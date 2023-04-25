@@ -17,7 +17,7 @@
                     </div>
                     <hr class="dark horizontal my-0">
                     <div class="card-footer p-3">
-                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+55% </span>than last week
+                        <p class="mb-0"><span class="text-success text-sm font-weight-bolder">+58% </span>than last week
                         </p>
                     </div>
                 </div>
