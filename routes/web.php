@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+-- Route:: get Consultar
+-- Route:: Post Guardar
+-- Route:: Delete Eliminar
+-- Route:: Put Actualizar
 |
 */
 
