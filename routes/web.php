@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,16 +22,7 @@ Route::get('/', function () {
 Route::prefix('backend')->group(function(){
     Route::get('dashboard', [AdminController::class, 'dashboard']);
 });
-
-/*pruebas de mi git
-*/
-Route::get('section', Function () {
-    //consulta a la bd
-    $posts  =  [
-        [ 'id' => 1, 'title' =>  'BANNER',  'slug' => 'banner' ],
-        [ 'id' => 2,  'title' =>  'Header',  'sslug' => 'header' ]
-    ];
-
-    return view('blog', ['posts' => $posts]);
-    });
-
+//->middleware('guest')
+Route::view('login', 'Backend/Auth/login')->name('login');
+Route::post('login', [App\Http\Controllers\Backend\LoginController::class, 'login']);
+Route::post('logout', [App\Http\Controllers\Backend\LoginController::class, 'logout'])->name('logout');
