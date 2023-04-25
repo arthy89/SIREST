@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+-- Route:: get Consultar
+-- Route:: Post Guardar
+-- Route:: Delete Eliminar
+-- Route:: Put Actualizar
 |
 */
 
@@ -21,3 +21,17 @@ Route::get('/', function () {
 Route::prefix('backend')->group(function(){
     Route::get('dashboard', [AdminController::class, 'dashboard']);
 });
+
+/*
+mis pruewbas
+*/
+Route::get('section', Function () {
+    //consulta a la bd
+    $posts  =  [
+        [ 'id' => 1, 'title' =>  'BANNER',  'slug' => 'banner' ],
+        [ 'id' => 2,  'title' =>  'Header',  'sslug' => 'header' ]
+    ];
+
+    return view('blog', ['posts' => $posts]);
+    });
+
