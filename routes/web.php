@@ -22,8 +22,7 @@ Route::prefix('backend')->group(function(){
     Route::get('dashboard', [AdminController::class, 'dashboard']);
 });
 
-/*
-mis pruewbas
+/*pruebas de mi git
 */
 Route::get('section', Function () {
     //consulta a la bd
