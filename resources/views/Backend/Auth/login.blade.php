@@ -5,6 +5,26 @@
         style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');">
         <span class="mask bg-gradient-dark opacity-6"></span>
         <div class="container my-auto">
+
+            @if (session('status'))
+                <div class="row justify-content-center">
+                    <div class="col-md-4 my-5 ">
+                        <div class="alert alert-success text-white" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            @if ($errors->has('email'))
+                <div class="row justify-content-center">
+                    <div class="col-md-4 my-5 ">
+                        <div class="alert alert-primary text-white" role="alert">
+                            {{ '¡Error de inicio de sesión, credenciales incorrectas!' }}
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-4 col-md-8 col-12 mx-auto">
                     <div class="card z-index-0 fadeIn3 fadeInBottom">
@@ -31,13 +51,13 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('login') }}" class="text-start" method="POST">
+                            <form action="{{ route('login-admin') }}" class="text-start" method="POST">
 
                                 @csrf
 
                                 <div class="input-group input-group-outline my-3">
                                     <label class="form-label">Correo</label>
-                                    <input type="email" class="form-control" name="email">
+                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}">
                                 </div>
                                 <div class="input-group input-group-outline mb-3">
                                     <label class="form-label">Contraseña</label>
