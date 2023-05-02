@@ -24,5 +24,7 @@ Route::prefix('backend')->group(function(){
 });
 //->middleware('guest')
 Route::view('login', 'Backend/Auth/login')->name('login');
+
 Route::post('login', [App\Http\Controllers\Backend\LoginController::class, 'login']);
+
 Route::post('logout', [App\Http\Controllers\Backend\LoginController::class, 'logout'])->name('logout');

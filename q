@@ -1,0 +1,72 @@
+[33mcommit e90efeca8d263d8b562666a56a95add8b01aef4e[m[33m ([m[1;36mHEAD -> [m[1;32mjoel[m[33m, [m[1;31morigin/develop[m[33m)[m
+Merge: c18ff2c aed7184
+Author: Arhyel <39539150+arthy89@users.noreply.github.com>
+Date:   Tue Apr 25 15:42:22 2023 -0500
+
+    Merge pull request #5 from arthy89/joel
+    
+    Joel
+
+[33mcommit aed7184c0d9f3d6b9127db95c6bf33ae82104965[m[33m ([m[1;31morigin/joel[m[33m)[m
+Merge: 7b7bd1d c18ff2c
+Author: Arhyel Ramos Flores <arthy89>
+Date:   Tue Apr 25 15:40:41 2023 -0500
+
+    merge develop joel
+
+[33mcommit 7b7bd1d3952fd889387d7d2126db9a0a254154be[m
+Author: Joelgomez <ioelgomez2019@gmail.com>
+Date:   Tue Apr 25 15:30:33 2023 -0500
+
+    cambios 234
+
+[33mcommit b38a4a5181d2b48cc2d9abf8c6a8a603cf2da9d0[m
+Author: Joelgomez <ioelgomez2019@gmail.com>
+Date:   Tue Apr 25 15:12:55 2023 -0500
+
+    sin cambios
+
+[33mcommit c18ff2c202a0eb827e30c494301aff7bd1240f0b[m
+Merge: 3dd5573 8205ac5
+Author: Arhyel <39539150+arthy89@users.noreply.github.com>
+Date:   Tue Apr 25 15:10:34 2023 -0500
+
+    Merge pull request #4 from arthy89/arhyel
+    
+    login vista nomas
+
+[33mcommit 8205ac5fab0bc6bc2a67a06c27a356079b012df3[m[33m ([m[1;31morigin/arhyel[m[33m)[m
+Author: Arhyel Ramos Flores <arthy89>
+Date:   Tue Apr 25 15:09:48 2023 -0500
+
+    login vista nomas
+
+[33mcommit 519e520c74551c7c11deb56d7dc5b6a527b027a5[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: d2cda64 3dd5573
+Author: Arhyel <39539150+arthy89@users.noreply.github.com>
+Date:   Mon Apr 24 21:26:00 2023 -0500
+
+    Merge pull request #3 from arthy89/develop
+    
+    Develop
+
+[33mcommit 3dd5573165fcc1d70bfd565ffd965badf240b937[m[33m ([m[1;32mdevelop[m[33m)[m
+Merge: d2cda64 dc25ba0
+Author: Arhyel <39539150+arthy89@users.noreply.github.com>
+Date:   Mon Apr 24 21:25:26 2023 -0500
+
+    Merge pull request #2 from arthy89/arhyel
+    
+    material-dashboard2
+
+[33mcommit dc25ba00d06ad2e1141da8917d15e68527540071[m[33m ([m[1;32marhyel[m[33m)[m
+Author: Arhyel Ramos Flores <arthy89>
+Date:   Mon Apr 24 21:24:24 2023 -0500
+
+    material-dashboard2
+
+[33mcommit d2cda64c5182a812fb85398528e5db21c67b7e33[m
+Author: Arhyel Ramos Flores <arthy89>
+Date:   Mon Apr 24 17:12:47 2023 -0500
+
+    primer commit
