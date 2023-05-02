@@ -31,6 +31,54 @@
                 </a>
             </li>
 
+
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link text-white collapsed" aria-controls="pagesExamples" role="button" aria-expanded="false">
+                <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">category</i>
+                <span class="nav-link-text ms-2 ps-1">Inventario</span>
+                </a>
+                <div class="collapse" id="pagesExamples" style="">
+                    <ul class="nav ">
+                        <li class="nav-item active">
+                            <a class="nav-link text-white active" href="{{ route('categorias') }}">
+                                <span class="sidenav-mini-icon"> C </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Categorias </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " href="{{ route('productos') }}">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Productos </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                </li>
+
+
+            <!-- <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link text-white active" aria-controls="dashboardsExamples" role="button" aria-expanded="true">
+                    <i class="material-icons">group</i>
+                        <span class="nav-link-text ms-2 ps-1">Inventario</span>
+                </a>
+                <div class="collapse show" id="dashboardsExamples" style="">
+                    <ul class="nav ">
+                        <li class="nav-item active">
+                            <a class="nav-link text-white active" href="{{ route('categorias') }}">
+                                <span class="sidenav-mini-icon"> C </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Categorias </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " href="{{ route('productos') }}">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Productos </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li> -->
+
             <li class="nav-item">
                 <a class="nav-link text-white " href="../pages/tables.html">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
