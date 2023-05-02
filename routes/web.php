@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\UsuariosController;
 use App\Http\Controllers\Backend\LoginController;
+use App\Http\Controllers\Frontend\EcommerceController;
+use App\Http\Controllers\Frontend\LoginEController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +22,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('backend')->group(function(){
-    Route::get('dashboard', [AdminController::class, 'dashboard']);
-});
+// !BACKEND
+Route::get('backend/dashboard', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+
 //->middleware('guest')
-Route::view('login', 'Backend/Auth/login')->name('login');
-Route::post('login', [App\Http\Controllers\Backend\LoginController::class, 'login']);
-Route::post('logout', [App\Http\Controllers\Backend\LoginController::class, 'logout'])->name('logout');
+Route::view('backend/login', 'Backend/Auth/login')->name('login-admin')->middleware('guest');
+Route::post('backend/login', [App\Http\Controllers\Backend\LoginController::class, 'login']);
+Route::post('backend/logout', [App\Http\Controllers\Backend\LoginController::class, 'logout'])->name('logout-admin');
+
+// usuarios
+Route::get('backend/usuarios', [UsuariosController::class, 'index'])->name('usuarios');
+Route::get('backend/usuarios/crear', [UsuariosController::class, 'create'])->name('crear_usuarios');
+Route::post('backend/usuarios/crear', [UsuariosController::class, 'store'])->name('crear_usuarios');
+
+// ------------------------------------------------------------------------------------------------
+
+// ?FRONTEND
+Route::get('ecommerce/home', [EcommerceController::class, 'home'])->name('home-client');
+
+Route::view('ecommerce/login', 'Frontend/Auth/login')->name('login-client');
+Route::post('ecommerce/login', [LoginEController::class, 'login']);
+Route::post('ecommerce/logout', [LoginEController::class, 'logout'])->name('logout-client');
