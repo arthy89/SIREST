@@ -19,10 +19,54 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <p>AQUI SE MUESTRAN LOS USUARIOS</p>
-                        @foreach ($usuarios as $usuario)
-                            <li>{{ $usuario->nombre }} - {{ $usuario->nombrerol }}</li>
-                        @endforeach
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7">
+                                            Nombres</th>
+                                        <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 ps-2">
+                                            Cargo</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">
+                                            Estado</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-7">
+                                            Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($usuarios as $usuario)
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        <h6 class="mb-0 text-md">{{ $usuario->nombre }}</h6>
+                                                        <p class="text-xs text-secondary mb-0">{{ $usuario->email }}</p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-sm font-weight-bold mb-0">{{ $usuario->nombrerol }}</p>
+                                                <p class="text-xs text-secondary mb-0">SIREST</p>
+                                            </td>
+                                            <td class="align-middle text-center text-md">
+                                                @if ($usuario->status == 1)
+                                                    <span class="badge bg-gradient-success">Activo</span>
+                                                @else
+                                                    <span class="badge bg-gradient-danger">Inactivo</span>
+                                                @endif
+
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <a class="btn bg-gradient-info"><i class="material-icons">edit</i>
+                                                    Editar</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
