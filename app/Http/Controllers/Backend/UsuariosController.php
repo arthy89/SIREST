@@ -25,7 +25,7 @@ class UsuariosController extends Controller
                     ->join('rol', function($join){
                         $join->on('usuarios.rolid', '=', 'rol.idrol');
                     })
-                    ->select('usuarios.idusuarios','usuarios.nombre','usuarios.apellidos','usuarios.email','rol.nombrerol')->get();
+                    ->select('usuarios.idusuarios','usuarios.nombre','usuarios.apellidos','usuarios.email','usuarios.status','rol.nombrerol')->get();
         // return $usuarios;
         return view('Backend.Usuarios.indexusu', compact('usuarios'));
     }
