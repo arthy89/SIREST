@@ -44,7 +44,3 @@ Route::view('ecommerce/login', 'Frontend/Auth/login')->name('login-client');
 Route::post('ecommerce/login', [LoginEController::class, 'login']);
 Route::post('ecommerce/logout', [LoginEController::class, 'logout'])->name('logout-client');
 Route::view('login', 'Backend/Auth/login')->name('login');
-
-Route::post('login', [App\Http\Controllers\Backend\LoginController::class, 'login']);
-
-Route::post('logout', [App\Http\Controllers\Backend\LoginController::class, 'logout'])->name('logout');
