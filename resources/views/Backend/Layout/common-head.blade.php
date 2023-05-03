@@ -27,4 +27,16 @@
     .swal2-title {
         font-family: 'Roboto', sans-serif;
     }
+
+    .select2-selection__rendered {
+        line-height: 34px !important;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 35px !important;
+    }
+
+    .select2-selection__arrow {
+        height: 35px !important;
+    }
 </style>

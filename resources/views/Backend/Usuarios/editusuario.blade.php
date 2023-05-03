@@ -18,8 +18,20 @@
                             @method('put')
 
                             <div class="row">
-                                {{-- nombres --}}
 
+                                @if ($errors->has('email'))
+                                    @foreach ($errors->all() as $error)
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-4 my-0 ">
+                                                <div class="alert alert-danger text-white text-center" role="alert">
+                                                    <strong>¡Error!</strong> ¡El correo ya existe o es incorrecto!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+
+                                {{-- nombres --}}
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static my-3">
                                         <label>Nombres</label>

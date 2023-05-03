@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Backend\UsuariosReq\UsuariosRequest;
 use App\Http\Requests\Backend\UsuariosReq\EditUsuReq;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Usuarios;
 use App\Models\Rol;

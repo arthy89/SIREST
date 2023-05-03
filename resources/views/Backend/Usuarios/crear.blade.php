@@ -16,6 +16,20 @@
                             @csrf
 
                             <div class="row">
+
+                                {{-- error de email ya existente --}}
+                                @if ($errors->has('email'))
+                                    @foreach ($errors->all() as $error)
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-4 my-0 ">
+                                                <div class="alert alert-danger text-white text-center" role="alert">
+                                                    <strong>¡Error!</strong> ¡El correo ya existe o es incorrecto!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+
                                 {{-- nombres --}}
                                 @if ($errors->has('nombre'))
                                     <div class="col-md-6">
@@ -90,9 +104,9 @@
                                 {{-- rol --}}
                                 <div class="col-md-6">
                                     <label>Rol</label>
-                                    <div class="input-group input-group-static my-3">
+                                    <div class="input-group input-group-static my-0">
                                         <select class="js-example-basic-single" id="rol" name="rolid"
-                                            style="width: 100%">
+                                            style="width: 100%" height="100px">
                                             <option value="1">Administrador</option>
                                             <option value="2" selected>Técnico Reparador</option>
                                             <option value="3">Vendedor</option>

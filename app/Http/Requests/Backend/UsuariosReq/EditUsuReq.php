@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\UsuariosReq;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EditUsuReq extends FormRequest
 {
@@ -24,7 +25,9 @@ class EditUsuReq extends FormRequest
         return [
             'nombre' => 'required',
             'apellidos' => 'required',
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email',
+                        Rule::unique('usuarios')->ignore($this->usuario)
+                        ],
         ];
     }
 }
