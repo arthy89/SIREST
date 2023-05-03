@@ -3,6 +3,15 @@
 @section('main-content')
     <div class="container-fluid py-4">
         <div class="row">
+            @if (session('status'))
+                <div class="row justify-content-center">
+                    <div class="col-md-4 my-5 ">
+                        <div class="alert alert-success text-white text-center" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-md-4">
                     <a href="{{ route('crear_usuarios') }}" class="btn btn-info">
@@ -59,8 +68,21 @@
 
                                             </td>
                                             <td class="align-middle text-center">
-                                                <a class="btn bg-gradient-info"><i class="material-icons">edit</i>
-                                                    Editar</a>
+                                                <form action="{{ route('eliminar_usuarios', $usuario->idusuarios) }}"
+                                                    method="POST" class="formulario">
+
+                                                    @csrf
+
+                                                    @method('delete')
+
+                                                    <a href="{{ route('editar_usuarios', $usuario->idusuarios) }}"
+                                                        class="btn bg-gradient-info"><i class="material-icons">edit</i>
+                                                        Editar</a>
+                                                    <button type="submit" class="btn bg-gradient-danger formulario"><i
+                                                            class="material-icons">delete</i>
+                                                        Eliminar</button>
+
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -113,4 +135,34 @@
 @endsection
 
 @push('custom-scripts')
+    @if (session('eliminar') == 'ok')
+        <script>
+            Swal.fire(
+                '¡Eliminado!',
+                'Se eliminó al usuario correctamente',
+                'success'
+            )
+        </script>
+    @endif
+
+    <script>
+        // $('.formulario').submit(function(e){
+        $(document).on('submit', '.formulario', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro de eliminar al Usuario?',
+                text: "Se eliminará al usuario",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        });
+    </script>
 @endpush
