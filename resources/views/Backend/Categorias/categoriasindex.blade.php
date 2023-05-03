@@ -5,7 +5,7 @@
         <div class="row">
             <div class="row">
                 <div class="col-md-4">
-                    <a href="{{ route('crear_usuarios') }}" class="btn btn-info">
+                    <a href="{{ route('crear_categorias') }}" class="btn btn-info">
                         <i class="material-icons">person_add</i>
                         Agregar Nueva Categoria
                     </a>
