@@ -6,7 +6,7 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard "
             target="_blank">
-            <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
+            <img src="{{ asset('assets/img/logo-ct.png') }}" class="navbar-brand-img h-100" alt="main_logo">
             <span class="ms-1 font-weight-bold text-white">Material Dashboard 2</span>
         </a>
     </div>
@@ -14,13 +14,71 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link text-white active bg-gradient-primary" href="../pages/dashboard.html">
+                <a class="nav-link text-white active bg-gradient-primary" href="{{ route('dashboard') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('usuarios') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons">group</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Usuarios</span>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link text-white collapsed" aria-controls="pagesExamples" role="button" aria-expanded="false">
+                <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">category</i>
+                <span class="nav-link-text ms-2 ps-1">Inventario</span>
+                </a>
+                <div class="collapse" id="pagesExamples" style="">
+                    <ul class="nav ">
+                        <li class="nav-item active">
+                            <a class="nav-link text-white active" href="{{ route('categorias') }}">
+                                <span class="sidenav-mini-icon"> C </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Categorias </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " href="{{ route('productos') }}">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Productos </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                </li>
+
+
+            <!-- <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link text-white active" aria-controls="dashboardsExamples" role="button" aria-expanded="true">
+                    <i class="material-icons">group</i>
+                        <span class="nav-link-text ms-2 ps-1">Inventario</span>
+                </a>
+                <div class="collapse show" id="dashboardsExamples" style="">
+                    <ul class="nav ">
+                        <li class="nav-item active">
+                            <a class="nav-link text-white active" href="{{ route('categorias') }}">
+                                <span class="sidenav-mini-icon"> C </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Categorias </span>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " href="{{ route('productos') }}">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Productos </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li> -->
+
             <li class="nav-item">
                 <a class="nav-link text-white " href="../pages/tables.html">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -43,14 +101,6 @@
                         <i class="material-icons opacity-10">view_in_ar</i>
                     </div>
                     <span class="nav-link-text ms-1">Virtual Reality</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/rtl.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
-                    </div>
-                    <span class="nav-link-text ms-1">RTL</span>
                 </a>
             </li>
             <li class="nav-item">
