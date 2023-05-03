@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\Backend\UsuariosRequest;
+use App\Http\Requests\Backend\UsuariosReq\UsuariosRequest;
+use App\Http\Requests\Backend\UsuariosReq\EditUsuReq;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Usuarios;
 use App\Models\Rol;
@@ -42,9 +45,9 @@ class UsuariosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UsuariosRequest $request)
     {
-        //return $request;
+        // return $request;
         $user = Usuarios::create([
             'nombre' => $request->nombre,
             'apellidos' => $request->apellidos,
@@ -66,24 +69,37 @@ class UsuariosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Usuarios $usuario)
     {
         //
+        // return $usuario;
+        return view('Backend.Usuarios.editusuario', compact('usuario'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EditUsuReq $request, Usuarios $usuario)
     {
-        //
+        // return $request;
+        $usuario->update([
+            'nombre' => $request->nombre,
+            'apellidos' => $request->apellidos,
+            'email' => $request->email,
+            'status' => $request->status,
+            'rolid' => $request->rolid,
+        ]);
+
+        return redirect()->route('usuarios')->with('status', '¡Usuario actualizado correctamente!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Usuarios $usuario)
     {
         //
+        $usuario->delete();
+        return redirect()->route('usuarios')->with('eliminar', 'ok');
     }
 }

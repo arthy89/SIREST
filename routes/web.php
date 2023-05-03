@@ -38,14 +38,18 @@ Route::post('backend/logout', [App\Http\Controllers\Backend\LoginController::cla
 Route::get('backend/usuarios', [UsuariosController::class, 'index'])->name('usuarios');
 Route::get('backend/usuarios/crear', [UsuariosController::class, 'create'])->name('crear_usuarios');
 Route::post('backend/usuarios/crear', [UsuariosController::class, 'store'])->name('crear_usuarios');
+Route::get('backend/usuarios/{usuario}/editar', [UsuariosController::class, 'edit'])->name('editar_usuarios');
+Route::put('backend/usuarios/{usuario}/editar', [UsuariosController::class, 'update'])->name('editar_usuarios');
+Route::delete('backend/usuarios/{usuario}/eliminar', [UsuariosController::class, 'destroy'])->name('eliminar_usuarios');
+
 
 //CATEGORIAS
-
 Route::get('backend/categorias', [CategoriasController::class, 'index'])->name('categorias');
+Route::get('backend/categorias/crear', [CategoriasController::class, 'create'])->name('crear_categorias');
 
 //Productos
-
 Route::get('backend/productos', [ProductosController::class, 'index'])->name('productos');
+Route::get('backend/productos/crear', [ProductosController::class, 'create'])->name('crear_productos');
 
 
 // ------------------------------------------------------------------------------------------------

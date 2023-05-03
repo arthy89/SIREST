@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Backend;
+namespace App\Http\Requests\Backend\UsuariosReq;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UsuariosRequest extends FormRequest
+class EditUsuReq extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +23,11 @@ class UsuariosRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => ['required', 'string'],
-            'apellidos' => ['required', 'string'],
-            'email' => ['required', 'email', 'string'],
-            'password' => ['required', 'password', 'string'],
-            'rolid' => ['required']
+            'nombre' => 'required',
+            'apellidos' => 'required',
+            'email' => ['required', 'email',
+                        Rule::unique('usuarios')->ignore($this->usuario)
+                        ],
         ];
     }
 }

@@ -11,6 +11,7 @@
 <!-- Nucleo Icons -->
 <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
 <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/css/fotos.css') }}" rel="stylesheet" />
 <!-- Font Awesome Icons -->
 <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 <!-- Material Icons -->
@@ -20,3 +21,22 @@
 <!-- Nepcha Analytics (nepcha.com) -->
 <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
 <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+{{-- SELECT2 --}}
+<link rel="stylesheet" href="{{ asset('assets/select2/select2.min.css') }}">
+<style>
+    .swal2-title {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .select2-selection__rendered {
+        line-height: 34px !important;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 35px !important;
+    }
+
+    .select2-selection__arrow {
+        height: 35px !important;
+    }
+</style>

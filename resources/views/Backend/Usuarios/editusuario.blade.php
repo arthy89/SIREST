@@ -11,13 +11,14 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('crear_usuarios') }}" method="POST">
+                        <form action="{{ route('editar_usuarios', $usuario) }}" method="POST">
 
                             @csrf
 
+                            @method('put')
+
                             <div class="row">
 
-                                {{-- error de email ya existente --}}
                                 @if ($errors->has('email'))
                                     @foreach ($errors->all() as $error)
                                         <div class="row justify-content-center">
@@ -31,92 +32,69 @@
                                 @endif
 
                                 {{-- nombres --}}
-                                @if ($errors->has('nombre'))
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-outline is-invalid my-3">
-                                            <label class="form-label">Nombres</label>
-                                            <input type="text" class="form-control" name="nombre">
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="input-group input-group-static my-3">
+                                        <label>Nombres</label>
+                                        <input type="text" class="form-control" name="nombre"
+                                            value="{{ $usuario->nombre }}">
+                                        @if ($errors->has('nombre'))
+                                            <p class="text-danger mb-0 text-sm"><em>Este campo es obligatorio</em></p>
+                                        @endif
                                     </div>
-                                @else
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-outline my-3">
-                                            <label class="form-label">Nombres</label>
-                                            <input type="text" class="form-control" name="nombre"
-                                                value="{{ old('nombre') }}">
-                                        </div>
-                                    </div>
-                                @endif
+                                </div>
 
                                 {{-- apellidos --}}
-                                @if ($errors->has('apellidos'))
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-outline is-invalid my-3">
-                                            <label class="form-label">Apellidos</label>
-                                            <input type="text" class="form-control" name="apellidos">
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="input-group input-group-static my-3">
+                                        <label>Apellidos</label>
+                                        <input type="text" class="form-control" name="apellidos"
+                                            value="{{ $usuario->apellidos }}">
+                                        @if ($errors->has('apellidos'))
+                                            <p class="text-danger mb-0 text-sm"><em>Este campo es obligatorio</em></p>
+                                        @endif
                                     </div>
-                                @else
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-outline my-3">
-                                            <label class="form-label">Apellidos</label>
-                                            <input type="text" class="form-control" name="apellidos"
-                                                value="{{ old('apellidos') }}">
-                                        </div>
-                                    </div>
-                                @endif
+                                </div>
 
                                 {{-- correo --}}
-                                @if ($errors->has('email'))
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-outline is-invalid my-3">
-                                            <label class="form-label">@ Correo</label>
-                                            <input type="email" class="form-control" name="email">
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="input-group input-group-static my-3">
+                                        <label>@ Correo</label>
+                                        <input type="email" class="form-control" name="email"
+                                            value="{{ $usuario->email }}">
+                                        @if ($errors->has('email'))
+                                            <p class="text-danger mb-0 text-sm"><em>Este campo es obligatorio</em></p>
+                                        @endif
                                     </div>
-                                @else
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-outline my-3">
-                                            <label class="form-label">@ Correo</label>
-                                            <input type="email" class="form-control" name="email"
-                                                value="{{ old('email') }}">
-                                        </div>
-                                    </div>
-                                @endif
-
-                                {{-- contraseña --}}
-                                @if ($errors->has('password'))
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-outline is-invalid my-3">
-                                            <label class="form-label">* Contraseña *</label>
-                                            <input type="password" class="form-control" name="password">
-                                        </div>
-                                    </div>
-                                @else
-                                    <div class="col-md-6">
-                                        <div class="input-group input-group-outline my-3">
-                                            <label class="form-label">* Contraseña *</label>
-                                            <input type="password" class="form-control" name="password">
-                                        </div>
-                                    </div>
-                                @endif
+                                </div>
 
                                 {{-- rol --}}
                                 <div class="col-md-6">
                                     <label>Rol</label>
-                                    <div class="input-group input-group-static my-0">
+                                    <div class="input-group input-group-static my-3">
                                         <select class="js-example-basic-single" id="rol" name="rolid"
-                                            style="width: 100%" height="100px">
+                                            style="width: 100%">
                                             <option value="1">Administrador</option>
-                                            <option value="2" selected>Técnico Reparador</option>
+                                            <option value="2">Técnico Reparador</option>
                                             <option value="3">Vendedor</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {{-- rol --}}
+                                <div class="col-md-6">
+                                    <label>Estado de la cuenta</label>
+                                    <div class="input-group input-group-static my-3">
+                                        <select class="js-example-basic-single" id="estado" name="status"
+                                            style="width: 100%">
+                                            <option value="1">Activo</option>
+                                            <option value="0">Inactivo</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4 mt-3">
-                                    <button type="submit" class="btn bg-gradient-info">Guardar nuevo usuario</button>
+                                    <button type="submit" class="btn bg-gradient-info">Guardar cambios</button>
                                 </div>
                             </div>
                         </form>
@@ -169,6 +147,14 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+
+            // rol
+            $('#rol').val("{{ $usuario->rolid }}");
+            $('#rol').select2().trigger('change');
+
+            // rol
+            $('#estado').val("{{ $usuario->status }}");
+            $('#estado').select2().trigger('change');
         });
     </script>
 @endpush
