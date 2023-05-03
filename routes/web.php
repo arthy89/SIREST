@@ -40,12 +40,12 @@ Route::get('backend/usuarios/crear', [UsuariosController::class, 'create'])->nam
 Route::post('backend/usuarios/crear', [UsuariosController::class, 'store'])->name('crear_usuarios');
 
 //CATEGORIAS
-
 Route::get('backend/categorias', [CategoriasController::class, 'index'])->name('categorias');
+Route::get('backend/categorias/crear', [CategoriasController::class, 'create'])->name('crear_categorias');
 
 //Productos
-
 Route::get('backend/productos', [ProductosController::class, 'index'])->name('productos');
+Route::get('backend/productos/crear', [ProductosController::class, 'create'])->name('crear_productos');
 
 
 // ------------------------------------------------------------------------------------------------

@@ -22,6 +22,7 @@ class ProductosController extends Controller
     public function create()
     {
         //
+        return view('Backend.Productos.productoscrear');
     }
 
     /**
