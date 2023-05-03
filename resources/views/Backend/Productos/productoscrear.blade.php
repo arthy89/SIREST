@@ -47,7 +47,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Precio (compra)</label>
-                                        <input type="text" class="form-control" name="precio_mayoreo">
+                                        <input type="text" class="form-control" name="precio_compra">
                                     </div>
                                 </div>
 
@@ -55,7 +55,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Precio (Mayoreo)</label>
-                                        <input type="text" class="form-control" name="precio_mayoreo1">
+                                        <input type="text" class="form-control" name="precio_mayoreo">
                                     </div>
                                 </div>
 
@@ -70,7 +70,7 @@
                                 {{-- Descripcion --}}
                                 <div class="col-md-6">
                                     <div class="input-group input-group-dynamic">
-                                        <textarea class="form-control" rows="3" placeholder="Descripcion..." spellcheck="false"></textarea>
+                                        <textarea class="form-control" name="Descripcion" rows="3" placeholder="Descripcion..." spellcheck="false"></textarea>
                                     </div>
                                 </div>
                                 {{-- rol --}}
