@@ -16,7 +16,10 @@ class LoginController extends Controller
         // return $request;
         $remember = $request->filled('remember');
 
-        if (Auth::guard('web')->attempt($request->only('email', 'password'), $remember)) {
+        if (Auth::guard('web')->attempt($request->only('email', 'password'), $remember) && Auth::user()->status == 0) {
+            Auth::guard('web')->logout();
+        }
+        else {
             // $request->session()->regenerate();
             return redirect()->route('dashboard')
             // ->intended('/')

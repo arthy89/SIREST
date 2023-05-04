@@ -18,7 +18,7 @@ class UsuariosController extends Controller
     public function __construct()
     {
         // only >< except
-        $this->middleware('auth', ['only' => ['index','create']]);
+        $this->middleware('auth');
     }
 
     public function index()
