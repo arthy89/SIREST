@@ -87,30 +87,37 @@
                                     </div>
                                 </div>
 
-                                {{-- Categorias --}}
+                                {{-- Estado --}}
                                 <div class="col-md-6">
-
-                                    <label class="input-group input-group-static mb-4">Estado</label>
-                                    <div class="input-group input-group-static my-3">
+                                    <label>Estado</label>
+                                    <div class="input-group input-group-static my-0">
                                         <select class="js-example-basic-single" id="estado" name="estadoid"
-                                            style="width: 100%">
+                                            style="width: 100%" height="100px">
                                             <option value="1" selected>ACTIVO</option>
                                             <option value="2">INACTIVO</option>
                                         </select>
                                     </div>
                                 </div>
                                 {{-- img --}}
-                                <div class="col-md-6">
-                                    <input type="file" id="files" name="files[]" />
-                                    <output id="list"></output>
-                                    <div class="alert alert-info col-md-9" role="alert">
-                                        <small><li >El recorte de la imagen debe ser superior a 413 px de ancho y 531 px de alto</li></small>
+                                <div class="col-md-6" id="imgs">
+
+                                    <div class="col-md-6" id="imagenes">
+                                        <div class="main-container_1" id="main-container">
+                                            <div class="input-container_1">
+                                            Clic aquí para subir tu Imagen
+                                            <input type="file" id="archivo" name="archivo" />
+                                            </div>
+                                            <div class="preview-container">
+                                            <img src="" id="preview">
+                                            </div>
+
+                                        </div>
                                     </div>
-                                    <span class="badge badge-danger" id="error_imagen"></span>
                                 </div>
 
 
                             </div>
+
                             <div class="row">
                                 <div class="col-md-4">
                                     <button type="submit" class="btn bg-gradient-info">Guardar nuevo Producto</button>
@@ -122,72 +129,33 @@
                 </div>
             </div>
         </div>
-        {{-- <footer class="footer py-4  ">
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6 mb-lg-0 mb-4">
-                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>,
-                            made with <i class="fa fa-heart"></i> by
-                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative
-                                Tim</a>
-                            for a better web.
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com" class="nav-link text-muted"
-                                    target="_blank">Creative Tim</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                    target="_blank">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
-                                    target="_blank">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                    target="_blank">License</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer> --}}
     </div>
 @endsection
 
 @push('custom-scripts')
 <script>
-    function archivo(evt) {
-      var files = evt.target.files; // FileList object
+    function mostrarImagen(event){
+    var imagenSource = event.target.result;
+    var previewImage = document.getElementById('preview');
 
-        //Obtenemos la imagen del campo "file".
-      for (var i = 0, f; f = files[i]; i++) {
-           //Solo admitimos imágenes.
-           if (!f.type.match('image.*')) {
-                continue;
-           }
+    previewImage.src = imagenSource;
+    }
 
-           var reader = new FileReader();
+    function procesarArchivo(event){
+    var imagen = event.target.files[0];
 
-           reader.onload = (function(theFile) {
-               return function(e) {
-               // Creamos la imagen.
-                      document.getElementById("list").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
-               };
-           })(f);
+    var lector = new FileReader();
 
-           reader.readAsDataURL(f);
-       }
-}
+    lector.addEventListener('load', mostrarImagen, false);
 
-      document.getElementById('files').addEventListener('change', archivo, false);
+    lector.readAsDataURL(imagen);
+    }
+
+    document.getElementById('archivo')
+    .addEventListener('change', procesarArchivo, false)
+
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
 </script>
 @endpush

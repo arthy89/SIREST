@@ -28,9 +28,13 @@
 
                                 {{-- Categorias --}}
                                 <div class="col-md-6">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label"> Categorias</label>
-                                        <input type="text" class="form-control" name="categorias">
+                                    <label>Categoria</label>
+                                    <div class="input-group input-group-static my-0">
+                                        <select class="js-example-basic-single" id="estado" name="estadoid"
+                                            style="width: 100%" height="100px">
+                                            <option value="1" selected>Celulares</option>
+                                            <option value="2">cargadores</option>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -38,7 +42,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label"> Stock(Cantidad)</label>
-                                        <input type="text" class="form-control" name="Stock_cantidad">
+                                        <input type="text" class="form-control" name="Stock_cantidad" onkeypress='validate(event)' maxlength="">
                                     </div>
                                 </div>
 
@@ -47,7 +51,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Precio (compra)</label>
-                                        <input type="text" class="form-control" name="precio_compra">
+                                        <input type="text" class="form-control" name="precio_compra" onkeypress='validate(event)' maxlength="8">
                                     </div>
                                 </div>
 
@@ -55,7 +59,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Precio (Mayoreo)</label>
-                                        <input type="text" class="form-control" name="precio_mayoreo">
+                                        <input type="text" class="form-control" name="precio_mayoreo" onkeypress='validate(event)' maxlength="8">
                                     </div>
                                 </div>
 
@@ -73,15 +77,20 @@
                                         <textarea class="form-control" name="Descripcion" rows="3" placeholder="Descripcion..." spellcheck="false"></textarea>
                                     </div>
                                 </div>
-                                {{-- rol --}}
+                                {{-- img --}}
                                 <div class="col-md-6">
-                                    <input type="file" id="files" name="files[]" />
-                                    <br />
-                                    <output id="list"></output>
-                                    <div class="alert alert-info col-md-9" role="alert">
-                                        <small><li >El recorte de la imagen debe ser superior a 413 px de ancho y 531 px de alto</li></small>
+                                    <div class="col-md-6" id="imagenes">
+                                        <div class="main-container_1" id="main-container">
+                                            <div class="input-container_1">
+                                            Clic aquí para subir tu Imagen
+                                            <input type="file" id="archivo" name="archivo" />
+                                            </div>
+                                            <div class="preview-container">
+                                            <img src="" id="preview">
+                                            </div>
+
+                                        </div>
                                     </div>
-                                    <span class="badge badge-danger" id="error_imagen"></span>
                                 </div>
 
 
@@ -139,29 +148,49 @@
 
 @push('custom-scripts')
 <script>
-    function archivo(evt) {
-      var files = evt.target.files; // FileList object
+        function validate(evt) {
+            var theEvent = evt || window.event;
 
-        //Obtenemos la imagen del campo "file".
-      for (var i = 0, f; f = files[i]; i++) {
-           //Solo admitimos imágenes.
-           if (!f.type.match('image.*')) {
-                continue;
-           }
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+            // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if( !regex.test(key) ) {
+                theEvent.returnValue = false;
+                if(theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
 
-           var reader = new FileReader();
 
-           reader.onload = (function(theFile) {
-               return function(e) {
-               // Creamos la imagen.
-                      document.getElementById("list").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
-               };
-           })(f);
 
-           reader.readAsDataURL(f);
-       }
-}
 
-      document.getElementById('files').addEventListener('change', archivo, false);
+    function mostrarImagen(event){
+    var imagenSource = event.target.result;
+    var previewImage = document.getElementById('preview');
+
+    previewImage.src = imagenSource;
+    }
+
+    function procesarArchivo(event){
+    var imagen = event.target.files[0];
+
+    var lector = new FileReader();
+
+    lector.addEventListener('load', mostrarImagen, false);
+
+    lector.readAsDataURL(imagen);
+    }
+
+    document.getElementById('archivo')
+    .addEventListener('change', procesarArchivo, false)
+
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
 </script>
 @endpush
