@@ -152,6 +152,10 @@
 
 
                         <p>AQUI SE MUESTRAN Las Categorias</p>
+
+                        @foreach ($categorias as $categoria)
+                            <img src="{{ asset($categoria->ruta) }}" alt="No imagen" width="150px">
+                        @endforeach
                     </div>
                 </div>
             </div>
