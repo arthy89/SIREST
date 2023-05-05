@@ -23,23 +23,22 @@
                                         <input type="text" class="form-control" name="nombre_producto">
                                     </div>
                                 </div>
-
-
-
                                 {{-- Categorias --}}
                                 <div class="col-md-6">
                                     <label>Categoria</label>
                                     <div class="input-group input-group-static my-0">
-                                        <select class="js-example-basic-single" id="estado" name="estadoid"
+                                        <select class="js-example-basic-single" id="cateogiraid" name="categoria"
                                             style="width: 100%" height="100px">
-                                            <option value="1" selected>Celulares</option>
-                                            <option value="2">cargadores</option>
+                                            @foreach ($categorias as $categoria)
+                                                <option value="{{$categoria->idcategoria}}" selected>{{$categoria->nombre}}</option>
+                                            @endforeach
                                         </select>
+
                                     </div>
                                 </div>
 
-                                {{-- Stock --}}
-                                <div class="col-md-6">
+                                {{--stock cantidad --}}
+                                <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label"> Stock(Cantidad)</label>
                                         <input type="text" class="form-control" name="Stock_cantidad" onkeypress='validate(event)' maxlength="">
@@ -48,15 +47,14 @@
 
 
                                 {{-- precio Compra --}}
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Precio (compra)</label>
                                         <input type="text" class="form-control" name="precio_compra" onkeypress='validate(event)' maxlength="8">
                                     </div>
                                 </div>
-
                                 {{-- precio mayoreo  --}}
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Precio (Mayoreo)</label>
                                         <input type="text" class="form-control" name="precio_mayoreo" onkeypress='validate(event)' maxlength="8">
@@ -65,11 +63,34 @@
 
 
                                 {{-- rol --}}
-                                <div class="col-md-6">
+                                <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Precio (Publico)</label>
                                         <input type="text" class="form-control" name="precio_publico">
                                     </div>
+                                </div>
+
+                                {{-- Colores --}}
+                                <div class="col-md-6">
+                                    <label>Color</label>
+                                    <select class="tokenizationSelect2" name="colores" multiple="true" style="width: 100%" height="100px">
+                                        <option value="rojo">Rojo</option>
+                                        <option value="blanco">Blanco</option>
+                                        <option value="negro">Negro</option>
+                                        <option value="azul">Azul</option>
+                                        <option value="plomo">Plomo</option>
+                                    </select>
+                                </div>
+                                {{-- Tags --}}
+                                <div class="col-md-6">
+                                    <label>Tags</label>
+                                    <select class="tokenizationSelect3" name="tags" multiple="true" style="width: 100%" height="100px">
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                        <option value=""></option>
+                                    </select>
                                 </div>
                                 {{-- Descripcion --}}
                                 <div class="col-md-6">
@@ -78,6 +99,7 @@
                                     </div>
                                 </div>
                                 {{-- img --}}
+
                                 <div class="col-md-6">
                                     <div class="col-md-6" id="imagenes">
                                         <div class="main-container_1" id="main-container">
@@ -92,8 +114,8 @@
                                         </div>
                                     </div>
                                 </div>
-
-
+                                <div class="col-md-6">
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
@@ -105,50 +127,48 @@
                 </div>
             </div>
         </div>
-        {{-- <footer class="footer py-4  ">
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6 mb-lg-0 mb-4">
-                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>,
-                            made with <i class="fa fa-heart"></i> by
-                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative
-                                Tim</a>
-                            for a better web.
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com" class="nav-link text-muted"
-                                    target="_blank">Creative Tim</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                    target="_blank">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
-                                    target="_blank">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                    target="_blank">License</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer> --}}
     </div>
 @endsection
 
 @push('custom-scripts')
 <script>
-        function validate(evt) {
+    $(document).ready(function(){
+        $(".tokenizationSelect2").select2({
+                placeholder: "Escriba los Colores", //placeholder
+                tags: true,
+                tokenSeparators: ['/',',',';'," "]
+            });
+
+        $(".tokenizationSelect3").select2({
+                placeholder: "Escriba los tags", //placeholder
+                tags: true,
+                tokenSeparators: ['/',',',';'," "]
+            });
+        })
+$('select').select2({
+  createTag: function (params) {
+    $( ".js-ejemplo-tokenizador" ). select2 ({
+    etiquetas : verdadero ,
+    tokenSeparators : [ ',' , ' ' ] })
+
+    var term = $.trim(params.term);
+
+    if (term === '') {
+      return null;
+    }
+
+    return {
+      id: term,
+      text: term,
+      newTag: true // add additional parameters
+    }
+  }
+
+
+});
+
+//////////////////paara las imagenes
+    function validate(evt) {
             var theEvent = evt || window.event;
 
             // Handle paste
@@ -165,32 +185,25 @@
                 if(theEvent.preventDefault) theEvent.preventDefault();
             }
         }
-
-
-
-
     function mostrarImagen(event){
-    var imagenSource = event.target.result;
-    var previewImage = document.getElementById('preview');
-
-    previewImage.src = imagenSource;
+        var imagenSource = event.target.result;
+        var previewImage = document.getElementById('preview');
+        previewImage.src = imagenSource;
     }
 
     function procesarArchivo(event){
-    var imagen = event.target.files[0];
+        var imagen = event.target.files[0];
 
-    var lector = new FileReader();
+        var lector = new FileReader();
 
-    lector.addEventListener('load', mostrarImagen, false);
+        lector.addEventListener('load', mostrarImagen, false);
 
-    lector.readAsDataURL(imagen);
+        lector.readAsDataURL(imagen);
     }
 
     document.getElementById('archivo')
     .addEventListener('change', procesarArchivo, false)
 
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
+
 </script>
 @endpush

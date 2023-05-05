@@ -23,6 +23,8 @@
 <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 {{-- SELECT2 --}}
 <link rel="stylesheet" href="{{ asset('assets/select2/select2.min.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <style>
     .swal2-title {
         font-family: 'Roboto', sans-serif;
@@ -39,4 +41,5 @@
     .select2-selection__arrow {
         height: 35px !important;
     }
+
 </style>

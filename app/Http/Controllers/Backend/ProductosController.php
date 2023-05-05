@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Productos;
+use App\Models\Categorias;
+use DB;
 
 class ProductosController extends Controller
 {
@@ -22,7 +25,10 @@ class ProductosController extends Controller
     public function create()
     {
         //
-        return view('Backend.Productos.productoscrear');
+        $categorias = Categorias::all();
+        //return $categorias;
+
+        return view('Backend.Productos.productoscrear', compact('categorias'));
     }
 
     /**
