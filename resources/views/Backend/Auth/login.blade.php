@@ -7,7 +7,7 @@
         <div class="container my-auto">
 
             @if (session('status'))
-                <div class="row justify-content-center">
+                <div class="row justify-content-center text-center">
                     <div class="col-md-4 my-5 ">
                         <div class="alert alert-success text-white" role="alert">
                             {{ session('status') }}
@@ -16,15 +16,27 @@
                 </div>
             @endif
 
+            @if (session('inactivo'))
+                <div class="row justify-content-center">
+                    <div class="col-md-4 my-5 ">
+                        <div class="alert alert-danger text-white text-center" role="alert">
+                            {{ session('inactivo') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             @if ($errors->has('email'))
                 <div class="row justify-content-center">
                     <div class="col-md-4 my-5 ">
-                        <div class="alert alert-primary text-white" role="alert">
+                        <div class="alert alert-primary text-white text-center" role="alert">
                             {{ '¡Error de inicio de sesión, credenciales incorrectas!' }}
                         </div>
                     </div>
                 </div>
             @endif
+
+
             <div class="row">
                 <div class="col-lg-4 col-md-8 col-12 mx-auto">
                     <div class="card z-index-0 fadeIn3 fadeInBottom">

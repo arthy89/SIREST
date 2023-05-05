@@ -46,45 +46,53 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($usuarios as $usuario)
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-md">{{ $usuario->nombre }}</h6>
-                                                        <p class="text-xs text-secondary mb-0">{{ $usuario->email }}</p>
+                                        @if ($usuario->idusuarios == Auth::user()->idusuarios)
+                                            @continue
+                                        @else
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-md">{{ $usuario->nombre }}</h6>
+                                                            <p class="text-xs text-secondary mb-0">{{ $usuario->email }}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">{{ $usuario->nombrerol }}</p>
-                                                <p class="text-xs text-secondary mb-0">SIREST</p>
-                                            </td>
-                                            <td class="align-middle text-center text-md">
-                                                @if ($usuario->status == 1)
-                                                    <span class="badge bg-gradient-success">Activo</span>
-                                                @else
-                                                    <span class="badge bg-gradient-danger">Inactivo</span>
-                                                @endif
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $usuario->nombrerol }}</p>
+                                                    <p class="text-xs text-secondary mb-0">SIREST</p>
+                                                </td>
+                                                <td class="align-middle text-center text-md">
+                                                    @if ($usuario->status == 1)
+                                                        <span class="badge bg-gradient-success">Activo</span>
+                                                    @else
+                                                        <span class="badge bg-gradient-danger">Inactivo</span>
+                                                    @endif
 
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <form action="{{ route('eliminar_usuarios', $usuario->idusuarios) }}"
-                                                    method="POST" class="formulario">
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <form action="{{ route('eliminar_usuarios', $usuario->idusuarios) }}"
+                                                        method="POST" class="formulario">
 
-                                                    @csrf
+                                                        @csrf
 
-                                                    @method('delete')
+                                                        @method('delete')
 
-                                                    <a href="{{ route('editar_usuarios', $usuario->idusuarios) }}"
-                                                        class="btn bg-gradient-info"><i class="material-icons">edit</i>
-                                                        Editar</a>
-                                                    <button type="submit" class="btn bg-gradient-danger formulario"><i
-                                                            class="material-icons">delete</i>
-                                                        Eliminar</button>
+                                                        <a href="{{ route('editar_usuarios', $usuario->idusuarios) }}"
+                                                            class="btn bg-gradient-info"><i class="material-icons">edit</i>
+                                                            Editar</a>
+                                                        <a href="{{ route('editar_usuarios_pass', $usuario->idusuarios) }}"
+                                                            class="btn bg-gradient-warning"><i
+                                                                class="material-icons">key</i>
+                                                            Pass</a>
+                                                        <button type="submit" class="btn bg-gradient-danger formulario"><i
+                                                                class="material-icons">delete</i>
+                                                            Eliminar</button>
 
-                                                </form>
-                                            </td>
-                                        </tr>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>

@@ -96,6 +96,22 @@ class UsuariosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+    // para editar las contraseñas de otros usuarios
+    public function editpass(Usuarios $usuario)
+    {
+
+        return view('Backend.Usuarios.editcontra', compact('usuario'));
+    }
+
+    public function updatepass(Request $request, Usuarios $usuario)
+    {
+        $usuario->update([
+            'password' => Hash::make($request->password),
+        ]);
+        return redirect()->route('usuarios')->with('status-contra', '¡Contraseña del usuario actualizado correctamente!');
+    }
+
     public function destroy(Usuarios $usuario)
     {
         //
