@@ -54,6 +54,7 @@ Route::delete('backend/usuarios/{usuario}/eliminar', [UsuariosController::class,
 //CATEGORIAS
 Route::get('backend/categorias', [CategoriasController::class, 'index'])->name('categorias');
 Route::get('backend/categorias/crear', [CategoriasController::class, 'create'])->name('crear_categorias');
+Route::post('backend/categorias/crear', [CategoriasController::class, 'store'])->name('crear_categorias');
 
 //Productos
 Route::get('backend/productos', [ProductosController::class, 'index'])->name('productos');

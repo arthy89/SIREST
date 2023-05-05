@@ -20,19 +20,6 @@
                             @method('put')
 
                             <div class="row">
-
-                                @if ($errors->has('email'))
-                                    @foreach ($errors->all() as $error)
-                                        <div class="row justify-content-center">
-                                            <div class="col-md-4 my-0 ">
-                                                <div class="alert alert-danger text-white text-center" role="alert">
-                                                    <strong>¡Error!</strong> ¡El correo ya existe o es incorrecto!
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @endif
-
                                 <div class="col-md-6">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Contraseña Nueva</label>
@@ -109,7 +96,7 @@
                     mensaje.text("Las contraseñas no son iguales");
                 }
 
-                if (contra1 == contra2) {
+                if (contra1 == contra2 && contra1.length >= 6 && contra2.length >= 6) {
                     boton.removeClass('disabled');
                     mensaje.removeClass('text-danger');
                     mensaje.addClass('text-success');

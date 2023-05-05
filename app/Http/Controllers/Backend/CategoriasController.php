@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categorias;
 use Illuminate\Http\Request;
+use App\Http\Requests\Backend\Categorias\CategoriasRequest;
+use DB;
 
 class CategoriasController extends Controller
 {
@@ -13,7 +16,9 @@ class CategoriasController extends Controller
     public function index()
     {
         // en la vista principal
-        return view("Backend.Categorias.categoriasindex");
+        $categorias = Categorias::all();
+        // return $categorias;
+        return view("Backend.Categorias.categoriasindex", compact('categorias'));
     }
 
     /**
@@ -28,9 +33,26 @@ class CategoriasController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoriasRequest $request)
     {
-        //
+        // return $request;
+
+        if ($request->hasFile('archivo')){
+            $file = $request->file('archivo');
+            $destinopath = 'imgs/categorias/';
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $uploadSuccess = $request->file('archivo')->move($destinopath, $filename);
+            $ruta = $destinopath . $filename;
+        }
+
+        $categoria = Categorias::create([
+            'nombre' => $request->nombre_producto,
+            'descripcion' => $request->descripcion,
+            'ruta' => $ruta,
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('categorias');
     }
 
     /**
