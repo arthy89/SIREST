@@ -44,6 +44,10 @@ Route::get('backend/usuarios/crear', [UsuariosController::class, 'create'])->nam
 Route::post('backend/usuarios/crear', [UsuariosController::class, 'store'])->name('crear_usuarios');
 Route::get('backend/usuarios/{usuario}/editar', [UsuariosController::class, 'edit'])->name('editar_usuarios');
 Route::put('backend/usuarios/{usuario}/editar', [UsuariosController::class, 'update'])->name('editar_usuarios');
+// contraseñas
+Route::get('backend/usuarios/{usuario}/editarpass', [UsuariosController::class, 'editpass'])->name('editar_usuarios_pass');
+Route::put('backend/usuarios/{usuario}/editarpass', [UsuariosController::class, 'updatepass'])->name('editar_usuarios_pass');
+// borrar
 Route::delete('backend/usuarios/{usuario}/eliminar', [UsuariosController::class, 'destroy'])->name('eliminar_usuarios');
 
 

@@ -18,8 +18,10 @@ class LoginController extends Controller
 
         if (Auth::guard('web')->attempt($request->only('email', 'password'), $remember) && Auth::user()->status == 0) {
             Auth::guard('web')->logout();
+            return redirect()->route('login-admin')->with('inactivo','¡Su perfil está inactivo!');
         }
-        else {
+
+        if (Auth::guard('web')->attempt($request->only('email', 'password'), $remember) && Auth::user()->status == 1) {
             // $request->session()->regenerate();
             return redirect()->route('dashboard')
             // ->intended('/')
@@ -27,7 +29,7 @@ class LoginController extends Controller
         }
 
         throw ValidationException::withMessages([
-            'email' => ('invalid')
+            'email' => ('invalid'),
         ]);
     }
 
