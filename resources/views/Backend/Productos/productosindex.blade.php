@@ -20,6 +20,9 @@
                     </div>
                     <div class="card-body">
                         <p>AQUI SE MUESTRAN Los Productos</p>
+                        @foreach ($productos as $producto)
+                            <img src="{{ asset($producto->imagen) }}" alt="No imagen" width="150px">
+                        @endforeach
 
                     </div>
                 </div>

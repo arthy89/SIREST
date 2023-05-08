@@ -22,7 +22,9 @@ class Productos extends Model
         'descripcion',
         'precio_compra',
         'precio_venta_mayor',
-        'precio_venta_publico',
+        'precio_venta_public',
+        'colores',
+        'tags',
         'stock',
         'imagen',
         'status'
