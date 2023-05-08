@@ -46,5 +46,10 @@
     .select2-selection__arrow {
         height: 35px !important;
     }
+</style>
 
+<style>
+    .pagination .page-item.active .page-link {
+        color: white;
+    }
 </style>

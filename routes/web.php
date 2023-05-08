@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\UsuariosController;
+use App\Http\Controllers\Backend\PerfilController;
 use App\Http\Controllers\Backend\LoginController;
 use App\Http\Controllers\Backend\CategoriasController;
 use App\Http\Controllers\Backend\ProductosController;
@@ -49,6 +50,11 @@ Route::get('backend/usuarios/{usuario}/editarpass', [UsuariosController::class, 
 Route::put('backend/usuarios/{usuario}/editarpass', [UsuariosController::class, 'updatepass'])->name('editar_usuarios_pass');
 // borrar
 Route::delete('backend/usuarios/{usuario}/eliminar', [UsuariosController::class, 'destroy'])->name('eliminar_usuarios');
+
+// Perfil
+Route::get('backend/{usuario}/perfil', [PerfilController::class, 'edit'])->name('editar_perfil');
+Route::put('backend/{usuario}/perfil', [PerfilController::class, 'update'])->name('editar_perfil');
+Route::put('backend/{usuario}/perfil/pass', [PerfilController::class, 'updatepass'])->name('editar_perfil_pass');
 
 
 //CATEGORIAS

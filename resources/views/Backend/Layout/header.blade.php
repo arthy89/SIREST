@@ -26,7 +26,8 @@
                     @endif
                 @else
                     <li class="nav-item d-flex align-items-center">
-                        <a class="btn btn-outline-primary btn-sm mb-0 me-3">{{ Auth::user()->nombre }}
+                        <a href="{{ route('editar_perfil', Auth::user()->idusuarios) }}"
+                            class="btn btn-outline-primary btn-sm mb-0 me-3">{{ Auth::user()->nombre }}
                             {{ Auth::user()->apellidos }}</a>
                     </li>
                 @endguest

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Categorias;
 use Illuminate\Http\Request;
 use App\Http\Requests\Backend\Categorias\CategoriasRequest;
+use Yajra\DataTables\DataTables;
 use DB;
 
 class CategoriasController extends Controller
@@ -13,12 +14,39 @@ class CategoriasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         // en la vista principal
-        $categorias = Categorias::all();
-        // return $categorias;
-        return view("Backend.Categorias.categoriasindex", compact('categorias'));
+        if($request->ajax()){
+            $categorias = DB::table('categoria')
+                    ->select('categoria.idcategoria','categoria.nombre','categoria.descripcion','categoria.ruta','categoria.status')->get();
+            return DataTables::of($categorias)
+            ->addIndexColumn()
+            ->addColumn('img', function($categoria){
+                $ruta = asset($categoria->ruta);
+                $img = '<img src="'.$ruta.'" width="100px">';
+                return $img;
+            })
+            // ->addColumn('action', function($row){
+            //     $ruta_editar = route('editar_usuario', $row->id);
+            //     $ruta_eliminar = route('eliminar_usuario', $row->id);
+            //     $form = '<form action="'.$ruta_eliminar.'" method="POST" class="formulario">
+            //                 '.csrf_field().'
+            //                 '.method_field("delete").'
+            //                 <a href="'.$ruta_editar.'" class="btn btn-warning btn-sm"><i class="fa-solid fa-user-pen"></i></a>
+            //                 <button type="submit" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash-can"></i></button>
+            //             </form>';
+            //     return $form;
+            // })
+            ->addColumn('action', function($row){
+                $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
+                return $form;
+            })
+            ->rawColumns(['img','action'])
+            ->make(true);
+        }
+
+        return view("Backend.Categorias.categoriasindex");
     }
 
     /**
