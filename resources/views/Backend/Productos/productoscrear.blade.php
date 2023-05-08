@@ -11,7 +11,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('crear_usuarios') }}" method="POST">
+                        <form action="{{ route('crear_productos') }}" method="POST" enctype="multipart/form-data">
 
                             @csrf
 
@@ -27,7 +27,7 @@
                                 <div class="col-md-6">
                                     <label>Categoria</label>
                                     <div class="input-group input-group-static my-0">
-                                        <select class="js-example-basic-single" id="cateogiraid" name="categoria"
+                                        <select class="js-example-basic-single" id="cateogiraid" name="categoriaid"
                                             style="width: 100%" height="100px">
                                             @foreach ($categorias as $categoria)
                                                 <option value="{{$categoria->idcategoria}}" selected>{{$categoria->nombre}}</option>
@@ -41,7 +41,7 @@
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label"> Stock(Cantidad)</label>
-                                        <input type="text" class="form-control" name="Stock_cantidad" onkeypress='validate(event)' maxlength="">
+                                        <input type="text" class="form-control" name="stock_cantidad" onkeypress='validate(event)' maxlength="">
                                     </div>
                                 </div>
 
@@ -95,11 +95,22 @@
                                 {{-- Descripcion --}}
                                 <div class="col-md-6">
                                     <div class="input-group input-group-dynamic">
-                                        <textarea class="form-control" name="Descripcion" rows="3" placeholder="Descripcion..." spellcheck="false"></textarea>
+                                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Descripcion..." spellcheck="false"></textarea>
                                     </div>
                                 </div>
-                                {{-- img --}}
+                                {{-- Estado --}}
+                                <div class="col-md-6">
+                                    <label>Estado</label>
+                                    <div class="input-group input-group-static my-0">
+                                        <select class="js-example-basic-single" id="estado" name="status"
+                                            style="width: 100%" height="100px">
+                                            <option value="1" selected>ACTIVO</option>
+                                            <option value="2">INACTIVO</option>
+                                        </select>
+                                    </div>
+                                </div>
 
+                                {{-- img --}}
                                 <div class="col-md-6">
                                     <div class="col-md-6" id="imagenes">
                                         <div class="main-container_1" id="main-container">

@@ -16,7 +16,8 @@ class ProductosController extends Controller
     public function index()
     {
         //
-        return view("Backend.Productos.productosindex");
+        $productos = Productos::all();
+        return view("Backend.Productos.productosindex", compact('productos'));
     }
 
     /**
@@ -37,6 +38,28 @@ class ProductosController extends Controller
     public function store(Request $request)
     {
         //
+        if ($request->hasFile('archivo')){
+            $file = $request->file('archivo');
+            $destinopath = 'imgs/productos/';
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $uploadSuccess = $request->file('archivo')->move($destinopath, $filename);
+            $ruta = $destinopath . $filename;
+        }
+        $producto = Productos::create([
+            'categoriaid' => $request->categoriaid,
+            'nombre' => $request->nombre_producto,
+            'descripcion' => $request->descripcion,
+            'precio_compra' => $request->precio_compra,
+            'precio_venta_mayor' => $request->precio_mayoreo,
+            'precio_venta_public' => $request->precio_publico,
+            'colores' => $request->colores,
+            'tags' => $request->tags,
+            'stock' => $request->stock_cantidad,
+            'imagen' => $ruta,
+            'status' => $request->status
+        ]);
+
+        return redirect()->route('productos');
     }
 
     /**

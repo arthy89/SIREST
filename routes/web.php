@@ -59,6 +59,7 @@ Route::post('backend/categorias/crear', [CategoriasController::class, 'store'])-
 //Productos
 Route::get('backend/productos', [ProductosController::class, 'index'])->name('productos');
 Route::get('backend/productos/crear', [ProductosController::class, 'create'])->name('crear_productos');
+Route::post('backend/productos/crear', [ProductosController::class, 'store'])->name('crear_productos');
 
 
 // ------------------------------------------------------------------------------------------------
