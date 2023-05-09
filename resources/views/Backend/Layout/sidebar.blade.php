@@ -31,11 +31,22 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('reparaciones') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons">construction</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Reparaciones</span>
+                </a>
+            </li>
+
 
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link text-white collapsed" aria-controls="pagesExamples" role="button" aria-expanded="false">
-                <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">category</i>
-                <span class="nav-link-text ms-2 ps-1">Inventario</span>
+                <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link text-white collapsed"
+                    aria-controls="pagesExamples" role="button" aria-expanded="false">
+                    <i
+                        class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">category</i>
+                    <span class="nav-link-text ms-2 ps-1">Inventario</span>
                 </a>
                 <div class="collapse" id="pagesExamples" style="">
                     <ul class="nav ">
@@ -53,7 +64,7 @@
                         </li>
                     </ul>
                 </div>
-                </li>
+            </li>
 
 
             <!-- <li class="nav-item">

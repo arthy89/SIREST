@@ -30,18 +30,20 @@
                                         <select class="js-example-basic-single" id="cateogiraid" name="categoriaid"
                                             style="width: 100%" height="100px">
                                             @foreach ($categorias as $categoria)
-                                                <option value="{{$categoria->idcategoria}}" selected>{{$categoria->nombre}}</option>
+                                                <option value="{{ $categoria->idcategoria }}" selected>
+                                                    {{ $categoria->nombre }}</option>
                                             @endforeach
                                         </select>
 
                                     </div>
                                 </div>
 
-                                {{--stock cantidad --}}
+                                {{-- stock cantidad --}}
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label"> Stock(Cantidad)</label>
-                                        <input type="text" class="form-control" name="stock_cantidad" onkeypress='validate(event)' maxlength="">
+                                        <input type="text" class="form-control" name="stock_cantidad"
+                                            onkeypress='validate(event)' maxlength="">
                                     </div>
                                 </div>
 
@@ -50,14 +52,16 @@
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Precio (compra)</label>
-                                        <input type="text" class="form-control" name="precio_compra" onkeypress='validate(event)' maxlength="8">
+                                        <input type="text" class="form-control" name="precio_compra"
+                                            onkeypress='validate(event)' maxlength="8">
                                     </div>
                                 </div>
                                 {{-- precio mayoreo  --}}
                                 <div class="col-md-3">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Precio (Mayoreo)</label>
-                                        <input type="text" class="form-control" name="precio_mayoreo" onkeypress='validate(event)' maxlength="8">
+                                        <input type="text" class="form-control" name="precio_mayoreo"
+                                            onkeypress='validate(event)' maxlength="8">
                                     </div>
                                 </div>
 
@@ -95,7 +99,8 @@
                                 {{-- Descripcion --}}
                                 <div class="col-md-6">
                                     <div class="input-group input-group-dynamic">
-                                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Descripcion..." spellcheck="false"></textarea>
+                                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Descripcion..."
+                                            spellcheck="false"></textarea>
                                     </div>
                                 </div>
                                 {{-- Estado --}}
@@ -115,11 +120,11 @@
                                     <div class="col-md-6" id="imagenes">
                                         <div class="main-container_1" id="main-container">
                                             <div class="input-container_1">
-                                            Clic aquí para subir tu Imagen
-                                            <input type="file" id="archivo" name="archivo" />
+                                                Clic aquí para subir tu Imagen
+                                                <input type="file" id="archivo" name="archivo" />
                                             </div>
                                             <div class="preview-container">
-                                            <img src="" id="preview">
+                                                <img src="" id="preview">
                                             </div>
 
                                         </div>
@@ -142,79 +147,79 @@
 @endsection
 
 @push('custom-scripts')
-<script>
-    $(document).ready(function(){
-        $(".tokenizationSelect2").select2({
+    <script>
+        $(document).ready(function() {
+            $(".tokenizationSelect2").select2({
                 placeholder: "Escriba los Colores", //placeholder
                 tags: true,
-                tokenSeparators: ['/',',',';'," "]
+                tokenSeparators: ['/', ',', ';', " "]
             });
 
-        $(".tokenizationSelect3").select2({
+            $(".tokenizationSelect3").select2({
                 placeholder: "Escriba los tags", //placeholder
                 tags: true,
-                tokenSeparators: ['/',',',';'," "]
+                tokenSeparators: ['/', ',', ';', " "]
             });
         })
-$('select').select2({
-  createTag: function (params) {
-    $( ".js-ejemplo-tokenizador" ). select2 ({
-    etiquetas : verdadero ,
-    tokenSeparators : [ ',' , ' ' ] })
+        $('select').select2({
+            createTag: function(params) {
+                $(".js-ejemplo-tokenizador").select2({
+                    etiquetas: verdadero,
+                    tokenSeparators: [',', ' ']
+                })
 
-    var term = $.trim(params.term);
+                var term = $.trim(params.term);
 
-    if (term === '') {
-      return null;
-    }
+                if (term === '') {
+                    return null;
+                }
 
-    return {
-      id: term,
-      text: term,
-      newTag: true // add additional parameters
-    }
-  }
+                return {
+                    id: term,
+                    text: term,
+                    newTag: true // add additional parameters
+                }
+            }
 
 
-});
+        });
 
-//////////////////paara las imagenes
-    function validate(evt) {
+        //////////////////paara las imagenes
+        function validate(evt) {
             var theEvent = evt || window.event;
 
             // Handle paste
             if (theEvent.type === 'paste') {
                 key = event.clipboardData.getData('text/plain');
             } else {
-            // Handle key press
+                // Handle key press
                 var key = theEvent.keyCode || theEvent.which;
                 key = String.fromCharCode(key);
             }
             var regex = /[0-9]|\./;
-            if( !regex.test(key) ) {
+            if (!regex.test(key)) {
                 theEvent.returnValue = false;
-                if(theEvent.preventDefault) theEvent.preventDefault();
+                if (theEvent.preventDefault) theEvent.preventDefault();
             }
         }
-    function mostrarImagen(event){
-        var imagenSource = event.target.result;
-        var previewImage = document.getElementById('preview');
-        previewImage.src = imagenSource;
-    }
 
-    function procesarArchivo(event){
-        var imagen = event.target.files[0];
+        function mostrarImagen(event) {
+            var imagenSource = event.target.result;
+            var previewImage = document.getElementById('preview');
+            previewImage.src = imagenSource;
+        }
 
-        var lector = new FileReader();
+        function procesarArchivo(event) {
+            var imagen = event.target.files[0];
 
-        lector.addEventListener('load', mostrarImagen, false);
+            var lector = new FileReader();
 
-        lector.readAsDataURL(imagen);
-    }
+            lector.addEventListener('load', mostrarImagen, false);
 
-    document.getElementById('archivo')
-    .addEventListener('change', procesarArchivo, false)
+            lector.readAsDataURL(imagen);
+        }
 
-
-</script>
+        document.getElementById('archivo')
+            .addEventListener('change', procesarArchivo, false)
+    </script>
 @endpush

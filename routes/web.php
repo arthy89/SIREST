@@ -6,6 +6,8 @@ use App\Http\Controllers\Backend\PerfilController;
 use App\Http\Controllers\Backend\LoginController;
 use App\Http\Controllers\Backend\CategoriasController;
 use App\Http\Controllers\Backend\ProductosController;
+use App\Http\Controllers\Backend\ReparacionesController;
+// frontend controller
 use App\Http\Controllers\Frontend\EcommerceController;
 use App\Http\Controllers\Frontend\LoginEController;
 use Illuminate\Support\Facades\Route;
@@ -73,7 +75,12 @@ Route::get('backend/productos/{producto}/editar', [ProductosController::class, '
 // borrar producto
 Route::delete('backend/productos/{producto}/eliminar', [ProductosController::class, 'destroy'])->name('eliminar_productos');
 
+// Reparaciones
+Route::get('backend/reparaciones', [ReparacionesController::class, 'index'])->name('reparaciones');
+Route::get('backend/reparaciones/crear', [ReparacionesController::class, 'create'])->name('reparaciones_crear');
 
+// Dispositivos
+Route::post('backend/dispotivos/crear', [ReparacionesController::class, 'create_device'])->name('create_device');
 // ------------------------------------------------------------------------------------------------
 
 // ?FRONTEND
