@@ -19,10 +19,26 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <p>AQUI SE MUESTRAN Los Productos</p>
-                        @foreach ($productos as $producto)
-                            <img src="{{ asset($producto->imagen) }}" alt="No imagen" width="150px">
-                        @endforeach
+
+                        <table id="registro" class="table table-striped shadow p-3 mb-5 bg-body rounded mt-4"
+                            width="100%">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th>N°</th>
+                                    <th>NOMBRE</th>
+                                    <th>COLORES</th>
+                                    <th>CATEGORIA</th>
+                                    <th>PRECIO COMPRA</th>
+                                    <th>STOCK</th>
+                                    <th>IMAGEN</th>
+                                    <th>ESTADO</th>
+                                    <th>OPCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+
 
                     </div>
                 </div>
@@ -70,4 +86,64 @@
 @endsection
 
 @push('custom-scripts')
+
+<script>
+    $(document).ready(function() {
+        $('#registro').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('productos') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'nombre_p',
+                    name: 'nombre_p'
+                },
+                {
+                    data: 'colores'
+                },
+                {
+                    data: 'nombre',
+                    name: 'nombre'
+                },
+                {
+                    data: 'precio_compra',
+                    name: 'precio_compra'
+                },
+                {
+                    data: 'stock',
+                    name: 'stock'
+                },
+                {
+                    data: 'img'
+                },
+                {
+                    data: 'status',
+                    name: 'status'
+                },
+                {
+                    data: 'action',
+                    sWidth: '110px',
+                    sortable: false
+                },
+            ],
+            "language": {
+                "search": "Buscar",
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "paginate": {
+                    "previous": "<",
+                    "next": ">",
+                    "first": "Primero",
+                    "last": "Último"
+                }
+
+            }
+        });
+    });
+</script>
 @endpush

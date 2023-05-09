@@ -6,15 +6,16 @@
             <div class="col-12">
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                            <h6 class="text-white text-capitalize ps-3">Nueva Categoria</h6>
+                        <div class="bg-gradient-success shadow-primary border-radius-lg pt-4 pb-3">
+                            <h6 class="text-white text-capitalize ps-3">Editar Categoria</h6>
                         </div>
                     </div>
                     <div class="card-body">
 
-                        <form action="{{ route('crear_categorias') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('editar_categorias', $categoria) }}" method="POST" enctype="multipart/form-data">
 
                             @csrf
+                            @method("PUT")
 
                             <div class="row">
 
@@ -24,9 +25,9 @@
 
                                 {{-- nombre producto --}}
                                 <div class="col-md-6">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">Nombre del producto</label>
-                                        <input type="text" class="form-control" name="nombre_categoria">
+                                    <div class="input-group input-group-static mb-4">
+                                        <label class="">Nombre del Categoria</label>
+                                        <input type="text" class="form-control" name="nombre_categoria" value="{{$categoria->nombre}}">
                                     </div>
                                 </div>
 
@@ -35,7 +36,7 @@
                                     <div class="input-group input-group-static mb-4">
 
                                         <textarea type="text" class="form-control" rows="2" placeholder="Descripcion" spellcheck="false"
-                                            name="descripcion"></textarea>
+                                            name="descripcion">{{$categoria->descripcion}}</textarea>
 
                                     </div>
                                 </div>
@@ -47,7 +48,7 @@
                                         <select class="js-example-basic-single" id="estado" name="status"
                                             style="width: 100%" height="100px">
                                             <option value="1" selected>ACTIVO</option>
-                                            <option value="2">INACTIVO</option>
+                                            <option value="0">INACTIVO</option>
                                         </select>
                                     </div>
                                 </div>
@@ -57,23 +58,19 @@
                                     <div class="col-md-6" id="imagenes">
                                         <div class="main-container_1" id="main-container">
                                             <div class="input-container_1">
-                                                Clic aquí para subir tu Imagen
-                                                <input type="file" id="archivo" name="archivo" value="">
+                                                Clic aquí para Editar tu Imagen
+                                                <input type="file" id="archivo" name="archivo">
                                             </div>
                                             <div class="preview-container">
-                                                <img src="" id="preview">
+                                                <img src="{{$categoria->ruta}}" id="preview">
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
-
                             <div class="row">
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn bg-gradient-info">Guardar nuevo Producto</button>
+                                    <button type="submit" class="btn bg-gradient-success">Guardar actualizacion Producto</button>
                                 </div>
                             </div>
                         </form>
@@ -87,6 +84,18 @@
 
 @push('custom-scripts')
     <script>
+        var x = document.getElementById("archivo");
+        x.value = {{$categoria->ruta}};
+
+    </script>
+    <script>
+
+        $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+        // categorias
+        $('#estado').val("{{ $categoria->status }}");
+        $('#estado').select2().trigger('change');
+        });
         function mostrarImagen(event) {
             var imagenSource = event.target.result;
             var previewImage = document.getElementById('preview');

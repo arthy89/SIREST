@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Categorias;
 use Illuminate\Http\Request;
 use App\Http\Requests\Backend\Categorias\CategoriasRequest;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
 use DB;
 
@@ -27,21 +28,21 @@ class CategoriasController extends Controller
                 $img = '<img src="'.$ruta.'" width="100px">';
                 return $img;
             })
-            // ->addColumn('action', function($row){
-            //     $ruta_editar = route('editar_usuario', $row->id);
-            //     $ruta_eliminar = route('eliminar_usuario', $row->id);
-            //     $form = '<form action="'.$ruta_eliminar.'" method="POST" class="formulario">
-            //                 '.csrf_field().'
-            //                 '.method_field("delete").'
-            //                 <a href="'.$ruta_editar.'" class="btn btn-warning btn-sm"><i class="fa-solid fa-user-pen"></i></a>
-            //                 <button type="submit" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash-can"></i></button>
-            //             </form>';
-            //     return $form;
-            // })
             ->addColumn('action', function($row){
-                $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
+                $ruta_editar =  route('editar_categorias', $row->idcategoria);
+                $ruta_eliminar = route('eliminar_categorias', $row->idcategoria);
+                $form = '<form action="'.$ruta_eliminar.'" method="POST" class="formulario">
+                            '.csrf_field().'
+                            '.method_field("delete").'
+                            <a href="'.$ruta_editar.'" class="btn bg-gradient-info"><i class="material-icons">edit</i>EDITAR</a>
+                            <button type="submit" class="btn bg-gradient-danger formulario"><i class="material-icons">delete</i>ELIMINAR</button>
+                        </form>';
                 return $form;
             })
+            //->addColumn('action', function($row){
+            //    $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
+            //    return $form;
+            //})
             ->rawColumns(['img','action'])
             ->make(true);
         }
@@ -74,7 +75,7 @@ class CategoriasController extends Controller
         }
 
         $categoria = Categorias::create([
-            'nombre' => $request->nombre_producto,
+            'nombre' => $request->nombre_categoria,
             'descripcion' => $request->descripcion,
             'ruta' => $ruta,
             'status' => $request->status,
@@ -94,17 +95,41 @@ class CategoriasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+
+    public function edit(Categorias $categoria)
     {
-        //
+        //return $producto;
+        //$categorias = Categorias::all();
+
+        return view('Backend.Categorias.categoriasedit', compact('categoria'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoriasRequest $request, Categorias $categoria)
     {
-        //
+        if($request->hasFile('archivo')){
+            return "eres un ";
+        }
+        //return ;
+
+        // if ($request->hasFile('archivo')){
+        //     $file = $request->file('archivo');
+        //     $destinopath = 'imgs/categorias/';
+        //     $filename = time() . '-' . $file->getClientOriginalName();
+        //     $uploadSuccess = $request->file('archivo')->move($destinopath, $filename);
+        //     $ruta = $destinopath . $filename;
+        // }
+
+        // $categoria->update([
+        //     'nombre' => $request->nombre_categoria,
+        //     'descripcion' => $request->descripcion,
+        //     'ruta' => $ruta,
+        //     'status' => $request->status,
+        // ]);
+
+        //return redirect()->route('categorias')->with('status', 'Categoria actualizado correctamente!');
     }
 
     /**

@@ -23,9 +23,9 @@ class CategoriasRequest extends FormRequest
     {
         return [
             //
-            'nombre_producto' => 'required',
-            'descripcion' => 'required',
-            'archivo' => 'required|image',
+            'nombre_categoria' => 'required',
+            'descripcion' => 'required'
+            //,            'archivo' => 'required',
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Productos extends Model
 {
@@ -18,7 +19,7 @@ class Productos extends Model
     protected $fillable = [
         'categoriaid',
         'codigo',
-        'nombre',
+        'nombre_p',
         'descripcion',
         'precio_compra',
         'precio_venta_mayor',
@@ -30,4 +31,13 @@ class Productos extends Model
         'status'
 
     ];
+    protected function imagen():Attribute{
+        return Attribute::make(get:fn($value)=>env("APP_URL").$value);
+    }
+    protected function colores():Attribute{
+        return Attribute::make(get:fn($value)=>explode(",",$value));
+    }
+    protected function tags():Attribute{
+        return Attribute::make(get:fn($value)=>explode(",",$value));
+    }
 }

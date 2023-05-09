@@ -77,8 +77,7 @@
                                 {{-- Colores --}}
                                 <div class="col-md-6">
                                     <label>Color</label>
-                                    <select class="tokenizationSelect2" name="colores" multiple="true" style="width: 100%"
-                                        height="100px">
+                                    <select class="tokenizationSelect2" name="colores[]" multiple="true" style="width: 100%" height="100px">
                                         <option value="rojo">Rojo</option>
                                         <option value="blanco">Blanco</option>
                                         <option value="negro">Negro</option>
@@ -89,8 +88,7 @@
                                 {{-- Tags --}}
                                 <div class="col-md-6">
                                     <label>Tags</label>
-                                    <select class="tokenizationSelect3" name="tags" multiple="true" style="width: 100%"
-                                        height="100px">
+                                    <select class="tokenizationSelect3" name="tags[]" multiple="true" style="width: 100%" height="100px">
                                         <option value=""></option>
                                         <option value=""></option>
                                         <option value=""></option>

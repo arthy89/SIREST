@@ -58,16 +58,22 @@ Route::get('backend/{usuario}/perfil', [PerfilController::class, 'edit'])->name(
 Route::put('backend/{usuario}/perfil', [PerfilController::class, 'update'])->name('editar_perfil');
 Route::put('backend/{usuario}/perfil/pass', [PerfilController::class, 'updatepass'])->name('editar_perfil_pass');
 
-
 //CATEGORIAS
 Route::get('backend/categorias', [CategoriasController::class, 'index'])->name('categorias');
 Route::get('backend/categorias/crear', [CategoriasController::class, 'create'])->name('crear_categorias');
 Route::post('backend/categorias/crear', [CategoriasController::class, 'store'])->name('crear_categorias');
+Route::get('backend/categorias/{categoria}/editar', [CategoriasController::class, 'edit'])->name('editar_categorias');
+Route::put('backend/categorias/{categoria}/editar', [CategoriasController::class, 'update'])->name('editar_categorias');
+// borrar CATEGORIAS
+Route::delete('backend/productos/{categoria}/eliminar', [CategoriasController::class, 'destroy'])->name('eliminar_categorias');
 
 //Productos
 Route::get('backend/productos', [ProductosController::class, 'index'])->name('productos');
 Route::get('backend/productos/crear', [ProductosController::class, 'create'])->name('crear_productos');
 Route::post('backend/productos/crear', [ProductosController::class, 'store'])->name('crear_productos');
+Route::get('backend/productos/{producto}/editar', [ProductosController::class, 'edit'])->name('editar_productos');
+// borrar producto
+Route::delete('backend/productos/{producto}/eliminar', [ProductosController::class, 'destroy'])->name('eliminar_productos');
 
 // Reparaciones
 Route::get('backend/reparaciones', [ReparacionesController::class, 'index'])->name('reparaciones');
