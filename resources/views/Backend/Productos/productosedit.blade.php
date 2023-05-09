@@ -5,23 +5,24 @@
         <div class="row">
             <div class="col-12">
                 <div class="card my-4">
-                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                            <h6 class="text-white text-capitalize ps-3">Nuevo Producto</h6>
+                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 ">
+                        <div class="bg-gradient-success shadow-primary border-radius-lg pt-4 pb-3 ">
+                            <h6 class="text-white text-capitalize ps-3">Editar Producto</h6>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('crear_productos') }}" method="POST" enctype="multipart/form-data">
+                        <form action="" method="POST" enctype="multipart/form-data">
 
                             @csrf
 
                             <div class="row">
                                 {{-- nombre producto --}}
                                 <div class="col-md-6">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">Nombre del producto</label>
-                                        <input type="text" class="form-control" name="nombre_producto">
+                                    <div class="input-group input-group-static mb-4">
+                                        <label>Nombre del Producto</label>
+                                        <input type="text" class="form-control" name="nombre_producto" value="{{$producto->nombre_p}}">
                                     </div>
+
                                 </div>
                                 {{-- Categorias --}}
                                 <div class="col-md-6">
@@ -39,75 +40,75 @@
 
                                 {{--stock cantidad --}}
                                 <div class="col-md-3">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label"> Stock(Cantidad)</label>
-                                        <input type="text" class="form-control" name="stock_cantidad" onkeypress='validate(event)' maxlength="">
+
+                                    <div class="input-group input-group-static mb-4">
+                                        <label > Stock(Cantidad)</label>
+                                        <input type="text" class="form-control" name="stock_cantidad" value="{{$producto->stock}}"onkeypress='validate(event)' maxlength="">
                                     </div>
                                 </div>
 
 
                                 {{-- precio Compra --}}
                                 <div class="col-md-3">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">Precio (compra)</label>
-                                        <input type="text" class="form-control" name="precio_compra" onkeypress='validate(event)' maxlength="8">
+                                    <div class="input-group input-group-static mb-4">
+                                        <label >Precio (compra)</label>
+                                        <input type="text" class="form-control" name="precio_compra" value="{{$producto->precio_compra}}" onkeypress='validate(event)' maxlength="8">
                                     </div>
                                 </div>
                                 {{-- precio mayoreo  --}}
                                 <div class="col-md-3">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">Precio (Mayoreo)</label>
-                                        <input type="text" class="form-control" name="precio_mayoreo" onkeypress='validate(event)' maxlength="8">
+                                    <div class="input-group input-group-static mb-4">
+                                        <label >Precio (Mayoreo)</label>
+                                        <input type="text" class="form-control" name="precio_mayoreo" value="{{$producto->precio_venta_mayor}}" onkeypress='validate(event)' maxlength="8">
                                     </div>
                                 </div>
-
-
                                 {{-- rol --}}
                                 <div class="col-md-3">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">Precio (Publico)</label>
-                                        <input type="text" class="form-control" name="precio_publico">
+                                    <div class="input-group input-group-static mb-4">
+                                        <label >Precio (Publico)</label>
+                                        <input type="text" class="form-control" name="precio_publico" value="{{$producto->precio_venta_public}}">
                                     </div>
                                 </div>
 
                                 {{-- Colores --}}
                                 <div class="col-md-6">
                                     <label>Color</label>
-                                    <select class="tokenizationSelect2" name="colores[]" multiple="true" style="width: 100%" height="100px">
-                                        <option value="rojo">Rojo</option>
-                                        <option value="blanco">Blanco</option>
-                                        <option value="negro">Negro</option>
-                                        <option value="azul">Azul</option>
-                                        <option value="plomo">Plomo</option>
+                                    <select class="tokenizationSelect2" id="colores" name="colores[]" multiple="true" style="width: 100%" height="100px">
+                                        @foreach ($producto->colores as $color)
+                                            <option value="{{$color}}">{{$color}}</option>
+                                        @endforeach
+
                                     </select>
                                 </div>
                                 {{-- Tags --}}
                                 <div class="col-md-6">
                                     <label>Tags</label>
-                                    <select class="tokenizationSelect3" name="tags[]" multiple="true" style="width: 100%" height="100px">
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
-                                        <option value=""></option>
+                                    <select class="tokenizationSelect3" id="tags" name="tags[]" multiple="true" style="width: 100%" height="100px">
+                                        @foreach ($producto->tags as $tag)
+                                            <option value="{{$tag}}">{{$tag}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 {{-- Descripcion --}}
                                 <div class="col-md-6">
                                     <div class="input-group input-group-dynamic">
-                                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Descripcion..." spellcheck="false"></textarea>
+                                        <textarea class="form-control" id="descripcion"  name="descripcion" rows="3"  spellcheck="false">{{$producto->descripcion}}</textarea>
                                     </div>
                                 </div>
                                 {{-- Estado --}}
                                 <div class="col-md-6">
                                     <label>Estado</label>
-                                    <div class="input-group input-group-static my-0">
+                                    <div class="input-group input-group-static my-2">
                                         <select class="js-example-basic-single" id="estado" name="status"
                                             style="width: 100%" height="100px">
-                                            <option value="1" selected>ACTIVO</option>
-                                            <option value="2">INACTIVO</option>
+                                            <option value="1">ACTIVO</option>
+                                            <option value="0">INACTIVO</option>
                                         </select>
                                     </div>
+                                </div>
+
+                                <div class="col-md-6">
+
                                 </div>
 
                                 {{-- img --}}
@@ -115,22 +116,24 @@
                                     <div class="col-md-6" id="imagenes">
                                         <div class="main-container_1" id="main-container">
                                             <div class="input-container_1">
-                                            Clic aquí para subir tu Imagen
+                                            Clic aquí para Cambiar tu Imagen
                                             <input type="file" id="archivo" name="archivo" />
                                             </div>
                                             <div class="preview-container">
-                                            <img src="" id="preview">
+                                            <img src="{{$producto->imagen}}" id="preview">
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+
+                                <div>
+
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn bg-gradient-info">Guardar nuevo Producto</button>
+                                    <button type="submit" class="btn bg-gradient-success">Guardar cambios Producto</button>
                                 </div>
                             </div>
                         </form>
@@ -143,6 +146,27 @@
 
 @push('custom-scripts')
 <script>
+        //var pizza = "porción1,porción2,porción3,porción4";
+    $(document).ready(function() {
+
+            $('.js-example-basic-single').select2();
+            // categorias
+            $('#cateogiraid').val("{{ $producto->categoriaid }}");
+            $('#cateogiraid').select2().trigger('change');
+            // rol
+            $('#estado').val("{{ $producto->status }}");
+            $('#estado').select2().trigger('change');
+            // colores
+            $('#colores').val(@json($producto->colores));
+            // tags
+            $('#tags').val(@json($producto->tags));
+            // tags
+            //var rj = @json($producto->tags);
+            //$('#pruebas').val(rj);
+
+    });
+
+
     $(document).ready(function(){
         $(".tokenizationSelect2").select2({
                 placeholder: "Escriba los Colores", //placeholder
