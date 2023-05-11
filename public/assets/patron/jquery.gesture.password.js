@@ -41,28 +41,46 @@
 
 
         this.$element.append('<canvas class="main-c" width="'+options.width+'" height="'+options.height+'" >');
-        //this.$element.append('<canvas class="main-p" width="'+options.width+'" height="'+options.height+'" >');
+        // this.$element.append('<canvas class="main-p" width="'+options.width+'" height="'+options.height+'" >');
         this.$c= $(this.id+" .main-c")[0];
         this.$ctx=this.$c.getContext('2d');
 
 
 
 
-        this.initDraw=function(){
-            this.$ctx.strokeStyle=this.color;
-            this.$ctx.lineWidth=2;
-            for(var j=0; j<3;j++ ){
-                for(var i =0;i<3;i++){
-                    this.$ctx.moveTo(this.o/2+this.rr*2+i*(this.o+2*this.rr),this.o/2+this.rr+j*(this.o+2*this.rr));
+        this.initDraw = function() {
+            this.$ctx.strokeStyle = this.color;
+            this.$ctx.lineWidth = 2;
+
+            var num = 1; // contador para los números
+
+            for (var j = 0; j < 3; j++) {
+                for (var i = 0; i < 3; i++) {
+                    // Dibujar el círculo
+                    this.$ctx.beginPath();
                     this.$ctx.arc(this.o/2+this.rr+i*(this.o+2*this.rr),this.o/2+this.rr+j*(this.o+2*this.rr),this.rr,0,2*Math.PI);
-                    var tem=new Point(this.o/2+this.rr+i*(this.o+2*this.rr),this.o/2+this.rr+j*(this.o+2*this.rr));
-                    if (that.pList.length < 9)
+                    this.$ctx.stroke();
+
+                    // Dibujar el número dentro del círculo
+                    this.$ctx.font = "17px Roboto";
+                    this.$ctx.fillStyle = "#7b809a";
+                    this.$ctx.textAlign = "center";
+                    this.$ctx.textBaseline = "middle";
+                    var x = this.o/2+this.rr+i*(this.o+2*this.rr);
+                    var y = this.o/2+this.rr+j*(this.o+2*this.rr);
+                    this.$ctx.fillText(num, x, y);
+
+                    // Agregar el punto correspondiente a la lista
+                    var tem = new Point(x, y);
+                    if (this.pList.length < 9) {
                         this.pList.push(tem);
+                    }
+                    num++; // Incrementar el contador de números
                 }
             }
-            this.$ctx.stroke();
-            this.initImg=this.$ctx.getImageData(0,0,this.options.width,this.options.height);
+            this.initImg = this.$ctx.getImageData(0,0,this.options.width,this.options.height);
         };
+
         this.initDraw();
         //this.$ctx.stroke();
         this.isIn=function(x,y){
@@ -157,9 +175,10 @@
             // that.$ctx.stroke();
             for(var p in that.sList){
                 if(e.data.that.pointInList(that.sList[p], e.data.that.pList)){
-                    e.data.that.result= e.data.that.result+(e.data.that.pointInList(that.sList[p], e.data.that.pList)).toString();
+                    e.data.that.result += (e.data.that.pointInList(that.sList[p], e.data.that.pList)).toString() + "-";
                 }
             }
+            e.data.that.result = e.data.that.result.slice(0, -1);
             $(element).trigger("hasPasswd",that.result);
         });
 
