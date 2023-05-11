@@ -37,7 +37,7 @@ class ProductosController extends Controller
                 $textor = "<span class='badge bg-gradient-primary' style=' height: 20px; background:red; border:1px  solid #7b809a;  '> </span>";
                 $textoa = "<span class='badge bg-gradient-primary' style=' height: 20px; background:DarkBlue; border:1px  solid #7b809a;  '> </span>";
                 $texton = "<span class='badge bg-gradient-primary' style=' height: 20px; background:black; border:1px  solid #7b809a;  '> </span>";
-                $textop = "<span class='badge bg-gradient-primary' style=' height: 20px; background:DarkGray; border:1px  solid #7b809a;  '> </span>";
+                $textop = "<span class='badge bg-gradient-primary' style=' height: 20px; background:white; border:1px  solid #7b809a;  '> </span>";
 
 
                     //(blanco,rojo,azul)
@@ -220,7 +220,7 @@ class ProductosController extends Controller
     public function destroy(Productos $producto)
     {
         //
-        return $producto;
+        return "AQUI LLEGO";
         $a = explode('/',$producto->ruta);
 
         unlink('imgs/productos/'.$a[5].'');
