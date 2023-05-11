@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\Backend\Productos\ProdActReq;
+use App\Http\Requests\Backend\Productos\ProductosRequest;
 use App\Models\Productos;
 use App\Models\Categorias;
 use Yajra\DataTables\DataTables;
@@ -30,11 +32,13 @@ class ProductosController extends Controller
                 $datos = explode(',',$colos);
                 $contador = 0;
                 $textog = "";
-                $textob = "<div class='cuadrado' style='width: 30px; height: 30px; background:white; border:1px solid #000; '></div>";
-                $textor = "<div class='cuadrado' style='width: 30px; height: 30px; background:red; border:1px solid #000; '></div>";
-                $textoa = "<div class='cuadrado' style='width: 30px; height: 30px; background:DarkBlue; border:1px solid #000; '></div>";
-                $texton = "<div class='cuadrado' style='width: 30px; height: 30px; background:black; border:1px solid #000; '></div>";
-                $textop = "<div class='cuadrado' style='width: 30px; height: 30px; background:DarkGray; border:1px solid #000; '></div>";
+
+                $textob = "<span class='badge bg-gradient-primary' style=' height: 20px; background:white; border:1px  solid #7b809a;  '> </span>";
+                $textor = "<span class='badge bg-gradient-primary' style=' height: 20px; background:red; border:1px  solid #7b809a;  '> </span>";
+                $textoa = "<span class='badge bg-gradient-primary' style=' height: 20px; background:DarkBlue; border:1px  solid #7b809a;  '> </span>";
+                $texton = "<span class='badge bg-gradient-primary' style=' height: 20px; background:black; border:1px  solid #7b809a;  '> </span>";
+                $textop = "<span class='badge bg-gradient-primary' style=' height: 20px; background:DarkGray; border:1px  solid #7b809a;  '> </span>";
+
 
                     //(blanco,rojo,azul)
                 foreach($datos as $elemento)
@@ -96,7 +100,7 @@ class ProductosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductosRequest $request)
     {
         //
         //return $request;
@@ -117,7 +121,7 @@ class ProductosController extends Controller
             'precio_venta_public' => $request->precio_publico,
             //'colores' => json_encode($request->colores),
             'colores' => implode(',',$request->colores),
-            'tags' => json_encode($request->tags),
+            'tags' => implode(',',$request->tags),
             'stock' => $request->stock_cantidad,
             'imagen' => $ruta,
             'status' => $request->status
@@ -149,24 +153,81 @@ class ProductosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(EditProdReq $request, Productos $producto)
+    public function update(ProdActReq $request, Productos $producto)
     {
         //
-         // return $request;
-        $producto->update([
+        //return $request;
+        //si conotiene archivo
+        if($request->hasFile('archivo')){
+            $a = explode('/',$producto->imagen);
+            //return "llegando hasta aqui";
+            $c = count($a);
 
-            'status' => $request->status,
-            'rolid' => $request->rolid,
-        ]);
+            if($c > 4){
+                unlink('imgs/productos/'.$a[5].'');
+            }else{
+                //unlink('imgs/categorias/'.$a[5].'');
 
-        return redirect()->route('producto')->with('status', 'Producto actualizado correctamente!');
+            }
+            //unlink('imgs/categorias/'.$a[5].'');
+
+            //return "ya elimino la webada";
+            $file = $request->file('archivo');
+            $destinopath = 'imgs/categorias/';
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $uploadSuccess = $request->file('archivo')->move($destinopath, $filename);
+            $ruta = $destinopath . $filename;
+            $producto->update([
+                'categoriaid' => $request->categoriaid,
+                'nombre_p' => $request->nombre_producto,
+                'descripcion' => $request->descripcion,
+                'precio_compra' => $request->precio_compra,
+                'precio_venta_mayor' => $request->precio_mayoreo,
+                'precio_venta_public' => $request->precio_publico,
+                //'colores' => json_encode($request->colores),
+                'colores' => implode(',',$request->colores),
+                'tags' => implode(',',$request->tags),
+                'stock' => $request->stock_cantidad,
+                'imagen' => $ruta,
+                'status' => $request->status,
+            ]);
+
+            //return"logro actualizar con achivo contenido";
+            return redirect()->route('productos')->with('status', 'Producto actualizado correctamente!');
+        //si no contiener archivo no sobreponemos las imganes
+        }else{
+            $producto->update([
+                'categoriaid' => $request->categoriaid,
+                'nombre_p' => $request->nombre_producto,
+                'descripcion' => $request->descripcion,
+                'precio_compra' => $request->precio_compra,
+                'precio_venta_mayor' => $request->precio_mayoreo,
+                'precio_venta_public' => $request->precio_publico,
+                //'colores' => json_encode($request->colores),
+                'colores' => implode(',',$request->colores),
+                'tags' => implode(',',$request->tags),
+                'stock' => $request->stock_cantidad,
+                'status' => $request->status,
+            ]);
+            //return"logro actualizar sin achivo contenido";
+            return redirect()->route('productos')->with('status', 'Producto actualizado correctamente!');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Productos $producto)
     {
         //
+        return $producto;
+        $a = explode('/',$producto->ruta);
+
+        unlink('imgs/productos/'.$a[5].'');
+        //eturn "se elimino laimg";
+        $producto->delete();
+
+        return redirect()->route('productos')->with('eliminar', 'ok');
     }
+
 }

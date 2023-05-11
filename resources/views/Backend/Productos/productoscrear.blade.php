@@ -16,12 +16,18 @@
                             @csrf
 
                             <div class="row">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
                                 {{-- nombre producto --}}
                                 <div class="col-md-6">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Nombre del producto</label>
                                         <input type="text" class="form-control" name="nombre_producto">
                                     </div>
+                                    @if ($errors->has('nombre_producto'))
+                                            <p class="text-danger mb-0 text-sm"><em>Este campo es obligatorio</em></p>
+                                    @endif
                                 </div>
                                 {{-- Categorias --}}
                                 <div class="col-md-6">
@@ -34,6 +40,7 @@
                                                     {{ $categoria->nombre }}</option>
                                             @endforeach
                                         </select>
+
 
                                     </div>
                                 </div>

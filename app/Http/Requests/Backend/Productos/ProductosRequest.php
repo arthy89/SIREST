@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Backend\Categorias;
+namespace App\Http\Requests\backend\Productos;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoriasRequest extends FormRequest
+class ProductosRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,14 @@ class CategoriasRequest extends FormRequest
     {
         return [
             //
-            'nombre_categoria' => 'required',
+            'nombre_producto' => 'required',
+            'categoriaid' => 'required',
+            'stock_cantidad' => 'required',
+            'precio_compra' => 'required',
+            'precio_mayoreo' => 'required',
+            'precio_publico' => 'required',
             'descripcion' => 'required',
+            'status' => 'required',
             'archivo' => 'required',
         ];
     }

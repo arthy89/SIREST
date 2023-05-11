@@ -27,6 +27,9 @@
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Nombre del producto</label>
                                         <input type="text" class="form-control" name="nombre_categoria">
+                                        @if ($errors->has('nombre_categoria'))
+                                            <p class="text-danger mb-0 text-sm"><em>Este campo es obligatorio</em></p>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -36,7 +39,9 @@
 
                                         <textarea type="text" class="form-control" rows="2" placeholder="Descripcion" spellcheck="false"
                                             name="descripcion"></textarea>
-
+                                            @if ($errors->has('descripcion'))
+                                            <p class="text-danger mb-0 text-sm"><em>Este campo es obligatorio</em></p>
+                                            @endif
                                     </div>
                                 </div>
 
@@ -63,7 +68,9 @@
                                             <div class="preview-container">
                                                 <img src="" id="preview">
                                             </div>
-
+                                            @if ($errors->has('archivo'))
+                                            <p class="text-danger mb-0 text-sm"><em>Este campo es obligatorio</em></p>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

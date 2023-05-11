@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Categorias;
 use Illuminate\Http\Request;
 use App\Http\Requests\Backend\Categorias\CategoriasRequest;
+use App\Http\Requests\Backend\Categorias\CatActReq;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Str;
 use DB;
 
 class CategoriasController extends Controller
@@ -107,27 +110,52 @@ class CategoriasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoriasRequest $request, Categorias $categoria)
+    public function update(CatActReq $request, Categorias $categoria)
     {
+        //si conotiene archivo
         if($request->hasFile('archivo')){
-            return "eres un ";
+            $a = explode('/',$categoria->ruta);
+            $c = count($a);
+            //return 'public/imgs/categorias/'.$a[5].'';
+            //\Storage::delete('public/imgs/categorias/'.$a[5].'');
+            //\Storage::delete($trabajador->foto);
+            //Storage::delete($categoria->ruta);
+            //return $a;
+            //eliminamos la imagen que tenia antes
+            if($c > 4){
+                unlink('imgs/categorias/'.$a[5].'');
+            }else{
+                //unlink('imgs/categorias/'.$a[5].'');
+
+            }
+            //unlink('imgs/categorias/'.$a[5].'');
+
+            //return "ya elimino la webada";
+            $file = $request->file('archivo');
+            $destinopath = 'imgs/categorias/';
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $uploadSuccess = $request->file('archivo')->move($destinopath, $filename);
+            $ruta = $destinopath . $filename;
+            $categoria->update([
+                'nombre' => $request->nombre_categoria,
+                'descripcion' => $request->descripcion,
+                'ruta' => $ruta,
+                'status' => $request->status,
+            ]);
+
+            //return"logro actualizar con achivo contenido";
+            return redirect()->route('categorias')->with('status', 'Categoria actualizado correctamente!');
+        //si no contiener archivo no sobreponemos las imganes
+        }else{
+            $categoria->update([
+                'nombre' => $request->nombre_categoria,
+                'descripcion' => $request->descripcion,
+                'status' => $request->status,
+            ]);
+            //return"logro actualizar sin achivo contenido";
+            return redirect()->route('categorias')->with('status', 'Categoria actualizado correctamente!');
         }
-        //return ;
 
-        // if ($request->hasFile('archivo')){
-        //     $file = $request->file('archivo');
-        //     $destinopath = 'imgs/categorias/';
-        //     $filename = time() . '-' . $file->getClientOriginalName();
-        //     $uploadSuccess = $request->file('archivo')->move($destinopath, $filename);
-        //     $ruta = $destinopath . $filename;
-        // }
-
-        // $categoria->update([
-        //     'nombre' => $request->nombre_categoria,
-        //     'descripcion' => $request->descripcion,
-        //     'ruta' => $ruta,
-        //     'status' => $request->status,
-        // ]);
 
         //return redirect()->route('categorias')->with('status', 'Categoria actualizado correctamente!');
     }
@@ -135,8 +163,16 @@ class CategoriasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Categorias $categoria)
     {
         //
+        $a = explode('/',$categoria->ruta);
+
+        unlink('imgs/categorias/'.$a[5].'');
+        //eturn "se elimino laimg";
+        $categoria->delete();
+        //return $categoria;
+        return redirect()->route('categorias')->with('eliminar', 'ok');
     }
+
 }
