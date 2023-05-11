@@ -29,7 +29,6 @@ class Productos extends Model
         'stock',
         'imagen',
         'status'
-
     ];
     protected function imagen():Attribute{
         return Attribute::make(get:fn($value)=>env("APP_URL").$value);

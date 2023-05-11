@@ -15,7 +15,7 @@
                         <form action="{{ route('editar_categorias', $categoria) }}" method="POST" enctype="multipart/form-data">
 
                             @csrf
-                            @method("PUT")
+                            @method("put")
 
                             <div class="row">
 

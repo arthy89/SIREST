@@ -4,7 +4,7 @@ namespace App\Http\Requests\Backend\Categorias;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoriasRequest extends FormRequest
+class CatActReq extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class CategoriasRequest extends FormRequest
         return [
             //
             'nombre_categoria' => 'required',
-            'descripcion' => 'required',
-            'archivo' => 'required',
+            'descripcion' => 'required'
+            //,            'archivo' => 'required',
         ];
     }
 }

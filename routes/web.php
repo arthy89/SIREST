@@ -72,6 +72,7 @@ Route::get('backend/productos', [ProductosController::class, 'index'])->name('pr
 Route::get('backend/productos/crear', [ProductosController::class, 'create'])->name('crear_productos');
 Route::post('backend/productos/crear', [ProductosController::class, 'store'])->name('crear_productos');
 Route::get('backend/productos/{producto}/editar', [ProductosController::class, 'edit'])->name('editar_productos');
+Route::put('backend/productos/{producto}/editar', [ProductosController::class, 'update'])->name('editar_productos');
 // borrar producto
 Route::delete('backend/productos/{producto}/eliminar', [ProductosController::class, 'destroy'])->name('eliminar_productos');
 

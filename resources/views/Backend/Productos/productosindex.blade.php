@@ -28,7 +28,7 @@
                                     <th>NOMBRE</th>
                                     <th>COLORES</th>
                                     <th>CATEGORIA</th>
-                                    <th>PRECIO COMPRA</th>
+                                    <th>COMPRA</th>
                                     <th>STOCK</th>
                                     <th>IMAGEN</th>
                                     <th>ESTADO</th>

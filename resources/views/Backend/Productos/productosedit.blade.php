@@ -10,12 +10,18 @@
                             <h6 class="text-white text-capitalize ps-3">Editar Producto</h6>
                         </div>
                     </div>
+
+
                     <div class="card-body">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('editar_productos', $producto) }}" method="POST" enctype="multipart/form-data">
 
                             @csrf
+                            @method("put")
 
                             <div class="row">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
                                 {{-- nombre producto --}}
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static mb-4">
