@@ -1,5 +1,5 @@
 <div>
-    <div wire:ignore.self class="modal fade" id="nuevo_servicio" tabindex="-1" role="dialog"
+    <div wire:ignore.self class="modal fade" id="nuevo_dispositivo" tabindex="-1" role="dialog"
         aria-labelledby="modal-default" aria-hidden="true">
         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
             <div class="modal-content">
