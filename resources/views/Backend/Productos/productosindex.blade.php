@@ -84,7 +84,9 @@
         </footer> --}}
     </div>
 @endsection
+@push('custom-css')
 
+@endpush
 @push('custom-scripts')
 @if (session('eliminar') == 'ok')
         <script>
@@ -100,6 +102,7 @@
 
             Lobibox.notify('success', {
                 width: 600,
+                img: "{{asset('imgs/success.png')}}",
                 position: 'top right',
                 title: 'Registro correctamente !!',
                 msg: 'Producto Registrada.'
@@ -112,6 +115,7 @@
 
             Lobibox.notify('success', {
                 width: 600,
+                img: "{{asset('imgs/success.png')}}",
                 position: 'top right',
                 title: 'Actualizacion correctamente !!',
                 msg: 'Producto Actualizada.'

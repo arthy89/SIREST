@@ -57,6 +57,7 @@
 
             Lobibox.notify('success', {
                 width: 600,
+                img: "{{asset('imgs/success.png')}}",
                 position: 'top right',
                 title: 'Registro correctamente !!',
                 msg: 'Categoria Registrada.'
@@ -69,6 +70,7 @@
 
             Lobibox.notify('success', {
                 width: 600,
+                img: "{{asset('imgs/success.png')}}",
                 position: 'top right',
                 title: 'Actualizacion correctamente !!',
                 msg: 'Categoria Actualizada.'
