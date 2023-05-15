@@ -3,7 +3,7 @@
 
 <head>
     @include('Backend.Layout.common-head')
-
+    @stack('custom-css')
     @livewireStyles
 
 </head>

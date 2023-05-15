@@ -57,9 +57,16 @@ class ProductosController extends Controller
                     return $textog;
                 })
                 ->addColumn('img', function ($producto) {
-                    $ruta = asset($producto->imagen);
-                    $img = '<img src="' . $ruta . '" width="100px">';
-                    return $img;
+                    if($producto->imagen != null){
+                        $ruta = asset($producto->imagen);
+                        $img = '<img src="' . $ruta . '" width="100px">';
+                        return $img;
+                    }else{
+                        $ruta = asset("imgs/noimage.jpg");
+                        $img = '<img src="' . $ruta . '" width="100px">';
+                        return $img;
+                    }
+
                 })
                 ->addColumn('action', function ($row) {
                     $ruta_editar =  route('editar_productos', $row->idproducto);
@@ -171,7 +178,7 @@ class ProductosController extends Controller
 
             //return "ya elimino la webada";
             $file = $request->file('archivo');
-            $destinopath = 'imgs/categorias/';
+            $destinopath = 'imgs/productos/';
             $filename = time() . '-' . $file->getClientOriginalName();
             $uploadSuccess = $request->file('archivo')->move($destinopath, $filename);
             $ruta = $destinopath . $filename;

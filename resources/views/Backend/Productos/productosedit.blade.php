@@ -126,7 +126,13 @@
                                             <input type="file" id="archivo" name="archivo" />
                                             </div>
                                             <div class="preview-container">
-                                            <img src="{{$producto->imagen}}" id="preview">
+
+                                            @if($producto->imagen == "http://sirest.test/")
+                                                <img src="{{asset('imgs/noimage.jpg')}}" id="preview">
+                                            @else
+                                                <img src="{{$producto->imagen}}" id="preview">
+                                            @endif
+
                                             </div>
 
                                         </div>
