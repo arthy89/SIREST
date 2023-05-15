@@ -3,6 +3,9 @@
 
 <head>
     @include('Backend.Layout.common-head')
+
+    @livewireStyles
+
 </head>
 
 <!--<body class="g-sidenav-show  bg-gray-200">-->
@@ -17,6 +20,9 @@
     </main>
     @include('Backend.Layout.common-end')
     @stack('custom-scripts')
+
+    @livewireScripts
+
 </body>
 
 </html>

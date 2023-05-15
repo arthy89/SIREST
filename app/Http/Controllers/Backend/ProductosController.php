@@ -16,22 +16,22 @@ class ProductosController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index( Request $request)
+    public function index(Request $request)
     {
         //
-        if($request->ajax()){
+        if ($request->ajax()) {
             $productos = DB::table('producto')
-                    ->join('categoria', function($join){
-                        $join->on('producto.categoriaid','=','categoria.idcategoria');
-                    })
-                    ->select('producto.nombre_p','producto.idproducto','producto.colores','categoria.nombre','producto.precio_compra','producto.stock','producto.imagen','producto.status')->get();
+                ->join('categoria', function ($join) {
+                    $join->on('producto.categoriaid', '=', 'categoria.idcategoria');
+                })
+                ->select('producto.nombre_p', 'producto.idproducto', 'producto.colores', 'categoria.nombre', 'producto.precio_compra', 'producto.stock', 'producto.imagen', 'producto.status')->get();
             return DataTables::of($productos)
-            ->addIndexColumn()
-            ->addColumn('colores', function($producto){
-                $colos = $producto->colores;
-                $datos = explode(',',$colos);
-                $contador = 0;
-                $textog = "";
+                ->addIndexColumn()
+                ->addColumn('colores', function ($producto) {
+                    $colos = $producto->colores;
+                    $datos = explode(',', $colos);
+                    $contador = 0;
+                    $textog = "";
 
                 $textob = "<span class='badge bg-gradient-primary' style=' height: 20px; background:white; border:1px  solid #7b809a;  '> </span>";
                 $textor = "<span class='badge bg-gradient-primary' style=' height: 20px; background:red; border:1px  solid #7b809a;  '> </span>";
@@ -41,45 +41,43 @@ class ProductosController extends Controller
 
 
                     //(blanco,rojo,azul)
-                foreach($datos as $elemento)
-                    {
-                        if($elemento == "blanco"){
-                            $textog = $textog.$textob ;
-                        }elseif($elemento == "rojo"){
-                            $textog = $textog.$textor;
-                        }elseif($elemento == "azul"){
-                            $textog = $textog.$textoa;
-                        }elseif($elemento == "negro"){
-                            $textog = $textog.$texton;
-                        }elseif($elemento == "plomo"){
-                            $textog = $textog.$textop;
+                    foreach ($datos as $elemento) {
+                        if ($elemento == "blanco") {
+                            $textog = $textog . $textob;
+                        } elseif ($elemento == "rojo") {
+                            $textog = $textog . $textor;
+                        } elseif ($elemento == "azul") {
+                            $textog = $textog . $textoa;
+                        } elseif ($elemento == "negro") {
+                            $textog = $textog . $texton;
+                        } elseif ($elemento == "plomo") {
+                            $textog = $textog . $textop;
                         }
                     }
-                return $textog;
-
-            })
-            ->addColumn('img', function($producto){
-                $ruta = asset($producto->imagen);
-                $img = '<img src="'.$ruta.'" width="100px">';
-                return $img;
-            })
-            ->addColumn('action', function($row){
-                $ruta_editar =  route('editar_productos', $row->idproducto);
-                $ruta_eliminar = route('eliminar_productos', $row->idproducto);
-                $form = '<form action="'.$ruta_eliminar.'" method="POST" class="formulario">
-                            '.csrf_field().'
-                            '.method_field("delete").'
-                            <a href="'.$ruta_editar.'" class="btn bg-gradient-info"><i class="material-icons">edit</i>EDITAR</a>
+                    return $textog;
+                })
+                ->addColumn('img', function ($producto) {
+                    $ruta = asset($producto->imagen);
+                    $img = '<img src="' . $ruta . '" width="100px">';
+                    return $img;
+                })
+                ->addColumn('action', function ($row) {
+                    $ruta_editar =  route('editar_productos', $row->idproducto);
+                    $ruta_eliminar = route('eliminar_productos', $row->idproducto);
+                    $form = '<form action="' . $ruta_eliminar . '" method="POST" class="formulario">
+                            ' . csrf_field() . '
+                            ' . method_field("delete") . '
+                            <a href="' . $ruta_editar . '" class="btn bg-gradient-info"><i class="material-icons">edit</i>EDITAR</a>
                             <button type="submit" class="btn bg-gradient-danger formulario"><i class="material-icons">delete</i>ELIMINAR</button>
                         </form>';
-                return $form;
-            })
-            //->addColumn('action', function($row){
-            //    $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
-            //    return $form;
-            //})
-            ->rawColumns(['colores','img','action'])
-            ->make(true);
+                    return $form;
+                })
+                //->addColumn('action', function($row){
+                //    $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
+                //    return $form;
+                //})
+                ->rawColumns(['colores', 'img', 'action'])
+                ->make(true);
         }
 
         return view("Backend.Productos.productosindex");
@@ -105,7 +103,7 @@ class ProductosController extends Controller
         //
         //return $request;
 
-        if ($request->hasFile('archivo')){
+        if ($request->hasFile('archivo')) {
             $file = $request->file('archivo');
             $destinopath = 'imgs/productos/';
             $filename = time() . '-' . $file->getClientOriginalName();
@@ -120,8 +118,8 @@ class ProductosController extends Controller
             'precio_venta_mayor' => $request->precio_mayoreo,
             'precio_venta_public' => $request->precio_publico,
             //'colores' => json_encode($request->colores),
-            'colores' => implode(',',$request->colores),
-            'tags' => implode(',',$request->tags),
+            'colores' => implode(',', $request->colores),
+            'tags' => implode(',', $request->tags),
             'stock' => $request->stock_cantidad,
             'imagen' => $ruta,
             'status' => $request->status
@@ -146,7 +144,7 @@ class ProductosController extends Controller
 
         $categorias = Categorias::all();
         //return $producto;
-        return view('Backend.Productos.productosedit', compact('categorias','producto'));
+        return view('Backend.Productos.productosedit', compact('categorias', 'producto'));
     }
 
 
@@ -158,14 +156,14 @@ class ProductosController extends Controller
         //
         //return $request;
         //si conotiene archivo
-        if($request->hasFile('archivo')){
-            $a = explode('/',$producto->imagen);
+        if ($request->hasFile('archivo')) {
+            $a = explode('/', $producto->imagen);
             //return "llegando hasta aqui";
             $c = count($a);
 
-            if($c > 4){
-                unlink('imgs/productos/'.$a[5].'');
-            }else{
+            if ($c > 4) {
+                unlink('imgs/productos/' . $a[5] . '');
+            } else {
                 //unlink('imgs/categorias/'.$a[5].'');
 
             }
@@ -185,14 +183,12 @@ class ProductosController extends Controller
                 'precio_venta_mayor' => $request->precio_mayoreo,
                 'precio_venta_public' => $request->precio_publico,
                 //'colores' => json_encode($request->colores),
-                'colores' => implode(',',$request->colores),
-                'tags' => implode(',',$request->tags),
+                'colores' => implode(',', $request->colores),
+                'tags' => implode(',', $request->tags),
                 'stock' => $request->stock_cantidad,
                 'imagen' => $ruta,
                 'status' => $request->status,
             ]);
-
-            //return"logro actualizar con achivo contenido";
             return redirect()->route('productos')->with('actualizar', 'ok');
         //si no contiener archivo no sobreponemos las imganes
         }else{
@@ -204,8 +200,8 @@ class ProductosController extends Controller
                 'precio_venta_mayor' => $request->precio_mayoreo,
                 'precio_venta_public' => $request->precio_publico,
                 //'colores' => json_encode($request->colores),
-                'colores' => implode(',',$request->colores),
-                'tags' => implode(',',$request->tags),
+                'colores' => implode(',', $request->colores),
+                'tags' => implode(',', $request->tags),
                 'stock' => $request->stock_cantidad,
                 'status' => $request->status,
             ]);
@@ -220,7 +216,7 @@ class ProductosController extends Controller
      */
     public function destroy(Productos $producto)
     {
-        //
+
         //return $producto;
         $a = explode('/',$producto->imagen);
         //return $a;
@@ -230,6 +226,5 @@ class ProductosController extends Controller
         //return $prodcuto;
         return redirect()->route('productos')->with('eliminar', 'ok');
     }
-
 
 }

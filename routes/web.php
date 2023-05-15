@@ -10,6 +10,9 @@ use App\Http\Controllers\Backend\VentasController;
 use App\Http\Controllers\Backend\ResumenventasController;
 use App\Http\Controllers\Backend\ProductosController;
 use App\Http\Controllers\Backend\ReparacionesController;
+// livewire
+use App\Http\Livewire\Backend\DispositivoLive\Listar;
+
 // frontend controller
 use App\Http\Controllers\Frontend\EcommerceController;
 use App\Http\Controllers\Frontend\LoginEController;
@@ -99,6 +102,7 @@ Route::get('/notifi', function () {
 });
 
 // Dispositivos
+Route::get('/backend/dispositivos-listar', Listar::class)->name('dispositivos');
 Route::post('backend/dispotivos/crear', [ReparacionesController::class, 'create_device'])->name('create_device');
 // ------------------------------------------------------------------------------------------------
 

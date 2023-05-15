@@ -166,9 +166,9 @@ class CategoriasController extends Controller
     public function destroy(Categorias $categoria)
     {
         //
-        //return $categoria;
         $a = explode('/',$categoria->ruta);
 
+        // return $a;
         unlink('imgs/categorias/'.$a[5].'');
         //eturn "se elimino laimg";
         $categoria->delete();
