@@ -5,10 +5,13 @@
         <div class="row">
             <div class="col-md-4">
                 <a href="{{ route('reparaciones_crear') }}" class="btn btn-info">
-                    <i class="material-icons">person_add</i>
-                    Agregar Nuevo Usuario
+                    <i class="material-icons">add</i>
+                    Crear nueva reparación
                 </a>
             </div>
+        </div>
+        <div class="row">
+            @yield('component-dispositivo')
         </div>
     </div>
 @endsection

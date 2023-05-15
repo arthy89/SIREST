@@ -7,6 +7,9 @@ use App\Http\Controllers\Backend\LoginController;
 use App\Http\Controllers\Backend\CategoriasController;
 use App\Http\Controllers\Backend\ProductosController;
 use App\Http\Controllers\Backend\ReparacionesController;
+// livewire
+use App\Http\Livewire\Backend\DispositivoLive\Listar;
+
 // frontend controller
 use App\Http\Controllers\Frontend\EcommerceController;
 use App\Http\Controllers\Frontend\LoginEController;
@@ -81,6 +84,7 @@ Route::get('backend/reparaciones', [ReparacionesController::class, 'index'])->na
 Route::get('backend/reparaciones/crear', [ReparacionesController::class, 'create'])->name('reparaciones_crear');
 
 // Dispositivos
+Route::get('/backend/dispositivos-listar', Listar::class)->name('dispositivos');
 Route::post('backend/dispotivos/crear', [ReparacionesController::class, 'create_device'])->name('create_device');
 // ------------------------------------------------------------------------------------------------
 

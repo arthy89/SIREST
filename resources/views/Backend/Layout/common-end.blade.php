@@ -10,11 +10,9 @@
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 <script src="{{ asset('assets/js/plugins/datatables.js') }}"></script>
-<script src="https://demos.creative-tim.com/test/material-dashboard-pro/assets/js/plugins/datatables.js" type="text/javascript"></script>
+<script src="https://demos.creative-tim.com/test/material-dashboard-pro/assets/js/plugins/datatables.js"
+    type="text/javascript"></script>
 <script>
-
-
-
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
     new Chart(ctx, {
