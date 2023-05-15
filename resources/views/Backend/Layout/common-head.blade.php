@@ -24,6 +24,12 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 <!-- CSS Files -->
 <link id="pagestyle" href="{{ asset('assets/css/material-dashboard.css?v=3.0.5') }}" rel="stylesheet" />
+<!-- Notificacionoes -->
+<link rel="stylesheet" href="{{ asset('assetsnotf/css/Lobibox.min.css') }}">
+<link rel="stylesheet" href="{{ asset('assetsnotf/css/notifications.css') }}">
+
+
+<link type="text/css" rel="shortcut icon" href="{{ asset('assetsnotf/img/logo-mywebsite-urian-viera.svg') }}"/>
 <!-- Nepcha Analytics (nepcha.com) -->
 <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
 

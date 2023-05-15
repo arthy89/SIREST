@@ -83,6 +83,10 @@
 @endsection
 
 @push('custom-scripts')
+
+
+
+
     <script>
         var x = document.getElementById("archivo");
         x.value = {{$categoria->ruta}};

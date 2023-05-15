@@ -37,7 +37,7 @@ class ProductosController extends Controller
                 $textor = "<span class='badge bg-gradient-primary' style=' height: 20px; background:red; border:1px  solid #7b809a;  '> </span>";
                 $textoa = "<span class='badge bg-gradient-primary' style=' height: 20px; background:DarkBlue; border:1px  solid #7b809a;  '> </span>";
                 $texton = "<span class='badge bg-gradient-primary' style=' height: 20px; background:black; border:1px  solid #7b809a;  '> </span>";
-                $textop = "<span class='badge bg-gradient-primary' style=' height: 20px; background:DarkGray; border:1px  solid #7b809a;  '> </span>";
+                $textop = "<span class='badge bg-gradient-primary' style=' height: 20px; background:white; border:1px  solid #7b809a;  '> </span>";
 
 
                     //(blanco,rojo,azul)
@@ -127,7 +127,7 @@ class ProductosController extends Controller
             'status' => $request->status
         ]);
 
-        return redirect()->route('productos');
+        return redirect()->route('productos')->with('crear', 'ok');
     }
 
     /**
@@ -193,7 +193,7 @@ class ProductosController extends Controller
             ]);
 
             //return"logro actualizar con achivo contenido";
-            return redirect()->route('productos')->with('status', 'Producto actualizado correctamente!');
+            return redirect()->route('productos')->with('actualizar', 'ok');
         //si no contiener archivo no sobreponemos las imganes
         }else{
             $producto->update([
@@ -210,8 +210,9 @@ class ProductosController extends Controller
                 'status' => $request->status,
             ]);
             //return"logro actualizar sin achivo contenido";
-            return redirect()->route('productos')->with('status', 'Producto actualizado correctamente!');
+            return redirect()->route('productos')->with('actualizar', 'ok');
         }
+        return redirect()->route('productos')->with('actualizar', 'fallied');
     }
 
     /**
@@ -220,14 +221,15 @@ class ProductosController extends Controller
     public function destroy(Productos $producto)
     {
         //
-        return $producto;
-        $a = explode('/',$producto->ruta);
-
+        //return $producto;
+        $a = explode('/',$producto->imagen);
+        //return $a;
         unlink('imgs/productos/'.$a[5].'');
         //eturn "se elimino laimg";
         $producto->delete();
-
+        //return $prodcuto;
         return redirect()->route('productos')->with('eliminar', 'ok');
     }
+
 
 }

@@ -84,7 +84,7 @@ class CategoriasController extends Controller
             'status' => $request->status,
         ]);
 
-        return redirect()->route('categorias');
+        return redirect()->route('categorias')->with('crear', 'ok');
     }
 
     /**
@@ -144,7 +144,7 @@ class CategoriasController extends Controller
             ]);
 
             //return"logro actualizar con achivo contenido";
-            return redirect()->route('categorias')->with('status', 'Categoria actualizado correctamente!');
+            return redirect()->route('categorias')->with('actualizar', 'ok');
         //si no contiener archivo no sobreponemos las imganes
         }else{
             $categoria->update([
@@ -153,7 +153,7 @@ class CategoriasController extends Controller
                 'status' => $request->status,
             ]);
             //return"logro actualizar sin achivo contenido";
-            return redirect()->route('categorias')->with('status', 'Categoria actualizado correctamente!');
+            return redirect()->route('categorias')->with('actualizar', 'ok');
         }
 
 
@@ -166,6 +166,7 @@ class CategoriasController extends Controller
     public function destroy(Categorias $categoria)
     {
         //
+        //return $categoria;
         $a = explode('/',$categoria->ruta);
 
         unlink('imgs/categorias/'.$a[5].'');
