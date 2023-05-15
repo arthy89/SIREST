@@ -11,6 +11,13 @@
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 <script src="{{ asset('assets/js/plugins/datatables.js') }}"></script>
 <script src="https://demos.creative-tim.com/test/material-dashboard-pro/assets/js/plugins/datatables.js" type="text/javascript"></script>
+<!-- Libreria js para las Notificaciones -->
+
+
+<script src="{{ asset('assetsnotf/js/Lobibox.js') }}"></script>
+<script src="{{ asset('assetsnotf/js/notification-active.js') }}"></script>
+
+<!--
 <script>
 
 
@@ -261,6 +268,7 @@
         },
     });
 </script>
+!-->
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
