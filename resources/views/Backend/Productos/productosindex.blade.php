@@ -86,8 +86,57 @@
 @endsection
 
 @push('custom-scripts')
+@if (session('eliminar') == 'ok')
+        <script>
+            Swal.fire(
+                '¡Eliminado!',
+                'Se eliminó la Categoria correctamente',
+                'success'
+            )
+        </script>
+    @endif
+    @if (session('crear')=='ok')
+        <script type="text/javascript">
 
+            Lobibox.notify('success', {
+                width: 600,
+                position: 'top right',
+                title: 'Registro correctamente !!',
+                msg: 'Producto Registrada.'
+            });
+
+        </script>
+    @endif
+    @if (session('actualizar')=='ok')
+        <script type="text/javascript">
+
+            Lobibox.notify('success', {
+                width: 600,
+                position: 'top right',
+                title: 'Actualizacion correctamente !!',
+                msg: 'Producto Actualizada.'
+            });
+
+        </script>
+    @endif
 <script>
+    $(document).on('submit', '.formulario', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro de eliminar al Categoria?',
+                text: "Se eliminará la Categoria    ",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        });
     $(document).ready(function() {
         $('#registro').DataTable({
             processing: true,

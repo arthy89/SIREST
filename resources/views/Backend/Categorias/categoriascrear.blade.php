@@ -17,19 +17,18 @@
                             @csrf
 
                             <div class="row">
-
+                                {{--
                                 @foreach ($errors->all() as $error)
+
                                     <li>{{ $error }}</li>
                                 @endforeach
 
-                                {{-- nombre producto --}}
+                                nombre producto --}}
                                 <div class="col-md-6">
                                     <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">Nombre del producto</label>
-                                        <input type="text" class="form-control" name="nombre_categoria">
-                                        @if ($errors->has('nombre_categoria'))
-                                            <p class="text-danger mb-0 text-sm"><em>Este campo es obligatorio</em></p>
-                                        @endif
+                                        <label class="form-label">Nombre Categoria</label>
+                                        <input type="text" class="form-control" name="nombre_categoria" required>
+
                                     </div>
                                 </div>
 
@@ -37,10 +36,10 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static mb-4">
 
-                                        <textarea type="text" class="form-control" rows="2" placeholder="Descripcion" spellcheck="false"
+                                        <textarea type="text" required class="form-control" rows="2" placeholder="Descripcion" spellcheck="false"
                                             name="descripcion"></textarea>
                                             @if ($errors->has('descripcion'))
-                                            <p class="text-danger mb-0 text-sm"><em>Este campo es obligatorio</em></p>
+                                            <p class="text-danger mb-0 text-sm" ><em>Este campo es obligatorio</em></p>
                                             @endif
                                     </div>
                                 </div>
@@ -63,7 +62,7 @@
                                         <div class="main-container_1" id="main-container">
                                             <div class="input-container_1">
                                                 Clic aquí para subir tu Imagen
-                                                <input type="file" id="archivo" name="archivo" value="">
+                                                <input type="file" id="archivo" name="archivo" value="" required>
                                             </div>
                                             <div class="preview-container">
                                                 <img src="" id="preview">
@@ -81,6 +80,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <button type="submit" class="btn bg-gradient-info">Guardar nuevo Producto</button>
+
                                 </div>
                             </div>
                         </form>
@@ -93,7 +93,23 @@
 @endsection
 
 @push('custom-scripts')
+    @foreach ($errors->all() as $error)
+
+                <script>
+
+                    Lobibox.notify('error', {
+                        width: 600,
+                        delay: 5500,
+                        position: 'top right',
+                        title: 'Revise los datos  !!',
+                        msg: '{{ $error }}'
+                    });
+                </script>
+
+    @endforeach
+
     <script>
+
         function mostrarImagen(event) {
             var imagenSource = event.target.result;
             var previewImage = document.getElementById('preview');

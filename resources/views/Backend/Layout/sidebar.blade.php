@@ -1,6 +1,6 @@
-<aside
-    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
-    id="sidenav-main">
+
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
@@ -11,8 +11,10 @@
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+
+    <div class="collapse navbar-collapse  w-auto h-auto ps " id="sidenav-collapse-main">
         <ul class="navbar-nav">
+
             <li class="nav-item">
                 <a class="nav-link text-white active bg-gradient-primary" href="{{ route('dashboard') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -32,6 +34,15 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('clientes') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons">group</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Clientes</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link text-white" href="{{ route('reparaciones') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons">construction</i>
@@ -39,6 +50,28 @@
                     <span class="nav-link-text ms-1">Reparaciones</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link text-white collapsed" aria-controls="componentsExamples" role="button" aria-expanded="false">
+                    <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">view_in_ar</i>
+                    <span class="nav-link-text ms-2 ps-1">Ventas</span>
+                </a>
+                <div class="collapse" id="componentsExamples" style="">
+                    <ul class="nav ">
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " href="{{ route('ventas') }}">
+                            <span class="sidenav-mini-icon"> V </span>
+                            <span class="sidenav-normal  ms-2  ps-1"> Venta </span>
+                            </a>
+                            </li>
+                            <li class="nav-item ">
+                            <a class="nav-link text-white " href="{{ route('resumenventas') }}" target="_blank">
+                            <span class="sidenav-mini-icon"> R </span>
+                            <span class="sidenav-normal  ms-2  ps-1"> Resumen Ventas </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                </li>
 
 
             <li class="nav-item">
@@ -52,28 +85,10 @@
                     <ul class="nav ">
                         <li class="nav-item active">
                             <a class="nav-link text-white active" href="{{ route('categorias') }}">
-                                <span class="sidenav-mini-icon"> C </span>
-                                <span class="sidenav-normal  ms-2  ps-1"> Categorias </span>
+                                <span class="sidenav-mini-icon"> Pr </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Proveedores </span>
                             </a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link text-white " href="{{ route('productos') }}">
-                                <span class="sidenav-mini-icon"> P </span>
-                                <span class="sidenav-normal  ms-2  ps-1"> Productos </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-
-            <!-- <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link text-white active" aria-controls="dashboardsExamples" role="button" aria-expanded="true">
-                    <i class="material-icons">group</i>
-                        <span class="nav-link-text ms-2 ps-1">Inventario</span>
-                </a>
-                <div class="collapse show" id="dashboardsExamples" style="">
-                    <ul class="nav ">
                         <li class="nav-item active">
                             <a class="nav-link text-white active" href="{{ route('categorias') }}">
                                 <span class="sidenav-mini-icon"> C </span>
@@ -88,7 +103,7 @@
                         </li>
                     </ul>
                 </div>
-            </li> -->
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link text-white " href="../pages/tables.html">
@@ -151,11 +166,5 @@
             </li>
         </ul>
     </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-        <div class="mx-3">
-            <a class="btn bg-gradient-primary mt-4 w-100"
-                href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree"
-                type="button">Upgrade to pro</a>
-        </div>
-    </div>
+
 </aside>

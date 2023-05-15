@@ -5,6 +5,9 @@ use App\Http\Controllers\Backend\UsuariosController;
 use App\Http\Controllers\Backend\PerfilController;
 use App\Http\Controllers\Backend\LoginController;
 use App\Http\Controllers\Backend\CategoriasController;
+use App\Http\Controllers\Backend\ClientesController;
+use App\Http\Controllers\Backend\VentasController;
+use App\Http\Controllers\Backend\ResumenventasController;
 use App\Http\Controllers\Backend\ProductosController;
 use App\Http\Controllers\Backend\ReparacionesController;
 // livewire
@@ -61,6 +64,9 @@ Route::get('backend/{usuario}/perfil', [PerfilController::class, 'edit'])->name(
 Route::put('backend/{usuario}/perfil', [PerfilController::class, 'update'])->name('editar_perfil');
 Route::put('backend/{usuario}/perfil/pass', [PerfilController::class, 'updatepass'])->name('editar_perfil_pass');
 
+//CLIENTES
+Route::get('backend/clientes', [ClientesController::class, 'index'])->name('clientes');
+
 //CATEGORIAS
 Route::get('backend/categorias', [CategoriasController::class, 'index'])->name('categorias');
 Route::get('backend/categorias/crear', [CategoriasController::class, 'create'])->name('crear_categorias');
@@ -68,7 +74,7 @@ Route::post('backend/categorias/crear', [CategoriasController::class, 'store'])-
 Route::get('backend/categorias/{categoria}/editar', [CategoriasController::class, 'edit'])->name('editar_categorias');
 Route::put('backend/categorias/{categoria}/editar', [CategoriasController::class, 'update'])->name('editar_categorias');
 // borrar CATEGORIAS
-Route::delete('backend/productos/{categoria}/eliminar', [CategoriasController::class, 'destroy'])->name('eliminar_categorias');
+Route::delete('backend/categorias/{categoria}/eliminar', [CategoriasController::class, 'destroy'])->name('eliminar_categorias');
 
 //Productos
 Route::get('backend/productos', [ProductosController::class, 'index'])->name('productos');
@@ -77,11 +83,23 @@ Route::post('backend/productos/crear', [ProductosController::class, 'store'])->n
 Route::get('backend/productos/{producto}/editar', [ProductosController::class, 'edit'])->name('editar_productos');
 Route::put('backend/productos/{producto}/editar', [ProductosController::class, 'update'])->name('editar_productos');
 // borrar producto
+//Route::delete('backend/productos/{categoria}/eliminar', [CategoriasController::class, 'destroy'])->name('eliminar_categorias');
 Route::delete('backend/productos/{producto}/eliminar', [ProductosController::class, 'destroy'])->name('eliminar_productos');
 
 // Reparaciones
 Route::get('backend/reparaciones', [ReparacionesController::class, 'index'])->name('reparaciones');
 Route::get('backend/reparaciones/crear', [ReparacionesController::class, 'create'])->name('reparaciones_crear');
+//VENTAS
+Route::get('backend/ventas', [VentasController::class, 'index'])->name('ventas');
+//Resumen de venta
+Route::get('backend/resumenventas', [ResumenventasController::class, 'index'])->name('resumenventas');
+
+
+
+//notificaciones
+Route::get('/notifi', function () {
+    return view('notificaciones');
+});
 
 // Dispositivos
 Route::get('/backend/dispositivos-listar', Listar::class)->name('dispositivos');

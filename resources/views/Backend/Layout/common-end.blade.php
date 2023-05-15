@@ -12,6 +12,10 @@
 <script src="{{ asset('assets/js/plugins/datatables.js') }}"></script>
 <script src="https://demos.creative-tim.com/test/material-dashboard-pro/assets/js/plugins/datatables.js"
     type="text/javascript"></script>
+<script src="https://demos.creative-tim.com/test/material-dashboard-pro/assets/js/plugins/datatables.js" type="text/javascript"></script>
+<!-- Libreria js para las Notificaciones -->
+<script src="{{ asset('assetsnotf/js/Lobibox.js') }}"></script>
+<script src="{{ asset('assetsnotf/js/notification-active.js') }}"></script>
 <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -259,6 +263,7 @@
         },
     });
 </script>
+!-->
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
