@@ -13,7 +13,8 @@
 
 <script src="https://demos.creative-tim.com/test/material-dashboard-pro/assets/js/plugins/datatables.js"
     type="text/javascript"></script>
-<script src="https://demos.creative-tim.com/test/material-dashboard-pro/assets/js/plugins/datatables.js" type="text/javascript"></script>
+<script src="https://demos.creative-tim.com/test/material-dashboard-pro/assets/js/plugins/datatables.js"
+    type="text/javascript"></script>
 <!-- Libreria js para las Notificaciones -->
 <script src="{{ asset('assetsnotf/js/Lobibox.js') }}"></script>
 <script src="{{ asset('assetsnotf/js/notification-active.js') }}"></script>

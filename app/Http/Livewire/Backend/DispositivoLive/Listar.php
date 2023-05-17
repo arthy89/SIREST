@@ -16,7 +16,7 @@ class Listar extends Component
     public function render()
     {
 
-        $dispositivos = Dispositivo::get();
+        $dispositivos = Dispositivo::orderBy('device_name')->get();
 
         return view('livewire.backend.dispositivo-live.listar', compact('dispositivos'));
     }
