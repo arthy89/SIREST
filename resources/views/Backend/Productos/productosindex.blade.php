@@ -28,10 +28,10 @@
                                     <th>NOMBRE</th>
                                     <th>COLORES</th>
                                     <th>CATEGORIA</th>
+                                    <th>PROVEEDOR</th>
                                     <th>COMPRA</th>
                                     <th>STOCK</th>
                                     <th>IMAGEN</th>
-                                    <th>ESTADO</th>
                                     <th>OPCIONES</th>
                                 </tr>
                             </thead>
@@ -164,6 +164,10 @@
                     name: 'nombre'
                 },
                 {
+                    data: 'nombre_proveedor',
+                    name: 'nombre_proveedor'
+                },
+                {
                     data: 'precio_compra',
                     name: 'precio_compra'
                 },
@@ -173,10 +177,6 @@
                 },
                 {
                     data: 'img'
-                },
-                {
-                    data: 'status',
-                    name: 'status'
                 },
                 {
                     data: 'action',

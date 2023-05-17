@@ -8,6 +8,7 @@ use App\Http\Requests\Backend\Productos\ProdActReq;
 use App\Http\Requests\Backend\Productos\ProductosRequest;
 use App\Models\Productos;
 use App\Models\Categorias;
+use App\Models\Proveedores;
 use Yajra\DataTables\DataTables;
 use DB;
 
@@ -19,12 +20,16 @@ class ProductosController extends Controller
     public function index(Request $request)
     {
         //
+
         if ($request->ajax()) {
             $productos = DB::table('producto')
                 ->join('categoria', function ($join) {
                     $join->on('producto.categoriaid', '=', 'categoria.idcategoria');
                 })
-                ->select('producto.nombre_p', 'producto.idproducto', 'producto.colores', 'categoria.nombre', 'producto.precio_compra', 'producto.stock', 'producto.imagen', 'producto.status')->get();
+                ->join('proveedor', function ($join){
+                    $join->on('producto.proveedorid', '=','proveedor.id_proveedor');
+                })
+                ->select('producto.nombre_p', 'proveedor.id_proveedor','proveedor.nombre_proveedor','producto.idproducto', 'producto.colores', 'categoria.nombre', 'producto.precio_compra', 'producto.stock', 'producto.imagen')->get();
             return DataTables::of($productos)
                 ->addIndexColumn()
                 ->addColumn('colores', function ($producto) {
@@ -81,7 +86,7 @@ class ProductosController extends Controller
                 })
                 //->addColumn('action', function($row){
                 //    $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
-                //    return $form;
+                //    turn $form;re
                 //})
                 ->rawColumns(['colores', 'img', 'action'])
                 ->make(true);
@@ -97,9 +102,10 @@ class ProductosController extends Controller
     {
         //
         $categorias = Categorias::all();
+        $proveedores = Proveedores::all();
         //return $categorias;
 
-        return view('Backend.Productos.productoscrear', compact('categorias'));
+        return view('Backend.Productos.productoscrear', compact('categorias','proveedores'));
     }
 
     /**
@@ -119,6 +125,7 @@ class ProductosController extends Controller
         }
         $producto = Productos::create([
             'categoriaid' => $request->categoriaid,
+            'proveedorid' => $request->proveedorid,
             'nombre_p' => $request->nombre_producto,
             'descripcion' => $request->descripcion,
             'precio_compra' => $request->precio_compra,
@@ -128,8 +135,7 @@ class ProductosController extends Controller
             'colores' => implode(',', $request->colores),
             'tags' => implode(',', $request->tags),
             'stock' => $request->stock_cantidad,
-            'imagen' => $ruta,
-            'status' => $request->status
+            'imagen' => $ruta
         ]);
 
         return redirect()->route('productos')->with('crear', 'ok');
@@ -150,8 +156,10 @@ class ProductosController extends Controller
     {
 
         $categorias = Categorias::all();
+
+        $proveedores = Proveedores::all();
         //return $producto;
-        return view('Backend.Productos.productosedit', compact('categorias', 'producto'));
+        return view('Backend.Productos.productosedit', compact('categorias', 'producto','proveedores'));
     }
 
 
@@ -194,7 +202,7 @@ class ProductosController extends Controller
                 'tags' => implode(',', $request->tags),
                 'stock' => $request->stock_cantidad,
                 'imagen' => $ruta,
-                'status' => $request->status,
+                'proveedorid' => $request->proveedor,
             ]);
             return redirect()->route('productos')->with('actualizar', 'ok');
         //si no contiener archivo no sobreponemos las imganes
@@ -210,7 +218,7 @@ class ProductosController extends Controller
                 'colores' => implode(',', $request->colores),
                 'tags' => implode(',', $request->tags),
                 'stock' => $request->stock_cantidad,
-                'status' => $request->status,
+                'proveedorid' => $request->proveedor,
             ]);
             //return"logro actualizar sin achivo contenido";
             return redirect()->route('productos')->with('actualizar', 'ok');

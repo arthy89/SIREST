@@ -29,8 +29,7 @@ class ProdActReq extends FormRequest
             'precio_compra' => 'required',
             'precio_mayoreo' => 'required',
             'precio_publico' => 'required',
-            'descripcion' => 'required',
-            'status' => 'required'
+            'descripcion' => 'required'
         ];
     }
 }

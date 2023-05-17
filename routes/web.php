@@ -6,12 +6,14 @@ use App\Http\Controllers\Backend\PerfilController;
 use App\Http\Controllers\Backend\LoginController;
 use App\Http\Controllers\Backend\CategoriasController;
 use App\Http\Controllers\Backend\ClientesController;
+use App\Http\Controllers\Backend\ProveedorController;
 use App\Http\Controllers\Backend\VentasController;
 use App\Http\Controllers\Backend\ResumenventasController;
 use App\Http\Controllers\Backend\ProductosController;
 use App\Http\Controllers\Backend\ReparacionesController;
 // livewire
 use App\Http\Livewire\Backend\DispositivoLive\Listar;
+use App\Http\Livewire\Backend\ProveedorLive\Listarproveedor;
 
 // frontend controller
 use App\Http\Controllers\Frontend\EcommerceController;
@@ -66,6 +68,24 @@ Route::put('backend/{usuario}/perfil/pass', [PerfilController::class, 'updatepas
 
 //CLIENTES
 Route::get('backend/clientes', [ClientesController::class, 'index'])->name('clientes');
+
+
+
+//PROVEDOR estamos pasando que  listarproveedor se comportara como mcontrolador
+Route::middleware(['auth:Sanctum','verified'])->get('backend/proveedor',Listarproveedor::class)->name('proveedor');
+//Route::get('backend/proveedor/prueba/{name}', Listarproveedor::class);
+//proveedor con trontrol\Dor nmoral
+Route::get('backend/proveedor', [ProveedorController::class, 'index'])->name('proveedor');
+
+
+//Route::get('backend/proveedor', [Listarproveedor::class, 'render'])->name('proveedor');
+//Route::post('backend/proveedor/crear', [ProveedorController::class, 'create_device'])->name('crear_proveedor');
+Route::get('backend/proveedor/crear', [ProveedorController::class, 'create'])->name('crear_proveedor');
+Route::post('backend/proveedor/crear', [ProveedorController::class, 'store'])->name('crear_proveedor');
+Route::get('backend/proveedor/{categoria}/editar', [ProveedorController::class, 'edit'])->name('editar_proveedor');
+Route::put('backend/proveedor/{categoria}/editar', [ProveedorController::class, 'update'])->name('editar_proveedor');
+// borrar PROVEEDOR
+Route::delete('backend/proveedor/{categoria}/eliminar', [ProveedorController::class, 'destroy'])->name('eliminar_proveedor');
 
 //CATEGORIAS
 Route::get('backend/categorias', [CategoriasController::class, 'index'])->name('categorias');

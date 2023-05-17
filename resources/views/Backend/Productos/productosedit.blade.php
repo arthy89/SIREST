@@ -103,12 +103,14 @@
                                 </div>
                                 {{-- Estado --}}
                                 <div class="col-md-6">
-                                    <label>Estado</label>
+                                    <label>Proveedor</label>
                                     <div class="input-group input-group-static my-2">
-                                        <select class="js-example-basic-single" id="estado" name="status"
+                                        <select class="js-example-basic-single" id="proveedorid" name="proveedor"
                                             style="width: 100%" height="100px">
-                                            <option value="1">ACTIVO</option>
-                                            <option value="0">INACTIVO</option>
+                                            @foreach ($proveedores as $proveedor)
+                                                <option value="{{ $proveedor->id_proveedor }}">
+                                                    {{ $proveedor->nombre_proveedor }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -166,8 +168,8 @@
             $('#cateogiraid').val("{{ $producto->categoriaid }}");
             $('#cateogiraid').select2().trigger('change');
             // rol
-            $('#estado').val("{{ $producto->status }}");
-            $('#estado').select2().trigger('change');
+            $('#proveedorid').val("{{ $producto->proveedorid }}");
+            $('#proveedorid').select2().trigger('change');
             // colores
             $('#colores').val(@json($producto->colores));
             // tags
