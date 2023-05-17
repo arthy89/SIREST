@@ -110,14 +110,16 @@
                                             spellcheck="false"></textarea>
                                     </div>
                                 </div>
-                                {{-- Estado --}}
+                                {{-- Estado/Provedoresl --}}
                                 <div class="col-md-6">
-                                    <label>Estado</label>
+                                    <label>Proveedores</label>
                                     <div class="input-group input-group-static my-0">
-                                        <select class="js-example-basic-single" id="estado" name="status"
+                                        <select class="js-example-basic-single" id="proveedorid" name="proveedorid"
                                             style="width: 100%" height="100px">
-                                            <option value="1" selected>ACTIVO</option>
-                                            <option value="2">INACTIVO</option>
+                                            @foreach ($proveedores as $proveedor)
+                                                <option value="{{ $proveedor->id_proveedor }}" selected>
+                                                    {{ $proveedor->nombre_proveedor }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

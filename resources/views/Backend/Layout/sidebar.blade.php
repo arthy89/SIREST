@@ -84,7 +84,7 @@
                 <div class="collapse" id="pagesExamples" style="">
                     <ul class="nav ">
                         <li class="nav-item active">
-                            <a class="nav-link text-white active" href="{{ route('categorias') }}">
+                            <a class="nav-link text-white active" href="{{ route('proveedor') }}">
                                 <span class="sidenav-mini-icon"> Pr </span>
                                 <span class="sidenav-normal  ms-2  ps-1"> Proveedores </span>
                             </a>

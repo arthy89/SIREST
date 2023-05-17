@@ -18,6 +18,7 @@ class Productos extends Model
 
     protected $fillable = [
         'categoriaid',
+        'proveedorid',
         'codigo',
         'nombre_p',
         'descripcion',
@@ -27,8 +28,7 @@ class Productos extends Model
         'colores',
         'tags',
         'stock',
-        'imagen',
-        'status'
+        'imagen'
     ];
     protected function imagen():Attribute{
         return Attribute::make(get:fn($value)=>env("APP_URL").$value);

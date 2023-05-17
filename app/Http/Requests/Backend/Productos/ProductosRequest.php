@@ -29,9 +29,7 @@ class ProductosRequest extends FormRequest
             'precio_compra' => 'required',
             'precio_mayoreo' => 'required',
             'precio_publico' => 'required',
-            'descripcion' => 'required',
-            'status' => 'required',
-            'archivo' => 'required',
+            'descripcion' => 'required'
         ];
     }
 }
