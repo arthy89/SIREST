@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pedido;
 use App\Models\Dispositivo;
+use App\Models\Persona;
+use App\Models\Usuarios;
 use DB;
 
 class ReparacionesController extends Controller
@@ -22,22 +24,15 @@ class ReparacionesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create_device(Request $request)
-    {
-        //
-        // return $request;
-        $dispositivo = Dispositivo::create([
-            'device_name' => $request->device_name,
-            'device_mark' => $request->device_mark
-        ]);
-        return back();
-    }
 
     public function create()
     {
         //
+        // $pedido = Pedido::all();
+        // return $pedido;
         $dispositivos = Dispositivo::all();
-        return view('Backend.Reparaciones.reparacionescrear', compact('dispositivos'));
+        $usuarios = Usuarios::all();
+        return view('Backend.Reparaciones.reparacionescrear', compact('dispositivos', 'usuarios'));
     }
 
     /**

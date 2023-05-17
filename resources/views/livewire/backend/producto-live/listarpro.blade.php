@@ -1,16 +1,19 @@
 <div>
     <div class="input-group input-group-static">
         <select class="select2 productos" name="producto" style="width: 100%" height="100px">
-            <option>Seleccione un producto...</option>
+            <option></option>
             @foreach ($productos as $pro)
-                <option>{{ $pro->nombre_p }} - ${{ $pro->precio_compra }} - {{ $pro->stock }}U</option>
+                <option value="{{ $pro->precio_compra }}">{{ $pro->nombre_p }}</option>
             @endforeach
         </select>
     </div>
 
     <script>
         document.addEventListener('livewire:update', function() {
-            $('.productos').select2();
+            $('.productos').select2({
+                placeholder: "Seleccione...",
+                allowClear: true
+            });
         });
     </script>
 </div>

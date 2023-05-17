@@ -16,7 +16,7 @@ class Listarservicio extends Component
     public function render()
     {
 
-        $servicios = Servicios::get();
+        $servicios = Servicios::orderBy('nombre')->get();
 
         return view('livewire.backend.servicio-live.listarservicio', compact('servicios'));
     }

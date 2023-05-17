@@ -15,7 +15,7 @@ class Listarpro extends Component
     public function render()
     {
 
-        $productos = Productos::get();
+        $productos = Productos::orderBy('nombre_p')->get();
 
         return view('livewire.backend.producto-live.listarpro', compact('productos'));
     }

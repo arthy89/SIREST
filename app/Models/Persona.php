@@ -16,14 +16,18 @@ class Persona extends Authenticatable
 
     protected $table = "persona";
 
+    public $timestamps = false;
+
     protected $primaryKey = 'idpersona';
 
     protected $fillable = [
         'nombres',
         'apellidos',
+        'cod',
         'telefono',
         'email',
         'password',
+        'direccionfiscal',
         'nit',
         'token',
         'status',
@@ -32,8 +36,7 @@ class Persona extends Authenticatable
     public function setAttribute($key, $value)
     {
         $isRememberTokenAttribute = $key == $this->getRememberTokenName();
-        if (!$isRememberTokenAttribute)
-        {
+        if (!$isRememberTokenAttribute) {
             parent::setAttribute($key, $value);
         }
     }
