@@ -68,22 +68,17 @@ Route::put('backend/{usuario}/perfil/pass', [PerfilController::class, 'updatepas
 
 //CLIENTES
 Route::get('backend/clientes', [ClientesController::class, 'index'])->name('clientes');
-
+Route::get('backend/clientes/crear', [ClientesController::class, 'create'])->name('crear_clientes');
+Route::post('backend/clientes/crear', [ClientesController::class, 'store'])->name('crear_clientes');
+Route::get('backend/clientes/{cliente}/editar', [ClientesController::class, 'edit'])->name('editar_clientes');
+Route::put('backend/clientes/{cliente}/editar', [ClientesController::class, 'update'])->name('editar_clientes');
+// borrar CATEGORIAS
+Route::delete('backend/clientes/{cliente}/eliminar', [ClientesController::class, 'destroy'])->name('eliminar_clientes');
 
 
 //PROVEDOR estamos pasando que  listarproveedor se comportara como mcontrolador
 Route::middleware(['auth:Sanctum','verified'])->get('backend/proveedor',Listarproveedor::class)->name('proveedor');
-//Route::get('backend/proveedor/prueba/{name}', Listarproveedor::class);
-//proveedor con trontrol\Dor nmoral
 Route::get('backend/proveedor', [ProveedorController::class, 'index'])->name('proveedor');
-
-
-//Route::get('backend/proveedor', [Listarproveedor::class, 'render'])->name('proveedor');
-//Route::post('backend/proveedor/crear', [ProveedorController::class, 'create_device'])->name('crear_proveedor');
-Route::get('backend/proveedor/crear', [ProveedorController::class, 'create'])->name('crear_proveedor');
-Route::post('backend/proveedor/crear', [ProveedorController::class, 'store'])->name('crear_proveedor');
-Route::get('backend/proveedor/{categoria}/editar', [ProveedorController::class, 'edit'])->name('editar_proveedor');
-Route::put('backend/proveedor/{categoria}/editar', [ProveedorController::class, 'update'])->name('editar_proveedor');
 // borrar PROVEEDOR
 Route::delete('backend/proveedor/{categoria}/eliminar', [ProveedorController::class, 'destroy'])->name('eliminar_proveedor');
 
@@ -109,6 +104,7 @@ Route::delete('backend/productos/{producto}/eliminar', [ProductosController::cla
 // Reparaciones
 Route::get('backend/reparaciones', [ReparacionesController::class, 'index'])->name('reparaciones');
 Route::get('backend/reparaciones/crear', [ReparacionesController::class, 'create'])->name('reparaciones_crear');
+
 //VENTAS
 Route::get('backend/ventas', [VentasController::class, 'index'])->name('ventas');
 //Resumen de venta
