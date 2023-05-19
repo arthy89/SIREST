@@ -30,3 +30,37 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('assets/js/material-dashboard.min.js?v=3.0.5') }}"></script>
+<script>
+    function r(e) {
+    var t = document.querySelectorAll(".navbar-main .nav-link")
+    , a = document.querySelectorAll(".navbar-main .sidenav-toggler-line");
+    "blur" === e ? (t.forEach(e=>{
+        e.classList.remove("text-body")
+    }
+    ),
+    a.forEach(e=>{
+        e.classList.add("bg-dark")
+    }
+    )) : "transparent" === e && (t.forEach(e=>{
+        e.classList.add("text-body")
+    }
+    ),
+    a.forEach(e=>{
+        e.classList.remove("bg-dark")
+    }
+    ))
+}
+document.querySelector(".sidenav-toggler") && (sidenavToggler = document.getElementsByClassName("sidenav-toggler")[0],
+sidenavShow = document.getElementsByClassName("g-sidenav-show")[0],
+toggleNavbarMinimize = document.getElementById("navbarMinimize"),
+sidenavShow) && (sidenavToggler.onclick = function() {
+sidenavShow.classList.contains("g-sidenav-hidden") ? (sidenavShow.classList.remove("g-sidenav-hidden"),
+sidenavShow.classList.add("g-sidenav-pinned"),
+toggleNavbarMinimize && (toggleNavbarMinimize.click(),
+toggleNavbarMinimize.removeAttribute("checked"))) : (sidenavShow.classList.remove("g-sidenav-pinned"),
+sidenavShow.classList.add("g-sidenav-hidden"),
+toggleNavbarMinimize && (toggleNavbarMinimize.click(),
+toggleNavbarMinimize.setAttribute("checked", "true")))
+}
+);
+</script>
