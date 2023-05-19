@@ -10,7 +10,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Persona extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    //use HasApiTokens, HasFactory, Notifiable;
+    protected $primaryKey = 'idpersona';
 
     protected $guard = "client";
 
@@ -18,12 +19,13 @@ class Persona extends Authenticatable
 
     public $timestamps = false;
 
-    protected $primaryKey = 'idpersona';
+
 
     protected $fillable = [
+        'idpersona',
         'nombres',
+        'identificacion',
         'apellidos',
-        'cod',
         'telefono',
         'email',
         'password',

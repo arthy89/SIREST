@@ -234,8 +234,14 @@ class ProductosController extends Controller
 
         //return $producto;
         $a = explode('/',$producto->imagen);
+        //return count($a);
+        if(count($a) == 6){
+            unlink('imgs/productos/'.$a[5].'');
+        }else{
+            //return "cuando no haiga imagen";
+        }
         //return $a;
-        unlink('imgs/productos/'.$a[5].'');
+
         //eturn "se elimino laimg";
         $producto->delete();
         //return $prodcuto;
