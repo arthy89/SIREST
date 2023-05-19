@@ -85,10 +85,12 @@
 
                             <hr class="dark horizontal my-3">
                             <div class="row">
+                                {{-- envio de la lista --}}
+                                <input type="hidden" name="elementos" id="elementosInput">
                                 <h4 class="mb-0">Lista de agregados</h4>
                                 <div class="listado">
                                     <div class="table-responsive">
-                                        <table class="table align-items-center mb-0">
+                                        <table class="table align-items-center mb-0" id="listadoelementos">
                                             <thead>
                                                 <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7"
                                                     width="400px">
@@ -110,6 +112,37 @@
                                 </div>
 
                                 <script>
+                                    // Obtén una referencia al elemento de input
+                                    var elementosInput = document.getElementById('elementosInput');
+
+                                    // Agrega un evento al botón de enviar el formulario (o a cualquier otro evento deseado)
+                                    document.getElementById('enviarFormulario').addEventListener('click', function() {
+                                        // Obtén los valores de los elementos de la tabla y guárdalos en un array
+                                        var tablaElementos = [];
+
+                                        // Itera sobre cada fila de la tabla con la clase "tablebody"
+                                        $('.tablebody tr').each(function() {
+                                            var tipo = $(this).find('td:first-child').text().trim();
+                                            var nombre = $(this).find('td:nth-child(2)').text().trim();
+                                            var id = $(this).find('td:nth-child(3)').text().trim();
+
+                                            // Agrega un objeto con los valores al array tablaElementos
+                                            tablaElementos.push({
+                                                tipo: tipo,
+                                                nombre: nombre,
+                                                id: id
+                                            });
+                                        });
+
+                                        // Asigna el valor del array tablaElementos al input elementosInput
+                                        elementosInput.value = JSON.stringify(tablaElementos);
+                                    });
+                                </script>
+                                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                                <script>
+                                    var tablaElementos = [];
+                                    var contadorId = 1;
+
                                     function agregarServicio() {
                                         var selectedOption = $('.servicios').select2('data')[0];
                                         if (selectedOption) {
@@ -125,7 +158,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="input-group input-group-outline">
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control precio-input">
                                                     </div>
                                                 </td>
                                                 <td>
@@ -133,12 +166,74 @@
                                                 </td>
                                                 </tr>`;
                                             $('.tablebody').append(servicioHtml);
+
+                                            // Agregar el elemento al array
+                                            var servicio = {
+                                                id: contadorId++,
+                                                tipo: 'servicio',
+                                                nombre: servicioNombre,
+                                                cantidad: '',
+                                                precio: ''
+                                            };
+                                            tablaElementos.push(servicio);
+                                            actualizarElementosInput();
+                                            console.log(tablaElementos);
+
+                                            // Actualizar el valor de precio en el elemento correspondiente en el array tablaElementos
+                                            $('.tablebody tr:last-child .precio-input').on('blur', function() {
+                                                var precio = $(this).val();
+
+                                                servicio.precio = precio;
+                                                actualizarElementosInput();
+                                                calcularResultadoTotal();
+                                                calcularReciboTotal();
+                                                console.log(tablaElementos);
+                                            });
+
                                             $('.servicios').val(null).trigger('change');
                                         }
                                     }
 
+                                    // function eliminarServicio(btn) {
+                                    //     $(btn).closest('tr').remove();
+
+                                    //     // Obtener el índice del elemento a eliminar
+                                    //     var index = $(btn).closest('tr').index();
+
+                                    //     // Eliminar el elemento del array
+                                    //     tablaElementos.splice(index, 1);
+
+                                    //     actualizarElementosInput();
+                                    // }
+
                                     function eliminarServicio(btn) {
-                                        $(btn).closest('tr').remove();
+                                        var tr = $(btn).closest('tr');
+                                        var servicioId = tr.data('servicio-id');
+
+                                        // Obtener el índice del elemento a eliminar
+                                        var index = $(btn).closest('tr').index();
+
+                                        // Eliminar el elemento del array
+                                        tablaElementos.splice(index, 1);
+
+                                        // Actualizar el campo de precio en el array para los servicios restantes
+                                        $('.tablebody tr').each(function(index, element) {
+                                            var precioInput = $(element).find('.precio-input');
+                                            var servicioId = $(element).data('servicio-id');
+                                            var servicio = tablaElementos.find(function(elemento) {
+                                                return elemento.id === servicioId;
+                                            });
+
+                                            if (servicio) {
+                                                servicio.precio = precioInput.val();
+                                            }
+                                        });
+
+                                        tr.remove();
+                                        actualizarElementosInput();
+                                        calcularResultadoTotal();
+                                        calcularReciboTotal();
+                                        console.log(tablaElementos);
                                     }
 
                                     function agregarProducto() {
@@ -153,7 +248,7 @@
                                                 `</td>
                                                 <td>
                                                     <div class="input-group input-group-outline">
-                                                        <input type="text" class="form-control">
+                                                        <input type="text" class="form-control cantidad-input">
                                                     </div>
                                                 </td>
                                                 <td align="center">` +
@@ -164,12 +259,162 @@
                                                 </td>
                                                 </tr>`;
                                             $('.tablebody').append(productoHtml);
+
+                                            // Agregar el elemento al array
+                                            // tablaElementos.push({
+                                            //     id: contadorId++,
+                                            //     tipo: 'producto',
+                                            //     nombre: productoNombre,
+                                            //     cantidad: '',
+                                            //     precio: ''
+                                            // });
+
+                                            // $('.productos').val(null).trigger('change');
+
+                                            // Agregar el elemento al array
+                                            var producto = {
+                                                id: contadorId++,
+                                                tipo: 'producto',
+                                                nombre: productoNombre,
+                                                cantidad: '',
+                                                precio: productoId
+                                            };
+                                            tablaElementos.push(producto);
+                                            actualizarElementosInput();
+                                            console.log(tablaElementos);
+
+                                            // Actualizar el valor de precio en el elemento correspondiente en el array tablaElementos
+                                            $('.tablebody tr:last-child .cantidad-input').on('blur', function() {
+                                                var cantidad = $(this).val();
+
+                                                producto.cantidad = cantidad;
+                                                actualizarElementosInput();
+                                                calcularResultadoTotal();
+                                                calcularReciboTotal();
+                                                console.log(tablaElementos);
+                                            });
+
                                             $('.productos').val(null).trigger('change');
+
                                         }
                                     }
 
+                                    // function eliminarProducto(btn) {
+                                    //     $(btn).closest('tr').remove();
+
+                                    //     // Obtener el índice del elemento a eliminar
+                                    //     var index = $(btn).closest('tr').index();
+
+                                    //     // Eliminar el elemento del array
+                                    //     tablaElementos.splice(index, 1);
+
+                                    //     actualizarElementosInput();
+                                    // }
+
                                     function eliminarProducto(btn) {
-                                        $(btn).closest('tr').remove();
+                                        var tr = $(btn).closest('tr');
+                                        var productoId = tr.data('producto-id');
+
+                                        // Obtener el índice del elemento a eliminar
+                                        var index = $(btn).closest('tr').index();
+
+                                        // Eliminar el elemento del array
+                                        tablaElementos.splice(index, 1);
+
+                                        // Actualizar el campo de precio en el array para los productos restantes
+                                        $('.tablebody tr').each(function(index, element) {
+                                            var precioInput = $(element).find('.precio-input');
+                                            var productoId = $(element).data('producto-id');
+                                            var producto = tablaElementos.find(function(elemento) {
+                                                return elemento.id === productoId;
+                                            });
+
+                                            if (producto) {
+                                                producto.precio = precioInput.val();
+                                            }
+                                        });
+
+                                        tr.remove();
+                                        actualizarElementosInput();
+                                        calcularResultadoTotal();
+                                        calcularReciboTotal();
+                                        console.log(tablaElementos);
+                                    }
+
+                                    function actualizarElementosInput() {
+                                        // Actualizar el valor del input con el array de elementos en formato JSON
+                                        document.getElementById('elementosInput').value = JSON.stringify(tablaElementos);
+                                    }
+
+                                    // Función para mostrar los elementos en la consola
+                                    function mostrarElementosConsola() {
+                                        console.log(tablaElementos);
+                                    }
+
+
+                                    // function calcularResultadoTotal() {
+                                    //     var total = 0;
+
+                                    //     // Recorre los elementos en el array tablaElementos
+                                    //     tablaElementos.forEach(function(elemento) {
+                                    //         if (elemento.tipo === 'producto') {
+                                    //             // Multiplica cantidad y precio para productos
+                                    //             var cantidad = parseInt(elemento.cantidad);
+                                    //             var precio = parseFloat(elemento.precio);
+                                    //             total += cantidad * precio;
+                                    //         } else if (elemento.tipo === 'servicio') {
+                                    //             // Agrega el precio para servicios
+                                    //             var precio = parseFloat(elemento.precio);
+                                    //             total += precio;
+                                    //         }
+                                    //     });
+
+                                    //     // Actualiza el contenido de la etiqueta #resultadoTotal
+                                    //     $('#resultadoTotal strong').text('$' + total.toFixed(2));
+                                    // }
+
+                                    function calcularResultadoTotal() {
+                                        var resultado = 0;
+
+                                        // Recorre los elementos en tablaElementos
+                                        tablaElementos.forEach(function(elemento) {
+                                            if (elemento.tipo === 'producto') {
+                                                // Si es un producto, multiplica cantidad por precio y suma al resultado
+                                                var cantidad = parseFloat(elemento.cantidad);
+                                                var precio = parseFloat(elemento.precio);
+                                                resultado += cantidad * precio;
+                                            } else if (elemento.tipo === 'servicio') {
+                                                // Si es un servicio, suma el precio al resultado
+                                                var precio = parseFloat(elemento.precio);
+                                                resultado += precio;
+                                            }
+                                        });
+
+                                        // Actualiza el resultado total en el contenedor
+                                        var resultadoFormatted = resultado.toFixed(2);
+                                        $('#resultadoTotal').text(resultadoFormatted);
+                                    }
+
+                                    $(document).ready(function() {
+                                        $('.monto-input').on('blur', function() {
+                                            calcularReciboTotal();
+                                        });
+                                    });
+
+                                    function calcularReciboTotal() {
+                                        var resultado = 0;
+
+                                        var servicio = parseFloat($('#resultadoTotal').text().replace('$', ''));
+                                        var impuesto_por = parseFloat($('#impuesto').val());
+                                        var adelanto = parseFloat($('#adelanto').val());
+
+                                        var impuesto = servicio * (impuesto_por / 100);
+
+                                        resultado = (servicio + impuesto) - adelanto;
+
+                                        // Actualiza el resultado total en el contenedor
+                                        var resultadoFormatted = resultado.toFixed(2);
+                                        $('#totalrecibo').text(resultadoFormatted);
                                     }
                                 </script>
                             </div>
@@ -360,22 +605,87 @@
                                     <i class="material-icons opacity-10">account_balance</i>
                                 </div>
                             </div>
-                            <div class="card-body pt-0 p-3">
+                            <div class="card-body pt-0 p-3 recibo">
                                 <div class="row">
-                                    <div class="col-6 text-start">
-                                        <h6 class="mb-0">Servicio</h6>
-                                        <h6 class="mb-0">Impuesto</h6>
-                                        <h6 class="mb-0">Adelanto</h6>
+                                    <div class="col-6">
+                                        <h6 class="mb-1">Servicio</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="mb-1"><strong>$<span id="resultadoTotal">0.00</span></strong></p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6 class="mb-1">Impuesto %</h6>
                                     </div>
                                     <div class="col-6 text-end">
-                                        <p class="mb-0"><strong>$40.00</strong></p>
-                                        <p class="mb-0"><strong>$40.00</strong></p>
-                                        <p class="mb-0"><strong>$40.00</strong></p>
+                                        <div class="input-group input-group-static mb-1">
+                                            <input id="impuesto" type="text" class="form-control monto-input"
+                                                value="0">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6 class="mb-1">Adelanto</h6>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <div class="input-group input-group-static mb-1">
+                                            <input id="adelanto" type="text" class="form-control monto-input"
+                                                value="0">
+                                        </div>
                                     </div>
                                 </div>
                                 <hr class="horizontal dark my-3">
-                                <h5 class="text-center mb-0">Total: +$2000</h5>
+                                <h5 class="text-center mb-0">Total: $<span id="totalrecibo">00.00</span></h5>
                             </div>
+
+                            {{-- <script>
+                                $('.monto-input').on('blur', function() {
+                                    calcularReciboTotal();
+                                });
+
+                                function calcularReciboTotal() {
+                                    var resultado = 0;
+                                    var impuesto = 0;
+
+                                    var servicio = parseFloat($('#resultadoTotal').text().replace('$', ''));
+                                    var impuesto_por = parseFloat($('#impuesto').val());
+                                    var adelanto = parseFloat($('#adelanto').val());
+
+                                    impuesto = servicio * (impuesto_por / 100);
+
+                                    resultado = servicio + impuesto - adelanto;
+
+                                    // Actualiza el resultado total en el contenedor
+                                    var resultadoFormatted = resultado.toFixed(2);
+                                    $('#totalrecibo').text(resultadoFormatted);
+                                }
+                            </script> --}}
+                            {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                            <script>
+                                $(document).ready(function() {
+                                    $('.monto-input').on('blur', function() {
+                                        calcularReciboTotal();
+                                    });
+
+                                    function calcularReciboTotal() {
+                                        var resultado = 0;
+
+                                        var servicio = parseFloat($('#resultadoTotal').text().replace('$', ''));
+                                        var impuesto_por = parseFloat($('#impuesto').val());
+                                        var adelanto = parseFloat($('#adelanto').val());
+
+                                        var impuesto = servicio * (impuesto_por / 100);
+
+                                        resultado = (servicio + impuesto) - adelanto;
+
+                                        // Actualiza el resultado total en el contenedor
+                                        var resultadoFormatted = resultado.toFixed(2);
+                                        $('#totalrecibo').text(resultadoFormatted);
+                                    }
+                                });
+                            </script> --}}
                         </div>
                     </div>
                 </div>
