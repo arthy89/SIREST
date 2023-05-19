@@ -60,3 +60,37 @@
         color: white;
     }
 </style>
+{{-- <style>
+    @media (min-width: 1200px) {
+    .sidenav:hover {
+        max-width:15.625rem
+    }
+
+    .sidenav .sidenav-toggler {
+        padding: 1.5rem
+    }
+    .sidenav.fixed-start+.main-content {
+        margin-left: 17.125rem
+    }
+
+    .sidenav.fixed-end+.main-content {
+        margin-right: 17.125rem
+    }
+}
+
+
+
+.navbar .sidenav-toggler-inner .sidenav-toggler-line {
+    transition: all .15s ease;
+    background: #7b809a;
+    border-radius: .1rem;
+    position: relative;
+    display: block;
+    height: 2px
+}
+
+.navbar .sidenav-toggler-inner {
+    width: 18px
+}
+</style>
+--}}
