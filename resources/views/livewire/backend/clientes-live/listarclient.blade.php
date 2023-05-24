@@ -1,6 +1,6 @@
 <div>
     <div class="input-group input-group-static">
-        <select wire:model="selectedClient" class="select2 clientes" name="rolid" style="width: 100%" height="100px">
+        <select wire:model="selectedClient" class="select2 clientes" name="cliente" style="width: 100%" height="100px">
             <option></option>
             @foreach ($clientes as $client)
                 <option value="{{ $client->idpersona }}">{{ $client->nombres }} {{ $client->apellidos }}</option>

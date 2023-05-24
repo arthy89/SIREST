@@ -16,19 +16,41 @@ class Pedido extends Model
     protected $primaryKey = "idpedido";
 
     protected $fillable = [
-        'referenciacobro',
+
         'personaid',
         'usuarioid',
         'fecha',
-        'costo_envio',
+        'fecha_entrega',
         'monto',
-        // 'tipopagoid',
-        'direccion_envio',
-        'referencia',
+        'impuesto',
+        'adelanto',
+        'costo_envio',
         'id_device',
+        'imei',
         'contrasena',
         'patron',
-        'idtipopedido',
-        'status',
+        'lista_pedido',
+        'prioridad',
+        'descripcion',
+
+        // 'referenciacobro',
+        // 'personaid',
+        // 'usuarioid',
+        // 'fecha',
+        // 'costo_envio',
+        // 'monto',
+        // 'tipopagoid',
+        // 'direccion_envio',
+        // 'referencia',
+        // 'id_device',
+        // 'contrasena',
+        // 'patron',
+        // 'idtipopedido',
+        // 'status',
     ];
+
+    public function imagenes()
+    {
+        return $this->hasMany(Imagenes::class, 'idpedido');
+    }
 }

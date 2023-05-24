@@ -3,12 +3,17 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Reparacion\ReparacionRequest;
 use Illuminate\Http\Request;
 use App\Models\Pedido;
 use App\Models\Dispositivo;
+use App\Models\Imagenes;
 use App\Models\Persona;
 use App\Models\Usuarios;
 use DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
+use League\Flysystem\Visibility;
 
 class ReparacionesController extends Controller
 {
@@ -38,9 +43,47 @@ class ReparacionesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ReparacionRequest $request)
     {
-        //
+        // return $reparacion;
+        // return $request;
+
+        $pedido = Pedido::create([
+            'personaid' => $request->cliente,
+            'usuarioid' => $request->responsable,
+            'fecha' => now(),
+            'fecha_entrega' => $request->fecha_entrega,
+            'monto' => $request->monto,
+            'impuesto' => $request->impuesto,
+            'adelanto' => $request->adelanto,
+            'costo_envio' => $request->envio,
+            'id_device' => $request->dispositivo,
+            'imei' => $request->imei,
+            'contrasena' => $request->contra,
+            'patron' => $request->patron,
+            'lista_pedido' => $request->lista_pedido,
+            'prioridad' => $request->prioridad,
+            'descripcion' => $request->descripcion,
+        ]);
+
+        $imagenes = $request->file('imagen');
+        if ($imagenes) {
+            foreach ($imagenes as $imagen) {
+                $filename = time() . '-' . $imagen->getClientOriginalName();
+                $path = $imagen->storeAs('reparaciones', $filename, 'public');
+
+                $nuevaImagen = new Imagenes([
+                    'img' => $filename,
+                    'ruta' => $path,
+                ]);
+
+                $pedido->imagenes()->save($nuevaImagen);
+
+                // $nuevaImagen->save();
+            }
+        }
+
+        return redirect()->route('reparaciones');
     }
 
     /**

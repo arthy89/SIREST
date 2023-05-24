@@ -77,7 +77,7 @@ Route::delete('backend/clientes/{cliente}/eliminar', [ClientesController::class,
 
 
 //PROVEDOR estamos pasando que  listarproveedor se comportara como mcontrolador
-Route::middleware(['auth:Sanctum','verified'])->get('backend/proveedor',Listarproveedor::class)->name('proveedor');
+Route::middleware(['auth:Sanctum', 'verified'])->get('backend/proveedor', Listarproveedor::class)->name('proveedor');
 Route::get('backend/proveedor', [ProveedorController::class, 'index'])->name('proveedor');
 // borrar PROVEEDOR
 Route::delete('backend/proveedor/{categoria}/eliminar', [ProveedorController::class, 'destroy'])->name('eliminar_proveedor');
@@ -101,9 +101,10 @@ Route::put('backend/productos/{producto}/editar', [ProductosController::class, '
 //Route::delete('backend/productos/{categoria}/eliminar', [CategoriasController::class, 'destroy'])->name('eliminar_categorias');
 Route::delete('backend/productos/{producto}/eliminar', [ProductosController::class, 'destroy'])->name('eliminar_productos');
 
-// Reparaciones
+//! Reparaciones
 Route::get('backend/reparaciones', [ReparacionesController::class, 'index'])->name('reparaciones');
-Route::get('backend/reparaciones/crear', [ReparacionesController::class, 'create'])->name('reparaciones_crear');
+Route::get('backend/reparaciones/crear', [ReparacionesController::class, 'create'])->name('reparaciones_crear_view');
+Route::post('backend/reparaciones/nuevo', [ReparacionesController::class, 'store'])->name('reparaciones_crear');
 
 //VENTAS
 Route::get('backend/ventas', [VentasController::class, 'index'])->name('ventas');
