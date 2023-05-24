@@ -28,7 +28,7 @@
 <!-- Notificacionoes -->
 <link rel="stylesheet" href="{{ asset('assetsnotf/css/Lobibox.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assetsnotf/css/notifications.css') }}">
-
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
 
 <link type="text/css" rel="shortcut icon" href="{{ asset('assetsnotf/img/logo-mywebsite-urian-viera.svg') }}"/>
 <!-- Nepcha Analytics (nepcha.com) -->
