@@ -4,7 +4,7 @@
     <div class="container-fluid py-4">
         <div class="row mt-4">
             <!-- PARTE OPERACIONAL DE OPCIONES -->
-            <div class="col-xl-7">
+            <div class="col-12 col-md-7">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="table-responsive p-0">
@@ -268,7 +268,7 @@
                 </div>
             </div>
             <!-- PARTE DE OPCIONES -->
-            <div class="col-xl-5 ms-auto mt-xl-0 mt-5">
+            <div class="col-12 col-md-5 ms-auto mt-xl-0 mt-5">
 
                 <div class="card h-100">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
