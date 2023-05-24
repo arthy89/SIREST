@@ -320,172 +320,19 @@
                                     <div class="card-body p-3">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-7">
-                                                <div class="table-responsive">
-                                                    <table class="table align-items-center ">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td class="w-30">
-                                                                    <div class="d-flex px-2 py-1 align-items-center">
-                                                                        <div>
-                                                                            <img src="../../assets/img/icons/flags/US.png"
-                                                                                alt="Country flag">
-                                                                        </div>
-                                                                        <div class="ms-4">
-                                                                            <p class="text-xs font-weight-bold mb-0 ">
-                                                                                Country:</p>
-                                                                            <h6 class="text-sm font-weight-normal mb-0 ">
-                                                                                United States</h6>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="text-center">
-                                                                        <p class="text-xs font-weight-bold mb-0 ">Sales:
-                                                                        </p>
-                                                                        <h6 class="text-sm font-weight-normal mb-0 ">2500
-                                                                        </h6>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="text-center">
-                                                                        <p class="text-xs font-weight-bold mb-0 ">Value:
-                                                                        </p>
-                                                                        <h6 class="text-sm font-weight-normal mb-0 ">
-                                                                            $230,900</h6>
-                                                                    </div>
-                                                                </td>
-                                                                <td class="align-middle text-sm">
-                                                                    <div class="col text-center">
-                                                                        <p class="text-xs font-weight-bold mb-0 ">Bounce:
-                                                                        </p>
-                                                                        <h6 class="text-sm font-weight-normal mb-0 ">29.9%
-                                                                        </h6>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="w-30">
-                                                                    <div class="d-flex px-2 py-1 align-items-center">
-                                                                        <div>
-                                                                            <img src="../../assets/img/icons/flags/DE.png"
-                                                                                alt="Country flag">
-                                                                        </div>
-                                                                        <div class="ms-4">
-                                                                            <p class="text-xs font-weight-bold mb-0 ">
-                                                                                Country:</p>
-                                                                            <h6 class="text-sm font-weight-normal mb-0 ">
-                                                                                Germany</h6>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="text-center">
-                                                                        <p class="text-xs font-weight-bold mb-0 ">Sales:
-                                                                        </p>
-                                                                        <h6 class="text-sm font-weight-normal mb-0 ">3.900
-                                                                        </h6>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="text-center">
-                                                                        <p class="text-xs font-weight-bold mb-0 ">Value:
-                                                                        </p>
-                                                                        <h6 class="text-sm font-weight-normal mb-0 ">
-                                                                            $440,000</h6>
-                                                                    </div>
-                                                                </td>
-                                                                <td class="align-middle text-sm">
-                                                                    <div class="col text-center">
-                                                                        <p class="text-xs font-weight-bold mb-0 ">Bounce:
-                                                                        </p>
-                                                                        <h6 class="text-sm font-weight-normal mb-0 ">40.22%
-                                                                        </h6>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="w-30">
-                                                                    <div class="d-flex px-2 py-1 align-items-center">
-                                                                        <div>
-                                                                            <img src="../../assets/img/icons/flags/GB.png"
-                                                                                alt="Country flag">
-                                                                        </div>
-                                                                        <div class="ms-4">
-                                                                            <p class="text-xs font-weight-bold mb-0 ">
-                                                                                Country:</p>
-                                                                            <h6 class="text-sm font-weight-normal mb-0 ">
-                                                                                Great Britain</h6>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="text-center">
-                                                                        <p class="text-xs font-weight-bold mb-0 ">Sales:
-                                                                        </p>
-                                                                        <h6 class="text-sm font-weight-normal mb-0 ">1.400
-                                                                        </h6>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="text-center">
-                                                                        <p class="text-xs font-weight-bold mb-0 ">Value:
-                                                                        </p>
-                                                                        <h6 class="text-sm font-weight-normal mb-0 ">
-                                                                            $190,700</h6>
-                                                                    </div>
-                                                                </td>
-                                                                <td class="align-middle text-sm">
-                                                                    <div class="col text-center">
-                                                                        <p class="text-xs font-weight-bold mb-0 ">Bounce:
-                                                                        </p>
-                                                                        <h6 class="text-sm font-weight-normal mb-0 ">23.44%
-                                                                        </h6>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="w-30">
-                                                                    <div class="d-flex px-2 py-1 align-items-center">
-                                                                        <div>
-                                                                            <img src="../../assets/img/icons/flags/BR.png"
-                                                                                alt="Country flag">
-                                                                        </div>
-                                                                        <div class="ms-4">
-                                                                            <p class="text-xs font-weight-bold mb-0 ">
-                                                                                Country:</p>
-                                                                            <h6 class="text-sm font-weight-normal mb-0 ">
-                                                                                Brasil</h6>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="text-center">
-                                                                        <p class="text-xs font-weight-bold mb-0 ">Sales:
-                                                                        </p>
-                                                                        <h6 class="text-sm font-weight-normal mb-0 ">562
-                                                                        </h6>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <div class="text-center">
-                                                                        <p class="text-xs font-weight-bold mb-0 ">Value:
-                                                                        </p>
-                                                                        <h6 class="text-sm font-weight-normal mb-0 ">
-                                                                            $143,960</h6>
-                                                                    </div>
-                                                                </td>
-                                                                <td class="align-middle text-sm">
-                                                                    <div class="col text-center">
-                                                                        <p class="text-xs font-weight-bold mb-0 ">Bounce:
-                                                                        </p>
-                                                                        <h6 class="text-sm font-weight-normal mb-0 ">32.14%
-                                                                        </h6>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
+                                                @livewire('backend.clientes-live.showclient')
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="dark horizontal my-0">
+                                    <div class="card-footer p-3">
+                                        <div class="row">
+                                            <div class="col-md-8 my-2">
+                                                @livewire('backend.clientes-live.listarclient')
+                                            </div>
+                                            <div class="col-md-4 my-2" align="center">
+                                                <button type="button" class="btn bg-gradient-dark mb-0"
+                                                    data-bs-toggle="modal" data-bs-target="#nuevo_cliente">Nuevo</button>
                                             </div>
                                         </div>
                                     </div>
@@ -890,25 +737,34 @@
                                 </a>
                             </li>
                             <!--
-                                    <li class="nav-item">
-                                        <a class="nav-link mb-0 px-0 py-1" id="pills-cateogiria-tab" data-bs-toggle="pill"
-                                            data-bs-target="#pills-categoria"data-bs-toggle="tab" data-bs-toggle="tab"
-                                            href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard"
-                                            aria-selected="false">
-                                            Categorias
-                                        </a>
-                                    </li>
-                                -->
+                                                                                            <li class="nav-item">
+                                                                                                <a class="nav-link mb-0 px-0 py-1" id="pills-cateogiria-tab" data-bs-toggle="pill"
+                                                                                                    data-bs-target="#pills-categoria"data-bs-toggle="tab" data-bs-toggle="tab"
+                                                                                                    href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard"
+                                                                                                    aria-selected="false">
+                                                                                                    Categorias
+                                                                                                </a>
+                                                                                            </li>
+                                                                                        -->
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-
+        {{-- MODALES --}}
+        @livewire('backend.clientes-live.crearclient')
     </div>
 @endsection
 
 @push('custom-scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: "Seleccione...",
+                allowClear: true
+            });
+        });
+    </script>
     <style>
         tr.even {}
 
@@ -932,8 +788,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('ventas') }}",
-                columns: [
-                    {
+                columns: [{
                         data: 'nombre_p',
                         name: 'nombre_p'
                     },
@@ -970,8 +825,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('ventas') }}",
-                columns: [
-                    {
+                columns: [{
                         data: 'nombre_p',
                         name: 'nombre_p'
                     },
@@ -1020,6 +874,5 @@
             });
         });
     </script>
-    <script>
-    </script>
+    <script></script>
 @endpush
