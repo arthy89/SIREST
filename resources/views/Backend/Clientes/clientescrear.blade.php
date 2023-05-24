@@ -40,7 +40,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Identificacion</label>
-                                        <input type="text" class="form-control" name="identificacion_cliente" >
+                                        <input type="text" class="form-control" name="identificacion_cliente" onkeypress='validate(event)' maxlength="8" >
 
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Telefono</label>
-                                        <input type="text" class="form-control" name="telefono_cliente" required >
+                                        <input type="text" class="form-control" name="telefono_cliente" onkeypress='validate(event)' maxlength="9" >
 
                                     </div>
                                 </div>
@@ -135,6 +135,25 @@
     $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
+</script>
+<script>
+    function validate(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
 </script>
 
 @endpush

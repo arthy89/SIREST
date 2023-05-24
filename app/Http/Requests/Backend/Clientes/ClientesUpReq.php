@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests\Backend\Clientes;
+use Illuminate\Validation\Rule;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -28,11 +29,15 @@ class ClientesUpReq extends FormRequest
         return [
             'nombre_cliente' => 'required',
             'apellido_cliente' => 'required',
-
+            'identificacion_cliente' => ['required',
+                        Rule::unique('persona','identificacion')->ignore($this->cliente)
+                        ],
             //'identificacion_cliente' => ['required', 'unique:persona,identificacion,'. $cliente->idpersona],
             'password_cliente' => 'sometimes',
             'telefono_cliente' => 'required',
-            //'email_cliente' => ['required', 'email', 'string', 'unique:persona,email,'.request()->route('cliente')->identificacion],
+            'email_cliente'  => ['required', 'email',
+                            Rule::unique('persona','email')->ignore($this->cliente)
+                            ],
             'direccionfiscal_cliente' => 'sometimes',
         ];
     }

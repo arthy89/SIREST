@@ -9,6 +9,9 @@
 <script src="{{ asset('assets/sweetalert/sweetalert2@11.js') }}"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+{{-- databale responsive--}}
+<script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+
 <script src="{{ asset('assets/js/plugins/datatables.js') }}"></script>
 <script src="https://demos.creative-tim.com/test/material-dashboard-pro/assets/js/plugins/datatables.js"
     type="text/javascript"></script>
