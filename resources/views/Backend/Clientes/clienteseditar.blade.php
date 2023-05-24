@@ -18,7 +18,7 @@
                             @csrf
                             @method("put")
                             @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
+
                             @endforeach
 
                             <div class="row">
@@ -46,7 +46,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static mb-4">
                                         <label class="form">Identificacion</label>
-                                        <input type="text" class="form-control" name="identificacion_cliente" value="{{ old('identificacion_cliente',$cliente->identificacion)}}" >
+                                        <input type="text" class="form-control" name="identificacion_cliente" onkeypress='validate(event)' maxlength="8" value="{{ old('identificacion_cliente',$cliente->identificacion)}}" >
 
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static mb-4">
                                         <label class="form">Telefono</label>
-                                        <input type="text" class="form-control" name="telefono_cliente"  value="{{$cliente->telefono}}" required>
+                                        <input type="text" class="form-control" name="telefono_cliente" onkeypress='validate(event)' maxlength="9"  value="{{$cliente->telefono}}" required>
 
                                     </div>
                                 </div>
@@ -147,5 +147,24 @@
             });
         </script>
 @endif
+<script>
+    function validate(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+</script>
 
 @endpush

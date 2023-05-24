@@ -3,16 +3,44 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+
+use App\Models\Productos;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use DB;
 
 class VentasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+
+        //return view("Backend.Ventas.ventasindex");
+        if($request->ajax()){
+            $productos = DB::table('producto')
+                    ->select('producto.idproducto','producto.nombre_p','producto.stock','producto.precio_venta_public')->get();
+            return DataTables::of($productos)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+
+                $value = '<a href="javascript:;" onclick()
+                            class="avatar avatar-sm border-1 rounded-circle bg-white shadow-sm">
+                            <i class="material-icons text-dark text-xxxl">add</i>
+                        </a>';
+                return $value;
+            })
+            //->addColumn('action', function($row){
+            //    $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
+            //    return $form;
+            //})
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+        //return $request;
+        //return view("Backend.Categorias.categoriasindex");
         return view("Backend.Ventas.ventasindex");
     }
 
