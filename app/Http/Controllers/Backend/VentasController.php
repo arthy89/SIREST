@@ -21,7 +21,7 @@ class VentasController extends Controller
         //return view("Backend.Ventas.ventasindex");
         if($request->ajax()){
             $productos = DB::table('producto')
-                    ->select('producto.idproducto','producto.nombre_p','producto.stock','producto.precio_venta_public')->get();
+                    ->select('producto.idproducto','producto.nombre_p','producto.stock','producto.precio_venta_public')->orderBy('producto.idproducto','desc')->take(15)->get();
             return DataTables::of($productos)
             ->addIndexColumn()
             ->addColumn('action', function($row){
