@@ -4,7 +4,7 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-md-4">
-                <a href="{{ route('reparaciones_crear') }}" class="btn btn-info">
+                <a href="{{ route('reparaciones_crear_view') }}" class="btn btn-info">
                     <i class="material-icons">add</i>
                     Crear nueva reparación
                 </a>

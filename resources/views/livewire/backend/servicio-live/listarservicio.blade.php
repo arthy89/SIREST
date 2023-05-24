@@ -1,6 +1,6 @@
 <div>
-    <div class="input-group input-group-static" wire:poll.5000ms>
-        <select class="select2 servicios" name="rolid" style="width: 100%" height="100px">
+    <div class="input-group input-group-static">
+        <select class="select2 servicios" style="width: 100%" height="100px">
             <option></option>
             @foreach ($servicios as $serv)
                 <option value="{{ $serv->id_tip_pedido }}">{{ $serv->nombre }}</option>
