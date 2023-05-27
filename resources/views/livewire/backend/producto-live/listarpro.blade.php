@@ -3,7 +3,8 @@
         <select class="select2 productos" style="width: 100%" height="100px">
             <option></option>
             @foreach ($productos as $pro)
-                <option value="{{ $pro->precio_compra }}">{{ $pro->nombre_p }}</option>
+                <option value="{{ $pro->idproducto }}" data-preciocompra="{{ $pro->precio_compra }}">{{ $pro->nombre_p }}
+                </option>
             @endforeach
         </select>
     </div>

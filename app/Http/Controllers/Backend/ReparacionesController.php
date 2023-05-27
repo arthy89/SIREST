@@ -23,7 +23,12 @@ class ReparacionesController extends Controller
     public function index()
     {
         //
-        return view('Backend.Reparaciones.reparacionesindex');
+        $pedidos = Pedido::join('persona', 'pedido.personaid', '=', 'persona.idpersona')
+            ->join('usuarios', 'pedido.usuarioid', '=', 'usuarios.idusuarios')
+            ->select('pedido.*', 'persona.*', 'persona.apellidos as persona_apellidos', 'usuarios.*', 'usuarios.apellidos as usuario_apellidos', 'usuarios.email as usuario_email')
+            ->get();
+        // return $pedidos;
+        return view('Backend.Reparaciones.reparacionesindex', compact('pedidos'));
     }
 
     /**
@@ -45,7 +50,6 @@ class ReparacionesController extends Controller
      */
     public function store(ReparacionRequest $request)
     {
-        // return $reparacion;
         // return $request;
 
         $pedido = Pedido::create([
