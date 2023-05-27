@@ -107,7 +107,8 @@ Route::get('backend/reparaciones/crear', [ReparacionesController::class, 'create
 Route::post('backend/reparaciones/nuevo', [ReparacionesController::class, 'store'])->name('reparaciones_crear');
 
 //VENTAS
-Route::get('backend/ventas', [VentasController::class, 'index'])->name('ventas');
+Route::get('backend/ventas', [VentasController::class, 'index', 'index2'])->name('ventas');
+//Route::get('backend/ventas', [VentasController::class, 'index2'])->name('ventas');
 //Resumen de venta
 Route::get('backend/resumenventas', [ResumenventasController::class, 'index'])->name('resumenventas');
 
