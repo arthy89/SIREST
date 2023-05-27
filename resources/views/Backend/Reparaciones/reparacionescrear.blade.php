@@ -275,6 +275,7 @@
                                             if (selectedOption) {
                                                 var productoNombre = selectedOption.text;
                                                 var productoId = selectedOption.id;
+                                                var productoPrecio = selectedOption.element.dataset.preciocompra;
                                                 var productoHtml =
                                                     `<tr>
                                                     <td>` +
@@ -286,7 +287,7 @@
                                                     </div>
                                                 </td>
                                                 <td align="center">` +
-                                                    productoId +
+                                                    productoPrecio +
                                                     `</td>
                                                 <td>
                                                     <button type="button" class="btn btn-sm btn-danger mt-2 mx-2" onclick="eliminarProducto(this)">x</button>
@@ -297,10 +298,11 @@
                                                 // Agregar el elemento al array
                                                 var producto = {
                                                     id: contadorId++,
+                                                    id_p: productoId,
                                                     tipo: 'producto',
                                                     nombre: productoNombre,
                                                     cantidad: '',
-                                                    precio: productoId
+                                                    precio: productoPrecio
                                                 };
                                                 tablaElementos.push(producto);
                                                 actualizarElementosInput();
@@ -707,83 +709,6 @@
         }
     </script>
 
-    {{-- <script>
-        var imageCount = 0;
-        var imagesArray = [];
-        var addButton = document.getElementById('add-image-button');
-
-        function openFileInput() {
-            document.getElementById('image-input').click();
-        }
-
-        // Manejo del evento de cambio del campo de entrada de archivos
-        document.getElementById('image-input').addEventListener('change', previewImages);
-
-
-        function previewImages(event) {
-            var previewContainer = document.getElementById('image-preview');
-            var files = event.target.files;
-            var remainingSlots = 3 - imageCount;
-            var filesToAdd = Array.from(files).slice(0, remainingSlots);
-
-            for (var i = 0; i < filesToAdd.length; i++) {
-                var file = filesToAdd[i];
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    var imageContainer = document.createElement('div');
-                    imageContainer.setAttribute('class', 'col-md-4');
-
-                    var deleteButton = document.createElement('button');
-                    deleteButton.innerHTML = 'Eliminar';
-                    deleteButton.setAttribute('class', 'delete-button btn btn-primary btn-sm');
-                    deleteButton.addEventListener('click', function() {
-                        deleteImage(imageContainer);
-                    });
-                    imageContainer.appendChild(deleteButton);
-
-                    var imgElement = document.createElement('img');
-                    imgElement.setAttribute('src', e.target.result);
-                    imgElement.setAttribute('width', '250');
-                    imageContainer.appendChild(imgElement);
-
-                    previewContainer.appendChild(imageContainer);
-                    imageCount++; // Incrementar el contador de imágenes
-                    imagesArray.push(file); // Agregar imagen al array
-
-                    console.log(imagesArray);
-                    // Asignar el valor al campo oculto "imagenes-input"
-                    // imagenesInput.value = JSON.stringify(imagesArray);
-                    // imagenesInput.value = imagesArray;
-
-
-                    // console.log(imagenesInput.value);
-                }
-
-                reader.readAsDataURL(file);
-            }
-
-            if (imageCount >= 3) {
-                addButton.disabled = true;
-            }
-        }
-
-        function deleteImage(imageContainer) {
-            imageContainer.parentNode.removeChild(imageContainer);
-            imageCount--; // Decrementar el contador de imágenes
-
-            // Eliminar la imagen del array
-            var index = Array.from(previewContainer.children).indexOf(imageContainer);
-            if (index > -1) {
-                imagesArray.splice(index, 1);
-            }
-
-            if (imageCount < 3) {
-                addButton.disabled = false;
-            }
-        }
-    </script> --}}
-
     {{-- patron jquery --}}
     <script src="{{ asset('assets/patron/jquery.gesture.password.js') }}"></script>
 
@@ -806,10 +731,6 @@
             var result;
             var patron_inp = $('#patron_inp');
 
-            // password pattern
-            // 1235789 = 'Z'
-            // comprueba
-            // passwd = ("123");
             patron_inp.val(passwd);
 
             $("#gesturepwd").trigger("passwdRight");
@@ -834,37 +755,6 @@
             });
         });
     </script>
-
-    {{-- comprobar campos nuevo dispositivo --}}
-    {{-- <script>
-        $(document).ready(() => {
-
-            var device_name = $('#device_name');
-            var device_mark = $('#device_mark');
-
-            function comprobar() {
-                var in1 = device_name.val();
-                var in2 = device_mark.val();
-                var boton = $('#boton');
-
-                if (in1 == "" || in2 == "") {
-                    boton.addClass('disabled');
-                }
-
-                if (in1.length > 0 && in2.length > 0) {
-                    boton.removeClass('disabled');
-                }
-            }
-
-            device_name.keyup(function() {
-                comprobar();
-            });
-
-            device_mark.keyup(function() {
-                comprobar();
-            });
-        });
-    </script> --}}
 
     {{-- validar solo numeros --}}
     <script>

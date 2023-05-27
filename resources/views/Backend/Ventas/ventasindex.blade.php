@@ -611,16 +611,6 @@
 
                                 </a>
                             </li>
-                            <!--
-                                                                                                                <li class="nav-item">
-                                                                                                                    <a class="nav-link mb-0 px-0 py-1" id="pills-cateogiria-tab" data-bs-toggle="pill"
-                                                                                                                        data-bs-target="#pills-categoria"data-bs-toggle="tab" data-bs-toggle="tab"
-                                                                                                                        href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard"
-                                                                                                                        aria-selected="false">
-                                                                                                                        Categorias
-                                                                                                                    </a>
-                                                                                                                </li>
-                                                                                                            -->
                         </ul>
                     </div>
                 </div>
