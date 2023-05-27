@@ -21,7 +21,8 @@ class VentasController extends Controller
         //return view("Backend.Ventas.ventasindex");
         if($request->ajax()){
             $productos = DB::table('producto')
-                    ->select('producto.idproducto','producto.nombre_p','producto.stock','producto.precio_venta_public')->orderBy('producto.idproducto','desc')->take(15)->get();
+                        ->select('producto.idproducto','producto.nombre_p','producto.stock','producto.precio_venta_public')->get();
+            //->select('producto.idproducto','producto.nombre_p','producto.stock','producto.precio_venta_public')->orderBy('producto.idproducto','desc')->take()->get();
             return DataTables::of($productos)
             ->addIndexColumn()
             ->addColumn('action', function($row){
@@ -41,6 +42,26 @@ class VentasController extends Controller
         }
         //return $request;
         //return view("Backend.Categorias.categoriasindex");
+        return view("Backend.Ventas.ventasindex");
+    }
+    public function index2(Request $request)
+    {
+        if($request->ajax()){
+            $productos = DB::table('producto')
+                    ->select('producto.idproducto','producto.nombre_p','producto.stock','producto.precio_venta_public')->get();
+            return DataTables::of($productos)
+            ->addIndexColumn()
+            ->addColumn('action', function($row){
+
+                $value = '<a href="javascript:;" onclick()
+                            class="avatar avatar-sm border-1 rounded-circle bg-white shadow-sm">
+                            <i class="material-icons text-dark text-xxxl">add</i>
+                        </a>';
+                return $value;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
         return view("Backend.Ventas.ventasindex");
     }
 
