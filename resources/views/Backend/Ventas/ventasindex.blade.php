@@ -1,6 +1,8 @@
 @extends('Backend.Layout.app')
 
 @section('main-content')
+<form action="{{ route('ventas_crear') }}" method="POST" enctype="multipart/form-data">
+@csrf
     <div class="container-fluid py-4">
         <div class="row mt-4">
             <!-- PARTE OPERACIONAL DE OPCIONES -->
@@ -54,10 +56,16 @@
                         </div>
                         <div class="row py-5">
                             <div class="col-lg-4 col-md-6 col-12">
+
                                 <div class="d-flex align-items-center position-relative">
+
                                     <span class="carrito-precio-total">
                                                 Total
-                                        <h6>$ <span id="total-precio">0.00</span></h6>
+                                        <h6>$
+                                            <span  id="span_total_precio"> 0.00</span>
+                                            <input type="hidden" name="contenido_total_precio" id="input_span_preciototal">
+
+                                        </h6>
                                     </span>
                                 </div>
                             </div>
@@ -73,7 +81,8 @@
                             </div>
                             <div class="col-lg-4 col-md-6 col-12 ms-lg-auto">
                                 <div class="d-flex align-items-center">
-                                    <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Pagar</button>
+                                    {{-- <button type="submit" class="btn bg-gradient-dark btn-lg w-100">Guardar Pedido</button> --}}
+                                    <button type="submit" class="btn bg-gradient-dark ms-auto mb-0 js-btn-next"  title="Next">Pagar</button>
                                 </div>
                             </div>
                         </div>
@@ -181,11 +190,17 @@
 
                                         function agregarProducto(id, nombre, precio, stock) {
 
+                                            //console.log(id, verificaCantidad(id));
+                                            if(verificaCantidad(id) == 0){
+                                                //alert("ettro aqui");
+                                                return 0;
+                                            }else{
                                             var contenedor = document.getElementById("carrito-item");
                                             //crear una nueva fila
                                             //var id = parseInt(id);
                                             var nuevoDiv = document.createElement("tr");
                                             nuevoDiv.id = id;
+
                                             nuevoDiv.innerHTML = '<tr  id="+id+" >' +
                                                 '<td><span class="carrito-item-titulo">' + nombre + '</span></td>' +
                                                 '<td><div class="container ">' +
@@ -225,28 +240,57 @@
                                                 contenedor.appendChild(nuevoDiv);
                                             }
                                             sumarPrecioTotal();
+                                        }
 
                                         }
                                         function verificaCantidad(id){
+                                            //console.log(id);
+
                                             var idAux = id;
                                              //algoritmo para obtener el estock original de un producto
                                             var letterstock = "S";
                                             var combinedIdstock = letterstock + idAux.toString();
                                             var elementoStockReal = document.getElementById(combinedIdstock);
                                             var stockReal = elementoStockReal.textContent;
-                                            //capturamos la cantidad de elementos
-                                            var elementoCantidad = document.getElementById((id + 2));
-                                            var elementoCantidade = elementoCantidad.value;
-                                            if(stockReal <= elementoCantidade){
+                                            var stockReal = parseInt(stockReal);
+                                            if(stockReal > 0){
+                                                var elementoCantidad = document.getElementById((id + 2));
+                                                if(elementoCantidad != null){
+                                                    //console.log("existe la tabla");
+                                                    var elementoCantidade = elementoCantidad.value;
+                                                    if(elementoCantidade > stockReal){
+                                                        Lobibox.notify('error', {
+                                                                        width: 600,
+                                                                        img: "{{asset('imgs/error.png')}}",
+                                                                        position: 'top right',
+                                                                        title: 'Error, Cantidad Supera el STOCK',
+                                                                        msg: 'No se puede vender mas de la cantidad redusca la cantidad .'
+                                                                    });
+                                                                return 0;
+                                                    }
+
+                                                }else{
+                                                    //console.log("no ela tablas");
+                                                }
+
+
+                                            }else{
                                                 Lobibox.notify('error', {
-                                                                width: 600,
-                                                                img: "{{asset('imgs/error.png')}}",
-                                                                position: 'top right',
-                                                                title: 'Error, Cantidad Supera el STOCK',
-                                                                msg: 'No se puede vender mas de la cantidad redusca la cantidad .'
-                                                            });
+                                                                        width: 600,
+                                                                        img: "{{asset('imgs/error.png')}}",
+                                                                        position: 'top right',
+                                                                        title: 'Error, STOCK NO DISPONIBLE',
+                                                                        msg: 'NO HAY CANTIDAD SUFICIENTE PARA VENDER DICHA CANTIDAD .'
+                                                                    });
+                                                return 0;
 
                                             }
+                                            //return id;
+                                            //capturamos la cantidad de elementos
+
+
+
+
 
 
                                         };
@@ -308,7 +352,12 @@
                                             }
                                             //console.log("Se Actualizara el precio",total);
                                             // Actualizar el elemento de total con el nuevo valor
-                                            document.getElementById('total-precio').textContent = total.toFixed(2);
+                                            document.getElementById('span_total_precio').textContent = total.toFixed(2);
+                                            //asignamos a un input para enviar al post
+
+                                            var spanContenidoP = document.getElementById('span_total_precio').textContent;
+                                            document.getElementById('input_span_preciototal').value = spanContenidoP;
+
 
                                         };
 
@@ -339,64 +388,7 @@
                                             //console.log("se restoo -1 en el id",id);
                                         }
                                     </script>
-                                    <script>
-                                        // let carrito = [];
-                                        // const divisa = '€';
-                                        // const DOMitems = document.querySelector('#items');
-                                        // const DOMcarrito = document.querySelector('#carrito');
-                                        // const DOMtotal = document.querySelector('#total');
-                                        // const DOMbotonVaciar = document.querySelector('#boton-vaciar');
 
-                                        // function agregarServicio(Nombre) {
-                                        //     //alert("ese esta imprimiendo" + Nombre);
-                                        //     // Anyadimos el Nodo a nuestro carrito
-                                        //     carrito.push(evento.target.getAttribute(nombre))
-                                        //     // Actualizamos el carrito
-                                        //     renderizarCarrito();
-                                        //     // Actualizamos el LocalStorage
-                                        //     guardarCarritoEnLocalStorage();
-                                        // }
-
-                                        // function renderizarCarrito() {
-                                        //     // Vaciamos todo el html
-                                        //     DOMcarrito.textContent = '';
-                                        //     // Quitamos los duplicados
-                                        //     const carritoSinDuplicados = [...new Set(carrito)];
-                                        //     // Generamos los Nodos a partir de carrito
-                                        //     carritoSinDuplicados.forEach((item) => {
-                                        //         // Obtenemos el item que necesitamos de la variable base de datos
-                                        //         const miItem = baseDeDatos.filter((itemBaseDatos) => {
-                                        //             // ¿Coincide las id? Solo puede existir un caso
-                                        //             return itemBaseDatos.id === parseInt(item);
-                                        //         });
-                                        //         // Cuenta el número de veces que se repite el producto
-                                        //         const numeroUnidadesItem = carrito.reduce((total, itemId) => {
-                                        //             // ¿Coincide las id? Incremento el contador, en caso contrario no mantengo
-                                        //             return itemId === item ? total += 1 : total;
-                                        //         }, 0);
-                                        //         // Creamos el nodo del item del carrito
-                                        //         const miNodo = document.createElement('li');
-                                        //         miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-                                        //         miNodo.textContent = `${numeroUnidadesItem} x ${miItem[0].nombre} - ${miItem[0].precio}${divisa}`;
-                                        //         // Boton de borrar
-                                        //         const miBoton = document.createElement('button');
-                                        //         miBoton.classList.add('btn', 'btn-danger', 'mx-5');
-                                        //         miBoton.textContent = 'X';
-                                        //         miBoton.style.marginLeft = '1rem';
-                                        //         miBoton.dataset.item = item;
-                                        //         miBoton.addEventListener('click', borrarItemCarrito);
-                                        //         // Mezclamos nodos
-                                        //         miNodo.appendChild(miBoton);
-                                        //         DOMcarrito.appendChild(miNodo);
-                                        //     });
-                                        //     // Renderizamos el precio total en el HTML
-                                        //     DOMtotal.textContent = calcularTotal();
-                                        // }
-
-                                        // function guardarCarritoEnLocalStorage() {
-                                        //     miLocalStorage.setItem('carrito', JSON.stringify(carrito));
-                                        // }
-                                    </script>
                                 </div>
                             </div>
                             <!--CUERTO NAV VAR CATEGORIAS-->
@@ -615,13 +607,18 @@
                     </div>
                 </div>
             </div>
+
         </div>
         {{-- MODALES --}}
         @livewire('backend.clientes-live.crearclient')
     </div>
+</form>
 @endsection
 
 @push('custom-scripts')
+{{-- para enviar el span --}}
+
+
     <script type="text/javascript">
         $(document).ready(function() {
             $('.select2').select2({
@@ -633,76 +630,7 @@
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
         });
-    </script>
-    <style>
-        tr.even {}
 
-        div:empty {
-            display: none;
-        }
-
-        input.form-control {}
-
-        div.dataTables_filter {
-            background-color: white;
-            position: relative;
-
-        }
-    </style>
-    <script>
-        $(document).ready(function() {
-            $('#productoscompleto').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('ventas') }}",
-                columns: [{
-                        data: 'nombre_p',
-                        name: 'nombre_p'
-                    },
-                    {
-                        data: 'action',
-                        sWidth: '110px',
-                        sortable: false
-                    },
-                    {
-                        data: 'stock',
-                        name: 'stock'
-                    },
-                    {
-                        data: 'precio_venta_public',
-                        name: 'precio_venta_public'
-                    },
-                ],
-                language: {
-                    "decimal": "",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Mostrar _MENU_ Entradas",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "Sin resultados encontrados",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                },
-                "responsive": true,
-                "info": false,
-                "ordering": false,
-                "paging": false,
-                "deferRender": true,
-                "scroller": true,
-                "scrollCollapse": true,
-                "scrollY": 250
-            });
-        });
         $(document).ready(function() {
             $('#productos').DataTable({
                 processing: true,
@@ -757,5 +685,4 @@
             });
         });
     </script>
-    <script></script>
 @endpush
