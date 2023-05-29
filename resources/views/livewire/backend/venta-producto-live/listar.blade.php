@@ -31,7 +31,7 @@
                         <div class="d-flex px-2 py-1">
                             <div class="d-flex flex-column justify-content-center">
                                 <h6 class="mb-0 text-xs" >{{$producto->nombre_p}}</h6>
-                                <p class="text-xs text-secondary mb-0">precio: <span class="text-success" id="P{{$producto->idproducto}}">{{$producto->precio_venta_public}}</span> </p>
+                                <p class="text-xs text-secondary mb-0">precio: <span  class="text-success" id="P{{$producto->idproducto}}">{{$producto->precio_venta_public}}</span> </p>
                             </div>
                         </div>
                     </td>

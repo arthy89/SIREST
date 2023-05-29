@@ -4,7 +4,7 @@
 <title>Ecommerce SIREST</title>
 
 <!-- ::::::::::::::Favicon icon::::::::::::::-->
-<link rel="shortcut icon" href="{{ asset('assetsc/images/favicon.ico') }}" type="image/png" />
+<link rel="shortcut icon" href="{{ asset('imgs/logo.png') }}" type="image/png" />
 
 <!-- ::::::::::::::All CSS Files here :::::::::::::: -->
 <!-- Vendor CSS -->

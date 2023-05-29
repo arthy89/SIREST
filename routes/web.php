@@ -108,6 +108,7 @@ Route::post('backend/reparaciones/nuevo', [ReparacionesController::class, 'store
 
 //VENTAS
 Route::get('backend/ventas', [VentasController::class, 'index', 'index2'])->name('ventas');
+Route::post('backend/ventas', [VentasController::class, 'store'])->name('ventas_crear');
 //Route::get('backend/ventas', [VentasController::class, 'index2'])->name('ventas');
 //Resumen de venta
 Route::get('backend/resumenventas', [ResumenventasController::class, 'index'])->name('resumenventas');
