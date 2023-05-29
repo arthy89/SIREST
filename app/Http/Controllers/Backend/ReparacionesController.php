@@ -25,7 +25,8 @@ class ReparacionesController extends Controller
         //
         $pedidos = Pedido::join('persona', 'pedido.personaid', '=', 'persona.idpersona')
             ->join('usuarios', 'pedido.usuarioid', '=', 'usuarios.idusuarios')
-            ->select('pedido.*', 'persona.*', 'persona.apellidos as persona_apellidos', 'usuarios.*', 'usuarios.apellidos as usuario_apellidos', 'usuarios.email as usuario_email')
+            ->join('dispositivo', 'pedido.id_device', '=', 'dispositivo.id_device')
+            ->select('pedido.*', 'persona.*', 'persona.apellidos as persona_apellidos', 'usuarios.*', 'usuarios.apellidos as usuario_apellidos', 'usuarios.email as usuario_email', 'dispositivo.*')
             ->get();
         // return $pedidos;
         return view('Backend.Reparaciones.reparacionesindex', compact('pedidos'));

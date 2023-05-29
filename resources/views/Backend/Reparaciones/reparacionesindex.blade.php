@@ -92,10 +92,16 @@
                                                         </th>
                                                         <th
                                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                            Function</th>
+                                                            Dispositivo</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                            Fechas</th>
+                                                        <th
+                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                            Responsable</th>
                                                         <th
                                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                            Status</th>
+                                                            Estado</th>
                                                         <th
                                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                             Employed</th>
@@ -118,8 +124,31 @@
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                                <p class="text-xs text-secondary mb-0">Organization</p>
+                                                                <p class="text-xs font-weight-bold mb-0">
+                                                                    {{ $pedido->device_name }}</p>
+                                                                <p class="text-xs text-secondary mb-0">
+                                                                    {{ $pedido->device_mark }}</p>
+                                                            </td>
+                                                            <td>
+                                                                <p class="text-xs text-secondary mb-0">
+                                                                    {{ date('d-m-Y', strtotime($pedido->fecha)) }} - Ingreso
+                                                                </p>
+                                                                <p class="text-xs font-weight-bold mb-0">
+                                                                    {{ date('d-m-Y', strtotime($pedido->fecha_entrega)) }} -
+                                                                    Entrega
+                                                                </p>
+                                                            </td>
+                                                            <td>
+                                                                @if ($pedido->usuarioid)
+                                                                    <p class="text-xs font-weight-bold mb-0">
+                                                                        {{ $pedido->nombre }}
+                                                                    </p>
+                                                                    <p class="text-xs text-secondary mb-0">
+                                                                        {{ $pedido->usuario_apellidos }}</p>
+                                                                @else
+                                                                    <p class="text-xs font-weight-bold mb-0">Sin Asignar
+                                                                    </p>
+                                                                @endif
                                                             </td>
                                                             <td class="align-middle text-center text-sm">
                                                                 <span
