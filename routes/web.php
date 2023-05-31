@@ -17,6 +17,9 @@ use App\Http\Livewire\Backend\ProveedorLive\Listarproveedor;
 
 // frontend controller
 use App\Http\Controllers\Frontend\EcommerceController;
+//categorias
+use App\Http\Controllers\Frontend\CategoriasVentaController;
+
 use App\Http\Controllers\Frontend\LoginEController;
 use Illuminate\Support\Facades\Route;
 
@@ -132,3 +135,6 @@ Route::view('ecommerce/login', 'Frontend/Auth/login')->name('login-client');
 Route::post('ecommerce/login', [LoginEController::class, 'login']);
 Route::post('ecommerce/logout', [LoginEController::class, 'logout'])->name('logout-client');
 Route::view('login', 'Backend/Auth/login')->name('login');
+///////MODULO categorias
+Route::get('ecommerce/home/categorias', [CategoriasVentaController::class, 'index'])->name('categorias');
+
