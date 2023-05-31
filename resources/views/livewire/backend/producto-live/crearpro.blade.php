@@ -38,7 +38,7 @@
                             <div class="col-12 col-md-6">
                                 <div class="input-group input-group-static mb-4">
                                     <label>Precio</label>
-                                    <input wire:model="producto.precio_compra" type="text" class="form-control"
+                                    <input wire:model="producto.precio_venta_public" type="text" class="form-control"
                                         onkeypress='validate(event)'>
                                 </div>
                             </div>

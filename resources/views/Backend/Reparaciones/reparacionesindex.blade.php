@@ -104,7 +104,7 @@
                                                             Estado</th>
                                                         <th
                                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                            Employed</th>
+                                                            Prioridad</th>
                                                         <th class="text-secondary opacity-7"></th>
                                                     </tr>
                                                 </thead>
@@ -151,23 +151,61 @@
                                                                 @endif
                                                             </td>
                                                             <td class="align-middle text-center text-sm">
-                                                                <span
-                                                                    class="badge badge-sm bg-gradient-success">Online</span>
+                                                                <div class="dropdown mt-2 mb-0">
+                                                                    <button
+                                                                        class="btn btn-sm bg-gradient-primary dropdown-toggle"
+                                                                        type="button" id="dropdownMenuButton"
+                                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        Por Asignar
+                                                                    </button>
+                                                                    <ul class="dropdown-menu"
+                                                                        aria-labelledby="dropdownMenuButton">
+                                                                        <li><a class="dropdown-item" href="#">Por
+                                                                                Asignar</a></li>
+                                                                        <li><a class="dropdown-item" href="#">Por
+                                                                                Recoger</a></li>
+                                                                        <li><a class="dropdown-item" href="#">En
+                                                                                Proceso</a></li>
+                                                                        <li><a class="dropdown-item" href="#">Por
+                                                                                Entregar</a></li>
+                                                                        <li><a class="dropdown-item"
+                                                                                href="#">Finalizado</a></li>
+                                                                        <li><a class="dropdown-item"
+                                                                                href="#">Entregado</a></li>
+                                                                    </ul>
+                                                                </div>
                                                             </td>
-                                                            <td class="align-middle text-center">
-                                                                <span
-                                                                    class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                                                            <td class="align-middle text-center text-sm">
+                                                                <span class="badge badge-sm bg-gradient-danger">Alta</span>
                                                             </td>
                                                             <td class="align-middle">
-                                                                <a href="javascript:;"
-                                                                    class="text-secondary font-weight-bold text-xs"
-                                                                    data-toggle="tooltip" data-original-title="Edit user">
-                                                                    Edit
-                                                                </a>
+                                                                <div class="dropdown mt-2 mb-0">
+                                                                    <button
+                                                                        class="btn btn-sm bg-gradient-info dropdown-toggle"
+                                                                        type="button" id="dropdownMenuButton"
+                                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                                        Acciones
+                                                                    </button>
+                                                                    <ul class="dropdown-menu dropdown-menu-start"
+                                                                        aria-labelledby="dropdownMenuButton">
+                                                                        <li><a class="dropdown-item" href="#">
+                                                                                Ver reparación <i
+                                                                                    class="material-icons">visibility</i></a>
+                                                                        </li>
+                                                                        <li><a class="dropdown-item" href="#">
+                                                                                Imprimir <i
+                                                                                    class="material-icons">print</i></a>
+                                                                        </li>
+                                                                        <li><a class="dropdown-item text-danger"
+                                                                                href="#">
+                                                                                Eliminar <i
+                                                                                    class="material-icons">delete</i></a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     @endforeach
-
                                                 </tbody>
                                             </table>
                                         </div>
