@@ -19,7 +19,7 @@ class Crearpro extends Component
     {
         return [
             'producto.nombre_p' => 'required',
-            'producto.precio_compra' => 'required',
+            'producto.precio_venta_public' => 'required',
             'producto.stock' => 'required',
             'producto.descripcion' => 'max:500',
             'producto.categoriaid' => 'max:100'
@@ -30,7 +30,7 @@ class Crearpro extends Component
     {
         return [
             'producto.nombre_p.required' => 'El campo Nombre del producto es requerido',
-            'producto.precio_compra.required' => 'El campo Precio es requerido ',
+            'producto.precio_venta_public.required' => 'El campo Precio es requerido ',
             'producto.stock.required' => 'El campo Stock es requerido',
             'producto.descripcion.max' => 'El campo Descripción supera los 500 caracteres',
             'producto.categoriaid.max' => 'El campo Categoría supera los 100 caracteres'
