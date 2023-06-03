@@ -23,8 +23,9 @@ class ReparacionesController extends Controller
     public function index()
     {
         //
+        // return Pedido::all();
         $pedidos = Pedido::join('persona', 'pedido.personaid', '=', 'persona.idpersona')
-            ->join('usuarios', 'pedido.usuarioid', '=', 'usuarios.idusuarios')
+            ->leftJoin('usuarios', 'pedido.usuarioid', '=', 'usuarios.idusuarios')
             ->join('dispositivo', 'pedido.id_device', '=', 'dispositivo.id_device')
             ->select('pedido.*', 'persona.*', 'persona.apellidos as persona_apellidos', 'usuarios.*', 'usuarios.apellidos as usuario_apellidos', 'usuarios.email as usuario_email', 'dispositivo.*')
             ->get();
@@ -83,8 +84,6 @@ class ReparacionesController extends Controller
                 ]);
 
                 $pedido->imagenes()->save($nuevaImagen);
-
-                // $nuevaImagen->save();
             }
         }
 
@@ -94,9 +93,19 @@ class ReparacionesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Pedido $reparacion)
     {
-        //
+        // return $reparacion;
+        $dispositivos = Dispositivo::all();
+        $usuarios = Usuarios::all();
+        $rep_actual = Pedido::join('persona', 'pedido.personaid', '=', 'persona.idpersona')
+            ->leftJoin('usuarios', 'pedido.usuarioid', '=', 'usuarios.idusuarios')
+            ->join('dispositivo', 'pedido.id_device', '=', 'dispositivo.id_device')
+            ->where('pedido.idpedido', $reparacion->idpedido)
+            ->select('pedido.*', 'persona.*', 'persona.apellidos as persona_apellidos', 'usuarios.*', 'usuarios.apellidos as usuario_apellidos', 'usuarios.email as usuario_email', 'dispositivo.*')
+            ->get();
+        // return $rep_actual;
+        return view('Backend.Reparaciones.reparacionesver', compact('rep_actual', 'usuarios', 'dispositivos'));
     }
 
     /**

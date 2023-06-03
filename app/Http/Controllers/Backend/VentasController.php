@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 
 use App\Models\Productos;
+use App\Models\Ventas;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class VentasController extends Controller
 {
@@ -19,26 +21,26 @@ class VentasController extends Controller
 
 
         //return view("Backend.Ventas.ventasindex");
-        if($request->ajax()){
+        if ($request->ajax()) {
             $productos = DB::table('producto')
-                        ->select('producto.idproducto','producto.nombre_p','producto.stock','producto.precio_venta_public')->get();
+                ->select('producto.idproducto', 'producto.nombre_p', 'producto.stock', 'producto.precio_venta_public')->get();
             //->select('producto.idproducto','producto.nombre_p','producto.stock','producto.precio_venta_public')->orderBy('producto.idproducto','desc')->take()->get();
             return DataTables::of($productos)
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
 
-                $value = '<a href="javascript:;" onclick()
+                    $value = '<a href="javascript:;" onclick()
                             class="avatar avatar-sm border-1 rounded-circle bg-white shadow-sm">
                             <i class="material-icons text-dark text-xxxl">add</i>
                         </a>';
-                return $value;
-            })
-            //->addColumn('action', function($row){
-            //    $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
-            //    return $form;
-            //})
-            ->rawColumns(['action'])
-            ->make(true);
+                    return $value;
+                })
+                //->addColumn('action', function($row){
+                //    $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
+                //    return $form;
+                //})
+                ->rawColumns(['action'])
+                ->make(true);
         }
         //return $request;
         //return view("Backend.Categorias.categoriasindex");
@@ -46,21 +48,21 @@ class VentasController extends Controller
     }
     public function index2(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $productos = DB::table('producto')
-                    ->select('producto.idproducto','producto.nombre_p','producto.stock','producto.precio_venta_public')->get();
+                ->select('producto.idproducto', 'producto.nombre_p', 'producto.stock', 'producto.precio_venta_public')->get();
             return DataTables::of($productos)
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
 
-                $value = '<a href="javascript:;" onclick()
+                    $value = '<a href="javascript:;" onclick()
                             class="avatar avatar-sm border-1 rounded-circle bg-white shadow-sm">
                             <i class="material-icons text-dark text-xxxl">add</i>
                         </a>';
-                return $value;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+                    return $value;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
         return view("Backend.Ventas.ventasindex");
     }
@@ -78,8 +80,16 @@ class VentasController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
-        //
+        $ventas = Ventas::create([
+            'idpersona' => $request->cliente,
+            'lista_venta' => $request->tablaElementos,
+            'tipodepago_venta' => $request->tipodepago,
+            'total_venta' => $request->contenido_total_precio,
+            'vendedor_venta' => Auth::user()->nombre . ' ' . Auth::user()->apellidos,
+            'fecha_venta' => now(),
+        ]);
+
+        return view("Backend.Ventas.ventasindex");
     }
 
     /**

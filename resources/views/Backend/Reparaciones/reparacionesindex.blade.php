@@ -61,6 +61,14 @@
                                                 data-bs-toggle="pill" data-bs-target="#pills-productos"data-bs-toggle="tab"
                                                 href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard"
                                                 aria-selected="true">
+                                                Rechazado
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link mb-0 px-0 py-1" id="pills-productos-tab"
+                                                data-bs-toggle="pill" data-bs-target="#pills-productos"data-bs-toggle="tab"
+                                                href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard"
+                                                aria-selected="true">
                                                 Finalizado
                                             </a>
                                         </li>
@@ -134,8 +142,12 @@
                                                                     {{ date('d-m-Y', strtotime($pedido->fecha)) }} - Ingreso
                                                                 </p>
                                                                 <p class="text-xs font-weight-bold mb-0">
-                                                                    {{ date('d-m-Y', strtotime($pedido->fecha_entrega)) }} -
-                                                                    Entrega
+                                                                    @if ($pedido->fecha_entrega)
+                                                                        {{ date('d-m-Y', strtotime($pedido->fecha_entrega)) }}
+                                                                        - Entrega
+                                                                    @else
+                                                                        Sin fecha de entrega
+                                                                    @endif
                                                                 </p>
                                                             </td>
                                                             <td>
@@ -176,7 +188,21 @@
                                                                 </div>
                                                             </td>
                                                             <td class="align-middle text-center text-sm">
-                                                                <span class="badge badge-sm bg-gradient-danger">Alta</span>
+                                                                @if ($pedido->prioridad)
+                                                                    @if ($pedido->prioridad == 1)
+                                                                        <span
+                                                                            class="badge badge-sm bg-gradient-info">Baja</span>
+                                                                    @elseif ($pedido->prioridad == 2)
+                                                                        <span
+                                                                            class="badge badge-sm bg-gradient-warning">Media</span>
+                                                                    @else
+                                                                        <span
+                                                                            class="badge badge-sm bg-gradient-danger">Alta</span>
+                                                                    @endif
+                                                                @else
+                                                                    <span
+                                                                        class="badge badge-sm bg-gradient-secondary">Vacío</span>
+                                                                @endif
                                                             </td>
                                                             <td class="align-middle">
                                                                 <div class="dropdown mt-2 mb-0">
@@ -188,7 +214,8 @@
                                                                     </button>
                                                                     <ul class="dropdown-menu dropdown-menu-start"
                                                                         aria-labelledby="dropdownMenuButton">
-                                                                        <li><a class="dropdown-item" href="#">
+                                                                        <li><a class="dropdown-item"
+                                                                                href="{{ route('reparaciones_ver', $pedido->idpedido) }}">
                                                                                 Ver reparación <i
                                                                                     class="material-icons">visibility</i></a>
                                                                         </li>
