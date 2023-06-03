@@ -1,5 +1,6 @@
-
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+<aside
+    class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
+    id="sidenav-main">
 
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
@@ -51,27 +52,29 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link text-white collapsed" aria-controls="componentsExamples" role="button" aria-expanded="false">
-                    <i class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">view_in_ar</i>
+                <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link text-white collapsed"
+                    aria-controls="componentsExamples" role="button" aria-expanded="false">
+                    <i
+                        class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">view_in_ar</i>
                     <span class="nav-link-text ms-2 ps-1">Ventas</span>
                 </a>
                 <div class="collapse" id="componentsExamples" style="">
                     <ul class="nav ">
                         <li class="nav-item ">
                             <a class="nav-link text-white " href="{{ route('ventas') }}">
-                            <span class="sidenav-mini-icon"> V </span>
-                            <span class="sidenav-normal  ms-2  ps-1"> Venta </span>
+                                <span class="sidenav-mini-icon"> V </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Venta </span>
                             </a>
-                            </li>
-                            <li class="nav-item ">
+                        </li>
+                        <li class="nav-item ">
                             <a class="nav-link text-white " href="{{ route('resumenventas') }}" target="_blank">
-                            <span class="sidenav-mini-icon"> R </span>
-                            <span class="sidenav-normal  ms-2  ps-1"> Resumen Ventas </span>
+                                <span class="sidenav-mini-icon"> R </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Resumen Ventas </span>
                             </a>
                         </li>
                     </ul>
                 </div>
-                </li>
+            </li>
 
 
             <li class="nav-item">
@@ -99,6 +102,38 @@
                             <a class="nav-link text-white " href="{{ route('productos') }}">
                                 <span class="sidenav-mini-icon"> P </span>
                                 <span class="sidenav-normal  ms-2  ps-1"> Productos </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#ecommerceExamples" class="nav-link text-white collapsed"
+                    aria-controls="ecommerceExamples" role="button" aria-expanded="false">
+                    <i
+                        class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">shopping_basket</i>
+                    <span class="nav-link-text ms-2 ps-1">Ecommerce</span>
+                </a>
+                <div class="collapse" id="ecommerceExamples" style="">
+                    <ul class="nav ">
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " href="{{ route('slider') }}">
+                                <span class="sidenav-mini-icon"> S </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Slider </span>
+                            </a>
+                        </li>
+                        {{-- <li class="nav-item ">
+                            <a class="nav-link text-white " href="../../pages/ecommerce/referral.html">
+                                <span class="sidenav-mini-icon"> R </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Referral </span>
+                            </a>
+                        </li> --}}
+
+                        <li class="nav-item ">
+                            <a class="nav-link text-white " href="{{ route('promociones') }}">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal  ms-2  ps-1"> Promociones </span>
                             </a>
                         </li>
                     </ul>

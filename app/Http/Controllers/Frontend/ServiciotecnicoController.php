@@ -10,8 +10,7 @@ use App\Models\Proveedores;
 use Yajra\DataTables\DataTables;
 use DB;
 
-
-class CategoriasVentaController extends Controller
+class ServiciotecnicoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,17 +20,8 @@ class CategoriasVentaController extends Controller
         //
         $productos = Productos::all();
         //return $productos;
-        return view("Frontend.Categoriasventa.categoriasventaindex", compact('productos'));
-    }
-    public function detalles(Request $request)
-    {
-        //
-        //return $request;
-        //$categorias = Categorias::all();
-        $productos = Productos::all();
-        // return $usuarios;
-        return view('Frontend.Categoriasventa.categoriadetalles', compact('productos'));
-        //return view("Frontend.Categoriasventa.categoriasventaindex");
+        return view("Frontend.Serviciotecnico.serviciotecnicoindex", compact('productos'));
+
     }
 
     /**
