@@ -119,6 +119,7 @@ Route::delete('backend/productos/{producto}/eliminar', [ProductosController::cla
 Route::get('backend/reparaciones', [ReparacionesController::class, 'index'])->name('reparaciones');
 Route::get('backend/reparaciones/crear', [ReparacionesController::class, 'create'])->name('reparaciones_crear_view');
 Route::post('backend/reparaciones/nuevo', [ReparacionesController::class, 'store'])->name('reparaciones_crear');
+Route::get('backend/reparaciones/{reparacion}/ver', [ReparacionesController::class, 'show'])->name('reparaciones_ver');
 
 //VENTAS
 Route::get('backend/ventas', [VentasController::class, 'index', 'index2'])->name('ventas');

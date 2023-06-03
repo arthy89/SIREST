@@ -8,15 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Ventas extends Model
 {
     use HasFactory;
+
+    protected $table = "ventas";
+
+    public $timestamps = false;
+
+    protected $primaryKey = "id_venta";
+
     protected $fillable = [
-        'idproducto',
-        'categoriaid',
-        'proveedorid',
-        'codigo',
-        'nombre_p',
-        'descripcion',
-        'stock',
-        'preciocompra',
-        'precio_venta_public'
+        'idpersona',
+        'lista_venta',
+        'tipodepago_venta',
+        'total_venta',
+        'vendedor_venta',
+        'fecha_venta',
     ];
 }
