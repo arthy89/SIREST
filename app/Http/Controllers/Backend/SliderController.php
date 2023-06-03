@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Productos;
-use App\Models\Categorias;
-use App\Models\Proveedores;
+
+use App\Models\Slider;
 use Yajra\DataTables\DataTables;
 use DB;
 
-
-class CategoriasVentaController extends Controller
+class SliderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,19 +17,9 @@ class CategoriasVentaController extends Controller
     public function index()
     {
         //
-        $productos = Productos::all();
-        //return $productos;
-        return view("Frontend.Categoriasventa.categoriasventaindex", compact('productos'));
-    }
-    public function detalles(Request $request)
-    {
-        //
-        //return $request;
-        //$categorias = Categorias::all();
-        $productos = Productos::all();
-        // return $usuarios;
-        return view('Frontend.Categoriasventa.categoriadetalles', compact('productos'));
-        //return view("Frontend.Categoriasventa.categoriasventaindex");
+        $slider = Slider::all();
+
+        return view("Backend.Slider.sliderindex",compact('slider'));
     }
 
     /**
@@ -40,6 +28,7 @@ class CategoriasVentaController extends Controller
     public function create()
     {
         //
+        return view("Backend.Slider.slidercrear");
     }
 
     /**
@@ -48,6 +37,20 @@ class CategoriasVentaController extends Controller
     public function store(Request $request)
     {
         //
+        //return $request;
+        if ($request->hasFile('archivo')) {
+            $file = $request->file('archivo');
+            $destinopath = 'imgs/productos/';
+            $filename = time() . '-' . $file->getClientOriginalName();
+            $uploadSuccess = $request->file('archivo')->move($destinopath, $filename);
+            $ruta = $destinopath . $filename;
+        }
+        $slider = Slider::create([
+            'htmlcode' => $request->htmlcode,
+            'imagen' => $ruta
+        ]);
+
+        return redirect()->route('slider')->with('crear', 'ok');
     }
 
     /**

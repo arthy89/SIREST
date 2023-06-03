@@ -4,14 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Productos;
-use App\Models\Categorias;
-use App\Models\Proveedores;
-use Yajra\DataTables\DataTables;
-use DB;
 
-
-class CategoriasVentaController extends Controller
+class ContactanosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,20 +13,12 @@ class CategoriasVentaController extends Controller
     public function index()
     {
         //
-        $productos = Productos::all();
+
         //return $productos;
-        return view("Frontend.Categoriasventa.categoriasventaindex", compact('productos'));
+        return view("Frontend.Contactanos.contactanosindex");
+
     }
-    public function detalles(Request $request)
-    {
-        //
-        //return $request;
-        //$categorias = Categorias::all();
-        $productos = Productos::all();
-        // return $usuarios;
-        return view('Frontend.Categoriasventa.categoriadetalles', compact('productos'));
-        //return view("Frontend.Categoriasventa.categoriasventaindex");
-    }
+
 
     /**
      * Show the form for creating a new resource.
