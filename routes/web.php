@@ -11,6 +11,10 @@ use App\Http\Controllers\Backend\VentasController;
 use App\Http\Controllers\Backend\ResumenventasController;
 use App\Http\Controllers\Backend\ProductosController;
 use App\Http\Controllers\Backend\ReparacionesController;
+//slider
+use App\Http\Controllers\Backend\SliderController;
+//promciones
+use App\Http\Controllers\Backend\PromocionesController;
 // livewire
 use App\Http\Livewire\Backend\DispositivoLive\Listar;
 use App\Http\Livewire\Backend\ProveedorLive\Listarproveedor;
@@ -19,6 +23,13 @@ use App\Http\Livewire\Backend\ProveedorLive\Listarproveedor;
 use App\Http\Controllers\Frontend\EcommerceController;
 //categorias
 use App\Http\Controllers\Frontend\CategoriasVentaController;
+//ofertas
+use App\Http\Controllers\Frontend\OfertasController;
+//contactanos
+use App\Http\Controllers\Frontend\ContactanosController;
+//servicio tecnico
+use App\Http\Controllers\Frontend\ServiciotecnicoController;
+
 
 use App\Http\Controllers\Frontend\LoginEController;
 use Illuminate\Support\Facades\Route;
@@ -116,7 +127,14 @@ Route::post('backend/ventas', [VentasController::class, 'store'])->name('ventas_
 //Route::get('backend/ventas', [VentasController::class, 'index2'])->name('ventas');
 //Resumen de venta
 Route::get('backend/resumenventas', [ResumenventasController::class, 'index'])->name('resumenventas');
-
+////////////ecommerce
+//slider
+Route::get('backend/slider', [SliderController::class, 'index'])->name('slider');
+Route::get('backend/slider/crear', [SliderController::class, 'create'])->name('crear_slider');
+Route::post('backend/slider/crear', [SliderController::class, 'store'])->name('crear_slider');
+//priomociones
+Route::get('backend/promociones', [PromocionesController::class, 'index'])->name('promociones');
+//Route::get('backend/ecommerce', [VentasController::class, 'index', 'index2'])->name('ventas');
 
 
 //notificaciones
@@ -127,6 +145,7 @@ Route::get('/notifi', function () {
 // Dispositivos
 Route::get('/backend/dispositivos-listar', Listar::class)->name('dispositivos');
 Route::post('backend/dispotivos/crear', [ReparacionesController::class, 'create_device'])->name('create_device');
+
 // ------------------------------------------------------------------------------------------------
 
 // ?FRONTEND
@@ -137,4 +156,14 @@ Route::post('ecommerce/login', [LoginEController::class, 'login']);
 Route::post('ecommerce/logout', [LoginEController::class, 'logout'])->name('logout-client');
 Route::view('login', 'Backend/Auth/login')->name('login');
 ///////MODULO categorias
-Route::get('ecommerce/home/categorias', [CategoriasVentaController::class, 'index'])->name('categorias');
+Route::get('ecommerce/categorias', [CategoriasVentaController::class, 'index'])->name('categorias');
+Route::get('ecommerce/home/{nombre}', [CategoriasVentaController::class, 'detalles'])->name('detalles_producto');
+/////modulo ofertas
+Route::get('ecommerce/ofertas', [OfertasController::class, 'index'])->name('ofertas');
+Route::get('ecommerce/ofertas/{nombre}', [OfertasController::class, 'detalles'])->name('detalles_oferta');
+
+//contactanos
+Route::get('ecommerce/contactanos', [ContactanosController::class, 'index'])->name('contactanos');
+
+//servicio tecnico
+Route::get('ecommerce/serviciot', [ServiciotecnicoController::class, 'index'])->name('serviciotecnico');

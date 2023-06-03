@@ -18,7 +18,7 @@
                             <nav>
                                 <ul>
                                     <li class="has-dropdown">
-                                        <a class="active main-menu-link" href="#">Home
+                                        <a class="active main-menu-link" href="{{ route('home-client') }}">Home
                                             {{-- <i class="fa fa-angle-down"></i> --}}
                                         </a>
                                         <!-- Sub Menu -->
@@ -54,7 +54,7 @@
                                         </ul>
                                     </li>
                                     <li class="has-dropdown">
-                                        <a href="#">Ofertas <i class="fa fa-angle-down"></i></a>
+                                        <a href="{{ route('ofertas') }}">Ofertas <i class="fa fa-angle-down"></i></a>
                                         <!-- Sub Menu -->
                                         <ul class="sub-menu">
                                             <li><a href="faq.html">Reparaciones</a></li>
@@ -65,10 +65,10 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="about-us.html">Sobre Nosotros</a>
+                                        <a href="{{ route('serviciotecnico') }}">Tecnico a domicilio</a>
                                     </li>
                                     <li>
-                                        <a href="contact-us.html">Contactanos</a>
+                                        <a href="{{ route('contactanos') }}">Contactanos</a>
                                     </li>
                                 </ul>
                             </nav>
