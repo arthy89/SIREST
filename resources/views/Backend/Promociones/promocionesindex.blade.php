@@ -5,7 +5,7 @@
         <div class="row">
             <div class="row">
                 <div class="col-md-4">
-                    <a href="{{ route('crear_productos') }}" class="btn btn-info">
+                    <a href="{{ route('crear_promociones') }}" class="btn btn-info">
                         <i class="material-icons">person_add</i>
                         Promociones para el Ecommerce
                     </a>
@@ -26,12 +26,11 @@
                                 <tr>
                                     <th>N°</th>
                                     <th>NOMBRE</th>
-                                    <th>COLORES</th>
-                                    <th>CATEGORIA</th>
-                                    <th>PROVEEDOR</th>
-                                    <th>COMPRA</th>
-                                    <th>STOCK</th>
-                                    <th>IMAGEN</th>
+                                    <th>FECHA INICIO</th>
+                                    <th>FECHA FINAL</th>
+                                    <th>PRODUCTO</th>
+                                    <th>PROMOCION</th>
+
                                     <th>OPCIONES</th>
                                 </tr>
                             </thead>
@@ -44,46 +43,77 @@
                 </div>
             </div>
         </div>
-        {{-- <footer class="footer py-4  ">
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6 mb-lg-0 mb-4">
-                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>,
-                            made with <i class="fa fa-heart"></i> by
-                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative
-                                Tim</a>
-                            for a better web.
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com" class="nav-link text-muted"
-                                    target="_blank">Creative Tim</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                    target="_blank">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
-                                    target="_blank">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                    target="_blank">License</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer> --}}
     </div>
 @endsection
-@push('custom-js')
+@push('custom-scripts')
+<script>
+    $(document).on('submit', '.formulario', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro de eliminar al Categoria?',
+                text: "Se eliminará la promocion    ",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        });
+    $(document).ready(function() {
+        $('#registro').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('promociones') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'nombre_promocion',
+                    name: 'nombre_promocion'
+                },
+                {
+                    data: 'fecha_inicio',
+                    name: 'fecha_inicio'
+                },
+                {
+                    data: 'fecha_final',
+                    name: 'fecha_final'
+                },
+                {
+                    data: 'nombre_p',
+                    name: 'nombre_p'
+                },
+                {
+                    data: 'cantidad_descuento',
+                    name: 'cantidad_descuento'
+                },
+                {
+                    data: 'action',
+                    sWidth: '110px',
+                    sortable: false
+                },
+            ],
+            "language": {
+                "search": "Buscar",
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "paginate": {
+                    "previous": "<",
+                    "next": ">",
+                    "first": "Primero",
+                    "last": "Último"
+                }
 
+            }
+        });
+    });
+</script>
 @endpush

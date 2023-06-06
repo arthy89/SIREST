@@ -21,91 +21,130 @@
                     <div class="card-body">
                         <div class="row mt-5">
                             @foreach ($slider as $sliders)
-                            <div class="col-lg-6 col-md-6">
-                                <div class="card" data-animation="true">
-                                    <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                                        <a class="d-block blur-shadow-image">
 
-                                            <img src="{{ asset($sliders->imagen) }}" alt="img-blur-shadow"
-                                                class="img-fluid shadow border-radius-lg">
-                                        </a>
-                                        <div class="colored-shadow"
-                                            style="background-image: url(&quot;../../assets/img/products/product-1-min.jpg&quot;);">
+                                @csrf
+
+                                <div class="col-lg-6 col-md-6">
+                                        <div class="card" data-animation="true">
+                                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                                                <a class="d-block blur-shadow-image">
+
+                                                    <img src="{{ asset($sliders->imagen) }}" alt="img-blur-shadow"
+                                                        class="img-fluid shadow border-radius-lg">
+                                                </a>
+                                                <div class="colored-shadow"
+                                                    style="background-image: url(&quot;../../assets/img/products/product-1-min.jpg&quot;);">
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body text-center">
+                                                <form action="{{route('eliminar_slider', $sliders->sliderid)}}" method="POST" class="formulario">
+                                                    @csrf
+
+                                                    @method('DELETE')
+                                                    <div class="d-flex mt-n6 mx-auto">
+                                                        <a href="{{route('editar_slider', $sliders->sliderid)}}" class="btn btn-link text-primary ms-auto border-0" data-bs-toggle="tooltip"
+                                                            data-bs-placement="bottom" data-bs-original-title="edit">
+                                                            <i class="material-icons text-lg" >edit</i>
+                                                        </a>
+
+                                                        <button id="" type="submit" class="btn btn-link text-info me-auto border-0" data-bs-toggle="tooltip"
+                                                            data-bs-placement="bottom"  >
+                                                            <i class="material-icons text-lg">delete</i>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                                <div class="hero-slider-content">
+                                                    {!! html_entity_decode($sliders->htmlcode ) !!}
+
+                                                </div>
+                                            </div>
+
+
+                                            <hr class="dark horizontal my-0">
+                                            <div class="card-footer d-flex">
+
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="card-body text-center">
-                                        <div class="d-flex mt-n6 mx-auto">
-                                            <a class="btn btn-link text-primary ms-auto border-0" data-bs-toggle="tooltip"
-                                                data-bs-placement="bottom" data-bs-original-title="Refresh">
-                                                <i class="material-icons text-lg">refresh</i>
-                                            </a>
-                                            <button class="btn btn-link text-info me-auto border-0" data-bs-toggle="tooltip"
-                                                data-bs-placement="bottom" data-bs-original-title="Edit">
-                                                <i class="material-icons text-lg">edit</i>
-                                            </button>
-                                        </div>
-                                        <div class="hero-slider-content">
-                                            {!! html_entity_decode($sliders->htmlcode ) !!}
-
-                                        </div>
-                                    </div>
-
-
-                                    <hr class="dark horizontal my-0">
-                                    <div class="card-footer d-flex">
-
-                                    </div>
                                 </div>
-                            </div>
+                            </form>
+                            @endforeach
 
 
                         </div>
-                    @endforeach
+
 
                     </div>
                 </div>
             </div>
         </div>
-        {{-- <footer class="footer py-4  ">
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6 mb-lg-0 mb-4">
-                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>,
-                            made with <i class="fa fa-heart"></i> by
-                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative
-                                Tim</a>
-                            for a better web.
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com" class="nav-link text-muted"
-                                    target="_blank">Creative Tim</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                    target="_blank">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
-                                    target="_blank">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                    target="_blank">License</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer> --}}
+
     </div>
 @endsection
-@push('custom-js')
+@push('custom-scripts')
+<script>
+    $(document).on('submit', '.formulario', function(e) {
+        e.preventDefault();
+        Swal.fire({
+            title: '¿Estás seguro de eliminar al Categoria?',
+            text: "Se eliminará la Categoria    ",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Si, eliminar!',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.submit();
+            }
+        })
+    });
+</script>
+    @if (session('eliminar') == 'ok')
+        <script>
+            Swal.fire(
+                '¡Eliminado!',
+                'Se eliminó el Slider',
+                'success'
+            )
+        </script>
+    @endif
+    @if (session('eliminar') == 'ok_e')
+        <script>
+            Swal.fire(
+                '¡Eliminado!',
+                'El slider no existe ',
+                'success'
+            )
+        </script>
+    @endif
+    @if (session('crear')=='ok')
+        <script type="text/javascript">
+
+            Lobibox.notify('success', {
+                width: 600,
+                img: "{{asset('imgs/success.png')}}",
+                position: 'top right',
+                title: 'Registro correctamente !!',
+                msg: 'Slider Registrada.'
+            });
+
+        </script>
+    @endif
+    @if (session('actualizar')=='ok')
+        <script type="text/javascript">
+
+            Lobibox.notify('success', {
+                width: 600,
+                img: "{{asset('imgs/success.png')}}",
+                position: 'top right',
+                title: 'Actualizacion correctamente !!',
+                msg: 'Slider Actualizada.'
+            });
+
+        </script>
+    @endif
+
 @endpush

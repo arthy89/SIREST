@@ -132,8 +132,17 @@ Route::get('backend/resumenventas', [ResumenventasController::class, 'index'])->
 Route::get('backend/slider', [SliderController::class, 'index'])->name('slider');
 Route::get('backend/slider/crear', [SliderController::class, 'create'])->name('crear_slider');
 Route::post('backend/slider/crear', [SliderController::class, 'store'])->name('crear_slider');
+Route::get('backend/slider/{slider}/editar', [SliderController::class, 'edit'])->name('editar_slider');
+Route::put('backend/slider/{slider}/editar', [SliderController::class, 'update'])->name('editar_slider');
+
+Route::delete('backend/slider/{slider}/eliminar', [SliderController::class, 'destroy'])->name('eliminar_slider');
 //priomociones
 Route::get('backend/promociones', [PromocionesController::class, 'index'])->name('promociones');
+Route::get('backend/promociones/crear', [PromocionesController::class, 'create'])->name('crear_promociones');
+Route::post('backend/promociones/crear', [PromocionesController::class, 'store'])->name('crear_promociones');
+Route::get('backend/promociones/{promociones}/editar', [PromocionesController::class, 'edit'])->name('editar_promociones');
+Route::put('backend/promociones/{promociones}/editar', [PromocionesController::class, 'update'])->name('editar_promociones');
+Route::delete('backend/promociones/{promociones}/eliminar', [PromocionesController::class, 'destroy'])->name('eliminar_promociones');
 //Route::get('backend/ecommerce', [VentasController::class, 'index', 'index2'])->name('ventas');
 
 
@@ -156,7 +165,7 @@ Route::post('ecommerce/login', [LoginEController::class, 'login']);
 Route::post('ecommerce/logout', [LoginEController::class, 'logout'])->name('logout-client');
 Route::view('login', 'Backend/Auth/login')->name('login');
 ///////MODULO categorias
-Route::get('ecommerce/categorias', [CategoriasVentaController::class, 'index'])->name('categorias');
+Route::get('ecommerce/categorias', [CategoriasVentaController::class, 'index'])->name('ecomerce_categorias');
 Route::get('ecommerce/home/{nombre}', [CategoriasVentaController::class, 'detalles'])->name('detalles_producto');
 /////modulo ofertas
 Route::get('ecommerce/ofertas', [OfertasController::class, 'index'])->name('ofertas');
