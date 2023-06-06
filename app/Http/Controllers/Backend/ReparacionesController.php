@@ -73,6 +73,7 @@ class ReparacionesController extends Controller
         ]);
 
         $imagenes = $request->file('imagen');
+        // dd($imagenes);
         if ($imagenes) {
             foreach ($imagenes as $imagen) {
                 $filename = time() . '-' . $imagen->getClientOriginalName();
@@ -105,7 +106,9 @@ class ReparacionesController extends Controller
             ->select('pedido.*', 'persona.*', 'persona.apellidos as persona_apellidos', 'usuarios.*', 'usuarios.apellidos as usuario_apellidos', 'usuarios.email as usuario_email', 'dispositivo.*')
             ->get();
         // return $rep_actual;
-        return view('Backend.Reparaciones.reparacionesver', compact('rep_actual', 'usuarios', 'dispositivos'));
+        $imagenes = Imagenes::where('idpedido', $reparacion->idpedido)->get();
+        // return $imagenes;
+        return view('Backend.Reparaciones.reparacionesver', compact('rep_actual', 'usuarios', 'dispositivos', 'imagenes'));
     }
 
     /**
