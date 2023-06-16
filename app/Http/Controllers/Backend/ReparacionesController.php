@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 use App\Models\Pedido;
 use App\Models\Dispositivo;
 use App\Models\Imagenes;
+use App\Models\Negocio;
 use App\Models\Persona;
 use App\Models\Usuarios;
-use DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
 use League\Flysystem\Visibility;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class ReparacionesController extends Controller
 {
@@ -27,8 +28,9 @@ class ReparacionesController extends Controller
         $pedidos = Pedido::join('persona', 'pedido.personaid', '=', 'persona.idpersona')
             ->leftJoin('usuarios', 'pedido.usuarioid', '=', 'usuarios.idusuarios')
             ->join('dispositivo', 'pedido.id_device', '=', 'dispositivo.id_device')
-            ->select('pedido.*', 'persona.*', 'persona.apellidos as persona_apellidos', 'usuarios.*', 'usuarios.apellidos as usuario_apellidos', 'usuarios.email as usuario_email', 'dispositivo.*')
-            ->get();
+            ->select('pedido.*', 'pedido.status as estado_p', 'persona.*', 'persona.apellidos as persona_apellidos', 'usuarios.*', 'usuarios.apellidos as usuario_apellidos', 'usuarios.email as usuario_email', 'dispositivo.*')
+            ->paginate(5);
+        // ->get();
         // return $pedidos;
         return view('Backend.Reparaciones.reparacionesindex', compact('pedidos'));
     }
@@ -73,7 +75,7 @@ class ReparacionesController extends Controller
         ]);
 
         $imagenes = $request->file('imagen');
-        // dd($imagenes);
+
         if ($imagenes) {
             foreach ($imagenes as $imagen) {
                 $filename = time() . '-' . $imagen->getClientOriginalName();
@@ -122,16 +124,130 @@ class ReparacionesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ReparacionRequest $request, Pedido $reparacion)
     {
-        //
+        // return $reparacion;
+        // return $request;
+
+        // * Actualizar campos
+        $reparacion->update([
+            'personaid' => $request->cliente,
+            'usuarioid' => $request->responsable,
+            'fecha' => now(),
+            'fecha_entrega' => $request->fecha_entrega,
+            'monto' => $request->monto,
+            'impuesto' => $request->impuesto,
+            'adelanto' => $request->adelanto,
+            'costo_envio' => $request->envio,
+            'id_device' => $request->dispositivo,
+            'imei' => $request->imei,
+            'contrasena' => $request->contra,
+            'patron' => $request->patron,
+            'lista_pedido' => $request->lista_pedido,
+            'prioridad' => $request->prioridad,
+            'descripcion' => $request->descripcion,
+        ]);
+        // * Actualizar campos
+
+        //! Eliminar imagenes
+        if ($request->imagenes_eliminadas) {
+            $images = $request->imagenes_eliminadas;
+            $imageIds = json_decode(
+                $images,
+                true
+            );
+        }
+
+        if (!empty($imageIds)) {
+            $imagenes = Imagenes::whereIn('id', $imageIds)->get();
+
+            foreach ($imagenes as $imagen) {
+                // Elimina la imagen de la base de datos
+                $imagen->delete();
+
+                // Elimina el archivo de la imagen del sistema de archivos
+                Storage::disk('public')->delete($imagen->ruta);
+            }
+        }
+        //! Eliminar imagenes
+
+
+        // ? Actualizar imagenes / resubir
+        $imagenes_upt = $request->file('imagen');
+
+        if ($imagenes_upt) {
+            foreach ($imagenes_upt as $imagen) {
+                $filename = time() . '-' . $imagen->getClientOriginalName();
+                $path = $imagen->storeAs('reparaciones', $filename, 'public');
+
+                $nuevaImagen = new Imagenes([
+                    // 'idpedido' => $reparacion->idpedido,
+                    'img' => $filename,
+                    'ruta' => $path,
+                ]);
+
+                $reparacion->imagenes()->save($nuevaImagen);
+            }
+        }
+        // ? Actualizar imagenes / resubir
+
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Pedido $reparacion)
     {
-        //
+        $imagenes = Imagenes::where('idpedido', $reparacion->idpedido)->get();
+
+        // Eliminar las imágenes del sistema de archivos
+        foreach ($imagenes as $imagen) {
+            Storage::disk('public')->delete($imagen->ruta);
+        }
+
+        // Eliminar las imágenes de la base de datos
+        $imagenes->each->delete();
+
+        // Eliminar el pedido
+        $reparacion->delete();
+
+        return back();
+    }
+
+    public function print(Pedido $reparacion)
+    {
+        // return $reparacion;
+        $negocio = Negocio::all();
+        // return $negocio;
+
+        $rep_actual = Pedido::join('persona', 'pedido.personaid', '=', 'persona.idpersona')
+            ->leftJoin('usuarios', 'pedido.usuarioid', '=', 'usuarios.idusuarios')
+            ->join('dispositivo', 'pedido.id_device', '=', 'dispositivo.id_device')
+            ->where('pedido.idpedido', $reparacion->idpedido)
+            ->select('pedido.*', 'persona.*', 'persona.apellidos as persona_apellidos', 'persona.telefono as persona_telefono', 'usuarios.*', 'usuarios.apellidos as usuario_apellidos', 'usuarios.email as usuario_email', 'dispositivo.*')
+            ->get();
+        // return $rep_actual;
+        return view('Backend.Reparaciones.reparacionesprint', compact('rep_actual', 'negocio'));
+    }
+
+    public function pdf(Pedido $reparacion)
+    {
+        // return $reparacion;
+        $negocio = Negocio::all();
+        // return $negocio;
+
+        $rep_actual = Pedido::join('persona', 'pedido.personaid', '=', 'persona.idpersona')
+            ->leftJoin('usuarios', 'pedido.usuarioid', '=', 'usuarios.idusuarios')
+            ->join('dispositivo', 'pedido.id_device', '=', 'dispositivo.id_device')
+            ->where('pedido.idpedido', $reparacion->idpedido)
+            ->select('pedido.*', 'persona.*', 'persona.apellidos as persona_apellidos', 'persona.telefono as persona_telefono', 'usuarios.*', 'usuarios.apellidos as usuario_apellidos', 'usuarios.email as usuario_email', 'dispositivo.*')
+            ->get();
+        // return $rep_actual;
+        // return view('Backend.Reparaciones.reparacionesprint', compact('rep_actual', 'negocio'));
+
+        $pdf = PDF::loadView('Backend.Reparaciones.reparacionespdf', compact('rep_actual', 'negocio'));
+
+        return $pdf->stream("Factura.pdf", ["Attachment" => true]);
     }
 }

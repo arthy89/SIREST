@@ -29,9 +29,10 @@
 @endpush
 
 @section('main-content')
-    <form action="{{ route('reparaciones_crear') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('reparaciones_actualizar', $rep_actual[0]) }}" method="POST" enctype="multipart/form-data">
 
         @csrf
+        @method('put')
 
         <div class="container-fluid py-4">
             <div class="row">
@@ -145,49 +146,51 @@
                                                         Quitar</th>
                                                 </thead>
                                                 <tbody class="tablebody">
-                                                    @foreach (json_decode($rep_actual[0]->lista_pedido) as $item)
-                                                        @if ($item->tipo == 'servicio')
-                                                            <tr>
-                                                                <td>{{ $item->nombre }}</td>
-                                                                <td></td>
-                                                                <td>
-                                                                    <div class="input-group input-group-outline">
-                                                                        <input type="text"
-                                                                            class="form-control precio-input"
-                                                                            onkeypress='validate(event)'
-                                                                            value="{{ $item->precio }}"
-                                                                            data-id="{{ $item->id }}">
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    <button type="button"
-                                                                        class="btn btn-sm bg-gradient-danger mt-2 mx-2"
-                                                                        onclick="eliminarServicio(this)">x</button>
-                                                                </td>
-                                                            </tr>
-                                                        @elseif ($item->tipo == 'producto')
-                                                            <tr>
-                                                                <td>{{ $item->nombre }}</td>
-                                                                <td>
-                                                                    <div class="input-group input-group-outline">
-                                                                        <input type="text"
-                                                                            class="form-control cantidad-input"
-                                                                            onkeypress='validate(event)'
-                                                                            value="{{ $item->cantidad }}"
-                                                                            data-id="{{ $item->id }}">
-                                                                    </div>
-                                                                </td>
-                                                                <td align="center">
-                                                                    {{ $item->precio }}
-                                                                </td>
-                                                                <td>
-                                                                    <button type="button"
-                                                                        class="btn btn-sm btn-danger mt-2 mx-2"
-                                                                        onclick="eliminarProducto(this)">x</button>
-                                                                </td>
-                                                            </tr>
-                                                        @endif
-                                                    @endforeach
+                                                    @if ($rep_actual[0]->lista_pedido)
+                                                        @foreach (json_decode($rep_actual[0]->lista_pedido) as $item)
+                                                            @if ($item->tipo == 'servicio')
+                                                                <tr>
+                                                                    <td>{{ $item->nombre }}</td>
+                                                                    <td></td>
+                                                                    <td>
+                                                                        <div class="input-group input-group-outline">
+                                                                            <input type="text"
+                                                                                class="form-control precio-input"
+                                                                                onkeypress='validate(event)'
+                                                                                value="{{ $item->precio }}"
+                                                                                data-id="{{ $item->id }}">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button type="button"
+                                                                            class="btn btn-sm bg-gradient-danger mt-2 mx-2"
+                                                                            onclick="eliminarServicio(this)">x</button>
+                                                                    </td>
+                                                                </tr>
+                                                            @elseif ($item->tipo == 'producto')
+                                                                <tr>
+                                                                    <td>{{ $item->nombre }}</td>
+                                                                    <td>
+                                                                        <div class="input-group input-group-outline">
+                                                                            <input type="text"
+                                                                                class="form-control cantidad-input"
+                                                                                onkeypress='validate(event)'
+                                                                                value="{{ $item->cantidad }}"
+                                                                                data-id="{{ $item->id }}">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td align="center">
+                                                                        {{ $item->precio }}
+                                                                    </td>
+                                                                    <td>
+                                                                        <button type="button"
+                                                                            class="btn btn-sm btn-danger mt-2 mx-2"
+                                                                            onclick="eliminarProducto(this)">x</button>
+                                                                    </td>
+                                                                </tr>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 </tbody>
                                             </table>
                                         </div>
@@ -269,11 +272,14 @@
                             </div>
                             <div class="card-body p-3">
                                 <div id="image-preview" class="row">
+                                    <input type="hidden" name="imagenes_eliminadas" id="imagenes_eliminadas"
+                                        value="">
                                     @foreach ($imagenes as $imagen)
-                                        <div class="col-md-4 mt-3">
+                                        <div id="imagen-{{ $imagen->id }}" class="col-md-4 mt-3">
                                             <input type="file" name="imagen[]" multiple="" id="file-input">
-                                            <button type="button" class="btn btn-info btn-sm">Subir</button>
-                                            <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
+
+                                            <button type="button" class="btn btn-danger btn-sm"
+                                                onclick="eliminarImagen({{ $imagen->id }})">Eliminar</button><br>
                                             <img class="preview-image" src="{{ asset('storage/' . $imagen->ruta) }}">
                                         </div>
                                     @endforeach
@@ -457,9 +463,18 @@
     </script>
     <script>
         var tablaElementos = [];
-        var contadorId = 1;
+        var contadorId = 0;
+        var max_id = 0;
 
         var listaPedido = JSON.parse('{!! addslashes($rep_actual[0]->lista_pedido) !!}');
+
+        listaPedido.forEach(function(item) {
+            if (item.id > contadorId) {
+                max_id = item.id;
+            }
+        });
+
+        contadorId = max_id + 1;
 
         // Recorrer la lista de pedidos y agregarlos a tablaElementos
         listaPedido.forEach(function(item) {
@@ -756,6 +771,23 @@
         }
     </script>
 
+    {{-- eliminar imagenes --}}
+    <script>
+        var imagenesEliminadas = [];
+
+        function eliminarImagen(imagenId) {
+            // Remover el elemento visualmente
+            var imagenDiv = document.getElementById('imagen-' + imagenId);
+            imagenDiv.remove();
+
+            // Agregar el ID de la imagen eliminada a la variable 'imagenesEliminadas'
+            imagenesEliminadas.push(imagenId);
+
+            // Opcionalmente, puedes agregar un campo oculto en tu formulario para enviar los IDs de las imágenes eliminadas al servidor
+            var inputEliminadas = document.getElementById('imagenes_eliminadas');
+            inputEliminadas.value = JSON.stringify(imagenesEliminadas);
+        }
+    </script>
 
     {{-- enviar imagenes --}}
     <script>

@@ -9,19 +9,20 @@
         </nav>
         <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
             <a href="javascript:;" class="nav-link text-body p-0">
-            <div class="sidenav-toggler-inner">
-            <i class="sidenav-toggler-line"></i>
-            <i class="sidenav-toggler-line"></i>
-            <i class="sidenav-toggler-line"></i>
-            </div>
+                <div class="sidenav-toggler-inner">
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                </div>
             </a>
         </div>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <div class="input-group input-group-outline">
-                    <label class="form-label">Escribe...</label>
-                    <input type="text" class="form-control">
-                </div>
+                <li class="nav-item d-flex align-items-center">
+                    <a href="{{ route('negocio') }}" class="btn btn-outline-info mb-0 me-3">
+                        <i class="material-icons">store</i> Mi Negocio
+                    </a>
+                </li>
             </div>
             <ul class="navbar-nav justify-content-end">
                 @guest
@@ -36,7 +37,8 @@
                 @else
                     <li class="nav-item d-flex align-items-center">
                         <a href="{{ route('editar_perfil', Auth::user()->idusuarios) }}"
-                            class="btn btn-outline-primary btn-sm mb-0 me-3">{{ Auth::user()->nombre }}
+                            class="btn btn-outline-primary mb-0 me-3"><i class="material-icons">face</i>
+                            {{ Auth::user()->nombre }}
                             {{ Auth::user()->apellidos }}</a>
                     </li>
                 @endguest
@@ -70,7 +72,7 @@
                             <a class="dropdown-item border-radius-md" href="javascript:;">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
-                                        <img src="{{asset('assets/img/team-2.jpg')}}" class="avatar avatar-sm  me-3 ">
+                                        <img src="{{ asset('assets/img/team-2.jpg') }}" class="avatar avatar-sm  me-3 ">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                         <h6 class="text-sm font-weight-normal mb-1">
@@ -88,7 +90,7 @@
                             <a class="dropdown-item border-radius-md" href="javascript:;">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
-                                        <img src="{{asset('assets/img/small-logos/logo-spotify.svg')}}"
+                                        <img src="{{ asset('assets/img/small-logos/logo-spotify.svg') }}"
                                             class="avatar avatar-sm bg-gradient-dark  me-3 ">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">

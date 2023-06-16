@@ -170,6 +170,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         // datatable
         Yajra\DataTables\DataTablesServiceProvider::class,
+        // dompdf
+        Barryvdh\DomPDF\ServiceProvider::class,
     ])->toArray(),
 
     /*

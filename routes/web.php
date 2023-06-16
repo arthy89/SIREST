@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\PerfilController;
 use App\Http\Controllers\Backend\LoginController;
 use App\Http\Controllers\Backend\CategoriasController;
 use App\Http\Controllers\Backend\ClientesController;
+use App\Http\Controllers\Backend\NegocioController;
 use App\Http\Controllers\Backend\ProveedorController;
 use App\Http\Controllers\Backend\VentasController;
 use App\Http\Controllers\Backend\ResumenventasController;
@@ -56,6 +57,9 @@ Route::get('/home', function () {
 // !BACKEND
 Route::get('backend/dashboard', [AdminController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 
+// !NEGOCIO
+Route::get('backend/negocio', [NegocioController::class, 'index'])->name('negocio');
+Route::put('backend/negocio/{negocio}/editar', [NegocioController::class, 'update'])->name('negocio_edit');
 
 
 //->middleware('guest')
@@ -120,6 +124,10 @@ Route::get('backend/reparaciones', [ReparacionesController::class, 'index'])->na
 Route::get('backend/reparaciones/crear', [ReparacionesController::class, 'create'])->name('reparaciones_crear_view');
 Route::post('backend/reparaciones/nuevo', [ReparacionesController::class, 'store'])->name('reparaciones_crear');
 Route::get('backend/reparaciones/{reparacion}/ver', [ReparacionesController::class, 'show'])->name('reparaciones_ver');
+Route::get('backend/reparaciones/{reparacion}/imprimir', [ReparacionesController::class, 'print'])->name('reparaciones_imprimir');
+Route::get('backend/reparaciones/{reparacion}/pdf', [ReparacionesController::class, 'pdf'])->name('reparaciones_pdf');
+Route::put('backend/reparaciones/{reparacion}/actualizar', [ReparacionesController::class, 'update'])->name('reparaciones_actualizar');
+Route::delete('backend/reparaciones/{reparacion}/eliminar', [ReparacionesController::class, 'destroy'])->name('reparaciones_eliminar');
 
 //VENTAS
 Route::get('backend/ventas', [VentasController::class, 'index', 'index2'])->name('ventas');

@@ -28,13 +28,20 @@
                                         <li class="nav-item">
                                             <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab"
                                                 href="#profile-tabs-simple" role="tab" aria-controls="profile"
+                                                aria-selected="true" id="pills-todo-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-todo" aria-selected="false">TODO
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab"
+                                                href="#profile-tabs-simple" role="tab" aria-controls="profile"
                                                 aria-selected="true" id="pills-asignar-tab" data-bs-toggle="pill"
                                                 data-bs-target="#pills-asignar" aria-selected="false">Por asignar
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link mb-0 px-0 py-1" id="pills-clientes-tab" data-bs-toggle="pill"
-                                                data-bs-target="#pills-clientes" data-bs-toggle="tab"
+                                            <a class="nav-link mb-0 px-0 py-1" id="pills-recoger-tab" data-bs-toggle="pill"
+                                                data-bs-target="#pills-recoger" data-bs-toggle="tab"
                                                 href="#dashboard-tabs-simple" role="tab" aria-controls="dashboard"
                                                 aria-selected="false">
                                                 Por recoger - Dilivery
@@ -78,19 +85,19 @@
                         </div>
                         {{-- tablas correspondientes --}}
                         <div class="tab-content shadow-dark border-radius-lg mt-4" id="pills-tabContent">
-                            {{-- PRIMER NAV asignar --}}
-                            <div class="tab-pane fade show active" id="pills-asignar" role="tabpanel"
-                                aria-labelledby="pills-asignar-tab">
+                            {{-- !TODO! --}}
+                            <div class="tab-pane fade show active" id="pills-todo" role="tabpanel"
+                                aria-labelledby="pills-todo-tab">
                                 <div class="card mb-4">
                                     <div class="d-flex">
                                         <div
-                                            class="icon icon-shape icon-lg bg-gradient-danger shadow text-center border-radius-xl mt-n3 ms-4">
-                                            <i class="material-icons opacity-10" aria-hidden="true">pending_actions</i>
+                                            class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-xl mt-n3 ms-4">
+                                            <i class="material-icons opacity-10" aria-hidden="true">table_view</i>
                                         </div>
-                                        <h6 class="mt-3 mb-2 ms-3 ">REPARACIONES POR ASIGNAR</h6>
+                                        <h6 class="mt-3 mb-2 ms-3 ">TODAS LAS REPARACIONES</h6>
                                     </div>
                                     <div class="card-body p-3">
-                                        <div class="table-responsive p-0">
+                                        <div class="p-0">
                                             <table class="table align-items-center mb-0">
                                                 <thead>
                                                     <tr>
@@ -219,14 +226,22 @@
                                                                                 Ver reparación <i
                                                                                     class="material-icons">visibility</i></a>
                                                                         </li>
-                                                                        <li><a class="dropdown-item" href="#">
+                                                                        <li><a class="dropdown-item"
+                                                                                href="{{ route('reparaciones_imprimir', $pedido->idpedido) }}">
                                                                                 Imprimir <i
                                                                                     class="material-icons">print</i></a>
                                                                         </li>
-                                                                        <li><a class="dropdown-item text-danger"
-                                                                                href="#">
-                                                                                Eliminar <i
-                                                                                    class="material-icons">delete</i></a>
+                                                                        <li>
+                                                                            <form
+                                                                                action="{{ route('reparaciones_eliminar', $pedido->idpedido) }}"
+                                                                                method="POST">
+                                                                                @csrf
+                                                                                @method('delete')
+                                                                                <button type="submit"
+                                                                                    class="dropdown-item text-danger">
+                                                                                    Eliminar <i
+                                                                                        class="material-icons">delete</i></button>
+                                                                            </form>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -235,83 +250,80 @@
                                                     @endforeach
                                                 </tbody>
                                             </table>
+                                            {{-- {{ $pedidos->links() }} --}}
+                                            <nav aria-label="Page navigation example">
+                                                <ul class="pagination justify-content-end">
+                                                    <!-- Botón "Anterior" -->
+                                                    <li
+                                                        class="page-item {{ $pedidos->previousPageUrl() ? '' : 'disabled' }}">
+                                                        <a class="page-link" href="{{ $pedidos->previousPageUrl() }}"
+                                                            tabindex="-1">
+                                                            <span class="material-icons">
+                                                                keyboard_arrow_left
+                                                            </span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                    </li>
+
+                                                    <!-- Números de página -->
+                                                    @foreach ($pedidos->getUrlRange(1, $pedidos->lastPage()) as $page => $url)
+                                                        <li
+                                                            class="page-item {{ $page == $pedidos->currentPage() ? 'active' : '' }}">
+                                                            <a class="page-link"
+                                                                href="{{ $url }}">{{ $page }}</a>
+                                                        </li>
+                                                    @endforeach
+
+                                                    <!-- Botón "Siguiente" -->
+                                                    <li class="page-item {{ $pedidos->nextPageUrl() ? '' : 'disabled' }}">
+                                                        <a class="page-link" href="{{ $pedidos->nextPageUrl() }}">
+                                                            <span class="material-icons">
+                                                                keyboard_arrow_right
+                                                            </span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </nav>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!--SEGUNDO NAV VAR CLIENTES  -->
-                            <div class="tab-pane fade" id="pills-clientes" role="tabpanel"
-                                aria-labelledby="pills-clientes-tab">
-                                <div class="card mb-4 ">
+                            {{-- ?POR ASIGNAR --}}
+                            <div class="tab-pane fade" id="pills-asignar" role="tabpanel"
+                                aria-labelledby="pills-asignar-tab">
+                                <div class="card mb-4">
                                     <div class="d-flex">
                                         <div
-                                            class="icon icon-shape icon-lg bg-gradient-info shadow text-center border-radius-xl mt-n3 ms-4">
-                                            <i class="material-icons opacity-10" aria-hidden="true">person_add</i>
+                                            class="icon icon-shape icon-lg bg-gradient-danger shadow text-center border-radius-xl mt-n3 ms-4">
+                                            <i class="material-icons opacity-10" aria-hidden="true">pending_actions</i>
                                         </div>
-                                        <h6 class="mt-3 mb-2 ms-3 ">EN PROCESO</h6>
+                                        <h6 class="mt-3 mb-2 ms-3 ">REPARACIONES POR ASIGNAR</h6>
                                     </div>
                                     <div class="card-body p-3">
-                                        <div class="table-responsive p-0">
-                                            <table class="table align-items-center mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                            Author
-                                                        </th>
-                                                        <th
-                                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                            Function</th>
-                                                        <th
-                                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                            Status</th>
-                                                        <th
-                                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                            Employed</th>
-                                                        <th class="text-secondary opacity-7"></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="d-flex px-2 py-1">
-                                                                <div>
-                                                                    <img src="../assets/img/team-2.jpg"
-                                                                        class="avatar avatar-sm me-3 border-radius-lg"
-                                                                        alt="user1">
-                                                                </div>
-                                                                <div class="d-flex flex-column justify-content-center">
-                                                                    <h6 class="mb-0 text-sm">John Michael</h6>
-                                                                    <p class="text-xs text-secondary mb-0">
-                                                                        john@creative-tim.com</p>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <p class="text-xs font-weight-bold mb-0">Manager</p>
-                                                            <p class="text-xs text-secondary mb-0">Organization</p>
-                                                        </td>
-                                                        <td class="align-middle text-center text-sm">
-                                                            <span class="badge badge-sm bg-gradient-success">Online</span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
-                                                            <span
-                                                                class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                                                        </td>
-                                                        <td class="align-middle">
-                                                            <a href="javascript:;"
-                                                                class="text-secondary font-weight-bold text-xs"
-                                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                                Edit
-                                                            </a>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                        <div class="p-0">
+                                            @livewire('backend.reparacion-live.porasignar')
                                         </div>
                                     </div>
                                 </div>
-
+                            </div>
+                            {{-- ?POR RECOGER  --}}
+                            <div class="tab-pane fade" id="pills-recoger" role="tabpanel"
+                                aria-labelledby="pills-recoger-tab">
+                                <div class="card mb-4 ">
+                                    <div class="d-flex">
+                                        <div
+                                            class="icon icon-shape icon-lg bg-gradient-warning shadow text-center border-radius-xl mt-n3 ms-4">
+                                            <i class="material-icons opacity-10" aria-hidden="true">person_add</i>
+                                        </div>
+                                        <h6 class="mt-3 mb-2 ms-3 ">POR RECOGER - DELIVERY</h6>
+                                    </div>
+                                    <div class="card-body p-3">
+                                        <div class="p-0">
+                                            @livewire('backend.reparacion-live.porrecoger')
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!--Tercer NAV VAR PRODUCTOS -->
                             <div class="tab-pane fade" id="pills-productos" role="tabpanel"
