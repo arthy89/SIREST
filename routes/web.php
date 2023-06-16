@@ -161,12 +161,12 @@ Route::post('backend/dispotivos/crear', [ReparacionesController::class, 'create_
 Route::get('ecommerce/home', [EcommerceController::class, 'home'])->name('home-client');
 
 Route::view('ecommerce/login', 'Frontend/Auth/login')->name('login-client');
-Route::post('ecommerce/login', [LoginEController::class, 'login']);
+Route::post('ecommerce/login', [LoginEController::class, 'login_cliente']);
 Route::post('ecommerce/logout', [LoginEController::class, 'logout'])->name('logout-client');
-Route::view('login', 'Backend/Auth/login')->name('login');
+Route::view('ecommerce/login', 'Backend/Auth/login')->name('login_cliente');
 ///////MODULO categorias
 Route::get('ecommerce/categorias', [CategoriasVentaController::class, 'index'])->name('ecomerce_categorias');
-Route::get('ecommerce/home/{nombre}', [CategoriasVentaController::class, 'detalles'])->name('detalles_producto');
+Route::get('ecommerce/home/{parametro1}', [CategoriasVentaController::class, 'detalles'])->name('detalles_producto');
 /////modulo ofertas
 Route::get('ecommerce/ofertas', [OfertasController::class, 'index'])->name('ofertas');
 Route::get('ecommerce/ofertas/{nombre}', [OfertasController::class, 'detalles'])->name('detalles_oferta');

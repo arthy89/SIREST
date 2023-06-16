@@ -46,7 +46,7 @@
                                     <label>Estado</label>
                                     <div class="input-group input-group-static my-0">
                                         <select class="js-example-basic-single" id="estado" name="status"
-                                            style="width: 100%" height="100px">
+                                            style="width: 100%" height="100px" required>
                                             <option value="1" selected>ACTIVO</option>
                                             <option value="0">INACTIVO</option>
                                         </select>

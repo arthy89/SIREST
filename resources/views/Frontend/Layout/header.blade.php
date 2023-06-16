@@ -31,7 +31,7 @@
                                     </li>
 
                                     <li class="has-dropdown">
-                                        <a href="{{ route('categorias') }}">Categorias <i
+                                        <a href="{{ route('ecomerce_categorias') }}">Categorias <i
                                                 class="fa fa-angle-down"></i></a>
                                         <!-- Sub Menu -->
                                         <ul class="sub-menu">
@@ -65,11 +65,12 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="{{ route('serviciotecnico') }}">Tecnico a domicilio</a>
+                                        <a href="{{ route('serviciotecnico') }}">Pedir Tecnico</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('contactanos') }}">Contactanos</a>
+                                        <a href="{{ route('contactanos') }}">Contacto</a>
                                     </li>
+
                                 </ul>
                             </nav>
                         </div>
@@ -77,23 +78,41 @@
 
                         <!-- Start Header Action Link -->
                         <ul class="header-action-link action-color--white action-hover-color--pink">
-                            <li>
+                            {{-- <li>
                                 <a href="#offcanvas-wishlish" class="offcanvas-toggle">
                                     <i class="icon-heart"></i>
                                     <span class="item-count">3</span>
                                 </a>
-                            </li>
+                            </li> --}}
+
                             <li>
                                 <a href="#offcanvas-add-cart" class="offcanvas-toggle">
                                     <i class="icon-bag"></i>
                                     <span class="item-count">3</span>
                                 </a>
                             </li>
+
                             <li>
                                 <a href="#search">
                                     <i class="icon-magnifier"></i>
                                 </a>
                             </li>
+                            @guest
+                                @if (Route::has('login_cliente'))
+                                    <li class="nav-item d-flex align-items-center">
+                                        <a href="{{ route('login_cliente') }}" class="nav-link text-body font-weight-bold px-0">
+                                            <i class="fa fa-user me-sm-1"></i>
+                                            <span class="d-sm-inline d-none">Iniciar Sesión</span>
+                                        </a>
+                                    </li>
+                                @endif
+                            @else
+                                <li class="nav-item d-flex align-items-center">
+                                    <a href="{{ route('editar_perfil', Auth::user()->idusuarios) }}"
+                                        class="btn btn-outline-primary btn-sm mb-0 me-3">{{ Auth::user()->nombre }}
+                                        {{ Auth::user()->apellidos }}</a>
+                                </li>
+                            @endguest
                             <li>
                                 <a href="#offcanvas-about" class="offacnvas offside-about offcanvas-toggle">
                                     <i class="icon-menu"></i>

@@ -7,13 +7,14 @@
                 <div class="card my-4">
                     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                         <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                            <h6 class="text-white text-capitalize ps-3">Nueva Promocion</h6>
+                            <h6 class="text-white text-capitalize ps-3">Editar Promocion</h6>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('crear_promociones') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('editar_promociones', $promocion) }}" method="POST" enctype="multipart/form-data">
 
                             @csrf
+                            @method("put")
 
                             <div class="row">
                                 @foreach ($errors->all() as $error)
@@ -21,10 +22,11 @@
                                 @endforeach
                                 {{-- nombre producto --}}
                                 <div class="col-md-6">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">Nombre de la promocion</label>
-                                        <input type="text" class="form-control" name="nombre_promocion">
+                                    <div class="input-group input-group-static mb-4">
+                                        <label>Nombre de la promocion</label>
+                                        <input type="text" value="{{$promocion->nombre_promocion}}" class="form-control" name="nombre_promocion">
                                     </div>
+
                                     @if ($errors->has('nombre_producto'))
                                         <p class="text-danger mb-0 text-sm"><em>Este campo es obligatorio</em></p>
                                     @endif
@@ -49,7 +51,7 @@
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-4">
                                         <label>Fecha Inicio</label>
-                                        <input name="fecha_inicio" type="datetime-local" class="form-control"
+                                        <input name="fecha_inicio" value="{{$promocion->fecha_inicio}}" type="datetime-local" class="form-control"
                                             onfocus="focused(this)" onfocusout="defocused(this)">
                                     </div>
                                 </div>
@@ -58,7 +60,7 @@
                                 <div class="col-md-3">
                                     <div class="input-group input-group-static mb-4">
                                         <label>Fecha Fecha Final</label>
-                                        <input name="fecha_final" type="datetime-local" class="form-control"
+                                        <input name="fecha_final" value="{{$promocion->fecha_final}}" type="datetime-local" class="form-control"
                                             onfocus="focused(this)" onfocusout="defocused(this)">
                                     </div>
                                 </div>
@@ -67,27 +69,53 @@
                                 <div class="col-md-6">
                                     <div class="input-group input-group-static mb-4">
                                         <label>Tipo de Descuento</label>
+                                        @if($promocion->tipo_descuento == 1)
+                                            <div class="form-check mb-3">
+                                                <input class="form-check-input" value="1" type="radio" name="tipo_descuento"
+                                                    id="customRadio1" checked onchange="identificarSeleccion()">
+                                                <label class="custom-control-label" for="customRadio1">Porcentaje</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" value="2" type="radio" name="tipo_descuento"
+                                                    id="customRadio2" onchange="identificarSeleccion()" name="cantidad_descuento">
+                                                <label class="custom-control-label" for="customRadio2">Monto</label>
+                                            </div>
+                                        @else
                                         <div class="form-check mb-3">
                                             <input class="form-check-input" value="1" type="radio" name="tipo_descuento"
-                                                id="customRadio1" checked onchange="identificarSeleccion()">
+                                                id="customRadio1"  onchange="identificarSeleccion()">
                                             <label class="custom-control-label" for="customRadio1">Porcentaje</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" value="2" type="radio" name="tipo_descuento"
-                                                id="customRadio2" onchange="identificarSeleccion()" name="cantidad_descuento">
+                                                id="customRadio2" checked onchange="identificarSeleccion()" name="cantidad_descuento">
                                             <label class="custom-control-label" for="customRadio2">Monto</label>
                                         </div>
+                                        @endif
+
 
                                     </div>
                                 </div>
+
                                 {{-- Descuento --}}
-                                <div class="col-md-6" id="tipo_descuento">
-                                    <label>Porcentaje de Descuento</label>
-                                    <div class="input-group input-group-dynamic mb-4">
-                                        <span class="input-group-text">%</span>
-                                        <input type="text" class="form-control" name="cantidad_descuento" value="0.01" aria-label="Amount (to the nearest dollar)">
+                                @if($promocion->tipo_descuento == 1)
+                                    <div class="col-md-6" id="tipo_descuento">
+                                        <label>Porcentaje de Descuento</label>
+                                        <div class="input-group input-group-dynamic mb-4">
+                                            <span class="input-group-text">%</span>
+                                            <input type="text" class="form-control" name="cantidad_descuento" value="{{$promocion->cantidad_descuento}}" aria-label="Amount (to the nearest dollar)">
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="col-md-6" id="tipo_descuento">
+                                        <label>Cantidad de Descuento</label>
+                                        <div class="input-group input-group-dynamic mb-4">
+                                            <span class="input-group-text">$</span>
+                                            <input type="text" class="form-control" name="cantidad_descuento" value="{{$promocion->cantidad_descuento}}" aria-label="Amount (to the nearest dollar)">
+                                        </div>
+                                    </div>
+                                @endif
+
 
                             </div>
 
@@ -97,9 +125,10 @@
                                     <div class="input-group input-group-static my-0">
                                         <select class="js-example-basic-single" id="productoid" name="productoid"
                                             style="width: 100%" height="100px">
+
                                             @foreach ($productos as $producto)
-                                                <option value="{{ $producto->idproducto }}" selected>
-                                                    {{ $producto->nombre_p }}</option>
+                                                <option value="{{ $producto->idproducto }}" selected>{{ $producto->nombre_p }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -124,6 +153,13 @@
 
 @push('custom-scripts')
     <script>
+        $(document).ready(function() {
+
+        $('.js-example-basic-single').select2();
+        // productosd
+        $('#productoid').val("{{ $promocion->idproducto }}");
+        $('#productoid').select2().trigger('change');
+        });
         $(document).ready(function() {
             $(".tokenizationSelect2").select2({
                 placeholder: "Escriba los Colores", //placeholder

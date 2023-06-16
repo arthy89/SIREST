@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Backend\Promociones\PromocionesRequest;
-use App\Models\Productos;
 use App\Models\Promociones;
+use App\Models\Productos;
 use Yajra\DataTables\DataTables;
 use DB;
 
@@ -23,7 +23,7 @@ class PromocionesController extends Controller
             ->join('producto', function ($join) {
                 $join->on('promocion.idproducto', '=', 'producto.idproducto');
             })
-                ->select('promocion.promocionid','promocion.nombre_promocion', 'promocion.fecha_inicio','promocion.fecha_final','producto.nombre_p', 'promocion.cantidad_descuento')->get();
+            ->select('promocion.nombre_promocion', 'promocion.fecha_inicio','promocion.fecha_final','producto.nombre_p','promocion.promocionid', 'promocion.cantidad_descuento')->get();
             return DataTables::of($promociones)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -45,6 +45,7 @@ class PromocionesController extends Controller
                 ->make(true);
         }
         //return $form;
+
         return view("Backend.Promociones.promocionesindex");
     }
 
@@ -56,7 +57,7 @@ class PromocionesController extends Controller
         //
         $productos = Productos::all();
         //return $productos;
-        return view("Backend.Promociones.promocionescrear",compact('productos'));
+        return view('Backend.Promociones.promocionescrear',compact('productos'));
     }
 
     /**
@@ -90,24 +91,63 @@ class PromocionesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         //
+        $promocion = Promociones::findOrFail($id);
+        $productos = Productos::all();
+        //return $promocion;
+        return view('Backend.Promociones.promocionesedit',compact('productos','promocion'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update( Request $request, Promociones $promocion, $id)
     {
-        //
+        //return $id;
+        // Validar los datos del formulario (opcional)
+
+
+        // Obtener el registro a actualizar
+        $registro = Promociones::find($id);
+        //return $request;
+        // Actualizar los campos con los valores del formulario
+        $registro->nombre_promocion = $request->input('nombre_promocion');
+        $registro->fecha_inicio = $request->input('fecha_inicio');
+        $registro->fecha_final = $request->input('fecha_final');
+        $registro->idproducto = $request->input('productoid');
+        $registro->tipo_descuento = $request->input('tipo_descuento');
+        $registro->cantidad_descuento = $request->input('cantidad_descuento');
+
+        $registro->save();
+
+            //return"logro actualizar con achivo contenido";
+        return redirect()->route('promociones')->with('actualizar', 'ok');
+        //si no contiener archivo no sobreponemos las imganes
+
+        //return redirect()->route('slider')->with('status', 'Slider actualizado correctamente!');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        // Buscar el producto por su ID
+        $promociones = Promociones::find($id);
+
+        //return $slider;
+        // Verificar si el producto existe
+        if (!$promociones) {
+            return redirect()->back()->with('eliminar', 'ok_e');
+        }
+
+        // Eliminar el producto
+        $promociones->delete();
+
+        // Redirigir a alguna vista o realizar alguna acción después de la eliminación
+        return redirect()->back()->with('eliminar', 'ok');
     }
 }

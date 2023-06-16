@@ -84,7 +84,20 @@
         </footer> --}}
     </div>
 @endsection
-@push('custom-css')
+@push('styles')
+<style>
+    @media (max-width: 767px) {
+    #registro {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    #registro th,
+    #registro td {
+        white-space: nowrap;
+    }
+}
+</style>
 
 @endpush
 @push('custom-scripts')
@@ -184,6 +197,7 @@
                     sortable: false
                 },
             ],
+            responsive: true,
             "language": {
                 "search": "Buscar",
                 "lengthMenu": "Mostrar _MENU_ registros por página",
