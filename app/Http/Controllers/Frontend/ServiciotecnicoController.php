@@ -18,9 +18,18 @@ class ServiciotecnicoController extends Controller
     public function index()
     {
         //
+        $repuestos = DB::table('producto')
+                ->select('*')
+                ->join('categoria', 'producto.categoriaid', '=', 'categoria.idcategoria')
+                ->where(function ($query) {
+                    $query->where('categoria.nombre', 'Pantallas')
+                        ->orWhere('categoria.nombre', 'Flex Carga');
+                })
+                ->get();
+
         $productos = Productos::all();
-        //return $productos;
-        return view("Frontend.Serviciotecnico.serviciotecnicoindex", compact('productos'));
+        //return $repuestos;
+        return view("Frontend.Serviciotecnico.serviciotecnicoindex", compact('productos','repuestos'));
 
     }
 

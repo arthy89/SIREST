@@ -18,9 +18,13 @@ class OfertasController extends Controller
     public function index()
     {
         //
+        $ofertas = DB::table('producto')
+                    ->select('producto.*', 'promocion.*')
+                    ->join('promocion', 'producto.idproducto', '=', 'promocion.idproducto')
+                    ->get();
         $productos = Productos::all();
-        //return $productos;
-        return view("Frontend.Ofertas.ofertasindex", compact('productos'));
+        //return $ofertas;
+        return view("Frontend.Ofertas.ofertasindex", compact('productos','ofertas'));
 
     }
     public function detalles(Request $request)

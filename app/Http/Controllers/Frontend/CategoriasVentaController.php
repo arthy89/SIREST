@@ -20,17 +20,29 @@ class CategoriasVentaController extends Controller
     {
         //
         $productos = Productos::all();
+        $categorias = Categorias::all();
+        $proveedores = Proveedores::all();
+
+        $tags = DB::table('producto')
+                ->select('tags')
+                ->distinct()
+                ->get();
         //return $productos;
-        return view("Frontend.Categoriasventa.categoriasventaindex", compact('productos'));
+        return view("Frontend.Categoriasventa.categoriasventaindex", compact('productos','categorias','proveedores','tags'));
     }
-    public function detalles(Request $request)
+    public function detalles(Request $request, $nombre)
     {
         //
-        //return $request;
+
+        $product = Productos::where('nombre_p', $nombre)->get();
+        $palabras = str_word_count($nombre, 1);
+        //return $palabras[0];
+        $productossim = Productos::where('nombre_p', 'LIKE', '%' . $palabras[0] . '%')->get();
+        //return $productosimilares;
         //$categorias = Categorias::all();
         $productos = Productos::all();
         // return $usuarios;
-        return view('Frontend.Categoriasventa.categoriadetalles', compact('productos'));
+        return view('Frontend.Categoriasventa.categoriadetalles', compact('product','productossim'));
         //return view("Frontend.Categoriasventa.categoriasventaindex");
     }
 

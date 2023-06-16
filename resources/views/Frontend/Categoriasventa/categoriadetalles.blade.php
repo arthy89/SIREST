@@ -11,7 +11,7 @@
                         <nav aria-label="breadcrumb">
                             <ul>
                                 <li><a href="{{route('home-client')}}">Home</a></li>
-                                <li><a href="{{ route('categorias') }}">ecommerce</a></li>
+                                <li><a href="{{ route('ecomerce_categorias') }}">ecommerce</a></li>
                                 <li class="active" aria-current="page">productos Detalle</li>
                             </ul>
                         </nav>
@@ -35,10 +35,10 @@
                                     role="group" aria-label="1 / 6"
                                     style="width: 715px; position: relative; overflow: hidden;">
                                     <img
-                                        src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"alt="">
+                                        src="{{$product[0]->imagen}}"alt="">
 
                                     <img role="presentation" alt=""
-                                        src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
+                                        src="{{$product[0]->imagen}}"
                                         class="zoomImg"
                                         style="position: absolute; top: 131.325px; left: 98.1119px; opacity: 0; width: 600px; height: 690px; border: none; max-width: none; max-height: none;">
                                 </div>
@@ -46,9 +46,9 @@
                                     role="group" aria-label="2 / 6"
                                     style="width: 715px; position: relative; overflow: hidden;">
                                     <img
-                                        src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"alt="">
+                                        src="{{$product[0]->imagen}}"alt="">
                                     <img role="presentation" alt=""
-                                        src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
+                                        src="{{$product[0]->imagen}}"
                                         class="zoomImg"
                                         style="position: absolute; top: -85.0532px; left: -35.4043px; opacity: 0; width: 600px; height: 690px; border: none; max-width: none; max-height: none;">
                                 </div>
@@ -56,9 +56,9 @@
                                     role="group" aria-label="3 / 6"
                                     style="width: 715px; position: relative; overflow: hidden;">
                                     <img
-                                        src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"alt="">
+                                        src="{{$product[0]->imagen}}"alt="">
                                     <img role="presentation" alt=""
-                                        src="file:///D:/Website%20Template/assets/images/product/default/home-1/default-3.jpg"
+                                        src="{{$product[0]->imagen}}"
                                         class="zoomImg"
                                         style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 600px; height: 690px; border: none; max-width: none; max-height: none;">
                                 </div>
@@ -66,9 +66,9 @@
                                     role="group" aria-label="4 / 6"
                                     style="width: 715px; position: relative; overflow: hidden;">
                                     <img
-                                        src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"alt="">
+                                    src="{{$product[0]->imagen}}"alt="">
                                     <img role="presentation" alt=""
-                                        src="file:///D:/Website%20Template/assets/images/product/default/home-1/default-4.jpg"
+                                    src="{{$product[0]->imagen}}"
                                         class="zoomImg"
                                         style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 600px; height: 690px; border: none; max-width: none; max-height: none;">
                                 </div>
@@ -76,9 +76,9 @@
                                     role="group" aria-label="5 / 6"
                                     style="width: 715px; position: relative; overflow: hidden;">
                                     <img
-                                        src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"alt="">
+                                    src="{{$product[0]->imagen}}"alt="">
                                     <img role="presentation" alt=""
-                                        src="file:///D:/Website%20Template/assets/images/product/default/home-1/default-5.jpg"
+                                    src="{{$product[0]->imagen}}"
                                         class="zoomImg"
                                         style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 600px; height: 690px; border: none; max-width: none; max-height: none;">
                                 </div>
@@ -95,69 +95,69 @@
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev"
                                     data-swiper-slide-index="2" role="group" aria-label="1 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
+                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
                                         alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active"
                                     data-swiper-slide-index="3" role="group" aria-label="2 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
+                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
                                         alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next"
                                     data-swiper-slide-index="4" role="group" aria-label="3 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
+                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
                                         alt="">
                                 </div>
 
 
                                 <div class="product-image-thumb-single swiper-slide" data-swiper-slide-index="1"
                                     role="group" aria-label="6 / 14" style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
+                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
                                         alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-prev"
                                     data-swiper-slide-index="2" role="group" aria-label="7 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
+                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
                                         alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-visible swiper-slide-active"
                                     data-swiper-slide-index="3" role="group" aria-label="8 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
+                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
                                         alt="">
                                 </div>
 
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-visible"
                                     data-swiper-slide-index="5" role="group" aria-label="10 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="assets/images/product/default/home-1/default-6.jpg"
+                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
                                         alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate swiper-slide-visible swiper-slide-thumb-active"
                                     data-swiper-slide-index="0" role="group" aria-label="11 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
+                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
                                         alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate"
                                     data-swiper-slide-index="1" role="group" aria-label="12 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="assets/images/product/default/home-1/default-2.jpg"
+                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
                                         alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev"
                                     data-swiper-slide-index="2" role="group" aria-label="13 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="assets/images/product/default/home-1/default-3.jpg"
+                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
                                         alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active"
                                     data-swiper-slide-index="3" role="group" aria-label="14 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="assets/images/product/default/home-1/default-4.jpg"
+                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
                                         alt="">
                                 </div>
                             </div>
@@ -176,7 +176,7 @@
                     <div class="product-details-content-area product-details--golden aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
                         <!-- Start  Product Details Text Area-->
                         <div class="product-details-text">
-                            <h4 class="title">Ipgone 7 plus</h4>
+                            <h4 class="title">{{$product[0]->nombre_p}}</h4>
                             <div class="d-flex align-items-center">
                                 <ul class="review-star">
                                     <li class="fill"><i class="ion-android-star"></i></li>
@@ -187,18 +187,15 @@
                                 </ul>
                                 <a href="#" class="customer-review ml-2">(customer review )</a>
                             </div>
-                            <div class="price">$80.00</div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est
-                                tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis
-                                justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id
-                                nulla.</p>
+                            <div class="price">{{$product[0]->precio_venta_public}}</div>
+                            <p>{{$product[0]->descripcion}}</p>
                         </div> <!-- End  Product Details Text Area-->
                         <!-- Start Product Variable Area -->
                         <div class="product-details-variable">
                             <h4 class="title">Sotck Disponible</h4>
                             <!-- Product Variable Single Item -->
                             <div class="variable-single-item">
-                                <div class="product-stock"> <span class="product-stock-in"><i class="ion-checkmark-circled"></i></span> 200 EN STOCK</div>
+                                <div class="product-stock"> <span class="product-stock-in"><i class="ion-checkmark-circled"></i></span> {{$product[0]->stock}} EN STOCK</div>
                             </div>
                             <!-- Product Variable Single Item -->
                             <div class="variable-single-item">
@@ -301,7 +298,7 @@
                         </ul> <!-- End Product Details Tab Button -->
 
                         <!-- Start Product Details Tab Content -->
-                        <div class="product-details-content-tab">
+                        {{-- <div class="product-details-content-tab">
                             <div class="tab-content">
                                 <!-- Start Product Details Tab Content Singel -->
                                 <div class="tab-pane show active" id="description">
@@ -508,9 +505,10 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div> <!-- End Product Details Tab Content Singel --> --}}
+                            </div> <!-- End Product Details Tab Content Singel -->
                             </div>
-                        </div> <!-- End Product Details Tab Content -->
+                        </div>  --}}
+                        <!-- End Product Details Tab Content -->
 
                     </div>
                 </div>
@@ -547,53 +545,56 @@
                                     style="transform: translate3d(0px, 0px, 0px);">
                                     <!-- End Product Default Single Item -->
                                     <!-- Start Product Default Single Item -->
-                                    <div class="product-default-single-item product-color--golden swiper-slide swiper-slide-active"
-                                        role="group" aria-label="1 / 8" style="width: 342.5px; margin-right: 30px;">
-                                        <div class="image-box">
-                                            <a href="{{ route('detalles_producto', $productos[0]->nombre_p) }}" class="image-link">
-                                                <img src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
-                                                    alt="">
-                                                <img src="{{ asset('assetsc/images/product/default/home-3/default-2.jpg') }}"
-                                                    alt="">
-                                            </a>
-                                            <div class="action-link">
-                                                <div class="action-link-left">
-                                                    <a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#modalAddcart">Add to Cart</a>
+                                    @foreach($productossim as $productosimil)
+                                        <div class="product-default-single-item product-color--golden swiper-slide swiper-slide-active"
+                                            role="group" aria-label="1 / 8" style="width: 342.5px; margin-right: 30px;">
+                                            <div class="image-box">
+                                                <a href="{{ route('detalles_producto', $productosimil->nombre_p) }}" class="image-link">
+                                                    <img src="http://sirest.test/{{$productosimil->imagen }}"
+                                                        alt="">
+                                                    <img src="{{ $productosimil->imagen }}"
+                                                        alt="">
+                                                </a>
+                                                <div class="action-link">
+                                                    <div class="action-link-left">
+                                                        <a href="#" data-bs-toggle="modal"
+                                                            data-bs-target="#modalAddcart">Add to Cart</a>
+                                                    </div>
+                                                    <div class="action-link-right">
+                                                        <a href="#" data-bs-toggle="modal"
+                                                            data-bs-target="#modalQuickview"><i
+                                                                class="icon-magnifier"></i></a>
+                                                        <a href="wishlist.html"><i class="icon-heart"></i></a>
+                                                        <a href="compare.html"><i class="icon-shuffle"></i></a>
+                                                    </div>
                                                 </div>
-                                                <div class="action-link-right">
-                                                    <a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#modalQuickview"><i
-                                                            class="icon-magnifier"></i></a>
-                                                    <a href="wishlist.html"><i class="icon-heart"></i></a>
-                                                    <a href="compare.html"><i class="icon-shuffle"></i></a>
+                                            </div>
+                                            <div class="content">
+                                                <div class="content-left">
+                                                    <h6 class="title"><a href="product-details-default.html">{{$productosimil->nombre_p}}</a></h6>
+                                                    <ul class="review-star">
+                                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                                        <li class="fill"><i class="ion-android-star"></i></li>
+                                                        <li class="empty"><i class="ion-android-star"></i></li>
+                                                    </ul>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <div class="content-left">
-                                                <h6 class="title"><a href="product-details-default.html">Epicuri per
-                                                        lobortis</a></h6>
-                                                <ul class="review-star">
-                                                    <li class="fill"><i class="ion-android-star"></i></li>
-                                                    <li class="fill"><i class="ion-android-star"></i></li>
-                                                    <li class="fill"><i class="ion-android-star"></i></li>
-                                                    <li class="fill"><i class="ion-android-star"></i></li>
-                                                    <li class="empty"><i class="ion-android-star"></i></li>
-                                                </ul>
-                                            </div>
-                                            <div class="content-right">
-                                                <span class="price">$68</span>
-                                            </div>
+                                                <div class="content-right">
+                                                    <span class="price">$ {{$productosimil->precio_venta_public}}</span>
+                                                </div>
 
+                                            </div>
                                         </div>
-                                    </div>
+
+                                    @endforeach
+
                                     <!-- End Product Default Single Item -->
                                     <!-- Start Product Default Single Item -->
                                     <div class="product-default-single-item product-color--golden swiper-slide swiper-slide-next"
                                         role="group" aria-label="2 / 8" style="width: 342.5px; margin-right: 30px;">
                                         <div class="image-box">
-                                            <a href="{{ route('detalles_producto', $productos[0]->nombre_p) }}" class="image-link">
+                                            <a href="{{ route('detalles_producto', $product[0]->nombre_p) }}" class="image-link">
                                                 <img src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
                                                     alt="">
                                                 <img src="{{ asset('assetsc/images/product/default/home-3/default-2.jpg') }}"
@@ -631,12 +632,13 @@
 
                                         </div>
                                     </div>
+                                    {{-- {{$product[0]->nombre_p}} --}}
                                     <!-- End Product Default Single Item -->
                                     <!-- Start Product Default Single Item -->
                                     <div class="product-default-single-item product-color--golden swiper-slide"
                                         role="group" aria-label="3 / 8" style="width: 342.5px; margin-right: 30px;">
                                         <div class="image-box">
-                                            <a href="{{ route('detalles_producto', $productos[0]->nombre_p) }}" class="image-link">
+                                            <a href="{{ route('detalles_producto', $product[0]->nombre_p) }}" class="image-link">
                                                 <img src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
                                                     alt="">
                                                 <img src="{{ asset('assetsc/images/product/default/home-3/default-2.jpg') }}"
@@ -679,7 +681,7 @@
                                     <div class="product-default-single-item product-color--golden swiper-slide"
                                         role="group" aria-label="4 / 8" style="width: 342.5px; margin-right: 30px;">
                                         <div class="image-box">
-                                            <a href="{{ route('detalles_producto', $productos[0]->nombre_p) }}" class="image-link">
+                                            <a href="{{ route('detalles_producto', $product[0]->nombre_p) }}" class="image-link">
                                                 <img src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
                                                     alt="">
                                                 <img src="{{ asset('assetsc/images/product/default/home-3/default-2.jpg') }}"
@@ -701,7 +703,7 @@
                                         </div>
                                         <div class="content">
                                             <div class="content-left">
-                                                <h6 class="title"><a href="{{ route('detalles_producto', $productos[0]->nombre_p) }}">Convallis quam
+                                                <h6 class="title"><a href="{{ route('detalles_producto', $product[0]->nombre_p) }}">Convallis quam
                                                         sit</a></h6>
                                                 <ul class="review-star">
                                                     <li class="fill"><i class="ion-android-star"></i></li>

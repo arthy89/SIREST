@@ -12,9 +12,9 @@ use DB;
 
 class LoginEController extends Controller
 {
-    public function login(Request $request)
+    public function login_cliente(Request $request)
     {
-        // return $request;
+        return $request;
         $remember = $request->filled('remember');
 
         if (Auth::guard('client')->attempt($request->only('email', 'password'), $remember)) {

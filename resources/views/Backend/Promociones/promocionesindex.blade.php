@@ -46,6 +46,41 @@
     </div>
 @endsection
 @push('custom-scripts')
+@if (session('eliminar') == 'ok')
+        <script>
+            Swal.fire(
+                '¡Eliminado!',
+                'Se eliminó la Categoria correctamente',
+                'success'
+            )
+        </script>
+    @endif
+    @if (session('crear')=='ok')
+        <script type="text/javascript">
+
+            Lobibox.notify('success', {
+                width: 600,
+                img: "{{asset('imgs/success.png')}}",
+                position: 'top right',
+                title: 'Registro correctamente !!',
+                msg: 'Producto Registrada.'
+            });
+
+        </script>
+    @endif
+    @if (session('actualizar')=='ok')
+        <script type="text/javascript">
+
+            Lobibox.notify('success', {
+                width: 600,
+                img: "{{asset('imgs/success.png')}}",
+                position: 'top right',
+                title: 'Actualizacion correctamente !!',
+                msg: 'Producto Actualizada.'
+            });
+
+        </script>
+    @endif
 <script>
     $(document).on('submit', '.formulario', function(e) {
             e.preventDefault();

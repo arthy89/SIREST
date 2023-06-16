@@ -169,7 +169,7 @@ class ProductosController extends Controller
     public function update(ProdActReq $request, Productos $producto)
     {
         //
-        //return $request;
+        //return $producto;
         //si conotiene archivo
         if ($request->hasFile('archivo')) {
             $a = explode('/', $producto->imagen);

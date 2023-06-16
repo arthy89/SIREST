@@ -30,56 +30,29 @@
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
                 <!-- Start Hero Single Slider Item -->
-                <div class="hero-single-slider-item swiper-slide">
-                    <!-- Hero Slider Image -->
-                    <div class="hero-slider-bg">
-                        <img src="{{ asset('assetsc/images/hero-slider/home-3/hero-slider-1.jpg') }}" alt="" />
-                    </div>
-                    <!-- Hero Slider Content -->
-                    <div class="hero-slider-wrapper">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <div class="hero-slider-content">
-                                        <h4 class="subtitle">New collection</h4>
-                                        <h1 class="title">
-                                            New Series of <br />
-                                            Degital Watch
-                                        </h1>
-                                        <a href="product-details-default.html" class="btn btn-lg btn-pink">shop now
-                                        </a>
+                @foreach ($sliders as $sliders)
+                    <div class="hero-single-slider-item swiper-slide">
+                        <!-- Hero Slider Image -->
+                        <div class="hero-slider-bg">
+                            <img src="{{ asset($sliders->imagen) }}" alt="" />
+                        </div>
+                        <!-- Hero Slider Content -->
+                        <div class="hero-slider-wrapper">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <div class="hero-slider-content">
+                                            {!! html_entity_decode($sliders->htmlcode ) !!}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- End Hero Single Slider Item -->
-                <!-- Start Hero Single Slider Item -->
-                <div class="hero-single-slider-item swiper-slide">
-                    <!-- Hero Slider Image -->
-                    <div class="hero-slider-bg">
-                        <img src="{{ asset('assetsc/images/hero-slider/home-3/hero-slider-2.jpg') }}" alt="" />
-                    </div>
-                    <!-- Hero Slider Content -->
-                    <div class="hero-slider-wrapper">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-auto">
-                                    <div class="hero-slider-content">
-                                        <h4 class="subtitle">New collection</h4>
-                                        <h1 class="title">
-                                            Best Of HiFi <br />
-                                            Loud Speaker
-                                        </h1>
-                                        <a href="product-details-default.html" class="btn btn-lg btn-pink">shop now
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <!-- End Hero Single Slider Item -->
+                    <!-- Start Hero Single Slider Item -->
+
+                @endforeach
                 <!-- End Hero Single Slider Item -->
             </div>
 
@@ -170,7 +143,7 @@
 
     <!-- Start Banner Section -->
     <div class="banner-section section-top-gap-100">
-        holsa
+
         <div class="banner-wrapper clearfix">
             <!-- Start Banner Single Item -->
             <a href="product-details-default.html">
