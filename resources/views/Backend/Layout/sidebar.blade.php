@@ -192,12 +192,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/sign-up.html">
+                <form action="{{ route('logout-admin') }}" method="POST">
+                    @csrf
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">assignment</i>
+                        <button type="submit" class="btn btn-outline-danger"><i
+                                class="material-icons opacity-10">logout</i> Cerrar Sesión</button>
                     </div>
-                    <span class="nav-link-text ms-1">Sign Up</span>
-                </a>
+
+
+                </form>
             </li>
         </ul>
     </div>
