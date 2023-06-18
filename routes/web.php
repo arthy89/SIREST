@@ -30,9 +30,12 @@ use App\Http\Controllers\Frontend\OfertasController;
 use App\Http\Controllers\Frontend\ContactanosController;
 //servicio tecnico
 use App\Http\Controllers\Frontend\ServiciotecnicoController;
-
-
+//servicio tecnico
 use App\Http\Controllers\Frontend\LoginEController;
+//servicio tecnico
+use App\Http\Controllers\Frontend\ClientesEcomController;
+
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -164,14 +167,27 @@ Route::get('/backend/dispositivos-listar', Listar::class)->name('dispositivos');
 Route::post('backend/dispotivos/crear', [ReparacionesController::class, 'create_device'])->name('create_device');
 
 // ------------------------------------------------------------------------------------------------
+// Route::view('backend/login', 'Backend/Auth/login')->name('login-admin')->middleware('guest');
+// Route::post('backend/login', [App\Http\Controllers\Backend\LoginController::class, 'login']);
+// Route::post('backend/logout', [App\Http\Controllers\Backend\LoginController::class, 'logout'])->name('logout-admin');
 
 // ?FRONTEND
 Route::get('ecommerce/home', [EcommerceController::class, 'home'])->name('home-client');
 
-Route::view('ecommerce/login', 'Frontend/Auth/login')->name('login-client');
-Route::post('ecommerce/login', [LoginEController::class, 'login_cliente']);
-Route::post('ecommerce/logout', [LoginEController::class, 'logout'])->name('logout-client');
-Route::view('ecommerce/login', 'Backend/Auth/login')->name('login_cliente');
+Route::view('ecommerce/login', 'Frontend/Auth/login')->name('login_cliente');
+//Route::view('ecommerce/regitrar', 'Frontend/Auth/registrar')->name('login-crear');
+//Route::post('ecommerce/login', [LoginEController::class, 'login_cliente']);
+Route::post('ecommerce/login', [LoginEController::class, 'login_cliente'])->name('login_cliente');
+Route::get('ecommerce/logout', [LoginEController::class, 'logout_cliente'])->name('logout-client');
+/////////////////////editar p[erfi;l] cliente
+// Route::get('backend/clientes', [ClientesController::class, 'index'])->name('clientes');
+Route::get('ecommerce/regitrar', [ClientesEcomController::class, 'create'])->name('login-crear');
+Route::post('ecommerce/regitrar', [ClientesEcomController::class, 'store'])->name('crear_ecom_clientes');
+Route::get('ecommerce/clientes/{cliente}/editar', [ClientesEcomController::class, 'edit'])->name('editar_perfil_cliente');
+Route::put('ecommerce/clientes/{cliente}/editar', [ClientesEcomController::class, 'update'])->name('editar_clientes');
+//Route::get('ecommerce/{cliente}/perfil', [PerfilclienteController::class, 'edit'])->name('editar_perfil_cliente');
+
+//Route::view('ecommerce/logincli', 'Backend/Auth/login')->name('login_cliente');
 ///////MODULO categorias
 Route::get('ecommerce/categorias', [CategoriasVentaController::class, 'index'])->name('ecomerce_categorias');
 Route::get('ecommerce/home/{parametro1}', [CategoriasVentaController::class, 'detalles'])->name('detalles_producto');
