@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <header class="header-section d-none d-xl-block">
     <div class="header-wrapper">
         <div class="header-bottom header-bottom-color--black section-fluid sticky-header sticky-color--black">
@@ -97,7 +98,30 @@
                                     <i class="icon-magnifier"></i>
                                 </a>
                             </li>
+
+                            @auth
+                                <li class="nav-item d-flex align-items-center">
+                                    <a href="" class="nav-link text-body font-weight-bold px-0">
+
+                                        <span class="d-sm-inline d-none">{{ Auth::user()->nombre }}
+                                            {{ Auth::user()->apellidos }}</span>
+                                    </a>
+                                </li>
+                                <a href="{{ route('logout-client') }}">
+                                    <i class="fa-light fa-right-from-bracket">Salir</i>
+                                </a>
+                            @endauth
+
+                            <!-- Mostrar contenido solo para usuarios no autenticados -->
                             @guest
+                            <li class="nav-item d-flex align-items-center">
+                                <a href="{{ route('login_cliente') }}" class="nav-link text-body font-weight-bold px-0">
+                                    <i class="fa fa-user me-sm-1"></i>
+                                    <span class="d-sm-inline d-none">Iniciar Sesión</span>
+                                </a>
+                            </li>
+                            @endguest
+                            {{-- @guest
                                 @if (Route::has('login_cliente'))
                                     <li class="nav-item d-flex align-items-center">
                                         <a href="{{ route('login_cliente') }}" class="nav-link text-body font-weight-bold px-0">
@@ -108,11 +132,11 @@
                                 @endif
                             @else
                                 <li class="nav-item d-flex align-items-center">
-                                    <a href="{{ route('editar_perfil', Auth::user()->idusuarios) }}"
-                                        class="btn btn-outline-primary btn-sm mb-0 me-3">{{ Auth::user()->nombre }}
-                                        {{ Auth::user()->apellidos }}</a>
+                                    <a href="{{ route('editar_perfil_cliente', Auth::user()->idpersona) }}"
+                                        class="btn btn-outline-primary btn-sm mb-0 me-3">{{ Auth::user()->nombres }}
+                                        {{ Auth::user()->apellidos }} perfin</a>
                                 </li>
-                            @endguest
+                            @endguest --}}
                             <li>
                                 <a href="#offcanvas-about" class="offacnvas offside-about offcanvas-toggle">
                                     <i class="icon-menu"></i>

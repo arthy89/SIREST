@@ -18,6 +18,9 @@
 <script src="{{ asset('assetsc/js/plugins/aos.min.j') }}s"></script>
 <script src="{{ asset('assetsc/js/plugins/jquery.instagramFeed.js') }}"></script>
 <script src="{{ asset('assetsc/js/plugins/ajax-mail.js') }}"></script>
+<!-- Libreria js para las Notificaciones -->
+<script src="{{ asset('assetsnotf/js/Lobibox.js') }}"></script>
+<script src="{{ asset('assetsnotf/js/notification-active.js') }}"></script>
 
 <!-- Use the minified version files listed below for better performance and remove the files listed above -->
 <!-- <script src="assetsc/js/vendor/vendor.min.js"></script>

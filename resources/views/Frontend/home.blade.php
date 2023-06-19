@@ -22,7 +22,15 @@
 
 @section('main-content')
     <div class="offcanvas-overlay"></div>
-
+    @if (session('status'))
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-4 my-5 ">
+                        <div class="alert alert-success text-white" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
     <!-- Start Hero Slider Section-->
     <div class="hero-slider-section">
         <!-- Slider main container -->
