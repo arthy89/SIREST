@@ -86,7 +86,7 @@
                                                     <!-- Start Product Default Single Item -->
                                                     <div class="product-default-single-item product-color--golden aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
                                                         <div class="image-box">
-                                                            <a href="product-details-default.html" class="image-link">
+                                                            <a href="{{ route('detalles_oferta', $oferta->nombre_p ) }}" class="image-link">
                                                                 <img src="http://sirest.test/{{$oferta->imagen }}" alt="">
                                                                 <img src="http://sirest.test/{{$oferta->imagen }}" alt="">
                                                             </a>
@@ -106,7 +106,7 @@
                                                         </div>
                                                         <div class="content">
                                                             <div class="content-left">
-                                                                <h6 class="title"><a href="product-details-default.html">{{$oferta->nombre_p}}</a></h6>
+                                                                <h6 class="title"><a href="#">{{$oferta->nombre_p}}</a></h6>
                                                                 <ul class="review-star">
                                                                     <li class="fill"><i class="ion-android-star"></i>
                                                                     </li>
