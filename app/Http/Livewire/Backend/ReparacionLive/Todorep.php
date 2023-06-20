@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Backend\ReparacionLive;
 
 use App\Models\Pedido;
 use Livewire\Component;
+use Livewire\WithPagination;
 
-class Enproceso extends Component
+class Todorep extends Component
 {
+    use WithPagination;
+
     public $listeners = [
         'pedidoActualizado' => 'render'
     ];
@@ -17,9 +20,9 @@ class Enproceso extends Component
             ->leftJoin('usuarios', 'pedido.usuarioid', '=', 'usuarios.idusuarios')
             ->join('dispositivo', 'pedido.id_device', '=', 'dispositivo.id_device')
             ->select('pedido.*', 'pedido.status as estado_p', 'persona.*', 'persona.apellidos as persona_apellidos', 'usuarios.*', 'usuarios.apellidos as usuario_apellidos', 'usuarios.email as usuario_email', 'dispositivo.*')
-            ->where('pedido.status', 2)
-            ->get();
-        return view('livewire.backend.reparacion-live.enproceso', [
+            ->orderBy('pedido.idpedido', 'desc')
+            ->paginate(5);
+        return view('livewire.backend.reparacion-live.todorep', [
             'pedidos' => $pedidos,
         ]);
     }

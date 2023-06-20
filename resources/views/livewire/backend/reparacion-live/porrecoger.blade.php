@@ -54,8 +54,16 @@
                         </p>
                     </td>
                     <td>
-                        <p class="text-xs font-weight-bold mb-0">Sin Asignar
-                        </p>
+                        @if ($pedido->usuarioid)
+                            <p class="text-xs font-weight-bold mb-0">
+                                {{ $pedido->nombre }}
+                            </p>
+                            <p class="text-xs text-secondary mb-0">
+                                {{ $pedido->usuario_apellidos }}</p>
+                        @else
+                            <p class="text-xs font-weight-bold mb-0">Sin Asignar
+                            </p>
+                        @endif
                     </td>
                     <td class="align-middle text-center text-sm">
                         <div class="dropdown mt-2 mb-0">
@@ -73,9 +81,9 @@
                                 <li><a wire:click="actualizarEstado({{ $pedido->idpedido }}, 3)" class="dropdown-item"
                                         href="#">Por Entregar</a></li>
                                 <li><a wire:click="actualizarEstado({{ $pedido->idpedido }}, 4)" class="dropdown-item"
-                                        href="#">Finalizado</a></li>
+                                        href="#">Rechazado</a></li>
                                 <li><a wire:click="actualizarEstado({{ $pedido->idpedido }}, 5)" class="dropdown-item"
-                                        href="#">Entregado</a></li>
+                                        href="#">Finalizado</a></li>
                             </ul>
                         </div>
                     </td>

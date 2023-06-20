@@ -177,8 +177,8 @@ Route::get('ecommerce/home', [EcommerceController::class, 'home'])->name('home-c
 Route::view('ecommerce/login', 'Frontend/Auth/login')->name('login_cliente');
 //Route::view('ecommerce/regitrar', 'Frontend/Auth/registrar')->name('login-crear');
 //Route::post('ecommerce/login', [LoginEController::class, 'login_cliente']);
-Route::post('ecommerce/login', [LoginEController::class, 'login_cliente'])->name('login_cliente');
-Route::get('ecommerce/logout', [LoginEController::class, 'logout_cliente'])->name('logout-client');
+Route::post('ecommerce/login', [LoginEController::class, 'login'])->name('login_cliente');
+Route::post('ecommerce/logout', [LoginEController::class, 'logout'])->name('logout-client');
 /////////////////////editar p[erfi;l] cliente
 // Route::get('backend/clientes', [ClientesController::class, 'index'])->name('clientes');
 Route::get('ecommerce/regitrar', [ClientesEcomController::class, 'create'])->name('login-crear');

@@ -16,15 +16,20 @@ class LoginController extends Controller
         // return $request;
         $remember = $request->filled('remember');
 
-        if (Auth::guard('web')->attempt($request->only('email', 'password'), $remember)) {
+        if (Auth::guard('web')->attempt($request->only('email', 'password'), $remember) && Auth::user()->status == 0) {
+            Auth::guard('web')->logout();
+            return redirect()->route('login-admin')->with('inactivo', '¡Su perfil está inactivo!');
+        }
+
+        if (Auth::guard('web')->attempt($request->only('email', 'password'), $remember) && Auth::user()->status == 1) {
             // $request->session()->regenerate();
             return redirect()->route('dashboard')
-            // ->intended('/')
-            ->with('status', '¡Inicio de sesión exitoso!');
+                // ->intended('/')
+                ->with('status', '¡Inicio de sesión exitoso!');
         }
 
         throw ValidationException::withMessages([
-            'email' => ('invalid')
+            'email' => ('invalid'),
         ]);
     }
 
