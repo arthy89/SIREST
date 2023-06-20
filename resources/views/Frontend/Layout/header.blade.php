@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <header class="header-section d-none d-xl-block">
     <div class="header-wrapper">
         <div class="header-bottom header-bottom-color--black section-fluid sticky-header sticky-color--black">
@@ -8,8 +9,7 @@
                         <!-- Start Header Logo -->
                         <div class="header-logo">
                             <div class="logo">
-                                <a href="#"><img src="{{ asset('imgs/ztel1.jpg') }}"
-                                        alt="" /></a>
+                                <a href="#"><img src="{{ asset('imgs/ztel1.jpg') }}" alt="" /></a>
                             </div>
                         </div>
                         <!-- End Header Logo -->
@@ -37,16 +37,19 @@
                                         <!-- Sub Menu -->
                                         <ul class="sub-menu">
                                             <li>
-                                                <a class="mega-menu-item-title" href="blog-grid-sidebar-left.html">Pantallas</a>
+                                                <a class="mega-menu-item-title"
+                                                    href="blog-grid-sidebar-left.html">Pantallas</a>
                                             </li>
                                             <li>
-                                                <a class="mega-menu-item-title" href="blog-grid-sidebar-right.html">Cargadores</a>
+                                                <a class="mega-menu-item-title"
+                                                    href="blog-grid-sidebar-right.html">Cargadores</a>
                                             </li>
                                             <li>
                                                 <a class="mega-menu-item-title" href="blog-full-width.html">Flexs</a>
                                             </li>
                                             <li>
-                                                <a class="mega-menu-item-title" href="blog-list-sidebar-left.html">Celulares</a>
+                                                <a class="mega-menu-item-title"
+                                                    href="blog-list-sidebar-left.html">Celulares</a>
                                             </li>
                                             <li>
                                                 <a href="#" class="mega-menu-item-title">Otros</a>
@@ -99,7 +102,7 @@
                                 </a>
                             </li>
 
-                            @auth
+                            {{-- @auth
                                 <li class="nav-item d-flex align-items-center">
                                     <a href="" class="nav-link text-body font-weight-bold px-0">
 
@@ -120,11 +123,13 @@
                                     <span class="d-sm-inline d-none">Iniciar Sesión</span>
                                 </a>
                             </li>
-                            @endguest
-                            {{-- @guest
+                            @endguest --}}
+
+                            @guest('client')
                                 @if (Route::has('login_cliente'))
                                     <li class="nav-item d-flex align-items-center">
-                                        <a href="{{ route('login_cliente') }}" class="nav-link text-body font-weight-bold px-0">
+                                        <a href="{{ route('login_cliente') }}"
+                                            class="nav-link text-body font-weight-bold px-0">
                                             <i class="fa fa-user me-sm-1"></i>
                                             <span class="d-sm-inline d-none">Iniciar Sesión</span>
                                         </a>
@@ -132,11 +137,11 @@
                                 @endif
                             @else
                                 <li class="nav-item d-flex align-items-center">
-                                    <a href="{{ route('editar_perfil_cliente', Auth::user()->idpersona) }}"
-                                        class="btn btn-outline-primary btn-sm mb-0 me-3">{{ Auth::user()->nombres }}
-                                        {{ Auth::user()->apellidos }} perfin</a>
+                                    <a href="{{ route('editar_perfil_cliente', Auth::guard('client')->user()->idpersona) }}"
+                                        class="btn btn-outline-primary btn-sm mb-0 me-3">{{ Auth::guard('client')->user()->nombres }}
+                                        {{ Auth::guard('client')->user()->apellidos }} perfin</a>
                                 </li>
-                            @endguest --}}
+                            @endguest
                             <li>
                                 <a href="#offcanvas-about" class="offacnvas offside-about offcanvas-toggle">
                                     <i class="icon-menu"></i>

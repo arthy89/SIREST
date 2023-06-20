@@ -25,10 +25,10 @@
                 </li>
             </div>
             <ul class="navbar-nav justify-content-end">
-                @guest
-                    @if (Route::has('login'))
+                @guest('web')
+                    @if (Route::has('login-admin'))
                         <li class="nav-item d-flex align-items-center">
-                            <a href="{{ route('login') }}" class="nav-link text-body font-weight-bold px-0">
+                            <a href="{{ route('login-admin') }}" class="nav-link text-body font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1"></i>
                                 <span class="d-sm-inline d-none">Iniciar Sesión</span>
                             </a>
@@ -36,10 +36,10 @@
                     @endif
                 @else
                     <li class="nav-item d-flex align-items-center">
-                        <a href="{{ route('editar_perfil', Auth::user()->idusuarios) }}"
+                        <a href="{{ route('editar_perfil', Auth::guard('web')->user()->idusuarios) }}"
                             class="btn btn-outline-primary mb-0 me-3"><i class="material-icons">face</i>
-                            {{ Auth::user()->nombre }}
-                            {{ Auth::user()->apellidos }}</a>
+                            {{ Auth::guard('web')->user()->nombre }}
+                            {{ Auth::guard('web')->user()->apellidos }}</a>
                     </li>
                 @endguest
 

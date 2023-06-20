@@ -90,7 +90,7 @@ class ReparacionesController extends Controller
             }
         }
 
-        return redirect()->route('reparaciones');
+        return redirect()->route('reparaciones')->with('creado', 'La reparación se registró correctamente');
     }
 
     /**
