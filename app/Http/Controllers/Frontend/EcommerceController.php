@@ -14,9 +14,12 @@ class EcommerceController extends Controller
     public function home(){
         $categorias = Categorias::all();
         $proveedores = Proveedores::all();
+        $productosrecien = Productos::orderBy('datecreated', 'DESC')
+                    ->limit(8)
+                    ->get();
         $productos = Productos::all();
         $sliders = Slider::all();
-        //return $sliders;
-        return view('Frontend.home', compact('sliders'));
+        //return $productosrecien;
+        return view('Frontend.home', compact('sliders','productosrecien'));
     }
 }
