@@ -27,7 +27,7 @@
     </style>
 @endpush
 @section('main-content')
-    <form action="{{ route('reparaciones_crear') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('reparaciones_crear') }}" method="POST" enctype="multipart/form-data" wire:ignore>
 
         @csrf
 
@@ -765,4 +765,28 @@
             }
         }
     </script>
+
+    @if ($errors->has('dispositivo'))
+        <script>
+            Lobibox.notify('error', {
+                width: 400,
+                img: "{{ asset('imgs/error.png') }}",
+                position: 'top right',
+                title: "¡ERROR DISPOSITIVO!",
+                msg: 'Seleccione un dispositivo.'
+            });
+        </script>
+    @endif
+
+    @if ($errors->has('cliente'))
+        <script>
+            Lobibox.notify('error', {
+                width: 400,
+                img: "{{ asset('imgs/error.png') }}",
+                position: 'top right',
+                title: "¡ERROR CLIENTE!",
+                msg: 'Seleccione un cliente.'
+            });
+        </script>
+    @endif
 @endpush

@@ -89,6 +89,21 @@ class VentasController extends Controller
             'fecha_venta' => now(),
         ]);
 
+        if ($request->tablaElementos) {
+            $tablaElementos = json_decode($request->tablaElementos, true);
+
+            foreach ($tablaElementos as $item) {
+                if ($item['tipo'] == 'producto' && isset($item['id_p']) && isset($item['cantidad'])) {
+                    $producto = Productos::find($item['id_p']);
+                    if ($producto) {
+                        $cantidad = intval($item['cantidad']);
+                        $producto->stock -= $cantidad;
+                        $producto->save();
+                    }
+                }
+            }
+        }
+
         return view("Backend.Ventas.ventasindex");
     }
 

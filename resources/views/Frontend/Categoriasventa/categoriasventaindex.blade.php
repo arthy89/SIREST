@@ -1,27 +1,27 @@
 @extends('Frontend.Layout.app')
 
 @section('main-content')
-{{-- <h6 class="title">{{$productos[0]->nombre_p}}</h6> --}}
-<div class="breadcrumb-section breadcrumb-bg-color--golden">
-    <div class="breadcrumb-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="breadcrumb-title">Categorias</h3>
-                    <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
-                        <nav aria-label="breadcrumb">
-                            <ul>
-                                <li><a href="http://sirest.test/ecommerce/home">Home</a></li>
-                                <li><a href="http://sirest.test/backend/categorias">ecommerce</a></li>
-                                <li class="active" aria-current="page">Categorias</li>
-                            </ul>
-                        </nav>
+    {{-- <h6 class="title">{{$productos[0]->nombre_p}}</h6> --}}
+    <div class="breadcrumb-section breadcrumb-bg-color--golden">
+        <div class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="breadcrumb-title">Categorias</h3>
+                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                            <nav aria-label="breadcrumb">
+                                <ul>
+                                    <li><a href="http://sirest.test/ecommerce/home">Home</a></li>
+                                    <li><a href="http://sirest.test/backend/categorias">ecommerce</a></li>
+                                    <li class="active" aria-current="page">Categorias</li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
     <div class="shop-section">
         <div class="container">
             <div class="row flex-column-reverse flex-lg-row">
@@ -35,7 +35,7 @@
                             <div class="sidebar-content">
                                 <ul class="sidebar-menu">
                                     @foreach ($categorias as $categoria)
-                                        <li><a href="#">{{$categoria->nombre}}</a></li>
+                                        <li><a href="#">{{ $categoria->nombre }}</a></li>
                                     @endforeach
                                     <li>
                                         <ul class="sidebar-menu-collapse">
@@ -48,7 +48,7 @@
                                                     <div id="men-fashion" class="collapse">
                                                         <ul class="accordion-category-list">
                                                             @foreach ($categorias as $categoria)
-                                                                <li><a href="#">{{$categoria->nombre}}</a></li>
+                                                                <li><a href="#">{{ $categoria->nombre }}</a></li>
                                                             @endforeach
                                                         </ul>
                                                     </div>
@@ -89,10 +89,9 @@
                                             <li>
                                                 <label class="checkbox-default" for="brakeParts">
                                                     <input type="checkbox" id="brakeParts">
-                                                    <span>{{$proveedor->nombre_proveedor}}(2)</span>
+                                                    <span>{{ $proveedor->nombre_proveedor }}(2)</span>
                                                 </label>
                                             </li>
-
                                         @endforeach
 
                                     </ul>
@@ -146,7 +145,7 @@
                             <h6 class="sidebar-title">Etiqueta de Productos</h6>
                             <div class="sidebar-content">
                                 <div class="tag-link">
-                                    {{-- @foreach(explode(',', $tags) as $tag)
+                                    {{-- @foreach (explode(',', $tags) as $tag)
                                         <span>{{ $tag }}</span>
                                     @endforeach --}}
 
@@ -164,15 +163,15 @@
                         </div> <!-- End Single Sidebar Widget -->
 
                         <!-- Start Single Sidebar Widget
-                        <div class="sidebar-single-widget">
-                            <div class="sidebar-content">
-                                <a href="product-details-default.html" class="sidebar-banner img-hover-zoom">
-                                    <img class="img-fluid"
-                                        src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
-                                        alt="">
-                                </a>
-                            </div>
-                        </div> <!-- End Single Sidebar Widget -->
+                                        <div class="sidebar-single-widget">
+                                            <div class="sidebar-content">
+                                                <a href="product-details-default.html" class="sidebar-banner img-hover-zoom">
+                                                    <img class="img-fluid"
+                                                        src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
+                                                        alt="">
+                                                </a>
+                                            </div>
+                                        </div> <!-- End Single Sidebar Widget -->
 
                     </div> <!-- End Sidebar Area -->
                 </div>
@@ -256,9 +255,10 @@
                                                         <div class="product-default-single-item product-color--golden aos-init aos-animate"
                                                             data-aos="fade-up" data-aos-delay="0">
                                                             <div class="image-box">
-                                                                <a href="{{ route('detalles_producto', $producto->nombre_p ) }}" class="image-link">
+                                                                <a href="{{ route('detalles_producto', $producto->nombre_p) }}"
+                                                                    class="image-link">
                                                                     {{-- <a href="{{ route('detalles_producto', ['parametro1' => $producto->nombre_p, 'parametro2' => $producto->idproducto]) }}" class="image-link"> --}}
-                                                                {{-- <a href="" class="image-link"> --}}
+                                                                    {{-- <a href="" class="image-link"> --}}
                                                                     <img src="{{ asset($producto->imagen) }}"
                                                                         alt="">
                                                                     <img src="{{ asset($producto->imagen) }}"
@@ -267,13 +267,15 @@
                                                                 <div class="action-link">
                                                                     <div class="action-link-left">
                                                                         <a href="#" data-bs-toggle="modal"
-                                                                            data-bs-target="#modalAddcart">Agregar Carrito</a>
+                                                                            data-bs-target="#modalAddcart">Agregar
+                                                                            Carrito</a>
                                                                     </div>
                                                                     <div class="action-link-right">
                                                                         <a href="#" data-bs-toggle="modal"
                                                                             data-bs-target="#modalQuickview"><i
                                                                                 class="icon-magnifier"></i></a>
-                                                                        <a href="wishlist.html"><i class="icon-heart"></i></a>
+                                                                        <a href="wishlist.html"><i
+                                                                                class="icon-heart"></i></a>
                                                                         <a href="compare.html"><i
                                                                                 class="icon-shuffle"></i></a>
                                                                     </div>
@@ -282,22 +284,29 @@
                                                             <div class="content">
                                                                 <div class="content-left">
                                                                     <h6 class="title"><a
-                                                                            href="product-details-default.html">{{$producto->nombre_p}}</a></h6>
+                                                                            href="product-details-default.html">{{ $producto->nombre_p }}</a>
+                                                                    </h6>
                                                                     <ul class="review-star">
-                                                                        <li class="fill"><i class="ion-android-star"></i>
+                                                                        <li class="fill"><i
+                                                                                class="ion-android-star"></i>
                                                                         </li>
-                                                                        <li class="fill"><i class="ion-android-star"></i>
+                                                                        <li class="fill"><i
+                                                                                class="ion-android-star"></i>
                                                                         </li>
-                                                                        <li class="fill"><i class="ion-android-star"></i>
+                                                                        <li class="fill"><i
+                                                                                class="ion-android-star"></i>
                                                                         </li>
-                                                                        <li class="fill"><i class="ion-android-star"></i>
+                                                                        <li class="fill"><i
+                                                                                class="ion-android-star"></i>
                                                                         </li>
-                                                                        <li class="empty"><i class="ion-android-star"></i>
+                                                                        <li class="empty"><i
+                                                                                class="ion-android-star"></i>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
                                                                 <div class="content-right">
-                                                                    <span class="price">$ {{$producto->precio_venta_public}}</span>
+                                                                    <span class="price">$
+                                                                        {{ $producto->precio_venta_public }}</span>
                                                                 </div>
 
                                                             </div>

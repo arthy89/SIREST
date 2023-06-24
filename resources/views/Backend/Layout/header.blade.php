@@ -18,13 +18,25 @@
         </div>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item d-flex align-items-center">
+                        <a href="{{ route('ventas') }}" class="btn btn-outline-danger mb-0 me-3">
+                            <i class="material-icons">add_circle</i> <i class="material-icons">point_of_sale</i> Ventas
+                        </a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center">
+                        <a href="{{ route('reparaciones_crear_view') }}" class="btn btn-outline-success mb-0 me-3">
+                            <i class="material-icons">add_circle</i> <i class="material-icons">build</i> Reparación
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="navbar-nav justify-content-end">
                 <li class="nav-item d-flex align-items-center">
                     <a href="{{ route('negocio') }}" class="btn btn-outline-info mb-0 me-3">
                         <i class="material-icons">store</i> Mi Negocio
                     </a>
                 </li>
-            </div>
-            <ul class="navbar-nav justify-content-end">
                 @guest('web')
                     @if (Route::has('login-admin'))
                         <li class="nav-item d-flex align-items-center">

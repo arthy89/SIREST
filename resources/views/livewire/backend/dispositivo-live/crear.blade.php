@@ -39,7 +39,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn bg-gradient-primary" id="boton">Guardar</button>
+                        <button type="submit" class="btn bg-gradient-primary" id="boton"
+                            wire:click.prevent="guardar_disp">Guardar</button>
                         <button type="button" class="btn btn-link  ml-auto" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
