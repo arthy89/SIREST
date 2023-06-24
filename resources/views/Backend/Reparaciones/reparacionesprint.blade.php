@@ -16,7 +16,7 @@
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-4">
-                <a class="btn bg-gradient-primary" href="#" onclick="printContent()">Imprimir</a>
+                <a class="btn bg-gradient-primary" href="" onclick="printContent()">Imprimir</a>
             </div>
             <div class="col-12">
                 <div class="card my-4">
@@ -66,7 +66,7 @@
                                         @php
                                             $numero = $rep_actual[0]->idpedido;
                                             $digitos = strlen((string) $numero);
-                                            
+
                                             if ($digitos <= 7) {
                                                 $numeroFormateado = str_pad($numero, 7, '0', STR_PAD_LEFT);
                                                 $resultado = 'REP-' . $numeroFormateado;
@@ -235,7 +235,7 @@
                                 </div>
 
                                 <div class="row justify-content-center">
-                                    <h6 class="px-3 text-center mt-6 border-top w-50">NOMBRE Y FIRMA DEL CLIENTE</h6>
+                                    <h6 class="px-3 text-center mt-8 border-top w-50">NOMBRE Y FIRMA DEL CLIENTE</h6>
                                 </div>
                             </div>
 

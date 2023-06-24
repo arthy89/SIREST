@@ -28,6 +28,7 @@ class Pedido extends Model
         'id_device',
         'imei',
         'contrasena',
+        'status',
         'patron',
         'lista_pedido',
         'prioridad',

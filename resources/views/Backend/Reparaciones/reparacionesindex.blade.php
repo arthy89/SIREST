@@ -248,8 +248,20 @@
                 width: 400,
                 img: "{{ asset('imgs/success.png') }}",
                 position: 'top right',
-                title: "CREADOOOOOOOOO",
+                title: "Reparación Registrada",
                 msg: '{{ session('creado') }}'
+            });
+        </script>
+    @endif
+
+    @if (session('actualizado'))
+        <script>
+            Lobibox.notify('success', {
+                width: 400,
+                img: "{{ asset('imgs/success.png') }}",
+                position: 'top right',
+                title: "Reparación Actualizada",
+                msg: '{{ session('actualizado') }}'
             });
         </script>
     @endif

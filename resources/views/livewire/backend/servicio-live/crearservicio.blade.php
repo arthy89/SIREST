@@ -9,7 +9,7 @@
                         <span aria-hidden="true"><i class="material-icons">cancel</i></span>
                     </button>
                 </div>
-                <form wire:submit.prevent="guardar_disp">
+                <form wire:submit.prevent="guardar_serv">
                     @csrf
                     <div class="modal-body">
 

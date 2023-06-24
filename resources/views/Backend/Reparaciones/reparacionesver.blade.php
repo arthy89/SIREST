@@ -386,8 +386,12 @@
                         <div class="col-12 mt-3">
                             <div class="row">
                                 <div class="col-12" align="center">
-                                    <button type="submit" class="btn bg-gradient-primary btn-lg w-100">Guardar
-                                        Pedido</button>
+                                    <button type="submit" class="btn bg-gradient-success btn-lg w-100">Guardar
+                                        Reparación</button>
+                                </div>
+                                <div class="col-12" align="center">
+                                    <a class="btn bg-gradient-primary btn-lg w-100"
+                                        href="{{ route('reparaciones_imprimir', $rep_actual[0]->idpedido) }}">Imprimir</a>
                                 </div>
                             </div>
                         </div>

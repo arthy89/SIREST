@@ -172,7 +172,6 @@
                                     </a>
                                 </div>
                             </div> <!-- End Single Sidebar Widget -->
-
                     </div> <!-- End Sidebar Area -->
                 </div>
                 <div class="col-lg-9">

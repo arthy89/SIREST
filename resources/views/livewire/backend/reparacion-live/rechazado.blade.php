@@ -25,7 +25,7 @@
                         <div class="d-flex px-2 py-1">
                             <div class="d-flex flex-column justify-content-center">
                                 <h6 class="mb-0 text-sm">
-                                    REP-00{{ $pedido->idpedido }}</h6>
+                                    REP-{{ str_pad($pedido->idpedido, 7, '0', STR_PAD_LEFT) }}</h6>
                                 <p class="text-xs text-secondary mb-0">
                                     {{ $pedido->nombres }}
                                     {{ $pedido->persona_apellidos }}
@@ -115,13 +115,10 @@
                                         Imprimir <i class="material-icons">print</i></a>
                                 </li>
                                 <li>
-                                    <form action="{{ route('reparaciones_eliminar', $pedido->idpedido) }}"
-                                        method="POST">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="dropdown-item text-danger">
-                                            Eliminar <i class="material-icons">delete</i></button>
-                                    </form>
+                                    <button wire:click="confirmarEliminacion({{ $pedido->idpedido }})" type="submit"
+                                        class="dropdown-item text-danger">
+                                        Eliminar <i class="material-icons">delete</i>
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -130,4 +127,40 @@
             @endforeach
         </tbody>
     </table>
+    @if (session('message'))
+        <script>
+            Lobibox.notify('success', {
+                width: 400,
+                img: "{{ asset('imgs/success.png') }}",
+                position: 'top right',
+                title: "Estado Cambiado",
+                msg: '{{ session('message') }}'
+            });
+        </script>
+    @endif
+    <script>
+        document.addEventListener('livewire:load', function() {
+            Livewire.on('confirmarEliminacion', function(data) {
+                Swal.fire({
+                    title: '¿Estás seguro de eliminar la reparación ' + data + '?',
+                    text: "¡Se eliminará la reparación!",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '¡Si, eliminar!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.emit('eliminarPedidoRechazado', data);
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'La reparación fue eliminada.',
+                            'success'
+                        );
+                    }
+                });
+            });
+        });
+    </script>
 </div>

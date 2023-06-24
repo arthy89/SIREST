@@ -9,6 +9,7 @@ use App\Models\Pedido;
 use App\Models\Dispositivo;
 use App\Models\Imagenes;
 use App\Models\Negocio;
+use App\Models\Productos;
 use App\Models\Persona;
 use App\Models\Usuarios;
 use Illuminate\Support\Facades\Storage;
@@ -55,24 +56,45 @@ class ReparacionesController extends Controller
     public function store(ReparacionRequest $request)
     {
         // return $request;
-
-        $pedido = Pedido::create([
-            'personaid' => $request->cliente,
-            'usuarioid' => $request->responsable,
-            'fecha' => now(),
-            'fecha_entrega' => $request->fecha_entrega,
-            'monto' => $request->monto,
-            'impuesto' => $request->impuesto,
-            'adelanto' => $request->adelanto,
-            'costo_envio' => $request->envio,
-            'id_device' => $request->dispositivo,
-            'imei' => $request->imei,
-            'contrasena' => $request->contra,
-            'patron' => $request->patron,
-            'lista_pedido' => $request->lista_pedido,
-            'prioridad' => $request->prioridad,
-            'descripcion' => $request->descripcion,
-        ]);
+        if ($request->responsable) {
+            $pedido = Pedido::create([
+                'personaid' => $request->cliente,
+                'usuarioid' => $request->responsable,
+                'fecha' => now(),
+                'fecha_entrega' => $request->fecha_entrega,
+                'monto' => $request->monto,
+                'impuesto' => $request->impuesto,
+                'adelanto' => $request->adelanto,
+                'costo_envio' => $request->envio,
+                'id_device' => $request->dispositivo,
+                'imei' => $request->imei,
+                'contrasena' => $request->contra,
+                'patron' => $request->patron,
+                'lista_pedido' => $request->lista_pedido,
+                'prioridad' => $request->prioridad,
+                'descripcion' => $request->descripcion,
+                'status' => 2,
+            ]);
+        } else {
+            $pedido = Pedido::create([
+                'personaid' => $request->cliente,
+                'usuarioid' => $request->responsable,
+                'fecha' => now(),
+                'fecha_entrega' => $request->fecha_entrega,
+                'monto' => $request->monto,
+                'impuesto' => $request->impuesto,
+                'adelanto' => $request->adelanto,
+                'costo_envio' => $request->envio,
+                'id_device' => $request->dispositivo,
+                'imei' => $request->imei,
+                'contrasena' => $request->contra,
+                'patron' => $request->patron,
+                'lista_pedido' => $request->lista_pedido,
+                'prioridad' => $request->prioridad,
+                'descripcion' => $request->descripcion,
+                'status' => 0,
+            ]);
+        }
 
         $imagenes = $request->file('imagen');
 
@@ -89,6 +111,22 @@ class ReparacionesController extends Controller
                 $pedido->imagenes()->save($nuevaImagen);
             }
         }
+
+        if ($request->lista_pedido) {
+            $listaPedido = json_decode($request->lista_pedido, true);
+
+            foreach ($listaPedido as $item) {
+                if ($item['tipo'] == 'producto' && isset($item['id_p']) && isset($item['cantidad'])) {
+                    $producto = Productos::find($item['id_p']);
+                    if ($producto) {
+                        $cantidad = intval($item['cantidad']);
+                        $producto->stock -= $cantidad;
+                        $producto->save();
+                    }
+                }
+            }
+        }
+
 
         return redirect()->route('reparaciones')->with('creado', 'La reparación se registró correctamente');
     }
@@ -191,7 +229,7 @@ class ReparacionesController extends Controller
         }
         // ? Actualizar imagenes / resubir
 
-        return back();
+        return redirect()->route('reparaciones')->with('actualizado', 'La reparación se actualizó correctamente');
     }
 
     /**

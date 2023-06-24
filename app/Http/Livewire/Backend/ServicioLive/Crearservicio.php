@@ -41,7 +41,7 @@ class Crearservicio extends Component
         return view('livewire.backend.servicio-live.crearservicio');
     }
 
-    public function guardar_disp()
+    public function guardar_serv()
     {
         $this->validate();
         $this->servicio->save();
