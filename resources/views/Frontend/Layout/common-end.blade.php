@@ -21,7 +21,8 @@
 <!-- Libreria js para las Notificaciones -->
 <script src="{{ asset('assetsnotf/js/Lobibox.js') }}"></script>
 <script src="{{ asset('assetsnotf/js/notification-active.js') }}"></script>
-
+{{-- carrito de compra --}}
+<script src="{{ asset('assets/js/carritocompra.js') }}"></script>
 <!-- Use the minified version files listed below for better performance and remove the files listed above -->
 <!-- <script src="assetsc/js/vendor/vendor.min.js"></script>
     <script src="assetsc/js/plugins/plugins.min.js"></script> -->

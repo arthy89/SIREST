@@ -1,4 +1,5 @@
-<div class="modal fade" id="modalQuickview" tabindex="-1" role="dialog" aria-hidden="true">
+<!-- Start Modal Quickview cart -->
+<div class="modal fade" id="modalmas" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -90,7 +91,7 @@
                             <div class="modal-product-details-content-area">
                                 <!-- Start  Product Details Text Area-->
                                 <div class="product-details-text">
-                                    <h4 class="title">Nonstick Dishwasher PFOA</h4>
+                                    <h4 class="title">Iphone 7 plusA</h4>
                                     <div class="price"><del>$70.00</del>$80.00</div>
                                 </div>
                                 <!-- End  Product Details Text Area-->
@@ -189,3 +190,4 @@
         </div>
     </div>
 </div>
+<!-- End Modal Quickview cart -->
