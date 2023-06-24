@@ -524,7 +524,7 @@
                         <div class="section-content-gap">
                             <div class="secton-content">
                                 <h3 class="section-title">PRODUCTOS RELACIONADOS</h3>
-                                <p>Explore la colección de nuestros productos relacionados</p>
+                                <p>Explore la colección de nuestros productos similares</p>
                             </div>
                         </div>
                     </div>
@@ -550,7 +550,7 @@
                                             role="group" aria-label="1 / 8" style="width: 342.5px; margin-right: 30px;">
                                             <div class="image-box">
                                                 <a href="{{ route('detalles_producto', $productosimil->nombre_p) }}" class="image-link">
-                                                    <img src="http://sirest.test/{{$productosimil->imagen }}"
+                                                    <img src="{{$productosimil->imagen }}"
                                                         alt="">
                                                     <img src="{{ $productosimil->imagen }}"
                                                         alt="">

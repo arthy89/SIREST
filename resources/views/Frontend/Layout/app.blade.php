@@ -16,6 +16,8 @@
 
     @include('Frontend.Layout.footer')
 
+
+
     @include('Frontend.Layout.common-end')
     @stack('costum-js')
 </body>

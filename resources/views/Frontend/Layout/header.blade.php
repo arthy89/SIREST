@@ -38,18 +38,18 @@
                                         <ul class="sub-menu">
                                             <li>
                                                 <a class="mega-menu-item-title"
-                                                    href="blog-grid-sidebar-left.html">Pantallas</a>
+                                                    href="#">Pantallas</a>
                                             </li>
                                             <li>
                                                 <a class="mega-menu-item-title"
-                                                    href="blog-grid-sidebar-right.html">Cargadores</a>
+                                                    href="#">Cargadores</a>
                                             </li>
                                             <li>
-                                                <a class="mega-menu-item-title" href="blog-full-width.html">Flexs</a>
+                                                <a class="mega-menu-item-title" href="#">Flexs</a>
                                             </li>
                                             <li>
                                                 <a class="mega-menu-item-title"
-                                                    href="blog-list-sidebar-left.html">Celulares</a>
+                                                    href="#">Celulares</a>
                                             </li>
                                             <li>
                                                 <a href="#" class="mega-menu-item-title">Otros</a>
@@ -82,25 +82,25 @@
 
                         <!-- Start Header Action Link -->
                         <ul class="header-action-link action-color--white action-hover-color--pink">
-                            {{-- <li>
+                            <li>
                                 <a href="#offcanvas-wishlish" class="offcanvas-toggle">
                                     <i class="icon-heart"></i>
                                     <span class="item-count">3</span>
                                 </a>
-                            </li> --}}
+                            </li>
 
                             <li>
                                 <a href="#offcanvas-add-cart" class="offcanvas-toggle">
                                     <i class="icon-bag"></i>
-                                    <span class="item-count">3</span>
+                                    <span id="numeritomovil" class="item-count">0</span>
                                 </a>
                             </li>
-
-                            <li>
+                            {{-- Habilitar cuando se incorpore la busqueda --}}
+                            {{-- <li>
                                 <a href="#search">
                                     <i class="icon-magnifier"></i>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             {{-- @auth
                                 <li class="nav-item d-flex align-items-center">
@@ -136,10 +136,10 @@
                                     </li>
                                 @endif
                             @else
-                                <li class="nav-item d-flex align-items-center">
+                                <li class="">
                                     <a href="{{ route('editar_perfil_cliente', Auth::guard('client')->user()->idpersona) }}"
-                                        class="btn btn-outline-primary btn-sm mb-0 me-3">{{ Auth::guard('client')->user()->nombres }}
-                                        {{ Auth::guard('client')->user()->apellidos }} perfin</a>
+                                        class="btn btn-outline-primary btn-xl mb-0 me-6">{{ Auth::guard('client')->user()->nombres }}
+                                        {{-- {{ Auth::guard('client')->user()->apellidos }}--}}</a>
                                 </li>
                             @endguest
                             <li>
@@ -168,7 +168,7 @@
                         <li>
                             <a href="index.html">
                                 <div class="logo">
-                                    <img src="{{ asset('assetsc/images/logo/logo_white.png') }}" alt="" />
+                                    <img src="{{ asset('imgs/ztel1.jpg') }}" alt="" />
                                 </div>
                             </a>
                         </li>
@@ -193,7 +193,7 @@
                         <li>
                             <a href="#offcanvas-add-cart" class="offcanvas-toggle">
                                 <i class="icon-bag"></i>
-                                <span class="item-count">3</span>
+                                <span  id="numerito" class="item-count">3</span>
                             </a>
                         </li>
                         <li>
@@ -228,94 +228,45 @@
             <div class="offcanvas-menu">
                 <ul>
                     <li>
-                        <a href="#"><span>Home</span></a>
-                        <ul class="mobile-sub-menu">
+                        <a href="{{ route('home-client') }}"><span>Home</span></a>
+                        {{-- <ul class="mobile-sub-menu">
                             <li><a href="index.html">Home 1</a></li>
                             <li><a href="index-2.html">Home 2</a></li>
                             <li><a href="index-3.html">Home 3</a></li>
                             <li><a href="index-4.html">Home 4</a></li>
-                        </ul>
+                        </ul> --}}
                     </li>
                     <li>
-                        <a href="#"><span>Shop</span></a>
+                        <a href="{{ route('ecomerce_categorias') }}"><span>CATEGORIA</span></a>
                         <ul class="mobile-sub-menu">
                             <li>
-                                <a href="#">Shop Layout</a>
-                                <ul class="mobile-sub-menu">
-                                    <li>
-                                        <a href="shop-grid-sidebar-left.html">Grid Left Sidebar</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-sidebar-right.html">Grid Right Sidebar</a>
-                                    </li>
-                                    <li><a href="shop-full-width.html">Full Width</a></li>
-                                    <li>
-                                        <a href="shop-list-sidebar-left.html">List Left Sidebar</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-list-sidebar-right.html">List Right Sidebar</a>
-                                    </li>
-                                </ul>
+                                <a href="">Pantallas</a>
                             </li>
                         </ul>
                         <ul class="mobile-sub-menu">
                             <li>
-                                <a href="#">Shop Pages</a>
-                                <ul class="mobile-sub-menu">
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="empty-cart.html">Empty Cart</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="compare.html">Compare</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                </ul>
+                                <a href="">Cargadores</a>
                             </li>
                         </ul>
                         <ul class="mobile-sub-menu">
                             <li>
-                                <a href="#">Product Single</a>
-                                <ul class="mobile-sub-menu">
-                                    <li>
-                                        <a href="product-details-default.html">Product Default</a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details-variable.html">Product Variable</a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details-affiliate.html">Product Referral</a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details-group.html">Product Group</a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details-single-slide.html">Product Slider</a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details-tab-left.html">Product Tab Left</a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details-tab-right.html">Product Tab Right</a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details-gallery-left.html">Product Gallery Left</a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details-gallery-right.html">Product Gallery Right</a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details-sticky-left.html">Product Sticky Left</a>
-                                    </li>
-                                    <li>
-                                        <a href="product-details-sticky-right.html">Product Sticky right</a>
-                                    </li>
-                                </ul>
+                                <a href="#">Flexs</a>
+                            </li>
+                        </ul>
+                        <ul class="mobile-sub-menu">
+                            <li>
+                                <a href="#">Celulares</a>
+                            </li>
+                        </ul>
+                        <ul class="mobile-sub-menu">
+                            <li>
+                                <a href="#">Otros</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><span>Blogs</span></a>
-                        <ul class="mobile-sub-menu">
+                        <a href="{{ route('ofertas') }}"><span>Ofertas</span></a>
+                        {{-- <ul class="mobile-sub-menu">
                             <li>
                                 <a href="#">Blog Grid</a>
                                 <ul class="mobile-sub-menu">
@@ -352,18 +303,15 @@
                                     </li>
                                 </ul>
                             </li>
-                        </ul>
+                        </ul> --}}
                     </li>
                     <li>
-                        <a href="#"><span>Pages</span></a>
-                        <ul class="mobile-sub-menu">
-                            <li><a href="faq.html">Frequently Questions</a></li>
-                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                            <li><a href="404.html">404 Page</a></li>
-                        </ul>
+                        <a href="{{ route('serviciotecnico') }}"><span>Pedir Tecnico</span></a>
+
                     </li>
-                    <li><a href="about-us.html">About Us</a></li>
-                    <li><a href="contact-us.html">Contact Us</a></li>
+
+                    <li><a href="contactanos">Contacto</a></li>
+
                 </ul>
             </div>
             <!-- End Mobile Menu Nav -->
@@ -373,14 +321,14 @@
         <!-- Start Mobile contact Info -->
         <div class="mobile-contact-info">
             <div class="logo">
-                <a href="index.html"><img src="{{ asset('assetsc/images/logo/logo_white.png') }}"
+                <a href="index.html"><img src="{{ asset('imgs/ztel1.jpg') }}"
                         alt="" /></a>
             </div>
 
             <address class="address">
-                <span>Address: Your address goes here.</span>
-                <span>Call Us: 0123456789, 0123456789</span>
-                <span>Email: demo@example.com</span>
+                <span>Address: Develop Sirest.</span>
+                <span>+51985 107 359</span>
+                <span>Email: ioelgomez2019@gmai.com</span>
             </address>
 
             <ul class="social-link">
@@ -532,7 +480,7 @@
         </div>
         <ul class="offcanvas-cart-action-button">
             <li>
-                <a href="cart.html" class="btn btn-block btn-pink">View Cart</a>
+                <a href="{{route('carrito_home')}}" class="btn btn-block btn-pink">View Cart</a>
             </li>
             <li>
                 <a href="compare.html" class="btn btn-block btn-pink mt-5">Checkout</a>
