@@ -88,7 +88,7 @@
             <!--login area start-->
 
             <!--register area start-->
-            {{-- <div class="col-lg-6 col-md-6">
+            <div class="col-lg-6 col-md-6">
                 <div class="account_form register aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
                     <h3>Registrar</h3>
 
@@ -130,7 +130,7 @@
                         </div>
                     </form>
                 </div>
-            </div> --}}
+            </div>
             <!--register area end-->
         </div>
     </div>

@@ -35,7 +35,7 @@
                             <div class="sidebar-content">
                                 <ul class="sidebar-menu">
                                     @foreach ($categorias as $categoria)
-                                        <li><a href="#">{{ $categoria->nombre }}</a></li>
+                                        <li><a href="{{route('filtro_categorias',$categoria->nombre)}}">{{ $categoria->nombre }}</a></li>
                                     @endforeach
                                     <li>
                                         <ul class="sidebar-menu-collapse">
@@ -48,7 +48,7 @@
                                                     <div id="men-fashion" class="collapse">
                                                         <ul class="accordion-category-list">
                                                             @foreach ($categorias as $categoria)
-                                                                <li><a href="#">{{ $categoria->nombre }}</a></li>
+                                                                <li><a href="{{route('filtro_categorias',$categoria->nombre)}}">{{ $categoria->nombre }}</a></li>
                                                             @endforeach
                                                         </ul>
                                                     </div>
@@ -163,16 +163,15 @@
                         </div> <!-- End Single Sidebar Widget -->
 
                         <!-- Start Single Sidebar Widget
-                                        <div class="sidebar-single-widget">
-                                            <div class="sidebar-content">
-                                                <a href="product-details-default.html" class="sidebar-banner img-hover-zoom">
-                                                    <img class="img-fluid"
-                                                        src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div> <!-- End Single Sidebar Widget -->
-
+                            <div class="sidebar-single-widget">
+                                <div class="sidebar-content">
+                                    <a href="product-details-default.html" class="sidebar-banner img-hover-zoom">
+                                        <img class="img-fluid"
+                                            src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}"
+                                            alt="">
+                                    </a>
+                                </div>
+                            </div> <!-- End Single Sidebar Widget -->
                     </div> <!-- End Sidebar Area -->
                 </div>
                 <div class="col-lg-9">
@@ -267,12 +266,13 @@
                                                                 <div class="action-link">
                                                                     <div class="action-link-left">
                                                                         <a href="#" data-bs-toggle="modal"
-                                                                            data-bs-target="#modalAddcart">Agregar
+                                                                        onclick="agregarAlCarrito(event,{{$producto}})" id="{{$producto->idproducto}}"
+                                                                            data-bs-target="#modalAddcart{{ $producto->idproducto }}">Agregar
                                                                             Carrito</a>
                                                                     </div>
                                                                     <div class="action-link-right">
                                                                         <a href="#" data-bs-toggle="modal"
-                                                                            data-bs-target="#modalQuickview"><i
+                                                                            data-bs-target="#modal{{ $producto->idproducto }}"><i
                                                                                 class="icon-magnifier"></i></a>
                                                                         <a href="wishlist.html"><i
                                                                                 class="icon-heart"></i></a>
@@ -317,259 +317,240 @@
 
                                             </div>
                                         </div> <!-- End Grid View Product -->
-                                        <!-- Start List View Product -->
-                                        <div class="tab-pane sort-layout-single" id="layout-list">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <!-- Start Product Defautlt Single -->
-                                                    <div class="product-list-single product-color--golden">
-                                                        <a href="product-details-default.html"
-                                                            class="product-list-img-link">
-                                                            <img class="img-fluid"
-                                                                src="assets/images/product/default/home-1/default-1.jpg"
-                                                                alt="">
-                                                            <img class="img-fluid"
-                                                                src="assets/images/product/default/home-1/default-1.jpg"
-                                                                alt="">
-                                                        </a>
-                                                        <div class="product-list-content">
-                                                            <h5 class="product-list-link"><a
-                                                                    href="product-details-default.html">KAOREET LOBORTIS
-                                                                    SAGIT</a></h5>
-                                                            <ul class="review-star">
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="empty"><i class="ion-android-star"></i></li>
-                                                            </ul>
-                                                            <span class="product-list-price"><del>$30.12</del>
-                                                                $25.12</span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Nobis ad, iure incidunt. Ab consequatur temporibus non
-                                                                eveniet inventore doloremque necessitatibus sed, ducimus
-                                                                quisquam, ad asperiores</p>
-                                                            <div class="product-action-icon-link-list">
-                                                                <a href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#modalAddcart"
-                                                                    class="btn btn-lg btn-black-default-hover">Add to
-                                                                    cart</a>
-                                                                <a href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#modalQuickview"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-magnifier"></i></a>
-                                                                <a href="wishlist.html"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-heart"></i></a>
-                                                                <a href="compare.html"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-shuffle"></i></a>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- End Product Defautlt Single -->
-                                                </div>
-                                                <div class="col-12">
-                                                    <!-- Start Product Defautlt Single -->
-                                                    <div class="product-list-single product-color--golden">
-                                                        <a href="product-details-default.html"
-                                                            class="product-list-img-link">
-                                                            <img class="img-fluid"
-                                                                src="assets/images/product/default/home-1/default-3.jpg"
-                                                                alt="">
-                                                            <img class="img-fluid"
-                                                                src="assets/images/product/default/home-1/default-4.jpg"
-                                                                alt="">
-                                                        </a>
-                                                        <div class="product-list-content">
-                                                            <h5 class="product-list-link"><a
-                                                                    href="product-details-default.html">CONDIMENTUM
-                                                                    POSUERE</a></h5>
-                                                            <ul class="review-star">
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="empty"><i class="ion-android-star"></i></li>
-                                                            </ul>
-                                                            <span class="product-list-price">$95.00</span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Nobis ad, iure incidunt. Ab consequatur temporibus non
-                                                                eveniet inventore doloremque necessitatibus sed, ducimus
-                                                                quisquam, ad asperiores</p>
-                                                            <div class="product-action-icon-link-list">
-                                                                <a href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#modalAddcart"
-                                                                    class="btn btn-lg btn-black-default-hover">Add to
-                                                                    cart</a>
-                                                                <a href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#modalQuickview"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-magnifier"></i></a>
-                                                                <a href="wishlist.html"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-heart"></i></a>
-                                                                <a href="compare.html"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-shuffle"></i></a>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- End Product Defautlt Single -->
-                                                </div>
-                                                <div class="col-12">
-                                                    <!-- Start Product Defautlt Single -->
-                                                    <div class="product-list-single product-color--golden">
-                                                        <a href="product-details-default.html"
-                                                            class="product-list-img-link">
-                                                            <img src="{{ asset('assetsc/images/product/default/home-3/default-3.jpg') }}"
-                                                                alt="" />
-                                                            <img src="{{ asset('assetsc/images/product/default/home-3/default-5.jpg') }}"
-                                                                alt="" />
-                                                        </a>
-                                                        <div class="product-list-content">
-                                                            <h5 class="product-list-link"><a
-                                                                    href="product-details-default.html">ALIQUAM
-                                                                    LOBORTIS</a></h5>
-                                                            <ul class="review-star">
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="empty"><i class="ion-android-star"></i></li>
-                                                            </ul>
-                                                            <span class="product-list-price"> $25.12</span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Nobis ad, iure incidunt. Ab consequatur temporibus non
-                                                                eveniet inventore doloremque necessitatibus sed, ducimus
-                                                                quisquam, ad asperiores</p>
-                                                            <div class="product-action-icon-link-list">
-                                                                <a href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#modalAddcart"
-                                                                    class="btn btn-lg btn-black-default-hover">Add to
-                                                                    cart</a>
-                                                                <a href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#modalQuickview"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-magnifier"></i></a>
-                                                                <a href="wishlist.html"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-heart"></i></a>
-                                                                <a href="compare.html"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-shuffle"></i></a>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- End Product Defautlt Single -->
-                                                </div>
-                                                <div class="col-12">
-                                                    <!-- Start Product Defautlt Single -->
-                                                    <div class="product-list-single product-color--golden">
-                                                        <a href="product-details-default.html"
-                                                            class="product-list-img-link">
-                                                            <img src="{{ asset('assetsc/images/product/default/home-3/default-3.jpg') }}"
-                                                                alt="" />
-                                                            <img src="{{ asset('assetsc/images/product/default/home-3/default-5.jpg') }}"
-                                                                alt="" />
-                                                        </a>
-                                                        <div class="product-list-content">
-                                                            <h5 class="product-list-link"><a
-                                                                    href="product-details-default.html">CONVALLIS QUAM
-                                                                    SIT</a></h5>
-                                                            <ul class="review-star">
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="empty"><i class="ion-android-star"></i></li>
-                                                            </ul>
-                                                            <span class="product-list-price">$75.00 - $85.00</span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Nobis ad, iure incidunt. Ab consequatur temporibus non
-                                                                eveniet inventore doloremque necessitatibus sed, ducimus
-                                                                quisquam, ad asperiores</p>
-                                                            <div class="product-action-icon-link-list">
-                                                                <a href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#modalAddcart"
-                                                                    class="btn btn-lg btn-black-default-hover">Add to
-                                                                    cart</a>
-                                                                <a href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#modalQuickview"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-magnifier"></i></a>
-                                                                <a href="wishlist.html"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-heart"></i></a>
-                                                                <a href="compare.html"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-shuffle"></i></a>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- End Product Defautlt Single -->
-                                                </div>
-                                                <div class="col-12">
-                                                    <!-- Start Product Defautlt Single -->
-                                                    <div class="product-list-single product-color--golden">
-                                                        <a href="product-details-default.html"
-                                                            class="product-list-img-link">
-                                                            <img src="{{ asset('assetsc/images/product/default/home-3/default-3.jpg') }}"
-                                                                alt="" />
-                                                            <img src="{{ asset('assetsc/images/product/default/home-3/default-5.jpg') }}"
-                                                                alt="" />
-                                                        </a>
-                                                        <div class="product-list-content">
-                                                            <h5 class="product-list-link"><a
-                                                                    href="product-details-default.html">DONEC EU LIBERO
-                                                                    AC</a></h5>
-                                                            <ul class="review-star">
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="fill"><i class="ion-android-star"></i></li>
-                                                                <li class="empty"><i class="ion-android-star"></i></li>
-                                                            </ul>
-                                                            <span class="product-list-price"><del>$25.12</del>
-                                                                $20.00</span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Nobis ad, iure incidunt. Ab consequatur temporibus non
-                                                                eveniet inventore doloremque necessitatibus sed, ducimus
-                                                                quisquam, ad asperiores</p>
-                                                            <div class="product-action-icon-link-list">
-                                                                <a href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#modalAddcart"
-                                                                    class="btn btn-lg btn-black-default-hover">Add to
-                                                                    cart</a>
-                                                                <a href="#" data-bs-toggle="modal"
-                                                                    data-bs-target="#modalQuickview"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-magnifier"></i></a>
-                                                                <a href="wishlist.html"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-heart"></i></a>
-                                                                <a href="compare.html"
-                                                                    class="btn btn-lg btn-black-default-hover"><i
-                                                                        class="icon-shuffle"></i></a>
-                                                            </div>
-                                                        </div>
-                                                    </div> <!-- End Product Defautlt Single -->
-                                                </div>
-                                            </div>
-                                        </div> <!-- End List View Product -->
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div> <!-- End Tab Wrapper -->
+                    {{-- <ul class="pagination justify-content-end">
+                        <!-- Botón "Anterior" -->
+                        <li class="page-item {{ $productos->previousPageUrl() ? '' : 'disabled' }}">
+                            <a class="page-link" wire:click="previousPage" tabindex="-1">
+                                <span class="material-icons">
+                                    keyboard_arrow_left
+                                </span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
 
-                    <!-- Start Pagination -->
+                        <!-- Números de página -->
+                        @for ($page = 1; $page <= $productos->lastPage(); $page++)
+                            <li class="page-item {{ $page == $productos->currentPage() ? 'active' : '' }}">
+                                <a class="page-link" wire:click="gotoPage({{ $page }})">{{ $page }}</a>
+                            </li>
+                        @endfor
+
+                        <!-- Botón "Siguiente" -->
+                        <li class="page-item {{ $productos->nextPageUrl() ? '' : 'disabled' }}">
+                            <a class="page-link" wire:click="nextPage">
+                                <span class="material-icons">
+                                    keyboard_arrow_right
+                                </span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul> --}}
                     <div class="page-pagination text-center aos-init" data-aos="fade-up" data-aos-delay="0">
+                    @if ($productos->hasPages())
+                        <ul >
+                            {{-- Enlace "anterior" --}}
+                            @if ($productos->onFirstPage())
+                                <li class="disabled"><span>&laquo;</span></li>
+                            @else
+                                <li><a href="{{ $productos->previousPageUrl() }}" rel="prev">&laquo;</a></li>
+                            @endif
+
+                            {{-- Elementos de la paginación --}}
+                            @foreach ($productos->getUrlRange(1, $productos->lastPage()) as $page => $url)
+                                @if ($page == $productos->currentPage())
+                                    <li ><a class="active" >{{ $page }}</a></li>
+                                @else
+                                    <li><a  href="{{ $url }}">{{ $page }}</a></li>
+                                @endif
+                            @endforeach
+
+                            {{-- Enlace "siguiente" --}}
+                            @if ($productos->hasMorePages())
+                                <li ><a href="{{ $productos->nextPageUrl() }}" rel="next"  >&raquo;</a></li>
+                            @else
+                                <li class="disabled"><span>&raquo;</span></li>
+                            @endif
+                        </ul>
+                    @endif
+                    </div>
+                    <!-- Start Pagination -->
+                    {{-- <div class="page-pagination text-center aos-init" data-aos="fade-up" data-aos-delay="0">
                         <ul>
-                            <li><a class="active" href="#">1</a></li>
+                            {{ $productos->links() }}
                             <li><a href="#">2</a></li>
                             <li><a href="#">3</a></li>
                             <li><a href="#"><i class="ion-ios-skipforward"></i></a></li>
                         </ul>
-                    </div> <!-- End Pagination -->
+                    </div> --}}
+                    <!-- End Pagination -->
                 </div>
             </div>
         </div>
     </div>
+    {{-- modal --}}
+    @foreach ($productos as $producto)
+        <div class="modal fade" id="modal{{ $producto->idproducto }}" tabindex="-1" role="dialog"
+            aria-labelledby="modal{{ $producto->idproducto }}Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    {{-- Hola{{ $producto->idproducto }} --}}
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="product-details-gallery-area mb-7">
+                                        <!-- Start Large Image -->
+                                        <div class="product-large-image  swiper-container">
+                                            <div class="swiper-wrapper">
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $producto->imagen }}" alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $producto->imagen }}" alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $producto->imagen }}" alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $producto->imagen }}" alt="" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- End Large Image -->
+                                        <!-- Start Thumbnail Image -->
+
+                                        <!-- End Thumbnail Image -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="modal-product-details-content-area">
+                                        <!-- Start  Product Details Text Area-->
+                                        <div class="product-details-text">
+                                            <h4 class="title">{{ $producto->nombre_p }}</h4>
+                                            <div class="price">$ {{ $producto->precio_venta_public }}</div>
+                                        </div>
+                                        <!-- End  Product Details Text Area-->
+                                        <!-- Start Product Variable Area -->
+                                        <div class="product-details-variable">
+                                            <!-- Product Variable Single Item -->
+                                            <div class="variable-single-item">
+                                                <span>Colores disponibles</span>
+                                                <div class="product-variable-color">
+                                                    <label for="modal-product-color-red">
+                                                        <input name="modal-product-color" id="modal-product-color-red"
+                                                            class="color-select" type="radio" checked />
+                                                        <span class="product-color-red"></span>
+                                                    </label>
+                                                    <label for="modal-product-color-tomato">
+                                                        <input name="modal-product-color" id="modal-product-color-tomato"
+                                                            class="color-select" type="radio" />
+                                                        <span class="product-color-tomato"></span>
+                                                    </label>
+                                                    <label for="modal-product-color-green">
+                                                        <input name="modal-product-color" id="modal-product-color-green"
+                                                            class="color-select" type="radio" />
+                                                        <span class="product-color-green"></span>
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!-- Product Variable Single Item -->
+                                            <div class="d-flex align-items-center flex-wrap">
+                                                <div class="variable-single-item">
+                                                    <span>Stock</span>
+                                                    <div class="product-variable-quantity">
+                                                        <input min="1" max="100" value="1"
+                                                            type="number" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-add-to-cart-btn">
+                                                    <a onclick="agregarAlCarrito(event,{{$producto}})" id="{{$producto->idproducto}}" href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#modalAddcart">Agregar Carrito</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Product Variable Area -->
+                                        <div class="modal-product-about-text">
+                                            <p>
+                                                {{ $producto->descripcion }}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- modal para carrito --}}
+        <div class="modal fade"  id="modalAddcart{{ $producto->idproducto }}" tabindex="-1" role="dialog"
+            aria-labelledby="modal{{ $producto->idproducto }}Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button type="button" class="close modal-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="modal-add-cart-product-img">
+                                                <img class="img-fluid" src="{{$producto->imagen}}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="modal-add-cart-info">
+                                                <i class="fa fa-check-square"></i>Added to cart
+                                                successfully!
+                                            </div>
+                                            <div class="modal-add-cart-product-cart-buttons">
+                                                <a href="cart.html">View Cart</a>
+                                                <a href="checkout.html">Checkout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 modal-border">
+                                    <ul class="modal-add-cart-product-shipping-info">
+                                        <li>
+                                            <strong><i class="icon-shopping-cart"></i> There Are 5 Items In
+                                                Your Cart.</strong>
+                                        </li>
+                                        <li><strong>TOTAL PRICE: </strong> <span>$187.00</span></li>
+                                        <li class="modal-continue-button">
+                                            <a href="#" data-bs-dismiss="modal">CONTINUE SHOPPING</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection

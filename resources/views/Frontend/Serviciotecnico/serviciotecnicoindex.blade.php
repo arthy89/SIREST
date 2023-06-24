@@ -93,7 +93,9 @@
                                                             </a>
                                                             <div class="action-link">
                                                                 <div class="action-link-left">
-                                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">Pedir Tecnico</a>
+                                                                    <a href="#" data-bs-toggle="modal"
+                                                            data-bs-target="#modal{{ $repuesto->idproducto }}"><i
+                                                                class="icon-magnifier"></i></a>
                                                                 </div>
                                                                 <div class="action-link-right">
                                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickview"><i class="icon-magnifier"></i></a>
@@ -416,6 +418,116 @@
         </div>
     </div>
 </div>
+@foreach($repuestos as $repuesto)
+        <div class="modal fade" id="modal{{ $repuesto->idproducto }}" tabindex="-1" role="dialog"
+            aria-labelledby="modal{{ $repuesto->idproducto }}Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    {{-- Hola{{ $repuesto }} --}}
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="product-details-gallery-area mb-7">
+                                        <!-- Start Large Image -->
+                                        <div class="product-large-image  swiper-container">
+                                            <div class="swiper-wrapper">
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $repuesto->imagen}}"
+                                                        alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $repuesto->imagen}}"
+                                                        alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $repuesto->imagen}}"
+                                                        alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $repuesto->imagen}}"
+                                                        alt="" />
+                                                </div>
 
+                                            </div>
+                                        </div>
+                                        <!-- End Large Image -->
+                                        <!-- Start Thumbnail Image -->
+
+                                        <!-- End Thumbnail Image -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="modal-product-details-content-area">
+                                        <!-- Start  Product Details Text Area-->
+                                        <div class="product-details-text">
+                                            <h4 class="title">{{$repuesto->nombre_p}}</h4>
+                                            <div class="price">$ {{$repuesto->precio_venta_public}}</div>
+                                        </div>
+                                        <!-- End  Product Details Text Area-->
+                                        <!-- Start Product Variable Area -->
+                                        <div class="product-details-variable">
+                                            <!-- Product Variable Single Item -->
+                                            <div class="variable-single-item">
+                                                <span>Colores disponibles</span>
+                                                <div class="product-variable-color">
+                                                    <label for="modal-product-color-red">
+                                                        <input name="modal-product-color" id="modal-product-color-red"
+                                                            class="color-select" type="radio" checked />
+                                                        <span class="product-color-red"></span>
+                                                    </label>
+                                                    <label for="modal-product-color-tomato">
+                                                        <input name="modal-product-color" id="modal-product-color-tomato"
+                                                            class="color-select" type="radio" />
+                                                        <span class="product-color-tomato"></span>
+                                                    </label>
+                                                    <label for="modal-product-color-green">
+                                                        <input name="modal-product-color" id="modal-product-color-green"
+                                                            class="color-select" type="radio" />
+                                                        <span class="product-color-green"></span>
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!-- Product Variable Single Item -->
+                                            <div class="d-flex align-items-center flex-wrap">
+                                                <div class="variable-single-item">
+                                                    <span>Stock</span>
+                                                    <div class="product-variable-quantity">
+                                                        <input min="1" max="100" value="1"
+                                                            type="number" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-add-to-cart-btn">
+                                                    <a onclick="agregarAlCarrito(event,{{$repuesto}})" id="{{$repuesto->idproducto}}" href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#modalAddcart">Agregar Carrito</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Product Variable Area -->
+                                        <div class="modal-product-about-text">
+                                            <p>
+                                                {{$repuesto->descripcion}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
 @endsection

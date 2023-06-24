@@ -30,8 +30,8 @@ class ProdActReq extends FormRequest
             'precio_mayoreo' => 'required',
             'precio_publico' => 'required',
             'descripcion' => 'required',
-            'colores' => 'requiered',
-            'tags' => 'requiered'
+            'colores' => 'required',
+            'tags' => 'required'
 
         ];
     }

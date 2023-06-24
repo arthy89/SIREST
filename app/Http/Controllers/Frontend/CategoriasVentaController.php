@@ -19,7 +19,8 @@ class CategoriasVentaController extends Controller
     public function index()
     {
         //
-        $productos = Productos::all();
+        $productos = Productos::paginate(9);
+        //return $productos;
         $categorias = Categorias::all();
         $proveedores = Proveedores::all();
 
@@ -44,6 +45,20 @@ class CategoriasVentaController extends Controller
         // return $usuarios;
         return view('Frontend.Categoriasventa.categoriadetalles', compact('product','productossim'));
         //return view("Frontend.Categoriasventa.categoriasventaindex");
+    }
+    public function filtrocategorias(Request $request, $nombre){
+        $productos = Productos::select('producto.*')
+            ->join('categoria', 'categoria.idcategoria', '=', 'producto.categoriaid')
+            ->where('categoria.nombre', '=', $nombre)
+            ->paginate(9);
+        $categorias = Categorias::all();
+        $proveedores = Proveedores::all();
+        $tags = DB::table('producto')
+                ->select('tags')
+                ->distinct()
+                ->get();
+        //return $resultado;
+        return view("Frontend.Categoriasventa.categoriasventaindex", compact('productos','categorias','proveedores','tags'));
     }
 
     /**

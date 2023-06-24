@@ -34,6 +34,8 @@ use App\Http\Controllers\Frontend\ServiciotecnicoController;
 use App\Http\Controllers\Frontend\LoginEController;
 //servicio tecnico
 use App\Http\Controllers\Frontend\ClientesEcomController;
+//servicio tecnico
+use App\Http\Controllers\Frontend\CarritoController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -189,8 +191,10 @@ Route::put('ecommerce/clientes/{cliente}/editar', [ClientesEcomController::class
 
 //Route::view('ecommerce/logincli', 'Backend/Auth/login')->name('login_cliente');
 ///////MODULO categorias
+//Route::get('ecommerce/{name}', [CategoriasVentaController::class, 'filtrocategorias'])->name('filtro_categorias');
 Route::get('ecommerce/categorias', [CategoriasVentaController::class, 'index'])->name('ecomerce_categorias');
-Route::get('ecommerce/home/{parametro1}', [CategoriasVentaController::class, 'detalles'])->name('detalles_producto');
+Route::get('ecommerce/detalle/{parametro1}', [CategoriasVentaController::class, 'detalles'])->name('detalles_producto');
+Route::get('ecommerce/categorias/fitro/{name}', [CategoriasVentaController::class, 'filtrocategorias'])->name('filtro_categorias');
 /////modulo ofertas
 Route::get('ecommerce/ofertas', [OfertasController::class, 'index'])->name('ofertas');
 Route::get('ecommerce/ofertas/{nombre}', [OfertasController::class, 'detalles'])->name('detalles_oferta');
@@ -200,3 +204,7 @@ Route::get('ecommerce/contactanos', [ContactanosController::class, 'index'])->na
 
 //servicio tecnico
 Route::get('ecommerce/serviciot', [ServiciotecnicoController::class, 'index'])->name('serviciotecnico');
+/// carrito de compras
+Route::get('ecommerce/carrito', [CarritoController::class, 'index'])->name('carrito_home');
+
+

@@ -86,19 +86,22 @@
                                                     <!-- Start Product Default Single Item -->
                                                     <div class="product-default-single-item product-color--golden aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
                                                         <div class="image-box">
-                                                            <a href="{{ route('detalles_oferta', $oferta->nombre_p ) }}" class="image-link">
-                                                                <img src="http://sirest.test/{{$oferta->imagen }}" alt="">
-                                                                <img src="http://sirest.test/{{$oferta->imagen }}" alt="">
+                                                            <a href="{{ route('detalles_oferta', $oferta->nombre_p, ) }}" class="image-link">
+                                                                <img src="{{$oferta->imagen }}" alt="">
+                                                                <img src="{{$oferta->imagen }}" alt="">
                                                             </a>
                                                             <div  class="tag">
                                                                 <span style="background-color:#ff365d">Oferta</span>
                                                             </div>
                                                             <div class="action-link">
                                                                 <div class="action-link-left">
-                                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">Agregar Carrito</a>
+                                                                    <a onclick="agregarAlCarrito(event,{{$oferta}})" id="{{$oferta->idproducto}}" href="#" data-bs-toggle="modal"
+                                                                        data-bs-target="#modalAddcart{{ $oferta->idproducto }}">Agregar Carrito</a>
                                                                 </div>
                                                                 <div class="action-link-right">
-                                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickview"><i class="icon-magnifier"></i></a>
+                                                                    <a href="#" data-bs-toggle="modal"
+                                                                            data-bs-target="#modal{{ $oferta->idproducto }}"><i
+                                                                                class="icon-magnifier"></i></a>
                                                                     <a href="wishlist.html"><i class="icon-heart"></i></a>
                                                                     <a href="compare.html"><i class="icon-shuffle"></i></a>
                                                                 </div>
@@ -121,7 +124,25 @@
                                                                 </ul>
                                                             </div>
                                                             <div class="content-right">
-                                                                <span class="price"><del>$ {{$oferta->precio_venta_public}}</del> $ 80.00</span>
+                                                                {{-- <span class="price">{{ $prorecien->precio_venta_public }}</span> --}}
+                                                                <span class=""><del>$ {{$oferta->precio_venta_public}}</del>
+                                                                    <h5>
+                                                                        <strong>$
+                                                                            <span class="price">
+                                                                                @if($oferta->tipo_descuento == 1)
+                                                                                    {{$oferta->precio_venta_public*$oferta->cantidad_descuento/100}}
+                                                                                @else
+                                                                                    {{$oferta->precio_venta_public - $oferta->cantidad_descuento}}
+                                                                                @endif
+                                                                            </span>
+
+                                                                        </strong>
+                                                                    </h5>
+
+                                                                    {{-- {{$oferta->cantidad_descuento}} --}}
+                                                                    {{-- $ 80.00 --}}
+
+                                                                </span>
                                                             </div>
 
                                                         </div>
@@ -307,18 +328,198 @@
                 </div> <!-- End Tab Wrapper -->
 
                 <!-- Start Pagination -->
-                <div class="page-pagination text-center aos-init aos-animate" data-aos="fade-up" data-aos-delay="0">
-                    <ul>
-                        <li><a class="active" href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="ion-ios-skipforward"></i></a></li>
-                    </ul>
-                </div> <!-- End Pagination -->
+                <div class="page-pagination text-center aos-init" data-aos="fade-up" data-aos-delay="0">
+                    @if ($ofertas->hasPages())
+                        <ul >
+                            {{-- Enlace "anterior" --}}
+                            @if ($ofertas->onFirstPage())
+                                <li class="disabled"><span>&laquo;</span></li>
+                            @else
+                                <li><a href="{{ $ofertas->previousPageUrl() }}" rel="prev">&laquo;</a></li>
+                            @endif
+
+                            {{-- Elementos de la paginación --}}
+                            @foreach ($ofertas->getUrlRange(1, $ofertas->lastPage()) as $page => $url)
+                                @if ($page == $ofertas->currentPage())
+                                    <li ><a class="active" >{{ $page }}</a></li>
+                                @else
+                                    <li><a  href="{{ $url }}">{{ $page }}</a></li>
+                                @endif
+                            @endforeach
+
+                            {{-- Enlace "siguiente" --}}
+                            @if ($ofertas->hasMorePages())
+                                <li ><a href="{{ $ofertas->nextPageUrl() }}" rel="next"  >&raquo;</a></li>
+                            @else
+                                <li class="disabled"><span>&raquo;</span></li>
+                            @endif
+                        </ul>
+                    @endif
+                    </div>
+                <!-- End Pagination -->
             </div> <!-- End Shop Product Sorting Section  -->
         </div>
     </div>
 </div>
+@foreach ($ofertas as $oferta)
+        <div class="modal fade" id="modal{{ $oferta->idproducto }}" tabindex="-1" role="dialog"
+            aria-labelledby="modal{{ $oferta->idproducto }}Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    {{-- Hola{{ $producto->idproducto }} --}}
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="product-details-gallery-area mb-7">
+                                        <!-- Start Large Image -->
+                                        <div class="product-large-image  swiper-container">
+                                            <div class="swiper-wrapper">
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $oferta->imagen }}" alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $oferta->imagen }}" alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $oferta->imagen }}" alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $oferta->imagen }}" alt="" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- End Large Image -->
+                                        <!-- Start Thumbnail Image -->
+
+                                        <!-- End Thumbnail Image -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="modal-product-details-content-area">
+                                        <!-- Start  Product Details Text Area-->
+                                        <div class="product-details-text">
+                                            <h4 class="title">{{ $oferta->nombre_p }}</h4>
+                                            <div class="price">$ {{ $oferta->precio_venta_public }}</div>
+                                        </div>
+                                        <!-- End  Product Details Text Area-->
+                                        <!-- Start Product Variable Area -->
+                                        <div class="product-details-variable">
+                                            <!-- Product Variable Single Item -->
+                                            <div class="variable-single-item">
+                                                <span>Colores disponibles</span>
+                                                <div class="product-variable-color">
+                                                    <label for="modal-product-color-red">
+                                                        <input name="modal-product-color" id="modal-product-color-red"
+                                                            class="color-select" type="radio" checked />
+                                                        <span class="product-color-red"></span>
+                                                    </label>
+                                                    <label for="modal-product-color-tomato">
+                                                        <input name="modal-product-color" id="modal-product-color-tomato"
+                                                            class="color-select" type="radio" />
+                                                        <span class="product-color-tomato"></span>
+                                                    </label>
+                                                    <label for="modal-product-color-green">
+                                                        <input name="modal-product-color" id="modal-product-color-green"
+                                                            class="color-select" type="radio" />
+                                                        <span class="product-color-green"></span>
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!-- Product Variable Single Item -->
+                                            <div class="d-flex align-items-center flex-wrap">
+                                                <div class="variable-single-item">
+                                                    <span>Stock</span>
+                                                    <div class="product-variable-quantity">
+                                                        <input min="1" max="100" value="1"
+                                                            type="number" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-add-to-cart-btn">
+                                                    <a onclick="agregarAlCarrito(event,{{$oferta}})" id="{{$oferta->idproducto}}" href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#modalAddcart{{ $oferta->idproducto }}">Agregar Carrito</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Product Variable Area -->
+                                        <div class="modal-product-about-text">
+                                            <p>
+                                                {{ $oferta->descripcion }}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- modal para carrito --}}
+        <div class="modal fade"  id="modalAddcart{{ $oferta->idproducto }}" tabindex="-1" role="dialog"
+            aria-labelledby="modal{{ $oferta->idproducto }}Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button type="button" class="close modal-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="modal-add-cart-product-img">
+                                                <img class="img-fluid" src="{{$oferta->imagen}}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="modal-add-cart-info">
+                                                <i class="fa fa-check-square"></i>Added to cart
+                                                successfully!
+                                            </div>
+                                            <div class="modal-add-cart-product-cart-buttons">
+                                                <a href="cart.html">View Cart</a>
+                                                <a href="checkout.html">Checkout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 modal-border">
+                                    <ul class="modal-add-cart-product-shipping-info">
+                                        <li>
+                                            <strong><i class="icon-shopping-cart"></i> There Are 5 Items In
+                                                Your Cart.</strong>
+                                        </li>
+                                        <li><strong>TOTAL PRICE: </strong> <span>$187.00</span></li>
+                                        <li class="modal-continue-button">
+                                            <a href="#" data-bs-dismiss="modal">CONTINUE SHOPPING</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
 
 @endsection

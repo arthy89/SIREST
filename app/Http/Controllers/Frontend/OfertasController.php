@@ -18,12 +18,14 @@ class OfertasController extends Controller
     public function index()
     {
         //
-        $ofertas = DB::table('producto')
-                    ->select('producto.*', 'promocion.*')
-                    ->join('promocion', 'producto.idproducto', '=', 'promocion.idproducto')
-                    ->get();
+
+            $ofertas = Productos::join('promocion', 'producto.idproducto', '=', 'promocion.idproducto')
+                ->select('producto.*', 'promocion.nombre_promocion', 'promocion.fecha_inicio', 'promocion.fecha_final', 'promocion.tipo_descuento', 'promocion.cantidad_descuento')
+                ->paginate(8);
+
+
         $productos = Productos::all();
-        //return $ofertas;
+        //return $resultados;
         return view("Frontend.Ofertas.ofertasindex", compact('productos','ofertas'));
 
     }
@@ -31,15 +33,21 @@ class OfertasController extends Controller
     {
         //
 
-        $product = Productos::where('nombre_p', $nombre)->get();
+        $product = Productos::join('promocion', 'producto.idproducto', '=', 'promocion.idproducto')
+        ->select('producto.*', 'promocion.nombre_promocion', 'promocion.fecha_inicio', 'promocion.fecha_final', 'promocion.tipo_descuento', 'promocion.cantidad_descuento')
+        ->where('producto.nombre_p', $nombre)
+        ->first();
         $palabras = str_word_count($nombre, 1);
         //return $palabras[0];
         $productossim = Productos::where('nombre_p', 'LIKE', '%' . $palabras[0] . '%')->get();
-        //return $productosimilares;
+        //return $productossim;
         //$categorias = Categorias::all();
-        $productos = Productos::all();
-        // return $usuarios;
-        return view('Frontend.Categoriasventa.categoriadetalles', compact('product','productossim'));
+        // $productossim = Productos::join('promocion', 'producto.idproducto', '=', 'promocion.idproducto')
+        //         ->select('producto.*', 'promocion.nombre_promocion', 'promocion.fecha_inicio', 'promocion.fecha_final', 'promocion.tipo_descuento', 'promocion.cantidad_descuento')
+        //         ->where('nombre_p', 'LIKE', '%' . $palabras[0] . '%')
+        //         ->get();
+        //return $product;
+        return view('Frontend.Ofertas.ofertasdetalles', compact('product','productossim'));
         //return view("Frontend.Categoriasventa.categoriasventaindex");
     }
 
