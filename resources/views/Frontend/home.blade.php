@@ -298,8 +298,8 @@
                                                 </div>
 
                                                 <div class="product-add-to-cart-btn">
-                                                    <a onclick="agregarAlCarrito(event,{{$prorecien}})" id="{{$prorecien->idproducto}}" href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#modalAddcart">Agregar Carrito</a>
+                                                    <a onclick="agregarAlCarrito(event,{{$producto}})" id="{{$producto->idproducto}}" href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#modalAddcart{{ $producto->idproducto }}">Agregar Carrito</a>
 
                                                 </div>
                                             </div>
@@ -343,12 +343,11 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="modal-add-cart-info">
-                                                <i class="fa fa-check-square"></i>Added to cart
-                                                successfully!
+                                                <i class="fa fa-check-square"></i>Agregado satisfactoriamente al carrito!
                                             </div>
                                             <div class="modal-add-cart-product-cart-buttons">
-                                                <a href="cart.html">View Cart</a>
-                                                <a href="checkout.html">Checkout</a>
+                                                <a href="{{route('carrito_home')}}">Ver Carrito</a>
+                                                <a href="checkout.html">Pasar Caja</a>
                                             </div>
                                         </div>
                                     </div>
@@ -356,10 +355,9 @@
                                 <div class="col-md-5 modal-border">
                                     <ul class="modal-add-cart-product-shipping-info">
                                         <li>
-                                            <strong><i class="icon-shopping-cart"></i> There Are 5 Items In
-                                                Your Cart.</strong>
+                                            <strong><i class="icon-shopping-cart"></i> En su carrito se agrega el articulo.</strong>
                                         </li>
-                                        <li><strong>TOTAL PRICE: </strong> <span>$187.00</span></li>
+                                        <li><strong>TOTAL PRECIO: </strong> <span>${{$producto->precio_venta_public}}</span></li>
                                         <li class="modal-continue-button">
                                             <a href="#" data-bs-dismiss="modal">CONTINUE SHOPPING</a>
                                         </li>

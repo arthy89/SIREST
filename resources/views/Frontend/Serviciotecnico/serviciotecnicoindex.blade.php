@@ -83,51 +83,56 @@
                                     <div class="tab-pane show sort-layout-single active" id="layout-4-grid">
                                         <div class="row">
                                             @foreach($repuestos as $repuesto)
-                                                <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                                                    <!-- Start Product Default Single Item -->
-                                                    <div class="product-default-single-item product-color--golden aos-init aos-animate" data-aos="fade-up" data-aos-delay="0">
-                                                        <div class="image-box">
-                                                            <a href="product-details-default.html" class="image-link">
-                                                                <img src="http://sirest.test/{{$repuesto->imagen}}" alt="">
-                                                                <img src="http://sirest.test/{{$repuesto->imagen}}" alt="">
-                                                            </a>
-                                                            <div class="action-link">
-                                                                <div class="action-link-left">
-                                                                    <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#modal{{ $repuesto->idproducto }}"><i
-                                                                class="icon-magnifier"></i></a>
-                                                                </div>
-                                                                <div class="action-link-right">
-                                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickview"><i class="icon-magnifier"></i></a>
-                                                                    <a href="wishlist.html"><i class="icon-heart"></i></a>
-                                                                    <a href="compare.html"><i class="icon-shuffle"></i></a>
-                                                                </div>
-                                                            </div>
+                                            <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                                                <!-- Start Product Default Single Item -->
+                                                <div class="product-default-single-item product-color--golden aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                                                    <div class="image-box">
+                                                        <a href="{{ route('detalles_producto_tecnico', $repuesto->nombre_p) }}" class="image-link">
+                                                            <img src="{{$repuesto->imagen }}" alt="">
+                                                            <img src="{{$repuesto->imagen }}" alt="">
+                                                        </a>
+                                                        <div  class="tag">
+                                                            {{-- <span style="background-color:#ff365d">Oferta</span> --}}
                                                         </div>
-                                                        <div class="content">
-                                                            <div class="content-left">
-                                                                <h6 class="title"><a href="product-details-default.html">{{$repuesto->nombre_p}}</a></h6>
-                                                                <ul class="review-star">
-                                                                    <li class="fill"><i class="ion-android-star"></i>
-                                                                    </li>
-                                                                    <li class="fill"><i class="ion-android-star"></i>
-                                                                    </li>
-                                                                    <li class="fill"><i class="ion-android-star"></i>
-                                                                    </li>
-                                                                    <li class="fill"><i class="ion-android-star"></i>
-                                                                    </li>
-                                                                    <li class="empty"><i class="ion-android-star"></i>
-                                                                    </li>
-                                                                </ul>
+                                                        <div class="action-link">
+                                                            <div class="action-link-left">
+                                                                <a onclick="{{-- agregarAlCarrito(event,{{$repuesto}})" id="{{$repuesto->idproducto}}"--}} href="#" data-bs-toggle="modal"
+                                                                    data-bs-target="#modalAddcart{{ $repuesto->idproducto }}">Pedir tecnico</a>
                                                             </div>
-                                                            <div class="content-right">
-                                                                <span class="price">$ {{$repuesto->precio_venta_public}}</span>
+                                                            <div class="action-link-right">
+                                                                <a href="#" data-bs-toggle="modal"
+                                                                        data-bs-target="#modal{{ $repuesto->idproducto }}"><i
+                                                                            class="icon-magnifier"></i></a>
+                                                                <a href="wishlist.html"><i class="icon-heart"></i></a>
+                                                                <a href="compare.html"><i class="icon-shuffle"></i></a>
                                                             </div>
-
                                                         </div>
                                                     </div>
-                                                    <!-- End Product Default Single Item -->
+                                                    <div class="content">
+                                                        <div class="content-left">
+                                                            <h6 class="title"><a href="#">{{$repuesto->nombre_p}}</a></h6>
+                                                            <ul class="review-star">
+                                                                <li class="fill"><i class="ion-android-star"></i>
+                                                                </li>
+                                                                <li class="fill"><i class="ion-android-star"></i>
+                                                                </li>
+                                                                <li class="fill"><i class="ion-android-star"></i>
+                                                                </li>
+                                                                <li class="fill"><i class="ion-android-star"></i>
+                                                                </li>
+                                                                <li class="empty"><i class="ion-android-star"></i>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="content-right">
+                                                            <span class="price">{{ $repuesto->precio_venta_public }}</span>
+
+                                                        </div>
+
+                                                    </div>
                                                 </div>
+                                                <!-- End Product Default Single Item -->
+                                            </div>
                                             @endforeach
 
                                         </div>
@@ -307,13 +312,34 @@
 
                 <!-- Start Pagination -->
                 <div class="page-pagination text-center aos-init" data-aos="fade-up" data-aos-delay="0">
-                    <ul>
-                        <li><a class="active" href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="ion-ios-skipforward"></i></a></li>
-                    </ul>
-                </div> <!-- End Pagination -->
+                    @if ($repuestos->hasPages())
+                        <ul >
+                            {{-- Enlace "anterior" --}}
+                            @if ($repuestos->onFirstPage())
+                                <li class="disabled"><span>&laquo;</span></li>
+                            @else
+                                <li><a href="{{ $repuestos->previousPageUrl() }}" rel="prev">&laquo;</a></li>
+                            @endif
+
+                            {{-- Elementos de la paginación --}}
+                            @foreach ($repuestos->getUrlRange(1, $repuestos->lastPage()) as $page => $url)
+                                @if ($page == $repuestos->currentPage())
+                                    <li ><a class="active" >{{ $page }}</a></li>
+                                @else
+                                    <li><a  href="{{ $url }}">{{ $page }}</a></li>
+                                @endif
+                            @endforeach
+
+                            {{-- Enlace "siguiente" --}}
+                            @if ($repuestos->hasMorePages())
+                                <li ><a href="{{ $repuestos->nextPageUrl() }}" rel="next"  >&raquo;</a></li>
+                            @else
+                                <li class="disabled"><span>&raquo;</span></li>
+                            @endif
+                        </ul>
+                    @endif
+                    </div>
+                <!-- End Pagination -->
             </div> <!-- End Shop Product Sorting Section  -->
         </div>
     </div>
@@ -419,6 +445,7 @@
     </div>
 </div>
 @foreach($repuestos as $repuesto)
+{{-- modal compra--}}
         <div class="modal fade" id="modal{{ $repuesto->idproducto }}" tabindex="-1" role="dialog"
             aria-labelledby="modal{{ $repuesto->idproducto }}Label" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -508,8 +535,8 @@
                                                 </div>
 
                                                 <div class="product-add-to-cart-btn">
-                                                    <a onclick="agregarAlCarrito(event,{{$repuesto}})" id="{{$repuesto->idproducto}}" href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#modalAddcart">Agregar Carrito</a>
+                                                    <a onclick="" id="{{$repuesto->idproducto}}" href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#modalAddcart">PEDIR TECNICO</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -521,6 +548,56 @@
                                         </div>
 
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- modal para carrito --}}
+        <div class="modal fade"  id="modalAddcart{{ $repuesto->idproducto }}" tabindex="-1" role="dialog"
+            aria-labelledby="modal{{ $repuesto->idproducto }} Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button type="button" class="close modal-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="modal-add-cart-product-img">
+                                                <img class="img-fluid" src="{{$repuesto->imagen}}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="modal-add-cart-info">
+                                                <i class="fa fa-check-square"></i>vAS A PDIR EL SIGUEINTE PRODUCTOP!
+                                            </div>
+                                            <div class="modal-add-cart-product-cart-buttons">
+                                                <a href="">CONTINUAR PEDIDO</a>
+                                                <a href="">SERVICIO TECNICO</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 modal-border">
+                                    <ul class="modal-add-cart-product-shipping-info">
+                                        <li>
+                                            <strong><i class="icon-shopping-cart"></i> Precio del producto sin costo de reparacion.</strong>
+                                        </li>
+                                        <li><strong>TOTAL PRICE: </strong> <span>{{$repuesto->precio_venta_public}}</span></li>
+                                        <li class="modal-continue-button">
+                                            <a href="#" data-bs-dismiss="modal">CONTINUAR COMPRA</a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
