@@ -204,6 +204,7 @@ Route::get('ecommerce/contactanos', [ContactanosController::class, 'index'])->na
 
 //servicio tecnico
 Route::get('ecommerce/serviciot', [ServiciotecnicoController::class, 'index'])->name('serviciotecnico');
+Route::get('ecommerce/serviciot/detalle/{parametro1}', [ServiciotecnicoController::class, 'detalles'])->name('detalles_producto_tecnico');
 /// carrito de compras
 Route::get('ecommerce/carrito', [CarritoController::class, 'index'])->name('carrito_home');
 

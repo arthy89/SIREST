@@ -417,7 +417,7 @@
 
     <!-- Start  Offcanvas Addcart Wrapper -->
     <div class="offcanvas-add-cart-wrapper">
-        <h4 class="offcanvas-title">Shopping Cart</h4>
+        <h4 class="offcanvas-title">Carrrito de Compra</h4>
         <ul class="offcanvas-cart">
             <li class="offcanvas-cart-item-single">
                 <div class="offcanvas-cart-item-block">
@@ -437,42 +437,7 @@
                     <a href="#" class="offcanvas-cart-item-delete"><i class="fa fa-trash-o"></i></a>
                 </div>
             </li>
-            <li class="offcanvas-cart-item-single">
-                <div class="offcanvas-cart-item-block">
-                    <a href="#" class="offcanvas-cart-item-image-link">
-                        <img src="{{ asset('assetsc/images/product/default/home-2/default-1.jpg') }}" alt=""
-                            class="offcanvas-cart-image" />
-                    </a>
-                    <div class="offcanvas-cart-item-content">
-                        <a href="#" class="offcanvas-cart-item-link">Car Vails</a>
-                        <div class="offcanvas-cart-item-details">
-                            <span class="offcanvas-cart-item-details-quantity">3 x </span>
-                            <span class="offcanvas-cart-item-details-price">$500.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="offcanvas-cart-item-delete text-right">
-                    <a href="#" class="offcanvas-cart-item-delete"><i class="fa fa-trash-o"></i></a>
-                </div>
-            </li>
-            <li class="offcanvas-cart-item-single">
-                <div class="offcanvas-cart-item-block">
-                    <a href="#" class="offcanvas-cart-item-image-link">
-                        <img src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}" alt=""
-                            class="offcanvas-cart-image" />
-                    </a>
-                    <div class="offcanvas-cart-item-content">
-                        <a href="#" class="offcanvas-cart-item-link">Shock Absorber</a>
-                        <div class="offcanvas-cart-item-details">
-                            <span class="offcanvas-cart-item-details-quantity">1 x </span>
-                            <span class="offcanvas-cart-item-details-price">$350.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="offcanvas-cart-item-delete text-right">
-                    <a href="#" class="offcanvas-cart-item-delete"><i class="fa fa-trash-o"></i></a>
-                </div>
-            </li>
+
         </ul>
         <div class="offcanvas-cart-total-price">
             <span class="offcanvas-cart-total-price-text">Subtotal:</span>
@@ -480,10 +445,10 @@
         </div>
         <ul class="offcanvas-cart-action-button">
             <li>
-                <a href="{{route('carrito_home')}}" class="btn btn-block btn-pink">View Cart</a>
+                <a href="{{route('carrito_home')}}" class="btn btn-block btn-pink">Ver Carrito</a>
             </li>
             <li>
-                <a href="compare.html" class="btn btn-block btn-pink mt-5">Checkout</a>
+                <a href="compare.html" class="btn btn-block btn-pink mt-5">Pasar Por Caja</a>
             </li>
         </ul>
     </div>
@@ -580,3 +545,6 @@
     </form>
 </div>
 <!-- End Offcanvas Search Bar Section -->
+<script>
+    console.log("Construiremos el semi carrito de compra");
+</script>

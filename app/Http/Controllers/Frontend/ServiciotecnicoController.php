@@ -18,7 +18,12 @@ class ServiciotecnicoController extends Controller
     public function index()
     {
         //
-        $repuestos = DB::table('producto')
+        $repuestos = Productos::select('producto.*')
+        ->join('categoria', 'producto.categoriaid', '=', 'categoria.idcategoria')
+        ->where('categoria.nombre', 'Pantallas')
+        ->orWhere('categoria.nombre', 'Flex Carga')
+        ->paginate(8);
+        $repuestosnot = DB::table('producto')
                 ->select('*')
                 ->join('categoria', 'producto.categoriaid', '=', 'categoria.idcategoria')
                 ->where(function ($query) {
@@ -28,9 +33,24 @@ class ServiciotecnicoController extends Controller
                 ->get();
 
         $productos = Productos::all();
-        //return $repuestos;
+        //return $products;
         return view("Frontend.Serviciotecnico.serviciotecnicoindex", compact('productos','repuestos'));
 
+    }
+    public function detalles(Request $request, $nombre)
+    {
+        //
+
+        $product = Productos::where('nombre_p', $nombre)->get();
+        $palabras = str_word_count($nombre, 1);
+        //return $palabras[0];
+        $productossim = Productos::where('nombre_p', 'LIKE', '%' . $palabras[0] . '%')->get();
+        //return $productosimilares;
+        //$categorias = Categorias::all();
+        $productos = Productos::all();
+        //return $product;
+        return view('Frontend.Serviciotecnico.serviciotecnicodetalle', compact('product','productossim'));
+        //return view("Frontend.Categoriasventa.categoriasventaindex");
     }
 
     /**
