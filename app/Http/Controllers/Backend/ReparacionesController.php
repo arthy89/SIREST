@@ -159,6 +159,12 @@ class ReparacionesController extends Controller
         //
     }
 
+    public function buscar()
+    {
+        //
+        return view('Backend.Reparaciones.reparacionesbuscar');
+    }
+
     /**
      * Update the specified resource in storage.
      */

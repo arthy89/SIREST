@@ -1,26 +1,26 @@
 @extends('Frontend.Layout.app')
 
 @section('main-content')
-<div class="breadcrumb-section breadcrumb-bg-color--golden">
-    <div class="breadcrumb-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="breadcrumb-title">{{$product[0]->nombre_p}}</h3>
-                    <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
-                        <nav aria-label="breadcrumb">
-                            <ul>
-                                <li><a href="{{route('home-client')}}">Home</a></li>
-                                <li><a href="{{ route('ecomerce_categorias') }}">ecommerce</a></li>
-                                <li class="active" aria-current="page">productos Detalle</li>
-                            </ul>
-                        </nav>
+    <div class="breadcrumb-section breadcrumb-bg-color--golden">
+        <div class="breadcrumb-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="breadcrumb-title">{{ $product[0]->nombre_p }}</h3>
+                        <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                            <nav aria-label="breadcrumb">
+                                <ul>
+                                    <li><a href="{{ route('home-client') }}">Home</a></li>
+                                    <li><a href="{{ route('ecomerce_categorias') }}">ecommerce</a></li>
+                                    <li class="active" aria-current="page">productos Detalle</li>
+                                </ul>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
     <div class="product-details-section">
         <div class="container">
             <div class="row">
@@ -34,52 +34,37 @@
                                 <div class="product-image-large-image swiper-slide zoom-image-hover img-responsive swiper-slide-active"
                                     role="group" aria-label="1 / 6"
                                     style="width: 715px; position: relative; overflow: hidden;">
-                                    <img
-                                        src="{{$product[0]->imagen}}"alt="">
+                                    <img src="{{ $product[0]->imagen }}"alt="">
 
-                                    <img role="presentation" alt=""
-                                        src="{{$product[0]->imagen}}"
-                                        class="zoomImg"
+                                    <img role="presentation" alt="" src="{{ $product[0]->imagen }}" class="zoomImg"
                                         style="position: absolute; top: 131.325px; left: 98.1119px; opacity: 0; width: 600px; height: 690px; border: none; max-width: none; max-height: none;">
                                 </div>
                                 <div class="product-image-large-image swiper-slide zoom-image-hover img-responsive swiper-slide-next"
                                     role="group" aria-label="2 / 6"
                                     style="width: 715px; position: relative; overflow: hidden;">
-                                    <img
-                                        src="{{$product[0]->imagen}}"alt="">
-                                    <img role="presentation" alt=""
-                                        src="{{$product[0]->imagen}}"
-                                        class="zoomImg"
+                                    <img src="{{ $product[0]->imagen }}"alt="">
+                                    <img role="presentation" alt="" src="{{ $product[0]->imagen }}" class="zoomImg"
                                         style="position: absolute; top: -85.0532px; left: -35.4043px; opacity: 0; width: 600px; height: 690px; border: none; max-width: none; max-height: none;">
                                 </div>
                                 <div class="product-image-large-image swiper-slide zoom-image-hover img-responsive"
                                     role="group" aria-label="3 / 6"
                                     style="width: 715px; position: relative; overflow: hidden;">
-                                    <img
-                                        src="{{$product[0]->imagen}}"alt="">
-                                    <img role="presentation" alt=""
-                                        src="{{$product[0]->imagen}}"
-                                        class="zoomImg"
+                                    <img src="{{ $product[0]->imagen }}"alt="">
+                                    <img role="presentation" alt="" src="{{ $product[0]->imagen }}" class="zoomImg"
                                         style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 600px; height: 690px; border: none; max-width: none; max-height: none;">
                                 </div>
                                 <div class="product-image-large-image swiper-slide zoom-image-hover img-responsive"
                                     role="group" aria-label="4 / 6"
                                     style="width: 715px; position: relative; overflow: hidden;">
-                                    <img
-                                    src="{{$product[0]->imagen}}"alt="">
-                                    <img role="presentation" alt=""
-                                    src="{{$product[0]->imagen}}"
-                                        class="zoomImg"
+                                    <img src="{{ $product[0]->imagen }}"alt="">
+                                    <img role="presentation" alt="" src="{{ $product[0]->imagen }}" class="zoomImg"
                                         style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 600px; height: 690px; border: none; max-width: none; max-height: none;">
                                 </div>
                                 <div class="product-image-large-image swiper-slide zoom-image-hover img-responsive"
                                     role="group" aria-label="5 / 6"
                                     style="width: 715px; position: relative; overflow: hidden;">
-                                    <img
-                                    src="{{$product[0]->imagen}}"alt="">
-                                    <img role="presentation" alt=""
-                                    src="{{$product[0]->imagen}}"
-                                        class="zoomImg"
+                                    <img src="{{ $product[0]->imagen }}"alt="">
+                                    <img role="presentation" alt="" src="{{ $product[0]->imagen }}" class="zoomImg"
                                         style="position: absolute; top: 0px; left: 0px; opacity: 0; width: 600px; height: 690px; border: none; max-width: none; max-height: none;">
                                 </div>
 
@@ -95,70 +80,59 @@
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev"
                                     data-swiper-slide-index="2" role="group" aria-label="1 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
-                                        alt="">
+                                    <img class="img-fluid" src="{{ $product[0]->imagen }}" alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active"
                                     data-swiper-slide-index="3" role="group" aria-label="2 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
-                                        alt="">
+                                    <img class="img-fluid" src="{{ $product[0]->imagen }}" alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next"
                                     data-swiper-slide-index="4" role="group" aria-label="3 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
-                                        alt="">
+                                    <img class="img-fluid" src="{{ $product[0]->imagen }}" alt="">
                                 </div>
 
 
                                 <div class="product-image-thumb-single swiper-slide" data-swiper-slide-index="1"
                                     role="group" aria-label="6 / 14" style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
-                                        alt="">
+                                    <img class="img-fluid" src="{{ $product[0]->imagen }}" alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-prev"
                                     data-swiper-slide-index="2" role="group" aria-label="7 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
-                                        alt="">
+                                    <img class="img-fluid" src="{{ $product[0]->imagen }}" alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-visible swiper-slide-active"
                                     data-swiper-slide-index="3" role="group" aria-label="8 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
-                                        alt="">
+                                    <img class="img-fluid" src="{{ $product[0]->imagen }}" alt="">
                                 </div>
 
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-visible"
                                     data-swiper-slide-index="5" role="group" aria-label="10 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
-                                        alt="">
+                                    <img class="img-fluid" src="{{ $product[0]->imagen }}" alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate swiper-slide-visible swiper-slide-thumb-active"
                                     data-swiper-slide-index="0" role="group" aria-label="11 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
-                                        alt="">
+                                    <img class="img-fluid" src="{{ $product[0]->imagen }}" alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate"
                                     data-swiper-slide-index="1" role="group" aria-label="12 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
-                                        alt="">
+                                    <img class="img-fluid" src="{{ $product[0]->imagen }}" alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev"
                                     data-swiper-slide-index="2" role="group" aria-label="13 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
-                                        alt="">
+                                    <img class="img-fluid" src="{{ $product[0]->imagen }}" alt="">
                                 </div>
                                 <div class="product-image-thumb-single swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active"
                                     data-swiper-slide-index="3" role="group" aria-label="14 / 14"
                                     style="width: 147.5px; margin-right: 25px;">
-                                    <img class="img-fluid" src="{{$product[0]->imagen}}"
-                                        alt="">
+                                    <img class="img-fluid" src="{{ $product[0]->imagen }}" alt="">
                                 </div>
                             </div>
                             <!-- Add Arrows -->
@@ -173,10 +147,11 @@
                     </div>
                 </div>
                 <div class="col-xl-7 col-lg-6">
-                    <div class="product-details-content-area product-details--golden aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                    <div class="product-details-content-area product-details--golden aos-init aos-animate"
+                        data-aos="fade-up" data-aos-delay="200">
                         <!-- Start  Product Details Text Area-->
                         <div class="product-details-text">
-                            <h4 class="title">{{$product[0]->nombre_p}}</h4>
+                            <h4 class="title">{{ $product[0]->nombre_p }}</h4>
                             <div class="d-flex align-items-center">
                                 <ul class="review-star">
                                     <li class="fill"><i class="ion-android-star"></i></li>
@@ -187,42 +162,50 @@
                                 </ul>
                                 <a href="#" class="customer-review ml-2">(customer review )</a>
                             </div>
-                            <div class="price">{{$product[0]->precio_venta_public}}</div>
-                            <p>{{$product[0]->descripcion}}</p>
+                            <div class="price">{{ $product[0]->precio_venta_public }}</div>
+                            <p>{{ $product[0]->descripcion }}</p>
                         </div> <!-- End  Product Details Text Area-->
                         <!-- Start Product Variable Area -->
                         <div class="product-details-variable">
                             <h4 class="title">Sotck Disponible</h4>
                             <!-- Product Variable Single Item -->
                             <div class="variable-single-item">
-                                <div class="product-stock"> <span class="product-stock-in"><i class="ion-checkmark-circled"></i></span> {{$product[0]->stock}} EN STOCK</div>
+                                <div class="product-stock"> <span class="product-stock-in"><i
+                                            class="ion-checkmark-circled"></i></span> {{ $product[0]->stock }} EN STOCK
+                                </div>
                             </div>
                             <!-- Product Variable Single Item -->
                             <div class="variable-single-item">
                                 <span>Color</span>
                                 <div class="product-variable-color">
                                     <label for="product-color-red">
-                                        <input name="product-color" id="product-color-red" class="color-select" type="radio" checked="">
+                                        <input name="product-color" id="product-color-red" class="color-select"
+                                            type="radio" checked="">
                                         <span class="product-color-red"></span>
                                     </label>
                                     <label for="product-color-tomato">
-                                        <input name="product-color" id="product-color-tomato" class="color-select" type="radio">
+                                        <input name="product-color" id="product-color-tomato" class="color-select"
+                                            type="radio">
                                         <span class="product-color-tomato"></span>
                                     </label>
                                     <label for="product-color-green">
-                                        <input name="product-color" id="product-color-green" class="color-select" type="radio">
+                                        <input name="product-color" id="product-color-green" class="color-select"
+                                            type="radio">
                                         <span class="product-color-green"></span>
                                     </label>
                                     <label for="product-color-light-green">
-                                        <input name="product-color" id="product-color-light-green" class="color-select" type="radio">
+                                        <input name="product-color" id="product-color-light-green" class="color-select"
+                                            type="radio">
                                         <span class="product-color-light-green"></span>
                                     </label>
                                     <label for="product-color-blue">
-                                        <input name="product-color" id="product-color-blue" class="color-select" type="radio">
+                                        <input name="product-color" id="product-color-blue" class="color-select"
+                                            type="radio">
                                         <span class="product-color-blue"></span>
                                     </label>
                                     <label for="product-color-light-blue">
-                                        <input name="product-color" id="product-color-light-blue" class="color-select" type="radio">
+                                        <input name="product-color" id="product-color-light-blue" class="color-select"
+                                            type="radio">
                                         <span class="product-color-light-blue"></span>
                                     </label>
                                 </div>
@@ -239,12 +222,14 @@
                                 </div>
 
                                 <div class="product-add-to-cart-btn">
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">+Pedir Tecnico</a>
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#compra_modal">+Pedir
+                                        Técnico</a>
                                 </div>
                             </div>
                             <!-- Start  Product Details Meta Area-->
                             <div class="product-details-meta mb-20">
-                                <a href="" class="icon-space-right"><i class="icon-heart"></i>Añadir a la lista de deseos</a>
+                                <a href="" class="icon-space-right"><i class="icon-heart"></i>Añadir a la lista de
+                                    deseos</a>
                                 <a href="" class="icon-space-right"><i class="icon-refresh"></i>Comparar</a>
                             </div> <!-- End  Product Details Meta Area-->
                         </div> <!-- End Product Variable Area -->
@@ -545,15 +530,15 @@
                                     style="transform: translate3d(0px, 0px, 0px);">
                                     <!-- End Product Default Single Item -->
                                     <!-- Start Product Default Single Item -->
-                                    @foreach($productossim as $productosimil)
+                                    @foreach ($productossim as $productosimil)
                                         <div class="product-default-single-item product-color--golden swiper-slide swiper-slide-active"
-                                            role="group" aria-label="1 / 8" style="width: 342.5px; margin-right: 30px;">
+                                            role="group" aria-label="1 / 8"
+                                            style="width: 342.5px; margin-right: 30px;">
                                             <div class="image-box">
-                                                <a href="{{ route('detalles_producto', $productosimil->nombre_p) }}" class="image-link">
-                                                    <img src="{{$productosimil->imagen }}"
-                                                        alt="">
-                                                    <img src="{{ $productosimil->imagen }}"
-                                                        alt="">
+                                                <a href="{{ route('detalles_producto', $productosimil->nombre_p) }}"
+                                                    class="image-link">
+                                                    <img src="{{ $productosimil->imagen }}" alt="">
+                                                    <img src="{{ $productosimil->imagen }}" alt="">
                                                 </a>
                                                 <div class="action-link">
                                                     <div class="action-link-left">
@@ -571,7 +556,9 @@
                                             </div>
                                             <div class="content">
                                                 <div class="content-left">
-                                                    <h6 class="title"><a href="product-details-default.html">{{$productosimil->nombre_p}}</a></h6>
+                                                    <h6 class="title"><a
+                                                            href="product-details-default.html">{{ $productosimil->nombre_p }}</a>
+                                                    </h6>
                                                     <ul class="review-star">
                                                         <li class="fill"><i class="ion-android-star"></i></li>
                                                         <li class="fill"><i class="ion-android-star"></i></li>
@@ -581,12 +568,12 @@
                                                     </ul>
                                                 </div>
                                                 <div class="content-right">
-                                                    <span class="price">$ {{$productosimil->precio_venta_public}}</span>
+                                                    <span class="price">$
+                                                        {{ $productosimil->precio_venta_public }}</span>
                                                 </div>
 
                                             </div>
                                         </div>
-
                                     @endforeach
 
 
@@ -605,4 +592,69 @@
             </div>
         </div>
     </div>
+
+    {{-- MODALES --}}
+    <!-- Start Modal Add cart -->
+    <div class="modal fade" id="compra_modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="modal-add-cart-product-img">
+                                            <img class="img-fluid" src="{{ $product[0]->imagen }}" alt="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="modal-add-cart-info">
+                                            <h4 class="title">Solicitar Delivery de Técnico</h4>
+                                            <p>Enviaremos a uno de nuestros trabajadores a su ubicación para recoger su
+                                                dispositivo e instalar la nueva pantalla.</p>
+                                        </div>
+                                        <div class="modal-add-cart-product-cart-buttons">
+                                            @guest('client')
+                                                <a href="{{ route('login_cliente') }}">Iniciar Sesión</a>
+                                            @else
+                                                <a href="{{ route('payment.create', $product[0]) }}">Realizar
+                                                    Pedido</a>
+                                            @endguest
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 modal-border">
+                                <ul class="modal-add-cart-product-shipping-info">
+                                    <li>
+                                        <strong><i class="icon-shopping-cart"></i>Detalles</strong>
+                                    </li>
+                                    <li><strong>Envío: </strong> <span>$20.00</span></li>
+                                    <li><strong>Producto: </strong> <span>${{ $product[0]->precio_venta_public }}</span>
+                                    </li>
+                                    <li><strong>TOTAL PRICE:
+                                            <span>${{ $product[0]->precio_venta_public + 20.0 }}</span></strong></li>
+                                    <li class="modal-continue-button">
+                                        <strong>Medio de pago: </strong><a data-bs-dismiss="modal"
+                                            href="">WEBPAY</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal Add cart -->
 @endsection

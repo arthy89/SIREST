@@ -31,4 +31,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'transbank' => [
+        'webpay' => [
+            'commerce_code' => env('WEBPAY_COMMERCE_CODE'),
+            'api_key' => env('WEBPAY_API_KEY'),
+            'environment' => env('WEBPAY_ENVIRONMENT'),
+        ],
+    ],
+
 ];

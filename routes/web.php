@@ -36,6 +36,7 @@ use App\Http\Controllers\Frontend\LoginEController;
 use App\Http\Controllers\Frontend\ClientesEcomController;
 //servicio tecnico
 use App\Http\Controllers\Frontend\CarritoController;
+use App\Http\Controllers\Backend\PaymentController;
 
 
 use Illuminate\Support\Facades\Route;
@@ -126,6 +127,7 @@ Route::delete('backend/productos/{producto}/eliminar', [ProductosController::cla
 
 //! Reparaciones
 Route::get('backend/reparaciones', [ReparacionesController::class, 'index'])->name('reparaciones');
+Route::get('backend/reparaciones/buscar', [ReparacionesController::class, 'buscar'])->name('reparaciones_buscar');
 Route::get('backend/reparaciones/crear', [ReparacionesController::class, 'create'])->name('reparaciones_crear_view');
 Route::post('backend/reparaciones/nuevo', [ReparacionesController::class, 'store'])->name('reparaciones_crear');
 Route::get('backend/reparaciones/{reparacion}/ver', [ReparacionesController::class, 'show'])->name('reparaciones_ver');
@@ -205,7 +207,10 @@ Route::get('ecommerce/contactanos', [ContactanosController::class, 'index'])->na
 //servicio tecnico
 Route::get('ecommerce/serviciot', [ServiciotecnicoController::class, 'index'])->name('serviciotecnico');
 Route::get('ecommerce/serviciot/detalle/{parametro1}', [ServiciotecnicoController::class, 'detalles'])->name('detalles_producto_tecnico');
+
+// !!WEBPAY
+Route::get('ecommerce/payment/create/{product}', [PaymentController::class, 'create'])->name('payment.create');
+Route::post('ecommerce/payment/confirm', [PaymentController::class, 'confirm'])->name('payment.confirm');
+
 /// carrito de compras
 Route::get('ecommerce/carrito', [CarritoController::class, 'index'])->name('carrito_home');
-
-
