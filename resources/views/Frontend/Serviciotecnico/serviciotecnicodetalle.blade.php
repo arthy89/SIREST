@@ -547,7 +547,7 @@
                                                     </div>
                                                     <div class="action-link-right">
                                                         <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#modalQuickview"><i
+                                                            data-bs-target="#modal{{ $productosimil->idproducto }}"><i
                                                                 class="icon-magnifier"></i></a>
                                                         <a href="wishlist.html"><i class="icon-heart"></i></a>
                                                         <a href="compare.html"><i class="icon-shuffle"></i></a>
@@ -592,7 +592,6 @@
             </div>
         </div>
     </div>
-
     {{-- MODALES --}}
     <!-- Start Modal Add cart -->
     <div class="modal fade" id="compra_modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -658,3 +657,4 @@
     </div>
     <!-- End Modal Add cart -->
 @endsection
+

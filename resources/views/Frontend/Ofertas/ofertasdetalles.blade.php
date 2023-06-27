@@ -233,7 +233,7 @@
 
                                 <div class="product-add-to-cart-btn">
                                     <a href="#" data-bs-toggle="modal" onclick="agregarAlCarrito(event,{{$product}})" id="{{$product->idproducto}}"
-                                        data-bs-target="#modalAddcart">+ Agregar
+                                        data-bs-target="#modalAddcartsolo">+ Agregar
                                         Carrito</a>
                                 </div>
                             </div>
@@ -556,11 +556,11 @@
                                             <div class="action-link">
                                                 <div class="action-link-left">
                                                     <a href="#" data-bs-toggle="modal" onclick="agregarAlCarrito(event,{{$productosimil}})" id="{{$productosimil->idproducto}}"
-                                                        data-bs-target="#modalAddcart">Add to Cart</a>
+                                                        data-bs-target="#modalAddcart{{ $productosimil->idproducto }}">Agregar Carro</a>
                                                 </div>
                                                 <div class="action-link-right">
                                                     <a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#modalQuickview"><i
+                                                    data-bs-target="#modal{{ $productosimil->idproducto }}"><i
                                                             class="icon-magnifier"></i></a>
                                                     <a href="wishlist.html"><i class="icon-heart"></i></a>
                                                     <a href="compare.html"><i class="icon-shuffle"></i></a>
@@ -594,6 +594,233 @@
                                 aria-disabled="true"></div>
                             <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide"
                                 aria-controls="swiper-wrapper-f172cdf161107c446" aria-disabled="false"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- modal es--}}
+    @foreach($productossim as $producto)
+    {{-- modal ver mas --}}
+        <div class="modal fade" id="modal{{ $producto->idproducto }}" tabindex="-1" role="dialog"
+            aria-labelledby="modal{{ $producto->idproducto }}Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    {{-- Hola{{ $producto->idproducto }} --}}
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="product-details-gallery-area mb-7">
+                                        <!-- Start Large Image -->
+                                        <div class="product-large-image  swiper-container">
+                                            <div class="swiper-wrapper">
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $producto->imagen}}"
+                                                        alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $producto->imagen}}"
+                                                        alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $producto->imagen}}"
+                                                        alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $producto->imagen}}"
+                                                        alt="" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- End Large Image -->
+                                        <!-- Start Thumbnail Image -->
+
+                                        <!-- End Thumbnail Image -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="modal-product-details-content-area">
+                                        <!-- Start  Product Details Text Area-->
+                                        <div class="product-details-text">
+                                            <h4 class="title">{{$producto->nombre_p}}</h4>
+                                            <div class="price">$ {{$producto->precio_venta_public}}</div>
+                                        </div>
+                                        <!-- End  Product Details Text Area-->
+                                        <!-- Start Product Variable Area -->
+                                        <div class="product-details-variable">
+                                            <!-- Product Variable Single Item -->
+                                            <div class="variable-single-item">
+                                                <span>Colores disponibles</span>
+                                                <div class="product-variable-color">
+                                                    <label for="modal-product-color-red">
+                                                        <input name="modal-product-color" id="modal-product-color-red"
+                                                            class="color-select" type="radio" checked />
+                                                        <span class="product-color-red"></span>
+                                                    </label>
+                                                    <label for="modal-product-color-tomato">
+                                                        <input name="modal-product-color" id="modal-product-color-tomato"
+                                                            class="color-select" type="radio" />
+                                                        <span class="product-color-tomato"></span>
+                                                    </label>
+                                                    <label for="modal-product-color-green">
+                                                        <input name="modal-product-color" id="modal-product-color-green"
+                                                            class="color-select" type="radio" />
+                                                        <span class="product-color-green"></span>
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!-- Product Variable Single Item -->
+                                            <div class="d-flex align-items-center flex-wrap">
+                                                <div class="variable-single-item">
+                                                    <span>Stock</span>
+                                                    <div class="product-variable-quantity">
+                                                        <input min="1" max="100" value="1"
+                                                            type="number" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-add-to-cart-btn">
+                                                    <a onclick="agregarAlCarrito(event,{{$producto}})" id="{{$producto->idproducto}}" href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#modalAddcart{{ $producto->idproducto }}">Agregar Carrito</a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Product Variable Area -->
+                                        <div class="modal-product-about-text">
+                                            <p>
+                                                {{$producto->descripcion}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{-- modal-dialog se agrego a tu carrito --}}
+        <div class="modal fade"  id="modalAddcart{{ $producto->idproducto }}" tabindex="-1" role="dialog"
+            aria-labelledby="modal{{ $producto->idproducto }}Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button type="button" class="close modal-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="modal-add-cart-product-img">
+                                                <img class="img-fluid" src="{{$producto->imagen}}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="modal-add-cart-info">
+                                                <i class="fa fa-check-square"></i>Agregado satisfactoriamente al carrito!
+                                            </div>
+                                            <div class="modal-add-cart-product-cart-buttons">
+                                                <a href="{{route('carrito_home')}}">Ver Carrito</a>
+                                                <a href="checkout.html">Pasar Caja</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 modal-border">
+                                    <ul class="modal-add-cart-product-shipping-info">
+                                        <li>
+                                            <strong><i class="icon-shopping-cart"></i> En su carrito se agrega el articulo.</strong>
+                                        </li>
+                                        <li><strong>TOTAL PRECIO: </strong>
+                                            <span class="price">$
+
+                                                {{ $producto->precio_venta_public}}
+                                            </span>
+                                    </li>
+                                        <li class="modal-continue-button">
+                                            <a href="#" data-bs-dismiss="modal">CONTINUE SHOPPING</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    {{-- modal-dialog se agrego a tu carrito --}}
+    <div class="modal fade"  id="modalAddcartsolo" tabindex="-1" role="dialog"
+        aria-labelledby="modalsoloLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="close modal-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="modal-add-cart-product-img">
+                                            <img class="img-fluid" src="{{$product->imagen}}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="modal-add-cart-info">
+                                            <i class="fa fa-check-square"></i>Agregado satisfactoriamente al carrito!
+                                        </div>
+                                        <div class="modal-add-cart-product-cart-buttons">
+                                            <a href="{{route('carrito_home')}}">Ver Carrito</a>
+                                            <a href="checkout.html">Pasar Caja</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 modal-border">
+                                <ul class="modal-add-cart-product-shipping-info">
+                                    <li>
+                                        <strong><i class="icon-shopping-cart"></i> En su carrito se agrega el articulo.</strong>
+                                    </li>
+                                    <li><strong>TOTAL PRECIO: </strong>
+                                        <span class="price">
+                                            @if ($product->tipo_descuento == 1)
+                                            {{ ($product->precio_venta_public * $product->cantidad_descuento) / 100 }}
+                                        @else
+                                            {{ $product->precio_venta_public - $product->cantidad_descuento }}
+                                        @endif
+                                        </span>
+                                </li>
+                                    <li class="modal-continue-button">
+                                        <a href="#" data-bs-dismiss="modal">CONTINUE SHOPPING</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,4 @@
-@extends('Frontend.Layout.app')
 
-@section('main-content')
 <body>
     <b:if cond="data:blog.pageType != &quot;error_page&quot;">
       ... Daerah ini berisi bagian-bagian utama dalam sebuah blog seperti main-wrapper, sidebar-wrapper, hingga footer-wrapper. Daerah ini akan diabaikan karena kita berada di dalam kondisi pengingkaran. ...
@@ -45,14 +43,10 @@
           </div>
         </div>
         <div id="buttonerror">
-  <a href="#">Homepage</a></div>
+  <a href="{{ route('dashboard') }} ">Homepage</a></div>
       </div>
     </b:if>
   </body>
-
-
-@endsection
-@push('style')
 <style>
     @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
 body {
@@ -579,4 +573,4 @@ ul.teeth li:last-child {
   right: -7px;
 }
 </style>
-@endpush
+

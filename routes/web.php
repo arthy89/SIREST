@@ -165,7 +165,10 @@ Route::delete('backend/promociones/{promociones}/eliminar', [PromocionesControll
 Route::get('/notifi', function () {
     return view('notificaciones');
 });
-
+//errors
+Route::get('/errors', function () {
+    return view('Errors.404');
+});
 // Dispositivos
 Route::get('/backend/dispositivos-listar', Listar::class)->name('dispositivos');
 Route::post('backend/dispotivos/crear', [ReparacionesController::class, 'create_device'])->name('create_device');
