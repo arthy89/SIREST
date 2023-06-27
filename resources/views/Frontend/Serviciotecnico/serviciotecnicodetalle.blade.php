@@ -549,7 +549,7 @@
                                         <div class="product-default-single-item product-color--golden swiper-slide swiper-slide-active"
                                             role="group" aria-label="1 / 8" style="width: 342.5px; margin-right: 30px;">
                                             <div class="image-box">
-                                                <a href="{{ route('detalles_producto', $productosimil->nombre_p) }}" class="image-link">
+                                                <a href="{{ route('detalles_producto_tecnico', $productosimil->nombre_p) }}" class="image-link">
                                                     <img src="{{$productosimil->imagen }}"
                                                         alt="">
                                                     <img src="{{ $productosimil->imagen }}"
@@ -562,7 +562,7 @@
                                                     </div>
                                                     <div class="action-link-right">
                                                         <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#modalQuickview"><i
+                                                            data-bs-target="#modal{{ $productosimil->idproducto }}"><i
                                                                 class="icon-magnifier"></i></a>
                                                         <a href="wishlist.html"><i class="icon-heart"></i></a>
                                                         <a href="compare.html"><i class="icon-shuffle"></i></a>
@@ -605,4 +605,166 @@
             </div>
         </div>
     </div>
-@endsection
+    @foreach($productossim as $repuesto)
+    {{-- modal compra--}}
+            <div class="modal fade" id="modal{{ $repuesto->idproducto }}" tabindex="-1" role="dialog"
+                aria-labelledby="modal{{ $repuesto->idproducto }}Label" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        {{-- Hola{{ $repuesto }} --}}
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col text-right">
+                                        <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="product-details-gallery-area mb-7">
+                                            <!-- Start Large Image -->
+                                            <div class="product-large-image  swiper-container">
+                                                <div class="swiper-wrapper">
+                                                    <div class="product-image-large-image swiper-slide img-responsive">
+                                                        <img src="{{ $repuesto->imagen}}"
+                                                            alt="" />
+                                                    </div>
+                                                    <div class="product-image-large-image swiper-slide img-responsive">
+                                                        <img src="{{ $repuesto->imagen}}"
+                                                            alt="" />
+                                                    </div>
+                                                    <div class="product-image-large-image swiper-slide img-responsive">
+                                                        <img src="{{ $repuesto->imagen}}"
+                                                            alt="" />
+                                                    </div>
+                                                    <div class="product-image-large-image swiper-slide img-responsive">
+                                                        <img src="{{ $repuesto->imagen}}"
+                                                            alt="" />
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <!-- End Large Image -->
+                                            <!-- Start Thumbnail Image -->
+
+                                            <!-- End Thumbnail Image -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="modal-product-details-content-area">
+                                            <!-- Start  Product Details Text Area-->
+                                            <div class="product-details-text">
+                                                <h4 class="title">{{$repuesto->nombre_p}}</h4>
+                                                <div class="price">$ {{$repuesto->precio_venta_public}}</div>
+                                            </div>
+                                            <!-- End  Product Details Text Area-->
+                                            <!-- Start Product Variable Area -->
+                                            <div class="product-details-variable">
+                                                <!-- Product Variable Single Item -->
+                                                <div class="variable-single-item">
+                                                    <span>Colores disponibles</span>
+                                                    <div class="product-variable-color">
+                                                        <label for="modal-product-color-red">
+                                                            <input name="modal-product-color" id="modal-product-color-red"
+                                                                class="color-select" type="radio" checked />
+                                                            <span class="product-color-red"></span>
+                                                        </label>
+                                                        <label for="modal-product-color-tomato">
+                                                            <input name="modal-product-color" id="modal-product-color-tomato"
+                                                                class="color-select" type="radio" />
+                                                            <span class="product-color-tomato"></span>
+                                                        </label>
+                                                        <label for="modal-product-color-green">
+                                                            <input name="modal-product-color" id="modal-product-color-green"
+                                                                class="color-select" type="radio" />
+                                                            <span class="product-color-green"></span>
+                                                        </label>
+
+                                                    </div>
+                                                </div>
+                                                <!-- Product Variable Single Item -->
+                                                <div class="d-flex align-items-center flex-wrap">
+                                                    <div class="variable-single-item">
+                                                        <span>Stock</span>
+                                                        <div class="product-variable-quantity">
+                                                            <input min="1" max="100" value="1"
+                                                                type="number" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="product-add-to-cart-btn">
+                                                        <a onclick="" id="{{$repuesto->idproducto}}" href="#" data-bs-toggle="modal"
+                                                            data-bs-target="#modalAddcart">PEDIR TECNICO</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Product Variable Area -->
+                                            <div class="modal-product-about-text">
+                                                <p>
+                                                    {{$repuesto->descripcion}}
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- modal para carrito --}}
+            <div class="modal fade"  id="modalAddcart{{ $repuesto->idproducto }}" tabindex="-1" role="dialog"
+                aria-labelledby="modal{{ $repuesto->idproducto }} Label" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col text-right">
+                                        <button type="button" class="close modal-close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="modal-add-cart-product-img">
+                                                    <img class="img-fluid" src="{{$repuesto->imagen}}" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="modal-add-cart-info">
+                                                    <i class="fa fa-check-square"></i>vAS A PDIR EL SIGUEINTE PRODUCTOP!
+                                                </div>
+                                                <div class="modal-add-cart-product-cart-buttons">
+                                                    <a href="">CONTINUAR PEDIDO</a>
+                                                    <a href="">SERVICIO TECNICO</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 modal-border">
+                                        <ul class="modal-add-cart-product-shipping-info">
+                                            <li>
+                                                <strong><i class="icon-shopping-cart"></i> Precio del producto sin costo de reparacion.</strong>
+                                            </li>
+                                            <li><strong>TOTAL PRICE: </strong> <span>{{$repuesto->precio_venta_public}}</span></li>
+                                            <li class="modal-continue-button">
+                                                <a href="#" data-bs-dismiss="modal">CONTINUAR COMPRA</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endsection

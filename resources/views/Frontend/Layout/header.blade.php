@@ -416,10 +416,10 @@
     <!-- End Offcanvas Header -->
 
     <!-- Start  Offcanvas Addcart Wrapper -->
-    <div class="offcanvas-add-cart-wrapper">
+    <div class="offcanvas-add-cart-wrapper"  >
         <h4 class="offcanvas-title">Carrrito de Compra</h4>
-        <ul class="offcanvas-cart">
-            <li class="offcanvas-cart-item-single">
+        <ul class="scrollable-div  offcanvas-cart" id="ul-carrito">
+            {{-- <li class="offcanvas-cart-item-single">
                 <div class="offcanvas-cart-item-block">
                     <a href="#" class="offcanvas-cart-item-image-link">
                         <img src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}" alt=""
@@ -436,12 +436,13 @@
                 <div class="offcanvas-cart-item-delete text-right">
                     <a href="#" class="offcanvas-cart-item-delete"><i class="fa fa-trash-o"></i></a>
                 </div>
-            </li>
+            </li> --}}
+
 
         </ul>
         <div class="offcanvas-cart-total-price">
             <span class="offcanvas-cart-total-price-text">Subtotal:</span>
-            <span class="offcanvas-cart-total-price-value">$170.00</span>
+            <span class="offcanvas-cart-total-price-value"><p class="subtotallado" id="subtotallado">$</p></span>
         </div>
         <ul class="offcanvas-cart-action-button">
             <li>
@@ -468,9 +469,9 @@
 
     <!-- Start Offcanvas Mobile Menu Wrapper -->
     <div class="offcanvas-wishlist-wrapper">
-        <h4 class="offcanvas-title">Wishlist</h4>
+        <h4 class="offcanvas-title">Favoritos</h4>
         <ul class="offcanvas-wishlist">
-            <li class="offcanvas-wishlist-item-single">
+            {{-- <li class="offcanvas-wishlist-item-single">
                 <div class="offcanvas-wishlist-item-block">
                     <a href="#" class="offcanvas-wishlist-item-image-link">
                         <img src="{{ asset('assetsc/images/product/default/home-3/default-1.jpg') }}" alt=""
@@ -526,10 +527,10 @@
                 <div class="offcanvas-wishlist-item-delete text-right">
                     <a href="#" class="offcanvas-wishlist-item-delete"><i class="fa fa-trash-o"></i></a>
                 </div>
-            </li>
+            </li> --}}
         </ul>
         <ul class="offcanvas-wishlist-action-button">
-            <li><a href="#" class="btn btn-block btn-pink">View wishlist</a></li>
+            <li><a href="#" class="btn btn-block btn-pink">ver Favoritos</a></li>
         </ul>
     </div>
     <!-- End Offcanvas Mobile Menu Wrapper -->
@@ -545,6 +546,86 @@
     </form>
 </div>
 <!-- End Offcanvas Search Bar Section -->
+<style>
+.scrollable-div {
+  width: 100%; /* Ancho del div al 100% del contenedor padre */
+  height: 200px; /* Altura fija del div */
+  overflow: auto; /* Habilita la barra de desplazamiento */
+}
+
+/* Media query para ajustar la altura del div en pantallas más pequeñas */
+@media (max-width: 768px) {
+  .scrollable-div {
+    height: 150px;
+  }
+}
+</style>
 <script>
     console.log("Construiremos el semi carrito de compra");
+    //var contenido_carro = document.getElementById('con-contenido-carrito');
+    const contenedorTotallado = document.querySelector("#subtotallado");
+
+    //carrito localstorage
+    let ProductosEnCarritolado = localStorage.getItem("productos-en-carrito");
+    ProductosEnCarritolado = JSON.parse(ProductosEnCarritolado)
+
+
+
+    //console.log(ProductosEnCarrito);
+    cargarProductoCarritolado();
+    //console.log(ProductosEnCarrito.length);
+    function cargarProductoCarritolado(){
+        let preciototalisimo = 0;
+        let precioaux = 0;
+        ProductosEnCarritolado.forEach(producto =>{
+            //console.log(${producto.imagen});
+            // Obtener una referencia al <tbody> por su ID
+            var ulcarrito = document.getElementById('ul-carrito');
+            //vamos a controlar en caso de ofertas
+            let preciopantalla = 0;
+            if(producto.nombre_promocion){
+                //console.log("contiene promocion final");
+                if(producto.tipo_descuento == 1){
+                    preciopantalla = producto.precio_venta_public*producto.cantidad_descuento/100;
+
+                }else{
+                    preciopantalla =producto.precio_venta_public - producto.cantidad_descuento;
+                    //console.log("descuenot por cantidad");
+                }
+            }else{
+                preciopantalla = producto.precio_venta_public;
+            }
+            //console.log(preciopantalla);
+            // Crear un nuevo elemento <tr>
+            var li = document.createElement('li');
+            li.innerHTML = `<li class="offcanvas-cart-item-single">
+                <div class="offcanvas-cart-item-block">
+                    <a href="#" class="offcanvas-cart-item-image-link">
+                        <img src="${producto.imagen}" alt=""
+                            class="offcanvas-cart-image" />
+                    </a>
+                    <div class="offcanvas-cart-item-content">
+                        <a href="#" class="offcanvas-cart-item-link">${producto.nombre_p}</a>
+                        <div class="offcanvas-cart-item-details">
+                            <span class="offcanvas-cart-item-details-quantity">${producto.cantidad} x </span>
+                            <span class="offcanvas-cart-item-details-price">$${preciopantalla}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="offcanvas-cart-item-delete text-right">
+                    <a href="#" class="offcanvas-cart-item-delete"><i class="fa fa-trash-o"></i></a>
+                </div>
+            </li> `;
+            //aqui calculamos el precio total de cada produco y lo acumuladmos en todo los productos
+            precioaux = precioaux + preciopantalla*producto.cantidad;
+            // agregar precio total
+
+
+            ulcarrito.appendChild(li);
+    })
+    subtotallado.innerText = `$${precioaux}`;
+    //console.log(precioaux);
+
+}
+
 </script>

@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
-
 use App\Http\Controllers\Controller;
+use App\Models\Ventas;
 use Illuminate\Http\Request;
 
 class ResumenventasController extends Controller
@@ -12,8 +12,10 @@ class ResumenventasController extends Controller
      */
     public function index()
     {
+        $ventas = Ventas::paginate(10);
         //
-        return view("Backend.Resumenventas.resumenventasindex");
+        return $ventas;
+        return view("Backend.Resumenventas.resumenventasindex", compact('ventas'));
     }
 
     /**

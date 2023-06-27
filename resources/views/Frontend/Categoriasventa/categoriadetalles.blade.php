@@ -239,8 +239,9 @@
                                 </div>
 
                                 <div class="product-add-to-cart-btn">
+
                                     <a href="#" onclick="agregarAlCarrito(event,{{$product[0]}})" id="{{$product[0]->idproducto}}"
-                                    data-bs-toggle="modal" data-bs-target="#modalAddcart">+ Agregar Carrito</a>
+                                    data-bs-toggle="modal" data-bs-target="#modalAddcart{{ $product[0]->idproducto }}">+ Agregar Carrito</a>
                                 </div>
                             </div>
                             <!-- Start  Product Details Meta Area-->
@@ -298,219 +299,6 @@
                             </a></li> --}}
                         </ul> <!-- End Product Details Tab Button -->
 
-                        <!-- Start Product Details Tab Content -->
-                        {{-- <div class="product-details-content-tab">
-                            <div class="tab-content">
-                                <!-- Start Product Details Tab Content Singel -->
-                                <div class="tab-pane show active" id="description">
-                                    <div class="single-tab-content-item">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue
-                                            nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi
-                                            ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate
-                                            adipiscing cursus eu, suscipit id nulla. </p>
-                                        <p>Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem,
-                                            quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies
-                                            massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero
-                                            hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus
-                                            nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus,
-                                            consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in
-                                            imperdiet ligula euismod eget</p>
-                                    </div>
-                                </div> <!-- End Product Details Tab Content Singel -->
-                                <!-- Start Product Details Tab Content Singel -->
-                                <div class="tab-pane" id="specification">
-                                    <div class="single-tab-content-item">
-                                        <table class="table table-bordered mb-20">
-                                            <tbody>
-                                                <tr>
-                                                    <th scope="row">Material</th>
-                                                    <td>vidrio templado</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Estilos</th>
-                                                    <td>nuevos</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Prodpiedades</th>
-                                                    <td>Economicos</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <p>Fashion has been creating well-designed collections since 2010. The brand
-                                            offers feminine designs delivering stylish separates and statement dresses
-                                            which have since evolved into a full ready-to-wear collection in which every
-                                            item is a vital part of a woman's wardrobe. The result? Cool, easy, chic
-                                            looks with youthful elegance and unmistakable signature style. All the
-                                            beautiful pieces are made in Italy and manufactured with the greatest
-                                            attention. Now Fashion extends to a range of accessories including shoes,
-                                            hats, belts and more!</p>
-                                    </div>
-                                </div> <!-- End Product Details Tab Content Singel -->
-                                <!-- Start Product Details Tab Content Singel -->
-                                {{-- <div class="tab-pane" id="review">
-                                <div class="single-tab-content-item">
-                                    <!-- Start - Review Comment -->
-                                    <ul class="comment">
-                                        <!-- Start - Review Comment list-->
-                                        <li class="comment-list">
-                                            <div class="comment-wrapper">
-                                                <div class="comment-img">
-                                                    <img src="assets/images/user/image-1.png" alt="">
-                                                </div>
-                                                <div class="comment-content">
-                                                    <div class="comment-content-top">
-                                                        <div class="comment-content-left">
-                                                            <h6 class="comment-name">Kaedyn Fraser</h6>
-                                                            <ul class="review-star">
-                                                                <li class="fill"><i class="ion-android-star"></i>
-                                                                </li>
-                                                                <li class="fill"><i class="ion-android-star"></i>
-                                                                </li>
-                                                                <li class="fill"><i class="ion-android-star"></i>
-                                                                </li>
-                                                                <li class="fill"><i class="ion-android-star"></i>
-                                                                </li>
-                                                                <li class="empty"><i class="ion-android-star"></i>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="comment-content-right">
-                                                            <a href="#"><i class="fa fa-reply"></i>Reply</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="para-content">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Tempora inventore dolorem a unde modi iste odio amet,
-                                                            fugit fuga aliquam, voluptatem maiores animi dolor nulla
-                                                            magnam ea! Dignissimos aspernatur cumque nam quod sint
-                                                            provident modi alias culpa, inventore deserunt
-                                                            accusantium amet earum soluta consequatur quasi eum eius
-                                                            laboriosam, maiores praesentium explicabo enim dolores
-                                                            quaerat! Voluptas ad ullam quia odio sint sunt. Ipsam
-                                                            officia, saepe repellat. </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Start - Review Comment Reply-->
-                                            <ul class="comment-reply">
-                                                <li class="comment-reply-list">
-                                                    <div class="comment-wrapper">
-                                                        <div class="comment-img">
-                                                            <img src="assets/images/user/image-2.png" alt="">
-                                                        </div>
-                                                        <div class="comment-content">
-                                                            <div class="comment-content-top">
-                                                                <div class="comment-content-left">
-                                                                    <h6 class="comment-name">Oaklee Odom</h6>
-                                                                </div>
-                                                                <div class="comment-content-right">
-                                                                    <a href="#"><i class="fa fa-reply"></i>Reply</a>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="para-content">
-                                                                <p>Lorem ipsum dolor sit amet, consectetur
-                                                                    adipisicing elit. Tempora inventore dolorem a
-                                                                    unde modi iste odio amet, fugit fuga aliquam,
-                                                                    voluptatem maiores animi dolor nulla magnam ea!
-                                                                    Dignissimos aspernatur cumque nam quod sint
-                                                                    provident modi alias culpa, inventore deserunt
-                                                                    accusantium amet earum soluta consequatur quasi
-                                                                    eum eius laboriosam, maiores praesentium
-                                                                    explicabo enim dolores quaerat! Voluptas ad
-                                                                    ullam quia odio sint sunt. Ipsam officia, saepe
-                                                                    repellat. </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul> <!-- End - Review Comment Reply-->
-                                        </li> <!-- End - Review Comment list-->
-                                        <!-- Start - Review Comment list-->
-                                        <li class="comment-list">
-                                            <div class="comment-wrapper">
-                                                <div class="comment-img">
-                                                    <img src="assets/images/user/image-3.png" alt="">
-                                                </div>
-                                                <div class="comment-content">
-                                                    <div class="comment-content-top">
-                                                        <div class="comment-content-left">
-                                                            <h6 class="comment-name">Jaydin Jones</h6>
-                                                            <ul class="review-star">
-                                                                <li class="fill"><i class="ion-android-star"></i>
-                                                                </li>
-                                                                <li class="fill"><i class="ion-android-star"></i>
-                                                                </li>
-                                                                <li class="fill"><i class="ion-android-star"></i>
-                                                                </li>
-                                                                <li class="fill"><i class="ion-android-star"></i>
-                                                                </li>
-                                                                <li class="empty"><i class="ion-android-star"></i>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="comment-content-right">
-                                                            <a href="#"><i class="fa fa-reply"></i>Reply</a>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="para-content">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                            Tempora inventore dolorem a unde modi iste odio amet,
-                                                            fugit fuga aliquam, voluptatem maiores animi dolor nulla
-                                                            magnam ea! Dignissimos aspernatur cumque nam quod sint
-                                                            provident modi alias culpa, inventore deserunt
-                                                            accusantium amet earum soluta consequatur quasi eum eius
-                                                            laboriosam, maiores praesentium explicabo enim dolores
-                                                            quaerat! Voluptas ad ullam quia odio sint sunt. Ipsam
-                                                            officia, saepe repellat. </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li> <!-- End - Review Comment list-->
-                                    </ul> <!-- End - Review Comment -->
-                                    <div class="review-form">
-                                        <div class="review-form-text-top">
-                                            <h5>ADD A REVIEW</h5>
-                                            <p>Your email address will not be published. Required fields are marked
-                                                *</p>
-                                        </div>
-
-                                        <form action="#" method="post">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="default-form-box">
-                                                        <label for="comment-name">Your name <span>*</span></label>
-                                                        <input id="comment-name" type="text" placeholder="Enter your name" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="default-form-box">
-                                                        <label for="comment-email">Your Email <span>*</span></label>
-                                                        <input id="comment-email" type="email" placeholder="Enter your email" required="">
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <div class="default-form-box">
-                                                        <label for="comment-review-text">Your review
-                                                            <span>*</span></label>
-                                                        <textarea id="comment-review-text" placeholder="Write a review" required=""></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12">
-                                                    <button class="btn btn-md btn-black-default-hover" type="submit">Submit</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div> <!-- End Product Details Tab Content Singel -->
-                            </div>
-                        </div>  --}}
-                        <!-- End Product Details Tab Content -->
-
                     </div>
                 </div>
             </div>
@@ -558,8 +346,8 @@
                                                 </a>
                                                 <div class="action-link">
                                                     <div class="action-link-left">
-                                                        <a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#modalAddcart">Add to Cart</a>
+                                                        <a href="#"  onclick="agregarAlCarrito(event,{{$productosimil}})" id="{{$productosimil->idproducto}}"
+                                                        data-bs-toggle="modal" data-bs-target="#modalAddcart{{ $productosimil->idproducto }}">Agregar Cart</a>
                                                     </div>
                                                     <div class="action-link-right">
                                                         <a href="#" data-bs-toggle="modal"
@@ -604,4 +392,217 @@
             </div>
         </div>
     </div>
+
+    @foreach($productossim as $producto)
+    {{-- modal ver mas --}}
+        <div class="modal fade" id="modal{{ $producto->idproducto }}" tabindex="-1" role="dialog"
+            aria-labelledby="modal{{ $producto->idproducto }}Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    {{-- Hola{{ $producto->idproducto }} --}}
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button type="button" class="close modal-close" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="product-details-gallery-area mb-7">
+                                        <!-- Start Large Image -->
+                                        <div class="product-large-image  swiper-container">
+                                            <div class="swiper-wrapper">
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $producto->imagen}}"
+                                                        alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $producto->imagen}}"
+                                                        alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $producto->imagen}}"
+                                                        alt="" />
+                                                </div>
+                                                <div class="product-image-large-image swiper-slide img-responsive">
+                                                    <img src="{{ $producto->imagen}}"
+                                                        alt="" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- End Large Image -->
+                                        <!-- Start Thumbnail Image -->
+
+                                        <!-- End Thumbnail Image -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="modal-product-details-content-area">
+                                        <!-- Start  Product Details Text Area-->
+                                        <div class="product-details-text">
+                                            <h4 class="title">{{$producto->nombre_p}}</h4>
+                                            <div class="price">$ {{$producto->precio_venta_public}}</div>
+                                        </div>
+                                        <!-- End  Product Details Text Area-->
+                                        <!-- Start Product Variable Area -->
+                                        <div class="product-details-variable">
+                                            <!-- Product Variable Single Item -->
+                                            <div class="variable-single-item">
+                                                <span>Colores disponibles</span>
+                                                <div class="product-variable-color">
+                                                    <label for="modal-product-color-red">
+                                                        <input name="modal-product-color" id="modal-product-color-red"
+                                                            class="color-select" type="radio" checked />
+                                                        <span class="product-color-red"></span>
+                                                    </label>
+                                                    <label for="modal-product-color-tomato">
+                                                        <input name="modal-product-color" id="modal-product-color-tomato"
+                                                            class="color-select" type="radio" />
+                                                        <span class="product-color-tomato"></span>
+                                                    </label>
+                                                    <label for="modal-product-color-green">
+                                                        <input name="modal-product-color" id="modal-product-color-green"
+                                                            class="color-select" type="radio" />
+                                                        <span class="product-color-green"></span>
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <!-- Product Variable Single Item -->
+                                            <div class="d-flex align-items-center flex-wrap">
+                                                <div class="variable-single-item">
+                                                    <span>Stock</span>
+                                                    <div class="product-variable-quantity">
+                                                        <input min="1" max="100" value="1"
+                                                            type="number" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="product-add-to-cart-btn">
+                                                    <a onclick="agregarAlCarrito(event,{{$producto}})" id="{{$producto->idproducto}}" href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#modalAddcart{{ $producto->idproducto }}">Agregar Carrito</a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Product Variable Area -->
+                                        <div class="modal-product-about-text">
+                                            <p>
+                                                {{$producto->descripcion}}
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{-- modal-dialog modal-dialog-centered modal-xl --}}
+        <div class="modal fade"  id="modalAddcart{{ $producto->idproducto }}" tabindex="-1" role="dialog"
+            aria-labelledby="modal{{ $producto->idproducto }}Label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col text-right">
+                                    <button type="button" class="close modal-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="modal-add-cart-product-img">
+                                                <img class="img-fluid" src="{{$producto->imagen}}" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="modal-add-cart-info">
+                                                <i class="fa fa-check-square"></i>Agregado satisfactoriamente al carrito!
+                                            </div>
+                                            <div class="modal-add-cart-product-cart-buttons">
+                                                <a href="{{route('carrito_home')}}">Ver Carrito</a>
+                                                <a href="checkout.html">Pasar Caja</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 modal-border">
+                                    <ul class="modal-add-cart-product-shipping-info">
+                                        <li>
+                                            <strong><i class="icon-shopping-cart"></i> En su carrito se agrega el articulo.</strong>
+                                        </li>
+                                        <li><strong>TOTAL PRECIO: </strong> <span>${{$producto->precio_venta_public}}</span></li>
+                                        <li class="modal-continue-button">
+                                            <a href="#" data-bs-dismiss="modal">CONTINUE SHOPPING</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- <div class="modal fade" id="modalAddcart{{ $producto->idproducto }}" tabindex="-1" role="dialog"
+            aria-labelledby="modal{{ $producto->idproducto }}Label" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col text-right">
+                                <button type="button" class="close modal-close" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true"> <i class="fa fa-times"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="modal-add-cart-product-img">
+                                            <img class="img-fluid" src="{{$producto->imagen}}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="modal-add-cart-info">
+                                            <i class="fa fa-check-square"></i>Added to cart
+                                            successfully!
+                                        </div>
+                                        <div class="modal-add-cart-product-cart-buttons">
+                                            <a href="cart.html">View Cart</a>
+                                            <a href="checkout.html">Checkout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5 modal-border">
+                                <ul class="modal-add-cart-product-shipping-info">
+                                    <li>
+                                        <strong><i class="icon-shopping-cart"></i> There Are 5 Items In
+                                            Your Cart.</strong>
+                                    </li>
+                                    <li><strong>TOTAL PRICE: </strong> <span>$187.00</span></li>
+                                    <li class="modal-continue-button">
+                                        <a href="#" data-bs-dismiss="modal">CONTINUE SHOPPING</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+    @endforeach
 @endsection
