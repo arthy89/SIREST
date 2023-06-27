@@ -17,7 +17,8 @@
         <ul class="navbar-nav">
 
             <li class="nav-item">
-                <a class="nav-link text-white active bg-gradient-primary" href="{{ route('dashboard') }}">
+                <a class="nav-link text-white {{ Str::startsWith(request()->url(), route('dashboard')) ? 'active bg-gradient-primary' : '' }}"
+                    href="{{ route('dashboard') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
@@ -26,7 +27,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('usuarios') }}">
+                <a class="nav-link text-white {{ Str::startsWith(request()->url(), route('usuarios')) ? 'active bg-gradient-primary' : '' }}"
+                    href="{{ route('usuarios') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons">group</i>
                     </div>
@@ -35,7 +37,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('clientes') }}">
+                <a class="nav-link text-white {{ Str::startsWith(request()->url(), route('clientes')) ? 'active bg-gradient-primary' : '' }}"
+                    href="{{ route('clientes') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons">group</i>
                     </div>
@@ -44,7 +47,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link text-white" href="{{ route('reparaciones') }}">
+                <a class="nav-link text-white {{ Str::startsWith(request()->url(), route('reparaciones')) ? 'active bg-gradient-primary' : '' }}"
+                    href="{{ route('reparaciones') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons">construction</i>
                     </div>
@@ -52,16 +56,18 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#componentsExamples" class="nav-link text-white collapsed"
+                <a data-bs-toggle="collapse" href="#componentsExamples"
+                    class="nav-link text-white {{ Str::startsWith(request()->url(), route('ventas')) ? 'active bg-gradient-primary' : '' }} collapsed"
                     aria-controls="componentsExamples" role="button" aria-expanded="false">
                     <i
                         class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">view_in_ar</i>
                     <span class="nav-link-text ms-2 ps-1">Ventas</span>
                 </a>
-                <div class="collapse" id="componentsExamples" style="">
+                <div class="collapse {{ Str::startsWith(request()->url(), route('ventas')) ? 'show' : '' }}"
+                    id="componentsExamples">
                     <ul class="nav ">
                         <li class="nav-item ">
-                            <a class="nav-link text-white " href="{{ route('ventas') }}">
+                            <a class="nav-link text-white active" href="{{ route('ventas') }}">
                                 <span class="sidenav-mini-icon"> V </span>
                                 <span class="sidenav-normal  ms-2  ps-1"> Venta </span>
                             </a>
@@ -76,62 +82,66 @@
                 </div>
             </li>
 
-
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link text-white collapsed"
+                <a data-bs-toggle="collapse" href="#pagesExamples"
+                    class="nav-link text-white {{ Str::startsWith(request()->url(), [route('proveedor'), route('categorias'), route('productos')]) ? 'active bg-gradient-primary' : '' }} collapsed"
                     aria-controls="pagesExamples" role="button" aria-expanded="false">
                     <i
                         class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">category</i>
                     <span class="nav-link-text ms-2 ps-1">Inventario</span>
                 </a>
-                <div class="collapse" id="pagesExamples" style="">
-                    <ul class="nav ">
-                        <li class="nav-item active">
-                            <a class="nav-link text-white active" href="{{ route('proveedor') }}">
-                                <span class="sidenav-mini-icon"> Pr </span>
-                                <span class="sidenav-normal  ms-2  ps-1"> Proveedores </span>
-                            </a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link text-white active" href="{{ route('categorias') }}">
-                                <span class="sidenav-mini-icon"> C </span>
-                                <span class="sidenav-normal  ms-2  ps-1"> Categorias </span>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link text-white " href="{{ route('productos') }}">
+                <div class="collapse {{ Str::startsWith(request()->url(), [route('proveedor'), route('categorias'), route('productos')]) ? 'show' : '' }}"
+                    id="pagesExamples">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-white {{ Str::startsWith(request()->url(), route('proveedor')) ? 'active' : '' }}"
+                                href="{{ route('proveedor') }}">
                                 <span class="sidenav-mini-icon"> P </span>
-                                <span class="sidenav-normal  ms-2  ps-1"> Productos </span>
+                                <span class="sidenav-normal ms-2 ps-1"> Proveedores </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white {{ Str::startsWith(request()->url(), route('categorias')) ? 'active' : '' }}"
+                                href="{{ route('categorias') }}">
+                                <span class="sidenav-mini-icon"> C </span>
+                                <span class="sidenav-normal ms-2 ps-1"> Categorias </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white {{ Str::startsWith(request()->url(), route('productos')) ? 'active' : '' }}"
+                                href="{{ route('productos') }}">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal ms-2 ps-1"> Productos </span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </li>
 
+
+
+
             <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#ecommerceExamples" class="nav-link text-white collapsed"
+                <a data-bs-toggle="collapse" href="#ecommerceExamples"
+                    class="nav-link text-white {{ Str::startsWith(request()->url(), [route('slider'), route('promociones')]) ? 'active bg-gradient-primary' : '' }} collapsed"
                     aria-controls="ecommerceExamples" role="button" aria-expanded="false">
                     <i
                         class="material-icons-round {% if page.brand == 'RTL' %}ms-2{% else %} me-2{% endif %}">shopping_basket</i>
                     <span class="nav-link-text ms-2 ps-1">Ecommerce</span>
                 </a>
-                <div class="collapse" id="ecommerceExamples" style="">
+                <div class="collapse {{ Str::startsWith(request()->url(), [route('slider'), route('promociones')]) ? 'show' : '' }}"
+                    id="ecommerceExamples" style="">
                     <ul class="nav ">
                         <li class="nav-item ">
-                            <a class="nav-link text-white " href="{{ route('slider') }}">
+                            <a class="nav-link text-white {{ Str::startsWith(request()->url(), route('slider')) ? 'active' : '' }}"
+                                href="{{ route('slider') }}">
                                 <span class="sidenav-mini-icon"> S </span>
                                 <span class="sidenav-normal  ms-2  ps-1"> Slider </span>
                             </a>
                         </li>
-                        {{-- <li class="nav-item ">
-                            <a class="nav-link text-white " href="../../pages/ecommerce/referral.html">
-                                <span class="sidenav-mini-icon"> R </span>
-                                <span class="sidenav-normal  ms-2  ps-1"> Referral </span>
-                            </a>
-                        </li> --}}
-
                         <li class="nav-item ">
-                            <a class="nav-link text-white " href="{{ route('promociones') }}">
+                            <a class="nav-link text-white {{ Str::startsWith(request()->url(), route('promociones')) ? 'active' : '' }}"
+                                href="{{ route('promociones') }}">
                                 <span class="sidenav-mini-icon"> P </span>
                                 <span class="sidenav-normal  ms-2  ps-1"> Promociones </span>
                             </a>
@@ -139,57 +149,8 @@
                     </ul>
                 </div>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/tables.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">table_view</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Tables</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/billing.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">receipt_long</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Billing</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/virtual-reality.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">view_in_ar</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Virtual Reality</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/notifications.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">notifications</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Notifications</span>
-                </a>
-            </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/profile.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">person</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-white " href="../pages/sign-in.html">
-                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="material-icons opacity-10">login</i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign In</span>
-                </a>
             </li>
             <li class="nav-item">
                 <form action="{{ route('logout-admin') }}" method="POST">

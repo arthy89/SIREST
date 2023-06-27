@@ -9,6 +9,7 @@ use App\Models\Categorias;
 use App\Models\Proveedores;
 use Yajra\DataTables\DataTables;
 use DB;
+use Transbank\Webpay\WebpayPlus;
 
 class ServiciotecnicoController extends Controller
 {
@@ -19,23 +20,22 @@ class ServiciotecnicoController extends Controller
     {
         //
         $repuestos = Productos::select('producto.*')
-        ->join('categoria', 'producto.categoriaid', '=', 'categoria.idcategoria')
-        ->where('categoria.nombre', 'Pantallas')
-        ->orWhere('categoria.nombre', 'Flex Carga')
-        ->paginate(8);
+            ->join('categoria', 'producto.categoriaid', '=', 'categoria.idcategoria')
+            ->where('categoria.nombre', 'Pantallas')
+            ->orWhere('categoria.nombre', 'Flex Carga')
+            ->paginate(8);
         $repuestosnot = DB::table('producto')
-                ->select('*')
-                ->join('categoria', 'producto.categoriaid', '=', 'categoria.idcategoria')
-                ->where(function ($query) {
-                    $query->where('categoria.nombre', 'Pantallas')
-                        ->orWhere('categoria.nombre', 'Flex Carga');
-                })
-                ->get();
+            ->select('*')
+            ->join('categoria', 'producto.categoriaid', '=', 'categoria.idcategoria')
+            ->where(function ($query) {
+                $query->where('categoria.nombre', 'Pantallas')
+                    ->orWhere('categoria.nombre', 'Flex Carga');
+            })
+            ->get();
 
         $productos = Productos::all();
         //return $products;
-        return view("Frontend.Serviciotecnico.serviciotecnicoindex", compact('productos','repuestos'));
-
+        return view("Frontend.Serviciotecnico.serviciotecnicoindex", compact('productos', 'repuestos'));
     }
     public function detalles(Request $request, $nombre)
     {
@@ -49,7 +49,7 @@ class ServiciotecnicoController extends Controller
         //$categorias = Categorias::all();
         $productos = Productos::all();
         //return $product;
-        return view('Frontend.Serviciotecnico.serviciotecnicodetalle', compact('product','productossim'));
+        return view('Frontend.Serviciotecnico.serviciotecnicodetalle', compact('product', 'productossim'));
         //return view("Frontend.Categoriasventa.categoriasventaindex");
     }
 

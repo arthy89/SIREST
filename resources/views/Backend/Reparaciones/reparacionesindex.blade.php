@@ -8,6 +8,10 @@
                     <i class="material-icons">add</i>
                     Crear nueva reparación
                 </a>
+                <a href="{{ route('reparaciones_buscar') }}" class="btn btn-success">
+                    <i class="material-icons">search</i>
+                    Buscar reparación
+                </a>
             </div>
         </div>
         <div class="row">
@@ -226,21 +230,6 @@
             $('.js-example-basic-single').select2();
         });
     </script>
-
-    {{-- <script>
-        Livewire.on('alert', function(title, message) {
-            Lobibox.notify('success', {
-                width: 400,
-                img: "{{ asset('imgs/success.png') }}",
-                position: 'top right',
-                title: title,
-                msg: message
-            });
-        })
-        document.addEventListener("DOMContentLoaded", function(event) {
-
-        });
-    </script> --}}
 
     @if (session('creado'))
         <script>
