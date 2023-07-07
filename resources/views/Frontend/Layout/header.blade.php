@@ -136,10 +136,23 @@
                                     </li>
                                 @endif
                             @else
-                                <li class="">
+                                <li class="list-unstyled rounded-circle">
                                     <a href="{{ route('editar_perfil_cliente', Auth::guard('client')->user()->idpersona) }}"
-                                        class="btn btn-outline-primary btn-xl mb-0 me-6">{{ Auth::guard('client')->user()->nombres }}
+                                        class="btn btn-outline-primary btn-xl mb-0 me-6">
+                                        @php
+                                        $name = Auth::guard('client')->user()->nombres;
+                                        $name2 =  Auth::guard('client')->user()->apellidos;
+                                        $firstLetter = substr($name, 0, 1);
+                                        $lastname = substr($name2, 0, 1);
+                                        @endphp
+                                        {{$firstLetter}}
+                                        {{-- {{ Auth::guard('client')->user()->nombres }} --}}
                                         {{-- {{ Auth::guard('client')->user()->apellidos }}--}}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('logout-client') }}">
+                                        <i class="bi bi-box-arrow-right">S R</i>
+                                    </a>
                                 </li>
                             @endguest
                             <li>

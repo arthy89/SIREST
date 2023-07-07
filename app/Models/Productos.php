@@ -12,6 +12,7 @@ class Productos extends Model
     protected $fillable = [
         'categoriaid',
         'proveedorid',
+        'id_device',
         'codigo',
         'nombre_p',
         'descripcion',

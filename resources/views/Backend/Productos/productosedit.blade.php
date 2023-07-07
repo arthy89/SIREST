@@ -115,8 +115,18 @@
                                     </div>
                                 </div>
 
+                                {{-- Dispositivo--}}
                                 <div class="col-md-6">
-
+                                    <label>Dispositivo</label>
+                                    <div class="input-group input-group-static my-0">
+                                        <select class="js-example-basic-single" id="deviceid" name="deviceid"
+                                            style="width: 100%" height="100px">
+                                            @foreach ($dispositivos as $dispositivo)
+                                                <option value="{{ $dispositivo->id_device }}">
+                                                    {{ $dispositivo->device_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
 
                                 {{-- img --}}

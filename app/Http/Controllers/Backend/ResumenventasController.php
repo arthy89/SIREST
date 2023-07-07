@@ -12,10 +12,10 @@ class ResumenventasController extends Controller
      */
     public function index()
     {
-        $ventas = Ventas::paginate(10);
+        $productos = Ventas::paginate(10);
         //
-        return $ventas;
-        return view("Backend.Resumenventas.resumenventasindex", compact('ventas'));
+        //return $ventas;
+        return view("Backend.Resumenventas.resumenventasindex");
     }
 
     /**

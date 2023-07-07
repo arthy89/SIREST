@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Productos;
+use Carbon\Carbon;
 use App\Models\Categorias;
 use App\Models\Proveedores;
 use Yajra\DataTables\DataTables;
@@ -15,12 +16,16 @@ class OfertasController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         //
+            $fechaActual = Carbon::now()->toDateString();
 
             $ofertas = Productos::join('promocion', 'producto.idproducto', '=', 'promocion.idproducto')
                 ->select('producto.*', 'promocion.nombre_promocion', 'promocion.fecha_inicio', 'promocion.fecha_final', 'promocion.tipo_descuento', 'promocion.cantidad_descuento')
+                ->where('promocion.fecha_inicio', '<=', $fechaActual)
+                ->where('promocion.fecha_final', '>=', $fechaActual)
                 ->paginate(8);
 
 
