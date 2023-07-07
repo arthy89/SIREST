@@ -347,9 +347,17 @@
                                         </div>
                                         <div class="col-6 text-end">
                                             <div class="input-group input-group-static mb-1">
-                                                <input name="impuesto" id="impuesto" type="text"
-                                                    class="form-control monto-input"
-                                                    value="{{ $rep_actual[0]->impuesto }}" onkeypress='validate(event)'>
+                                                @if ($rep_actual[0]->impuesto)
+                                                    <input name="impuesto" id="impuesto" type="text"
+                                                        class="form-control monto-input"
+                                                        value="{{ $rep_actual[0]->impuesto }}"
+                                                        onkeypress='validate(event)'>
+                                                @else
+                                                    <input name="impuesto" id="impuesto" type="text"
+                                                        class="form-control monto-input" value="0"
+                                                        onkeypress='validate(event)'>
+                                                @endif
+
                                             </div>
                                         </div>
                                     </div>
@@ -359,9 +367,17 @@
                                         </div>
                                         <div class="col-6 text-end">
                                             <div class="input-group input-group-static mb-1">
-                                                <input name="adelanto" id="adelanto" type="text"
-                                                    class="form-control monto-input"
-                                                    value="{{ $rep_actual[0]->adelanto }}" onkeypress='validate(event)'>
+                                                @if ($rep_actual[0]->adelanto)
+                                                    <input name="adelanto" id="adelanto" type="text"
+                                                        class="form-control monto-input"
+                                                        value="{{ $rep_actual[0]->adelanto }}"
+                                                        onkeypress='validate(event)'>
+                                                @else
+                                                    <input name="adelanto" id="adelanto" type="text"
+                                                        class="form-control monto-input" value="0"
+                                                        onkeypress='validate(event)'>
+                                                @endif
+
                                             </div>
                                         </div>
                                     </div>

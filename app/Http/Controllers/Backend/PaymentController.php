@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Productos;
 use Illuminate\Http\Request;
 use Transbank\Webpay\WebpayPlus;
+use Transbank\Webpay\WebpayPlus\Transaction;
 
 class PaymentController extends Controller
 {
@@ -14,9 +15,14 @@ class PaymentController extends Controller
         //return $product;
         $producto = Productos::find($product);
         $precio = floatval($producto->precio_venta_public);
+
+        // dd($precio);
         // return $producto;
         $webpay = new WebpayPlus();
-        $response = $webpay->transaction()->create('Nombre del comercio', $precio, 'Orden de compra', route('payment.confirm'));
+        $buyOrder = uniqid(); // Generar un ID único para la orden de compra
+        $sessionId = session()->getId(); // Obtener el ID de la sesión actual
+        $response = $webpay->transaction()->create($buyOrder, $sessionId, $precio, route('payment.confirm'));
+
 
         // Guardar el token de la transacción en la sesión
         session(['transactionToken' => $response->getToken()]);

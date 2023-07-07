@@ -1,12 +1,18 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
+
 use App\Http\Controllers\Controller;
 use App\Models\Ventas;
 use Illuminate\Http\Request;
 
 class ResumenventasController extends Controller
 {
+    public function __construct()
+    {
+        // only >< except
+        $this->middleware('auth:web');
+    }
     /**
      * Display a listing of the resource.
      */

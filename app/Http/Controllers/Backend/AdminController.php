@@ -12,12 +12,11 @@ use App\Models\Pedido;
 use App\Models\Productos;
 class AdminController extends Controller
 {
-
-    // public function __construct()
-    // {
-    //     // only >< except
-    //     $this->middleware('auth', ['only' => ['']]);
-    // }
+    public function __construct()
+    {
+        // only >< except
+        $this->middleware('auth:web');
+    }
 
     public function dashboard()
     {

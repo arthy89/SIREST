@@ -19,6 +19,11 @@ use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class ReparacionesController extends Controller
 {
+    public function __construct()
+    {
+        // only >< except
+        $this->middleware('auth:web');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -172,7 +177,6 @@ class ReparacionesController extends Controller
     {
         // return $reparacion;
         // return $request;
-
         // * Actualizar campos
         $reparacion->update([
             'personaid' => $request->cliente,

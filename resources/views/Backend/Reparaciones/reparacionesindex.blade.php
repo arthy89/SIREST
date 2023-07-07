@@ -8,10 +8,6 @@
                     <i class="material-icons">add</i>
                     Crear nueva reparación
                 </a>
-                <a href="{{ route('reparaciones_buscar') }}" class="btn btn-success">
-                    <i class="material-icons">search</i>
-                    Buscar reparación
-                </a>
             </div>
         </div>
         <div class="row">

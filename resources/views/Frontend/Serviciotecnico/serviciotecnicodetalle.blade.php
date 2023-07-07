@@ -1,6 +1,35 @@
 @extends('Frontend.Layout.app')
 
 @section('main-content')
+    @php
+        // SDK de Mercado Pago
+        require base_path('vendor/autoload.php');
+        // Agrega credenciales
+        MercadoPago\SDK::setAccessToken(config('services.mercadopago.token'));
+        
+        // Crea un objeto de preferencia
+        $preference = new MercadoPago\Preference();
+        
+        // Crea un ítem en la preferencia
+        $item = new MercadoPago\Item();
+        $item->title = $product[0]->nombre_p;
+        $item->quantity = 1;
+        $item->unit_price = $product[0]->precio_venta_public + 20;
+        
+        $preference->back_urls = [
+            'success' => url(route('orders.pay', ['producto' => $product[0]->idproducto])),
+            'failure' => 'http://www.tusitio/failure',
+            'pending' => 'http://www.tusitio/pending',
+        ];
+        
+        $preference->autoOpen = 'approved';
+        
+        $preference->items = [$item];
+        $preference->save();
+    @endphp
+
+    {{-- ! webpay --}}
+
     <div class="breadcrumb-section breadcrumb-bg-color--golden">
         <div class="breadcrumb-wrapper">
             <div class="container">
@@ -625,8 +654,25 @@
                                             @guest('client')
                                                 <a href="{{ route('login_cliente') }}">Iniciar Sesión</a>
                                             @else
-                                                <a href="{{ route('payment.create', $product[0]) }}">Realizar
-                                                    Pedido</a>
+                                                {{-- <a href="{{ route('payment.create', $product[0]) }}">Realizar
+                                                    Pedido</a> --}}
+                                                <div class="mx-2 mb-2">
+                                                    <form method="post" action="{{ $url_tbk }}">
+                                                        <input type="hidden" name="token_ws" value="{{ $token }}" />
+                                                        <button type="submit"
+                                                            style="background-color:white; border-style: solid; border-width: 2px; border-color: #890272; border-radius: 5px;">
+                                                            <img src="{{ asset('assetsc/images/logo/logo-webpay.webp') }}"
+                                                                width="70px">
+                                                        </button>
+                                                    </form>
+                                                </div>
+
+                                                <div class="p-1" align="center"
+                                                    style="background-color:white; border-style: solid; border-width: 2px; border-color: #009bdf; border-radius: 5px;">
+                                                    <img src="{{ asset('assetsc/images/logo/mercadopago.webp') }}"
+                                                        width="100px">
+                                                    <div class="mt-1 cho-container"></div>
+                                                </div>
                                             @endguest
 
                                         </div>
@@ -658,3 +704,20 @@
     <!-- End Modal Add cart -->
 @endsection
 
+@push('costum-js')
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+    <script>
+        const mp = new MercadoPago("{{ config('services.mercadopago.key') }}");
+        const bricksBuilder = mp.bricks();
+        mp.checkout({
+            preference: {
+                id: '{{ $preference->id }}',
+            },
+            render: {
+                container: '.cho-container',
+                label: 'Pagar',
+            }
+        });
+    </script>
+@endpush

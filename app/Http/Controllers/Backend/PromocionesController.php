@@ -12,6 +12,11 @@ use DB;
 
 class PromocionesController extends Controller
 {
+    public function __construct()
+    {
+        // only >< except
+        $this->middleware('auth:web');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -20,10 +25,10 @@ class PromocionesController extends Controller
         //
         if ($request->ajax()) {
             $promociones = DB::table('promocion')
-            ->join('producto', function ($join) {
-                $join->on('promocion.idproducto', '=', 'producto.idproducto');
-            })
-            ->select('promocion.nombre_promocion', 'promocion.fecha_inicio','promocion.fecha_final','producto.nombre_p','promocion.promocionid', 'promocion.cantidad_descuento')->get();
+                ->join('producto', function ($join) {
+                    $join->on('promocion.idproducto', '=', 'producto.idproducto');
+                })
+                ->select('promocion.nombre_promocion', 'promocion.fecha_inicio', 'promocion.fecha_final', 'producto.nombre_p', 'promocion.promocionid', 'promocion.cantidad_descuento')->get();
             return DataTables::of($promociones)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -41,7 +46,7 @@ class PromocionesController extends Controller
                 //    $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
 
                 //})
-                ->rawColumns([ 'action'])
+                ->rawColumns(['action'])
                 ->make(true);
         }
         //return $form;
@@ -57,7 +62,7 @@ class PromocionesController extends Controller
         //
         $productos = Productos::all();
         //return $productos;
-        return view('Backend.Promociones.promocionescrear',compact('productos'));
+        return view('Backend.Promociones.promocionescrear', compact('productos'));
     }
 
     /**
@@ -97,13 +102,13 @@ class PromocionesController extends Controller
         $promocion = Promociones::findOrFail($id);
         $productos = Productos::all();
         //return $promocion;
-        return view('Backend.Promociones.promocionesedit',compact('productos','promocion'));
+        return view('Backend.Promociones.promocionesedit', compact('productos', 'promocion'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update( Request $request, Promociones $promocion, $id)
+    public function update(Request $request, Promociones $promocion, $id)
     {
         //return $id;
         // Validar los datos del formulario (opcional)
@@ -122,7 +127,7 @@ class PromocionesController extends Controller
 
         $registro->save();
 
-            //return"logro actualizar con achivo contenido";
+        //return"logro actualizar con achivo contenido";
         return redirect()->route('promociones')->with('actualizar', 'ok');
         //si no contiener archivo no sobreponemos las imganes
 

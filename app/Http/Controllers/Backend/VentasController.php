@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Auth;
 
 class VentasController extends Controller
 {
+    public function __construct()
+    {
+        // only >< except
+        $this->middleware('auth:web');
+    }
     /**
      * Display a listing of the resource.
      */
