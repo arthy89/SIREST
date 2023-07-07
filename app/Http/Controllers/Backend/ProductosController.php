@@ -9,6 +9,7 @@ use App\Http\Requests\Backend\Productos\ProductosRequest;
 use App\Models\Productos;
 use App\Models\Categorias;
 use App\Models\Proveedores;
+use App\Models\Dispositivo;
 use Yajra\DataTables\DataTables;
 use DB;
 
@@ -107,9 +108,10 @@ class ProductosController extends Controller
         //
         $categorias = Categorias::all();
         $proveedores = Proveedores::all();
+        $dispositivos = Dispositivo::all();
         //return $categorias;
 
-        return view('Backend.Productos.productoscrear', compact('categorias', 'proveedores'));
+        return view('Backend.Productos.productoscrear', compact('categorias','proveedores','dispositivos'));
     }
 
     /**
@@ -130,6 +132,7 @@ class ProductosController extends Controller
         $producto = Productos::create([
             'categoriaid' => $request->categoriaid,
             'proveedorid' => $request->proveedorid,
+            'id_device' => $request->deviceid,
             'nombre_p' => $request->nombre_producto,
             'descripcion' => $request->descripcion,
             'precio_compra' => $request->precio_compra,
@@ -160,10 +163,10 @@ class ProductosController extends Controller
     {
 
         $categorias = Categorias::all();
-
+        $dispositivos = Dispositivo::all();
         $proveedores = Proveedores::all();
         //return $producto;
-        return view('Backend.Productos.productosedit', compact('categorias', 'producto', 'proveedores'));
+        return view('Backend.Productos.productosedit', compact('categorias', 'producto','proveedores','dispositivos'));
     }
 
 
@@ -196,6 +199,7 @@ class ProductosController extends Controller
             $ruta = $destinopath . $filename;
             $producto->update([
                 'categoriaid' => $request->categoriaid,
+                'id_device' => $request->deviceid,
                 'nombre_p' => $request->nombre_producto,
                 'descripcion' => $request->descripcion,
                 'precio_compra' => $request->precio_compra,
@@ -213,6 +217,7 @@ class ProductosController extends Controller
         } else {
             $producto->update([
                 'categoriaid' => $request->categoriaid,
+                'id_device' => $request->deviceid,
                 'nombre_p' => $request->nombre_producto,
                 'descripcion' => $request->descripcion,
                 'precio_compra' => $request->precio_compra,

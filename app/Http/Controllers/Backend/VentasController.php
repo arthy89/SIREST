@@ -46,6 +46,7 @@ class VentasController extends Controller
                 //})
                 ->rawColumns(['action'])
                 ->make(true);
+                //return $productos;
         }
         //return $request;
         //return view("Backend.Categorias.categoriasindex");
