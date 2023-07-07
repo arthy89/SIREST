@@ -32,6 +32,6 @@ class LoginEController extends Controller
         // $request->session()->invalidate();
         // $request->session()->regenerateToken();
 
-        return redirect()->route('login-client')->with('status', '¡Cierre de sesión exitoso!');
+        return redirect()->route('login_cliente')->with('status', '¡Cierre de sesión exitoso!');
     }
 }
