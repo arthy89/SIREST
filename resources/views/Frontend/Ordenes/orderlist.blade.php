@@ -25,9 +25,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="table_desc">
-                        <div class="table_page table-responsive">
-                            @if ($pedidos)
+                    @if ($pedidos->isNotEmpty())
+                        <div class="table_desc">
+                            <div class="table_page table-responsive">
+
                                 <table>
                                     <!-- Start Cart Table Head -->
                                     <thead>
@@ -70,11 +71,14 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                            @else
-                                <h4>USTED NO TIENE NINGUNA REPARACIÓN AGENDADA</h4>
-                            @endif
+
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="row justify-content-center" align="center">
+                            <h4 class="breadcrumb-title">USTED AÚN NO TIENE NINGUNA REPARACIÓN AGENDADA</h4>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
