@@ -27,48 +27,52 @@
                 <div class="col-12">
                     <div class="table_desc">
                         <div class="table_page table-responsive">
-                            <table>
-                                <!-- Start Cart Table Head -->
-                                <thead>
-                                    <tr>
-                                        <th class="">Num REP</th>
-                                        <th class="">Servicio</th>
-                                        <th class="">Fecha</th>
-                                        <th class="">Estado</th>
-                                        <th class="">Acción</th>
-                                    </tr>
-                                </thead> <!-- End Cart Table Head -->
-                                <tbody>
-                                    @foreach ($pedidos as $pedido)
+                            @if ($pedidos)
+                                <table>
+                                    <!-- Start Cart Table Head -->
+                                    <thead>
                                         <tr>
-                                            <td>
-                                                <strong>REP-{{ str_pad($pedido->idpedido, 7, '0', STR_PAD_LEFT) }}</strong>
-                                            </td>
-                                            <td><strong>Cambio de pantalla:</strong> {{ $pedido->device_name }} -
-                                                {{ $pedido->device_mark }}
-                                            </td>
-                                            <td>{{ date('d/m/Y - h:i:s A', strtotime($pedido->fecha)) }}</td>
-                                            <td>
-                                                @if ($pedido->estado_p == 0)
-                                                    <strong>Por Asignar</strong>
-                                                @elseif ($pedido->estado_p == 1)
-                                                    <strong>Por Recoger</strong>
-                                                @elseif ($pedido->estado_p == 2)
-                                                    <strong>En Proceso</strong>
-                                                @elseif ($pedido->estado_p == 3)
-                                                    <strong>Por Entregar</strong>
-                                                @elseif ($pedido->estado_p == 4)
-                                                    <strong>Rechazado</strong>
-                                                @elseif ($pedido->estado_p == 5)
-                                                    <strong>Finalizado</strong>
-                                                @endif
-                                            </td>
-                                            <td><a href="{{ route('orders.show', $pedido) }}" class="btn btn-pink"><i
-                                                        class="icon-eye"></i> Ver</a></td>
+                                            <th class="">Num REP</th>
+                                            <th class="">Servicio</th>
+                                            <th class="">Fecha</th>
+                                            <th class="">Estado</th>
+                                            <th class="">Acción</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead> <!-- End Cart Table Head -->
+                                    <tbody>
+                                        @foreach ($pedidos as $pedido)
+                                            <tr>
+                                                <td>
+                                                    <strong>REP-{{ str_pad($pedido->idpedido, 7, '0', STR_PAD_LEFT) }}</strong>
+                                                </td>
+                                                <td><strong>Cambio de pantalla:</strong> {{ $pedido->device_name }} -
+                                                    {{ $pedido->device_mark }}
+                                                </td>
+                                                <td>{{ date('d/m/Y - h:i:s A', strtotime($pedido->fecha)) }}</td>
+                                                <td>
+                                                    @if ($pedido->estado_p == 0)
+                                                        <strong>Por Asignar</strong>
+                                                    @elseif ($pedido->estado_p == 1)
+                                                        <strong>Por Recoger</strong>
+                                                    @elseif ($pedido->estado_p == 2)
+                                                        <strong>En Proceso</strong>
+                                                    @elseif ($pedido->estado_p == 3)
+                                                        <strong>Por Entregar</strong>
+                                                    @elseif ($pedido->estado_p == 4)
+                                                        <strong>Rechazado</strong>
+                                                    @elseif ($pedido->estado_p == 5)
+                                                        <strong>Finalizado</strong>
+                                                    @endif
+                                                </td>
+                                                <td><a href="{{ route('orders.show', $pedido) }}" class="btn btn-pink"><i
+                                                            class="icon-eye"></i> Ver</a></td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                <h4>USTED NO TIENE NINGUNA REPARACIÓN AGENDADA</h4>
+                            @endif
                         </div>
                     </div>
                 </div>

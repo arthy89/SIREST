@@ -172,11 +172,6 @@ Route::get('/errors', function () {
 Route::get('/backend/dispositivos-listar', Listar::class)->name('dispositivos');
 Route::post('backend/dispotivos/crear', [ReparacionesController::class, 'create_device'])->name('create_device');
 
-// ------------------------------------------------------------------------------------------------
-// Route::view('backend/login', 'Backend/Auth/login')->name('login-admin')->middleware('guest');
-// Route::post('backend/login', [App\Http\Controllers\Backend\LoginController::class, 'login']);
-// Route::post('backend/logout', [App\Http\Controllers\Backend\LoginController::class, 'logout'])->name('logout-admin');
-
 // ?FRONTEND
 Route::get('ecommerce/home', [EcommerceController::class, 'home'])->name('home-client');
 
