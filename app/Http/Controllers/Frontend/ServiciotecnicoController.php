@@ -147,6 +147,7 @@ class ServiciotecnicoController extends Controller
             ->select('pedido.*', 'pedido.status as estado_p', 'persona.*', 'persona.apellidos as persona_apellidos', 'dispositivo.*')
             ->where('pedido.personaid', $user->idpersona)
             ->get();
+        // return $pedidos;
         return view('Frontend.Ordenes.orderlist', compact('pedidos'));
     }
 
