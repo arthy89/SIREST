@@ -16,6 +16,11 @@ use DB;
 
 class ClientesController extends Controller
 {
+    public function __construct()
+    {
+        // only >< except
+        $this->middleware('auth:web');
+    }
 
     /**
      * Display a listing of the resource.
@@ -23,29 +28,29 @@ class ClientesController extends Controller
 
     public function index(Request $request)
     {
-         // en la vista principal
-        if($request->ajax()){
+        // en la vista principal
+        if ($request->ajax()) {
             $personas = DB::table('persona')
-                    ->select('persona.idpersona','persona.nombres','persona.apellidos','persona.identificacion','persona.telefono','persona.email','persona.password','persona.direccionfiscal','persona.status')->get();
+                ->select('persona.idpersona', 'persona.nombres', 'persona.apellidos', 'persona.identificacion', 'persona.telefono', 'persona.email', 'persona.password', 'persona.direccionfiscal', 'persona.status')->get();
             return DataTables::of($personas)
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                $ruta_editar =  route('editar_clientes', $row->idpersona);
-                $ruta_eliminar = route('eliminar_clientes', $row->idpersona);
-                $form = '<form action="'.$ruta_eliminar.'" method="POST" class="formulario">
-                            '.csrf_field().'
-                            '.method_field("delete").'
-                            <a href="'.$ruta_editar.'" class="btn bg-gradient-info"><i class="material-icons">edit</i>EDITAR</a>
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $ruta_editar =  route('editar_clientes', $row->idpersona);
+                    $ruta_eliminar = route('eliminar_clientes', $row->idpersona);
+                    $form = '<form action="' . $ruta_eliminar . '" method="POST" class="formulario">
+                            ' . csrf_field() . '
+                            ' . method_field("delete") . '
+                            <a href="' . $ruta_editar . '" class="btn bg-gradient-info"><i class="material-icons">edit</i>EDITAR</a>
                             <button type="submit" class="btn bg-gradient-danger formulario"><i class="material-icons">delete</i>ELIMINAR</button>
                         </form>';
-                return $form;
-            })
-            //->addColumn('action', function($row){
-            //    $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
-            //    return $form;
-            //})
-            ->rawColumns(['action'])
-            ->make(true);
+                    return $form;
+                })
+                //->addColumn('action', function($row){
+                //    $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
+                //    return $form;
+                //})
+                ->rawColumns(['action'])
+                ->make(true);
         }
 
         //return $request->ajax();
@@ -108,8 +113,8 @@ class ClientesController extends Controller
     {
         //return $request;
         //
-        if($request->password_cliente == null){
-            $cliente -> update([
+        if ($request->password_cliente == null) {
+            $cliente->update([
                 'nombres' => $request->nombre_cliente,
                 'apellidos' => $request->apellido_cliente,
                 'identificacion' => $request->identificacion_cliente,
@@ -118,8 +123,8 @@ class ClientesController extends Controller
                 'direccionfiscal' => $request->direccionfiscal_cliente,
                 'status' => $request->status,
             ]);
-        }else{
-            $cliente -> update([
+        } else {
+            $cliente->update([
                 'nombres' => $request->nombre_cliente,
                 'apellidos' => $request->apellido_cliente,
                 'identificacion' => $request->identificacion_cliente,

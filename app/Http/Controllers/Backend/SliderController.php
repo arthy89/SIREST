@@ -10,6 +10,11 @@ use DB;
 
 class SliderController extends Controller
 {
+    public function __construct()
+    {
+        // only >< except
+        $this->middleware('auth:web');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -20,7 +25,7 @@ class SliderController extends Controller
         $slider = Slider::all();
         //return $slider;
 
-        return view("Backend.Slider.sliderindex",compact('slider'));
+        return view("Backend.Slider.sliderindex", compact('slider'));
     }
 
     /**
@@ -77,7 +82,7 @@ class SliderController extends Controller
      * Update the specified resource in storage.
      */
 
-    public function update( Request $request, Slider $sliders, $id)
+    public function update(Request $request, Slider $sliders, $id)
     {
         //return $id;
         // Validar los datos del formulario (opcional)
@@ -95,7 +100,7 @@ class SliderController extends Controller
 
 
         //si conotiene archivo
-        if($request->hasFile('archivo')){
+        if ($request->hasFile('archivo')) {
 
             //eliminamos la imagen que tenia antes
 
@@ -114,8 +119,8 @@ class SliderController extends Controller
 
             //return"logro actualizar con achivo contenido";
             return redirect()->route('slider')->with('actualizar', 'ok');
-        //si no contiener archivo no sobreponemos las imganes
-        }else{
+            //si no contiener archivo no sobreponemos las imganes
+        } else {
 
             $registro->htmlcode = $request->input('htmlcode');
             $registro->save();
@@ -139,7 +144,7 @@ class SliderController extends Controller
         $slider = Slider::find($id);
         unlink($slider->imagen);
         //return $slider;
-    // Verificar si el producto existe
+        // Verificar si el producto existe
         if (!$slider) {
             return redirect()->back()->with('eliminar', 'ok_e');
         }
@@ -149,5 +154,5 @@ class SliderController extends Controller
 
         // Redirigir a alguna vista o realizar alguna acción después de la eliminación
         return redirect()->back()->with('eliminar', 'ok');
-        }
+    }
 }

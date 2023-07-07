@@ -15,39 +15,44 @@ use DB;
 
 class CategoriasController extends Controller
 {
+    public function __construct()
+    {
+        // only >< except
+        $this->middleware('auth:web');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         // en la vista principal
-        if($request->ajax()){
+        if ($request->ajax()) {
             $categorias = DB::table('categoria')
-                    ->select('categoria.idcategoria','categoria.nombre','categoria.descripcion','categoria.ruta','categoria.status')->get();
+                ->select('categoria.idcategoria', 'categoria.nombre', 'categoria.descripcion', 'categoria.ruta', 'categoria.status')->get();
             return DataTables::of($categorias)
-            ->addIndexColumn()
-            ->addColumn('img', function($categoria){
-                $ruta = asset($categoria->ruta);
-                $img = '<img src="'.$ruta.'" width="100px">';
-                return $img;
-            })
-            ->addColumn('action', function($row){
-                $ruta_editar =  route('editar_categorias', $row->idcategoria);
-                $ruta_eliminar = route('eliminar_categorias', $row->idcategoria);
-                $form = '<form action="'.$ruta_eliminar.'" method="POST" class="formulario">
-                            '.csrf_field().'
-                            '.method_field("delete").'
-                            <a href="'.$ruta_editar.'" class="btn bg-gradient-info"><i class="material-icons">edit</i>EDITAR</a>
+                ->addIndexColumn()
+                ->addColumn('img', function ($categoria) {
+                    $ruta = asset($categoria->ruta);
+                    $img = '<img src="' . $ruta . '" width="100px">';
+                    return $img;
+                })
+                ->addColumn('action', function ($row) {
+                    $ruta_editar =  route('editar_categorias', $row->idcategoria);
+                    $ruta_eliminar = route('eliminar_categorias', $row->idcategoria);
+                    $form = '<form action="' . $ruta_eliminar . '" method="POST" class="formulario">
+                            ' . csrf_field() . '
+                            ' . method_field("delete") . '
+                            <a href="' . $ruta_editar . '" class="btn bg-gradient-info"><i class="material-icons">edit</i>EDITAR</a>
                             <button type="submit" class="btn bg-gradient-danger formulario"><i class="material-icons">delete</i>ELIMINAR</button>
                         </form>';
-                return $form;
-            })
-            //->addColumn('action', function($row){
-            //    $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
-            //    return $form;
-            //})
-            ->rawColumns(['img','action'])
-            ->make(true);
+                    return $form;
+                })
+                //->addColumn('action', function($row){
+                //    $form = '<a href="" class="btn bg-gradient-info"><i class="material-icons">edit</i> Editar</a>';
+                //    return $form;
+                //})
+                ->rawColumns(['img', 'action'])
+                ->make(true);
         }
 
         return view("Backend.Categorias.categoriasindex");
@@ -69,7 +74,7 @@ class CategoriasController extends Controller
     {
         // return $request;
 
-        if ($request->hasFile('archivo')){
+        if ($request->hasFile('archivo')) {
             $file = $request->file('archivo');
             $destinopath = 'imgs/categorias/';
             $filename = time() . '-' . $file->getClientOriginalName();
@@ -113,8 +118,8 @@ class CategoriasController extends Controller
     public function update(CatActReq $request, Categorias $categoria)
     {
         //si conotiene archivo
-        if($request->hasFile('archivo')){
-            $a = explode('/',$categoria->ruta);
+        if ($request->hasFile('archivo')) {
+            $a = explode('/', $categoria->ruta);
             $c = count($a);
             //return 'public/imgs/categorias/'.$a[5].'';
             //\Storage::delete('public/imgs/categorias/'.$a[5].'');
@@ -122,9 +127,9 @@ class CategoriasController extends Controller
             //Storage::delete($categoria->ruta);
             //return $a;
             //eliminamos la imagen que tenia antes
-            if($c > 4){
-                unlink('imgs/categorias/'.$a[5].'');
-            }else{
+            if ($c > 4) {
+                unlink('imgs/categorias/' . $a[5] . '');
+            } else {
                 //unlink('imgs/categorias/'.$a[5].'');
 
             }
@@ -145,8 +150,8 @@ class CategoriasController extends Controller
 
             //return"logro actualizar con achivo contenido";
             return redirect()->route('categorias')->with('actualizar', 'ok');
-        //si no contiener archivo no sobreponemos las imganes
-        }else{
+            //si no contiener archivo no sobreponemos las imganes
+        } else {
             $categoria->update([
                 'nombre' => $request->nombre_categoria,
                 'descripcion' => $request->descripcion,
@@ -167,10 +172,10 @@ class CategoriasController extends Controller
     {
         //
         //return $categoria;
-        $a = explode('/',$categoria->ruta);
-        if(count($a) == 6){
-            unlink('imgs/categorias/'.$a[5].'');
-        }else{
+        $a = explode('/', $categoria->ruta);
+        if (count($a) == 6) {
+            unlink('imgs/categorias/' . $a[5] . '');
+        } else {
             //return "cuando no haiga imagen";
         }
         // return $a;
@@ -179,5 +184,4 @@ class CategoriasController extends Controller
         //return $categoria;
         return redirect()->route('categorias')->with('eliminar', 'ok');
     }
-
 }

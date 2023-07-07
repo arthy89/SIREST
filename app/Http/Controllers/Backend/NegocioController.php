@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Storage;
 
 class NegocioController extends Controller
 {
+    public function __construct()
+    {
+        // only >< except
+        $this->middleware('auth:web');
+    }
     /**
      * Display a listing of the resource.
      */

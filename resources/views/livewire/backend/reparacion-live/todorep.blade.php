@@ -1,4 +1,10 @@
 <div>
+    <div class="px-5 col-12">
+        <p class="mb-0"><i class="material-icons opacity-10" aria-hidden="true">search</i> Buscador</p>
+        <div class="input-group input-group-outline my-3 mt-0">
+            <input wire:model="search" type="text" class="form-control">
+        </div>
+    </div>
     <table class="table align-items-center mb-0">
         <thead>
             <tr>
