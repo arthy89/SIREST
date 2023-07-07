@@ -14,6 +14,11 @@ use DB;
 
 class ProductosController extends Controller
 {
+    public function __construct()
+    {
+        // only >< except
+        $this->middleware('auth:web');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -26,10 +31,10 @@ class ProductosController extends Controller
                 ->join('categoria', function ($join) {
                     $join->on('producto.categoriaid', '=', 'categoria.idcategoria');
                 })
-                ->join('proveedor', function ($join){
-                    $join->on('producto.proveedorid', '=','proveedor.id_proveedor');
+                ->join('proveedor', function ($join) {
+                    $join->on('producto.proveedorid', '=', 'proveedor.id_proveedor');
                 })
-                ->select('producto.nombre_p', 'proveedor.id_proveedor','proveedor.nombre_proveedor','producto.idproducto', 'producto.colores', 'categoria.nombre', 'producto.precio_compra', 'producto.stock', 'producto.imagen')->get();
+                ->select('producto.nombre_p', 'proveedor.id_proveedor', 'proveedor.nombre_proveedor', 'producto.idproducto', 'producto.colores', 'categoria.nombre', 'producto.precio_compra', 'producto.stock', 'producto.imagen')->get();
             return DataTables::of($productos)
                 ->addIndexColumn()
                 ->addColumn('colores', function ($producto) {
@@ -38,11 +43,11 @@ class ProductosController extends Controller
                     $contador = 0;
                     $textog = "";
 
-                $textob = "<span class='badge bg-gradient-primary' style=' height: 20px; background:white; border:1px  solid #7b809a;  '> </span>";
-                $textor = "<span class='badge bg-gradient-primary' style=' height: 20px; background:red; border:1px  solid #7b809a;  '> </span>";
-                $textoa = "<span class='badge bg-gradient-primary' style=' height: 20px; background:DarkBlue; border:1px  solid #7b809a;  '> </span>";
-                $texton = "<span class='badge bg-gradient-primary' style=' height: 20px; background:black; border:1px  solid #7b809a;  '> </span>";
-                $textop = "<span class='badge bg-gradient-primary' style=' height: 20px; background:white; border:1px  solid #7b809a;  '> </span>";
+                    $textob = "<span class='badge bg-gradient-primary' style=' height: 20px; background:white; border:1px  solid #7b809a;  '> </span>";
+                    $textor = "<span class='badge bg-gradient-primary' style=' height: 20px; background:red; border:1px  solid #7b809a;  '> </span>";
+                    $textoa = "<span class='badge bg-gradient-primary' style=' height: 20px; background:DarkBlue; border:1px  solid #7b809a;  '> </span>";
+                    $texton = "<span class='badge bg-gradient-primary' style=' height: 20px; background:black; border:1px  solid #7b809a;  '> </span>";
+                    $textop = "<span class='badge bg-gradient-primary' style=' height: 20px; background:white; border:1px  solid #7b809a;  '> </span>";
 
 
                     //(blanco,rojo,azul)
@@ -62,16 +67,15 @@ class ProductosController extends Controller
                     return $textog;
                 })
                 ->addColumn('img', function ($producto) {
-                    if($producto->imagen != null){
+                    if ($producto->imagen != null) {
                         $ruta = asset($producto->imagen);
                         $img = '<img src="' . $ruta . '" width="100px">';
                         return $img;
-                    }else{
+                    } else {
                         $ruta = asset("imgs/noimage.jpg");
                         $img = '<img src="' . $ruta . '" width="100px">';
                         return $img;
                     }
-
                 })
                 ->addColumn('action', function ($row) {
                     $ruta_editar =  route('editar_productos', $row->idproducto);
@@ -105,7 +109,7 @@ class ProductosController extends Controller
         $proveedores = Proveedores::all();
         //return $categorias;
 
-        return view('Backend.Productos.productoscrear', compact('categorias','proveedores'));
+        return view('Backend.Productos.productoscrear', compact('categorias', 'proveedores'));
     }
 
     /**
@@ -159,7 +163,7 @@ class ProductosController extends Controller
 
         $proveedores = Proveedores::all();
         //return $producto;
-        return view('Backend.Productos.productosedit', compact('categorias', 'producto','proveedores'));
+        return view('Backend.Productos.productosedit', compact('categorias', 'producto', 'proveedores'));
     }
 
 
@@ -205,8 +209,8 @@ class ProductosController extends Controller
                 'proveedorid' => $request->proveedor,
             ]);
             return redirect()->route('productos')->with('actualizar', 'ok');
-        //si no contiener archivo no sobreponemos las imganes
-        }else{
+            //si no contiener archivo no sobreponemos las imganes
+        } else {
             $producto->update([
                 'categoriaid' => $request->categoriaid,
                 'nombre_p' => $request->nombre_producto,
@@ -233,11 +237,11 @@ class ProductosController extends Controller
     {
 
         //return $producto;
-        $a = explode('/',$producto->imagen);
+        $a = explode('/', $producto->imagen);
         //return count($a);
-        if(count($a) == 6){
-            unlink('imgs/productos/'.$a[5].'');
-        }else{
+        if (count($a) == 6) {
+            unlink('imgs/productos/' . $a[5] . '');
+        } else {
             //return "cuando no haiga imagen";
         }
         //return $a;
@@ -247,5 +251,4 @@ class ProductosController extends Controller
         //return $prodcuto;
         return redirect()->route('productos')->with('eliminar', 'ok');
     }
-
 }

@@ -27,13 +27,9 @@
                     </div>
                     {{-- imprimir --}}
                     <div class="card-body p-5" id="printSection">
-                        <div class="row">
-                            <h6 class="text-white bg-gray-800 text-center">FACTURA DE REPARACIÓN</h6>
-                        </div>
-
                         <div class="factura">
                             <div class="row cabecera">
-                                <div class="col-6">
+                                <div class="row justify-content-center">
                                     {{-- logo --}}
                                     <div align="center">
                                         @if ($negocio[0]->neg_img)
@@ -44,7 +40,7 @@
                                         @endif
                                         <h1 class="mx-2">{{ $negocio[0]->neg_nombre }}</h1>
                                     </div>
-                                    <div class="mx-4 mb-2">
+                                    <div class="mx-4 mb-2" align="center">
                                         <p class="text-xs text-dark mb-0 text-uppercase">
                                             <strong>Teléfono:</strong> +{{ $negocio[0]->neg_cod }}
                                             {{ $negocio[0]->neg_telefono }}
@@ -58,15 +54,16 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12">
                                     {{-- numero de factura --}}
-                                    <div class="row ">
-                                        <h6 class="text-white bg-gray-800 text-center mb-0">FECHA | NÚMERO DE
-                                            FACTURA</h6>
+                                    <div class="row">
+                                        <p class="text-xs text-dark mb-0 text-uppercase">
+                                            <strong>Fecha de emisión:</strong> {{ now()->format('d/m/Y - h:i:s A') }}
+                                        </p>
                                         @php
                                             $numero = $rep_actual[0]->idpedido;
                                             $digitos = strlen((string) $numero);
-
+                                            
                                             if ($digitos <= 7) {
                                                 $numeroFormateado = str_pad($numero, 7, '0', STR_PAD_LEFT);
                                                 $resultado = 'REP-' . $numeroFormateado;
@@ -74,65 +71,39 @@
                                                 $resultado = $numero;
                                             }
                                         @endphp
-
-
-                                        <div class="border-bottom border-start border-end mb-2">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <p class="text-xs text-dark mb-0 border-end">
-                                                        {{ date('d/m/Y - h:i:s A', strtotime($rep_actual[0]->fecha)) }}
-                                                    </p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="text-end text-xs text-dark mb-0">{{ $resultado }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <p class="text-xs text-dark mb-0 text-uppercase">
+                                            <strong>Número de Factura:</strong> {{ $resultado }}
+                                        </p>
                                     </div>
 
                                     {{-- datos del cliente --}}
                                     <div class="row">
-                                        <h6 class="text-white text-center bg-gray-800 px-3 mb-0">DATOS DEL CLIENTE</h6>
-                                        <div class="border-bottom border-start border-end mb-2"">
+                                        <h6 class="text-center px-3 mb-0">DATOS DEL CLIENTE</h6>
+                                        <div class="mb-2"">
                                             <p class="text-xs text-dark mb-0 text-uppercase"><strong>Nombre:</strong>
                                                 {{ $rep_actual[0]->nombres }} {{ $rep_actual[0]->persona_apellidos }}</p>
                                             <p class="text-xs text-dark mb-0 text-uppercase"><strong>Teléfono:</strong>
                                                 +{{ $rep_actual[0]->cod }} {{ $rep_actual[0]->persona_telefono }}</p>
-                                            <strong class="text-xs text-dark mb-0 text-uppercase">Correo:</strong>
-                                            <p class="d-inline minuscula text-xs text-dark mb-0">
-                                                {{ $rep_actual[0]->email }}</p>
-
+                                            <p class="text-xs text-dark mb-0 text-uppercase">
+                                                <strong>Correo:</strong>{{ $rep_actual[0]->email }}
+                                            </p>
                                             <p class="text-xs text-dark mb-0 text-uppercase"><strong>Dirección:</strong>
                                                 {{ $rep_actual[0]->direccionfiscal }}</p>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
 
                             {{-- datos de raparacion --}}
                             <div class="row">
-                                <h6 class="text-white bg-gray-800 px-3 text-center mb-0">DETALLES DE REPARACIÓN</h6>
-                                <div class="border-bottom border-start border-end mb-2 mt-2">
+                                <h6 class=" px-3 text-center mb-0">DETALLES DE REPARACIÓN</h6>
+                                <div class="mb-2 mt-2">
                                     <div class="mx-4">
                                         <p class="text-xs text-dark mb-0 text-uppercase"><strong>Dispositivo:</strong>
                                             {{ $rep_actual[0]->device_name }} - {{ $rep_actual[0]->device_mark }}</p>
-                                        <p class="text-xs text-dark mb-0 text-uppercase"><strong>IMEI:</strong>
-                                            @if ($rep_actual[0]->imei)
-                                                {{ $rep_actual[0]->imei }}
-                                            @endif
-                                        </p>
-                                        <p class="text-xs text-dark mb-0"><strong
-                                                class="text-uppercase">Contraseña:</strong>
-                                            @if ($rep_actual[0]->contrasena)
-                                                {{ $rep_actual[0]->contrasena }}
-                                            @endif
-                                        </p>
-                                        <p class="text-xs text-dark mb-0 text-uppercase"><strong>PATRON:</strong>
-                                            @if ($rep_actual[0]->patron)
-                                                {{ $rep_actual[0]->patron }}
-                                            @endif
-                                        </p>
+                                        <p class="text-xs text-dark mb-0 text-uppercase"><strong>Fecha de Ingreso:</strong>
+                                            {{ date('d/m/Y - h:i:s A', strtotime($rep_actual[0]->fecha)) }}</p>
                                         <p class="text-xs text-dark mb-0"><strong
                                                 class="text-uppercase">Descripción:</strong>
                                             @if ($rep_actual[0]->descripcion)
@@ -144,7 +115,7 @@
                                         <table class="text-xs text-dark">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" class="text-uppercase">Item</th>
+                                                    <th scope="col" class="text-uppercase"></th>
                                                     <th scope="col" class="text-center text-uppercase">Cantidad</th>
                                                     <th scope="col" class="text-center text-uppercase">Precio</th>
                                                     <th scope="col" class="text-center text-uppercase">Total</th>
@@ -192,33 +163,33 @@
                                         </table>
                                     </div>
                                     <div class="row justify-content-end text-xxs text-uppercase mx-2 mb-2 text-dark">
-                                        <table style="width:350px">
+                                        <table style="width:250px">
                                             <tr>
-                                                <th class="bg-gray-800 text-white px-2">Subtotal</th>
-                                                <td class="border px-2 text-end">$ {{ $total_t }}</td>
+                                                <th class=" px-2">Subtotal</th>
+                                                <td class=" px-2 text-end">$ {{ $total_t }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="bg-gray-800 text-white px-2">Adelanto</th>
-                                                <td class="border px-2 text-end">$ {{ $rep_actual[0]->adelanto }}</td>
+                                                <th class="px-2">Adelanto</th>
+                                                <td class=" px-2 text-end">$ {{ $rep_actual[0]->adelanto }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="bg-gray-800 text-white px-2">Impuesto
+                                                <th class=" px-2">Impuesto
                                                     {{ $rep_actual[0]->impuesto }}%</th>
                                                 @php
                                                     $impuesto = $total_t * ($rep_actual[0]->impuesto / 100);
                                                 @endphp
-                                                <td class="border px-2 text-end">$ {{ $impuesto }}</td>
+                                                <td class=" px-2 text-end">$ {{ $impuesto }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="bg-gray-800 text-white px-2">Envío</th>
-                                                <td class="border px-2 text-end">$ {{ $rep_actual[0]->costo_envio }}</td>
+                                                <th class=" px-2">Envío</th>
+                                                <td class=" px-2 text-end">$ {{ $rep_actual[0]->costo_envio }}</td>
                                             </tr>
                                             <tr>
                                                 @php
                                                     $total_recibo = $total_t + $impuesto + $rep_actual[0]->costo_envio - $rep_actual[0]->adelanto;
                                                 @endphp
-                                                <th class="bg-gray-800 text-white px-2 text-xs text-bold">TOTAL</th>
-                                                <td class="border px-2 text-end text-xs text-bold">$ {{ $total_recibo }}
+                                                <th class=" px-2 text-xs text-bold">TOTAL</th>
+                                                <td class=" px-2 text-end text-xs text-bold">$ {{ $total_recibo }}
                                                 </td>
                                             </tr>
                                         </table>
@@ -226,8 +197,8 @@
                                 </div>
 
                                 <div class="row">
-                                    <h6 class="text-white bg-gray-800 px-3 text-center mb-0">GARANTÍA</h6>
-                                    <div class="border-bottom border-start border-end mb-2">
+                                    <h6 class="px-3 text-center mb-0">GARANTÍA</h6>
+                                    <div class="mb-2">
                                         <p class="text-xs text-dark mb-0">
                                             {{ $negocio[0]->neg_garantia }}
                                         </p>

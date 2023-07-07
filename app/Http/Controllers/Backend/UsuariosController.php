@@ -18,17 +18,17 @@ class UsuariosController extends Controller
     public function __construct()
     {
         // only >< except
-        $this->middleware('auth');
+        $this->middleware('auth:web');
     }
 
     public function index()
     {
         //
         $usuarios = DB::table('usuarios')
-                    ->join('rol', function($join){
-                        $join->on('usuarios.rolid', '=', 'rol.idrol');
-                    })
-                    ->select('usuarios.idusuarios','usuarios.nombre','usuarios.apellidos','usuarios.email','usuarios.status','rol.nombrerol')->get();
+            ->join('rol', function ($join) {
+                $join->on('usuarios.rolid', '=', 'rol.idrol');
+            })
+            ->select('usuarios.idusuarios', 'usuarios.nombre', 'usuarios.apellidos', 'usuarios.email', 'usuarios.status', 'rol.nombrerol')->get();
         // return $usuarios;
         return view('Backend.Usuarios.indexusu', compact('usuarios'));
     }

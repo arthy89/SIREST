@@ -7,6 +7,8 @@ use App\Http\Controllers\Backend\LoginController;
 use App\Http\Controllers\Backend\CategoriasController;
 use App\Http\Controllers\Backend\ClientesController;
 use App\Http\Controllers\Backend\NegocioController;
+use App\Http\Controllers\Backend\Payment\OrderController;
+use App\Http\Controllers\Backend\Payment\WebhooksController;
 use App\Http\Controllers\Backend\ProveedorController;
 use App\Http\Controllers\Backend\VentasController;
 use App\Http\Controllers\Backend\ResumenventasController;
@@ -36,9 +38,7 @@ use App\Http\Controllers\Frontend\LoginEController;
 use App\Http\Controllers\Frontend\ClientesEcomController;
 //servicio tecnico
 use App\Http\Controllers\Frontend\CarritoController;
-use App\Http\Controllers\Backend\PaymentController;
-
-
+use App\Http\Controllers\WebpayController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -127,7 +127,6 @@ Route::delete('backend/productos/{producto}/eliminar', [ProductosController::cla
 
 //! Reparaciones
 Route::get('backend/reparaciones', [ReparacionesController::class, 'index'])->name('reparaciones');
-Route::get('backend/reparaciones/buscar', [ReparacionesController::class, 'buscar'])->name('reparaciones_buscar');
 Route::get('backend/reparaciones/crear', [ReparacionesController::class, 'create'])->name('reparaciones_crear_view');
 Route::post('backend/reparaciones/nuevo', [ReparacionesController::class, 'store'])->name('reparaciones_crear');
 Route::get('backend/reparaciones/{reparacion}/ver', [ReparacionesController::class, 'show'])->name('reparaciones_ver');
@@ -210,10 +209,22 @@ Route::get('ecommerce/contactanos', [ContactanosController::class, 'index'])->na
 //servicio tecnico
 Route::get('ecommerce/serviciot', [ServiciotecnicoController::class, 'index'])->name('serviciotecnico');
 Route::get('ecommerce/serviciot/detalle/{parametro1}', [ServiciotecnicoController::class, 'detalles'])->name('detalles_producto_tecnico');
+//listado de pedidos de delivery reparacion
+Route::get('ecommerce/serviciot/pedidos', [ServiciotecnicoController::class, 'list_pedidos_servicio'])->name('list_pedidos_servicio');
 
 // !!WEBPAY
-Route::get('ecommerce/payment/create/{product}', [PaymentController::class, 'create'])->name('payment.create');
-Route::post('ecommerce/payment/confirm', [PaymentController::class, 'confirm'])->name('payment.confirm');
+Route::get('ecommerce/serviciot/detalle/{parametro1}/webpay', [ServiciotecnicoController::class, 'wpconfirm'])->name('wp_confirm');
+// Route::get('ecommerce/payment/create/{product}', [PaymentController::class, 'create'])->name('payment.create');
+// Route::post('ecommerce/payment/confirm', [PaymentController::class, 'confirm'])->name('payment.confirm');
+
+// Route::get('/webpay/init', [WebpayController::class, 'initTransaction']);
+// Route::get('ecommerce/serviciot/detalle/{parametro1}/webpay', [WebpayController::class, 'initTransaction'])->name('webpay_init');
+
+// ?MERCADOPAGO
+Route::get('ecommerce/{pedido}/detalles', [OrderController::class, 'show'])->name('orders.show');
+Route::post('ecommerce/mp/webhooks', WebhooksController::class);
+Route::get('ecommerce/serviciot/detalle/{producto}/pay', [OrderController::class, 'pay'])->name('orders.pay');
+
 
 /// carrito de compras
 Route::get('ecommerce/carrito', [CarritoController::class, 'index'])->name('carrito_home');

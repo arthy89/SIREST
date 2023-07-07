@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Hash;
 
 class PerfilController extends Controller
 {
+    public function __construct()
+    {
+        // only >< except
+        $this->middleware('auth:web');
+    }
+
     /**
      * Display a listing of the resource.
      */
