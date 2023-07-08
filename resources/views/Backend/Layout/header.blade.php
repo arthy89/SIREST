@@ -7,18 +7,40 @@
             </ol>
             <h6 class="font-weight-bolder mb-0">Dashboard</h6>
         </nav>
+        <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
+            <a href="javascript:;" class="nav-link text-body p-0">
+                <div class="sidenav-toggler-inner">
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                </div>
+            </a>
+        </div>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
             <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                <div class="input-group input-group-outline">
-                    <label class="form-label">Escribe...</label>
-                    <input type="text" class="form-control">
-                </div>
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item d-flex align-items-center">
+                        <a href="{{ route('ventas') }}" class="btn btn-outline-danger mb-0 me-3">
+                            <i class="material-icons">add_circle</i> <i class="material-icons">point_of_sale</i> Ventas
+                        </a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center">
+                        <a href="{{ route('reparaciones_crear_view') }}" class="btn btn-outline-success mb-0 me-3">
+                            <i class="material-icons">add_circle</i> <i class="material-icons">build</i> Reparación
+                        </a>
+                    </li>
+                </ul>
             </div>
             <ul class="navbar-nav justify-content-end">
-                @guest
-                    @if (Route::has('login'))
+                <li class="nav-item d-flex align-items-center">
+                    <a href="{{ route('negocio') }}" class="btn btn-outline-info mb-0 me-3">
+                        <i class="material-icons">store</i> Mi Negocio
+                    </a>
+                </li>
+                @guest('web')
+                    @if (Route::has('login-admin'))
                         <li class="nav-item d-flex align-items-center">
-                            <a href="{{ route('login') }}" class="nav-link text-body font-weight-bold px-0">
+                            <a href="{{ route('login-admin') }}" class="nav-link text-body font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1"></i>
                                 <span class="d-sm-inline d-none">Iniciar Sesión</span>
                             </a>
@@ -26,8 +48,10 @@
                     @endif
                 @else
                     <li class="nav-item d-flex align-items-center">
-                        <a class="btn btn-outline-primary btn-sm mb-0 me-3">{{ Auth::user()->nombre }}
-                            {{ Auth::user()->apellidos }}</a>
+                        <a href="{{ route('editar_perfil', Auth::guard('web')->user()->idusuarios) }}"
+                            class="btn btn-outline-primary mb-0 me-3"><i class="material-icons">face</i>
+                            {{ Auth::guard('web')->user()->nombre }}
+                            {{ Auth::guard('web')->user()->apellidos }}</a>
                     </li>
                 @endguest
 
@@ -60,7 +84,7 @@
                             <a class="dropdown-item border-radius-md" href="javascript:;">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
-                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                                        <img src="{{ asset('assets/img/team-2.jpg') }}" class="avatar avatar-sm  me-3 ">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                         <h6 class="text-sm font-weight-normal mb-1">
@@ -78,7 +102,7 @@
                             <a class="dropdown-item border-radius-md" href="javascript:;">
                                 <div class="d-flex py-1">
                                     <div class="my-auto">
-                                        <img src="../assets/img/small-logos/logo-spotify.svg"
+                                        <img src="{{ asset('assets/img/small-logos/logo-spotify.svg') }}"
                                             class="avatar avatar-sm bg-gradient-dark  me-3 ">
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">

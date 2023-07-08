@@ -1,0 +1,19 @@
+{
+    "roboto": {
+        "300": "C:\\laragon\\www\\SIREST\\public\\fonts\/\/roboto_300_21960201651f2ea862182ff34dfd5ead",
+        "normal": "C:\\laragon\\www\\SIREST\\public\\fonts\/\/roboto_normal_9fa47a070a8b30b595086d70bb7ac78c",
+        "500": "C:\\laragon\\www\\SIREST\\public\\fonts\/\/roboto_500_d0dcda9e813eb9b854a1cc044831f6fe",
+        "bold": "C:\\laragon\\www\\SIREST\\public\\fonts\/\/roboto_bold_3d0ad20d45ace845335f9e6c390a09d9",
+        "900": "roboto_900_509a5e5b153550862359e315131088d5"
+    },
+    "roboto slab": {
+        "normal": "C:\\laragon\\www\\SIREST\\public\\fonts\/\/roboto_slab_normal_66c226b0b958d5c06535c8f5f7b169b5",
+        "bold": "roboto_slab_bold_3e8e362ce1132cec60474edd3bcb078b"
+    },
+    "nucleoicons": {
+        "normal": "nucleoicons_normal_6a7681a4e374b8427110807d3fcdb171"
+    },
+    "cabin": {
+        "normal": "cabin_normal_98ed25c17b39cfb876563e40f9888118"
+    }
+}

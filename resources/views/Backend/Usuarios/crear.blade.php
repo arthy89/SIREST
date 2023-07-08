@@ -16,52 +16,106 @@
                             @csrf
 
                             <div class="row">
+
+                                {{-- error de email ya existente --}}
+                                @if ($errors->has('email'))
+                                    @foreach ($errors->all() as $error)
+                                        <div class="row justify-content-center">
+                                            <div class="col-md-4 my-0 ">
+                                                <div class="alert alert-danger text-white text-center" role="alert">
+                                                    <strong>¡Error!</strong> ¡El correo ya existe o es incorrecto!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+
                                 {{-- nombres --}}
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">Nombres</label>
-                                        <input type="text" class="form-control" name="nombre">
+                                @if ($errors->has('nombre'))
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline is-invalid my-3">
+                                            <label class="form-label">Nombres</label>
+                                            <input type="text" class="form-control" name="nombre">
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline my-3">
+                                            <label class="form-label">Nombres</label>
+                                            <input type="text" class="form-control" name="nombre"
+                                                value="{{ old('nombre') }}">
+                                        </div>
+                                    </div>
+                                @endif
 
                                 {{-- apellidos --}}
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">Apellidos</label>
-                                        <input type="text" class="form-control" name="apellidos">
+                                @if ($errors->has('apellidos'))
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline is-invalid my-3">
+                                            <label class="form-label">Apellidos</label>
+                                            <input type="text" class="form-control" name="apellidos">
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline my-3">
+                                            <label class="form-label">Apellidos</label>
+                                            <input type="text" class="form-control" name="apellidos"
+                                                value="{{ old('apellidos') }}">
+                                        </div>
+                                    </div>
+                                @endif
 
                                 {{-- correo --}}
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">@ Correo</label>
-                                        <input type="email" class="form-control" name="email">
+                                @if ($errors->has('email'))
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline is-invalid my-3">
+                                            <label class="form-label">@ Correo</label>
+                                            <input type="email" class="form-control" name="email">
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline my-3">
+                                            <label class="form-label">@ Correo</label>
+                                            <input type="email" class="form-control" name="email"
+                                                value="{{ old('email') }}">
+                                        </div>
+                                    </div>
+                                @endif
 
-                                {{-- correo --}}
-                                <div class="col-md-6">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">* Contraseña *</label>
-                                        <input type="password" class="form-control" name="password">
+                                {{-- contraseña --}}
+                                @if ($errors->has('password'))
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline is-invalid my-3">
+                                            <label class="form-label">* Contraseña *</label>
+                                            <input type="password" class="form-control" name="password">
+                                        </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="col-md-6">
+                                        <div class="input-group input-group-outline my-3">
+                                            <label class="form-label">* Contraseña *</label>
+                                            <input type="password" class="form-control" name="password">
+                                        </div>
+                                    </div>
+                                @endif
 
                                 {{-- rol --}}
                                 <div class="col-md-6">
-                                    <div class="input-group input-group-static mb-4">
-                                        <label for="exampleFormControlSelect1" class="ms-0">Rol</label>
-                                        <select class="form-control" name="rolid">
-                                            <option selected>Seleccione el rol...</option>
+                                    <label>Rol</label>
+                                    <div class="input-group input-group-static my-0">
+                                        <select class="js-example-basic-single" id="rol" name="rolid"
+                                            style="width: 100%" height="100px">
                                             <option value="1">Administrador</option>
-                                            <option value="2">Técnico Reparador</option>
+                                            <option value="2" selected>Técnico Reparador</option>
+                                            <option value="3">Vendedor</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-4 mt-3">
                                     <button type="submit" class="btn bg-gradient-info">Guardar nuevo usuario</button>
                                 </div>
                             </div>
@@ -112,4 +166,9 @@
 @endsection
 
 @push('custom-scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 @endpush

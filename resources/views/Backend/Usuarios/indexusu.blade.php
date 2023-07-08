@@ -3,6 +3,15 @@
 @section('main-content')
     <div class="container-fluid py-4">
         <div class="row">
+            @if (session('status'))
+                <div class="row justify-content-center">
+                    <div class="col-md-4 my-5 ">
+                        <div class="alert alert-success text-white text-center" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-md-4">
                     <a href="{{ route('crear_usuarios') }}" class="btn btn-info">
@@ -37,32 +46,53 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($usuarios as $usuario)
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-md">{{ $usuario->nombre }}</h6>
-                                                        <p class="text-xs text-secondary mb-0">{{ $usuario->email }}</p>
+                                        @if ($usuario->idusuarios == Auth::user()->idusuarios)
+                                            @continue
+                                        @else
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-md">{{ $usuario->nombre }}</h6>
+                                                            <p class="text-xs text-secondary mb-0">{{ $usuario->email }}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0">{{ $usuario->nombrerol }}</p>
-                                                <p class="text-xs text-secondary mb-0">SIREST</p>
-                                            </td>
-                                            <td class="align-middle text-center text-md">
-                                                @if ($usuario->status == 1)
-                                                    <span class="badge bg-gradient-success">Activo</span>
-                                                @else
-                                                    <span class="badge bg-gradient-danger">Inactivo</span>
-                                                @endif
+                                                </td>
+                                                <td>
+                                                    <p class="text-sm font-weight-bold mb-0">{{ $usuario->nombrerol }}</p>
+                                                    <p class="text-xs text-secondary mb-0">SIREST</p>
+                                                </td>
+                                                <td class="align-middle text-center text-md">
+                                                    @if ($usuario->status == 1)
+                                                        <span class="badge bg-gradient-success">Activo</span>
+                                                    @else
+                                                        <span class="badge bg-gradient-danger">Inactivo</span>
+                                                    @endif
 
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <a class="btn bg-gradient-info"><i class="material-icons">edit</i>
-                                                    Editar</a>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <form action="{{ route('eliminar_usuarios', $usuario->idusuarios) }}"
+                                                        method="POST" class="formulario">
+
+                                                        @csrf
+
+                                                        @method('delete')
+
+                                                        <a href="{{ route('editar_usuarios', $usuario->idusuarios) }}"
+                                                            class="btn bg-gradient-info"><i class="material-icons">edit</i>
+                                                            Editar</a>
+                                                        <a href="{{ route('editar_usuarios_pass', $usuario->idusuarios) }}"
+                                                            class="btn bg-gradient-warning"><i
+                                                                class="material-icons">key</i>
+                                                            Pass</a>
+                                                        <button type="submit" class="btn bg-gradient-danger formulario"><i
+                                                                class="material-icons">delete</i>
+                                                            Eliminar</button>
+
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
@@ -113,4 +143,34 @@
 @endsection
 
 @push('custom-scripts')
+    @if (session('eliminar') == 'ok')
+        <script>
+            Swal.fire(
+                '¡Eliminado!',
+                'Se eliminó al usuario correctamente',
+                'success'
+            )
+        </script>
+    @endif
+
+    <script>
+        // $('.formulario').submit(function(e){
+        $(document).on('submit', '.formulario', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro de eliminar al Usuario?',
+                text: "Se eliminará al usuario",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        });
+    </script>
 @endpush

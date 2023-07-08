@@ -5,7 +5,7 @@
         <div class="row">
             <div class="row">
                 <div class="col-md-4">
-                    <a href="{{ route('crear_usuarios') }}" class="btn btn-info">
+                    <a href="{{ route('crear_productos') }}" class="btn btn-info">
                         <i class="material-icons">person_add</i>
                         Agregar Nuevo Producto
                     </a>
@@ -19,7 +19,26 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <p>AQUI SE MUESTRAN Los Productos</p>
+
+                        <table id="registro" class="table table-striped shadow p-3 mb-5 bg-body rounded mt-4"
+                            width="100%">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th>N°</th>
+                                    <th>NOMBRE</th>
+                                    <th>COLORES</th>
+                                    <th>CATEGORIA</th>
+                                    <th>PROVEEDOR</th>
+                                    <th>COMPRA</th>
+                                    <th>STOCK</th>
+                                    <th>IMAGEN</th>
+                                    <th>OPCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+
 
                     </div>
                 </div>
@@ -65,6 +84,133 @@
         </footer> --}}
     </div>
 @endsection
+@push('styles')
+<style>
+    @media (max-width: 767px) {
+    #registro {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    #registro th,
+    #registro td {
+        white-space: nowrap;
+    }
+}
+</style>
 
+@endpush
 @push('custom-scripts')
+@if (session('eliminar') == 'ok')
+        <script>
+            Swal.fire(
+                '¡Eliminado!',
+                'Se eliminó la Categoria correctamente',
+                'success'
+            )
+        </script>
+    @endif
+    @if (session('crear')=='ok')
+        <script type="text/javascript">
+
+            Lobibox.notify('success', {
+                width: 600,
+                img: "{{asset('imgs/success.png')}}",
+                position: 'top right',
+                title: 'Registro correctamente !!',
+                msg: 'Producto Registrada.'
+            });
+
+        </script>
+    @endif
+    @if (session('actualizar')=='ok')
+        <script type="text/javascript">
+
+            Lobibox.notify('success', {
+                width: 600,
+                img: "{{asset('imgs/success.png')}}",
+                position: 'top right',
+                title: 'Actualizacion correctamente !!',
+                msg: 'Producto Actualizada.'
+            });
+
+        </script>
+    @endif
+<script>
+    $(document).on('submit', '.formulario', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estás seguro de eliminar al Categoria?',
+                text: "Se eliminará la Categoria    ",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '¡Si, eliminar!',
+                cancelButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        });
+    $(document).ready(function() {
+        $('#registro').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('productos') }}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex',
+                    orderable: true,
+                    searchable: true
+                },
+                {
+                    data: 'nombre_p',
+                    name: 'nombre_p'
+                },
+                {
+                    data: 'colores'
+                },
+                {
+                    data: 'nombre',
+                    name: 'nombre'
+                },
+                {
+                    data: 'nombre_proveedor',
+                    name: 'nombre_proveedor'
+                },
+                {
+                    data: 'precio_compra',
+                    name: 'precio_compra'
+                },
+                {
+                    data: 'stock',
+                    name: 'stock'
+                },
+                {
+                    data: 'img'
+                },
+                {
+                    data: 'action',
+                    sWidth: '110px',
+                    sortable: false
+                },
+            ],
+            responsive: true,
+            "language": {
+                "search": "Buscar",
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "paginate": {
+                    "previous": "<",
+                    "next": ">",
+                    "first": "Primero",
+                    "last": "Último"
+                }
+
+            }
+        });
+    });
+</script>
 @endpush

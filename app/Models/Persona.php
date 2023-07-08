@@ -10,20 +10,26 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Persona extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    //use HasApiTokens, HasFactory, Notifiable;
+    protected $primaryKey = 'idpersona';
 
     protected $guard = "client";
 
     protected $table = "persona";
 
-    protected $primaryKey = 'idpersona';
+    public $timestamps = false;
+
+
 
     protected $fillable = [
+        'idpersona',
         'nombres',
+        'identificacion',
         'apellidos',
         'telefono',
         'email',
         'password',
+        'direccionfiscal',
         'nit',
         'token',
         'status',
@@ -32,8 +38,7 @@ class Persona extends Authenticatable
     public function setAttribute($key, $value)
     {
         $isRememberTokenAttribute = $key == $this->getRememberTokenName();
-        if (!$isRememberTokenAttribute)
-        {
+        if (!$isRememberTokenAttribute) {
             parent::setAttribute($key, $value);
         }
     }

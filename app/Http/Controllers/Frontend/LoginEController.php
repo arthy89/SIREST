@@ -20,17 +20,18 @@ class LoginEController extends Controller
         if (Auth::guard('client')->attempt($request->only('email', 'password'), $remember)) {
             // $request->session()->regenerate();
             return redirect()->route('home-client')
-            // ->intended('/')
-            ->with('status', '¡Inicio de sesión exitoso!');
+                // ->intended('/')
+                ->with('status', '¡Inicio de sesión exitoso!');
         }
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::guard('client')->logout();
 
         // $request->session()->invalidate();
         // $request->session()->regenerateToken();
 
-        return redirect()->route('login-client')->with('status','¡Cierre de sesión exitoso!');
+        return redirect()->route('login_cliente')->with('status', '¡Cierre de sesión exitoso!');
     }
 }
