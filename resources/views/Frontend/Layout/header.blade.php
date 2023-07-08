@@ -37,16 +37,19 @@
                                         <!-- Sub Menu -->
                                         <ul class="sub-menu">
                                             <li>
-                                                <a class="mega-menu-item-title" href="#">Pantallas</a>
+                                                <a class="mega-menu-item-title"
+                                                    href="#">Pantallas</a>
                                             </li>
                                             <li>
-                                                <a class="mega-menu-item-title" href="#">Cargadores</a>
+                                                <a class="mega-menu-item-title"
+                                                    href="#">Cargadores</a>
                                             </li>
                                             <li>
                                                 <a class="mega-menu-item-title" href="#">Flexs</a>
                                             </li>
                                             <li>
-                                                <a class="mega-menu-item-title" href="#">Celulares</a>
+                                                <a class="mega-menu-item-title"
+                                                    href="#">Celulares</a>
                                             </li>
                                             <li>
                                                 <a href="#" class="mega-menu-item-title">Otros</a>
@@ -76,17 +79,15 @@
                             </nav>
                         </div>
                         <!-- End Header Main Menu Start -->
-
-                        <!-- Start Header Action Link -->
-                        <ul class="header-action-link action-color--white action-hover-color--pink">
-                            @auth('client')
+                        @auth('client')
                                 <li>
                                     <a href="{{ route('list_pedidos_servicio') }}">
                                         <i class="icon-grid"></i>
                                     </a>
                                 </li>
-                            @endauth
-
+                        @endauth
+                        <!-- Start Header Action Link -->
+                        <ul class="header-action-link action-color--white action-hover-color--pink">
                             <li>
                                 <a href="#offcanvas-wishlish" class="offcanvas-toggle">
                                     <i class="icon-heart"></i>
@@ -215,7 +216,7 @@
                         <li>
                             <a href="#offcanvas-add-cart" class="offcanvas-toggle">
                                 <i class="icon-bag"></i>
-                                <span id="numerito" class="item-count">3</span>
+                                <span  id="numerito" class="item-count">3</span>
                             </a>
                         </li>
                         <li>
@@ -343,7 +344,8 @@
         <!-- Start Mobile contact Info -->
         <div class="mobile-contact-info">
             <div class="logo">
-                <a href="index.html"><img src="{{ asset('imgs/ztel1.jpg') }}" alt="" /></a>
+                <a href="index.html"><img src="{{ asset('imgs/ztel1.jpg') }}"
+                        alt="" /></a>
             </div>
 
             <address class="address">
@@ -437,7 +439,7 @@
     <!-- End Offcanvas Header -->
 
     <!-- Start  Offcanvas Addcart Wrapper -->
-    <div class="offcanvas-add-cart-wrapper">
+    <div class="offcanvas-add-cart-wrapper"  >
         <h4 class="offcanvas-title">Carrrito de Compra</h4>
         <ul class="scrollable-div  offcanvas-cart" id="ul-carrito">
             {{-- <li class="offcanvas-cart-item-single">
@@ -463,13 +465,11 @@
         </ul>
         <div class="offcanvas-cart-total-price">
             <span class="offcanvas-cart-total-price-text">Subtotal:</span>
-            <span class="offcanvas-cart-total-price-value">
-                <p class="subtotallado" id="subtotallado">$</p>
-            </span>
+            <span class="offcanvas-cart-total-price-value"><p class="subtotallado" id="subtotallado">$</p></span>
         </div>
         <ul class="offcanvas-cart-action-button">
             <li>
-                <a href="{{ route('carrito_home') }}" class="btn btn-block btn-pink">Ver Carrito</a>
+                <a href="{{route('carrito_home')}}" class="btn btn-block btn-pink">Ver Carrito</a>
             </li>
             <li>
                 <a href="compare.html" class="btn btn-block btn-pink mt-5">Pasar Por Caja</a>
@@ -570,21 +570,18 @@
 </div>
 <!-- End Offcanvas Search Bar Section -->
 <style>
-    .scrollable-div {
-        width: 100%;
-        /* Ancho del div al 100% del contenedor padre */
-        height: 200px;
-        /* Altura fija del div */
-        overflow: auto;
-        /* Habilita la barra de desplazamiento */
-    }
+.scrollable-div {
+  width: 100%; /* Ancho del div al 100% del contenedor padre */
+  height: 200px; /* Altura fija del div */
+  overflow: auto; /* Habilita la barra de desplazamiento */
+}
 
-    /* Media query para ajustar la altura del div en pantallas más pequeñas */
-    @media (max-width: 768px) {
-        .scrollable-div {
-            height: 150px;
-        }
-    }
+/* Media query para ajustar la altura del div en pantallas más pequeñas */
+@media (max-width: 768px) {
+  .scrollable-div {
+    height: 150px;
+  }
+}
 </style>
 <script>
     console.log("Construiremos el semi carrito de compra");
@@ -600,25 +597,25 @@
     //console.log(ProductosEnCarrito);
     cargarProductoCarritolado();
     //console.log(ProductosEnCarrito.length);
-    function cargarProductoCarritolado() {
+    function cargarProductoCarritolado(){
         let preciototalisimo = 0;
         let precioaux = 0;
-        ProductosEnCarritolado.forEach(producto => {
+        ProductosEnCarritolado.forEach(producto =>{
             //console.log(${producto.imagen});
             // Obtener una referencia al <tbody> por su ID
             var ulcarrito = document.getElementById('ul-carrito');
             //vamos a controlar en caso de ofertas
             let preciopantalla = 0;
-            if (producto.nombre_promocion) {
+            if(producto.nombre_promocion){
                 //console.log("contiene promocion final");
-                if (producto.tipo_descuento == 1) {
-                    preciopantalla = producto.precio_venta_public * producto.cantidad_descuento / 100;
+                if(producto.tipo_descuento == 1){
+                    preciopantalla = producto.precio_venta_public*producto.cantidad_descuento/100;
 
-                } else {
-                    preciopantalla = producto.precio_venta_public - producto.cantidad_descuento;
+                }else{
+                    preciopantalla =producto.precio_venta_public - producto.cantidad_descuento;
                     //console.log("descuenot por cantidad");
                 }
-            } else {
+            }else{
                 preciopantalla = producto.precio_venta_public;
             }
             //console.log(preciopantalla);
@@ -643,14 +640,15 @@
                 </div>
             </li> `;
             //aqui calculamos el precio total de cada produco y lo acumuladmos en todo los productos
-            precioaux = precioaux + preciopantalla * producto.cantidad;
+            precioaux = precioaux + preciopantalla*producto.cantidad;
             // agregar precio total
 
 
             ulcarrito.appendChild(li);
-        })
-        subtotallado.innerText = `$${precioaux}`;
-        //console.log(precioaux);
+    })
+    subtotallado.innerText = `$${precioaux}`;
+    //console.log(precioaux);
 
-    }
+}
+
 </script>
