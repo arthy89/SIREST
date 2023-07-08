@@ -10,11 +10,22 @@
         // Crea un objeto de preferencia
         $preference = new MercadoPago\Preference();
         
+        //* coste servicio
+        if ($product[0]->precio_venta_public <= 100000) {
+            $servicio = 20000;
+        } elseif ($product[0]->precio_venta_public > 100000 && $product[0]->precio_venta_public <= 200000) {
+            $servicio = 40000;
+        } elseif ($product[0]->precio_venta_public > 200000 && $product[0]->precio_venta_public <= 300000) {
+            $servicio = 60000;
+        } elseif ($product[0]->precio_venta_public > 300000 && $product[0]->precio_venta_public <= 400000) {
+            $servicio = 80000;
+        }
+        
         // Crea un ítem en la preferencia
         $item = new MercadoPago\Item();
         $item->title = $product[0]->nombre_p;
         $item->quantity = 1;
-        $item->unit_price = $product[0]->precio_venta_public + 20;
+        $item->unit_price = $product[0]->precio_venta_public + 10000 + $servicio;
         
         $preference->back_urls = [
             'success' => url(route('orders.pay', ['producto' => $product[0]->idproducto])),
@@ -191,7 +202,7 @@
                                 </ul>
                                 <a href="#" class="customer-review ml-2">(customer review )</a>
                             </div>
-                            <div class="price">{{ $product[0]->precio_venta_public }}</div>
+                            <div class="price">${{ number_format($product[0]->precio_venta_public, 2, ',', '.') }}</div>
                             <p>{{ $product[0]->descripcion }}</p>
                         </div> <!-- End  Product Details Text Area-->
                         <!-- Start Product Variable Area -->
@@ -682,16 +693,43 @@
                             <div class="col-md-5 modal-border">
                                 <ul class="modal-add-cart-product-shipping-info">
                                     <li>
-                                        <strong><i class="icon-shopping-cart"></i>Detalles</strong>
+                                        <h4><i class="icon-shopping-cart"></i><strong>Detalles</strong></h4>
                                     </li>
-                                    <li><strong>Envío: </strong> <span>$20.00</span></li>
-                                    <li><strong>Producto: </strong> <span>${{ $product[0]->precio_venta_public }}</span>
+                                    <li><strong>Recojo y entrega (Delivery): </strong> <span>$10.000,00</span></li>
+                                    <li><strong>Producto: </strong>
+                                        <span>${{ number_format($product[0]->precio_venta_public, 2, ',', '.') }}</span>
                                     </li>
+                                    @if ($product[0]->precio_venta_public <= 100000)
+                                        <li><strong>Servicio: </strong>
+                                            <span>${{ number_format(20000, 2, ',', '.') }}</span>
+                                        </li>
+                                        @php
+                                            $servicio = 20000;
+                                        @endphp
+                                    @elseif ($product[0]->precio_venta_public > 100000 && $product[0]->precio_venta_public <= 200000)
+                                        <li><strong>Servicio: </strong>
+                                            <span>${{ number_format(40000, 2, ',', '.') }}</span>
+                                        </li>
+                                        @php
+                                            $servicio = 40000;
+                                        @endphp
+                                    @elseif ($product[0]->precio_venta_public > 200000 && $product[0]->precio_venta_public <= 300000)
+                                        <li><strong>Servicio: </strong>
+                                            <span>${{ number_format(60000, 2, ',', '.') }}</span>
+                                        </li>
+                                        @php
+                                            $servicio = 60000;
+                                        @endphp
+                                    @elseif ($product[0]->precio_venta_public > 300000 && $product[0]->precio_venta_public <= 400000)
+                                        <li><strong>Servicio: </strong>
+                                            <span>${{ number_format(80000, 2, ',', '.') }}</span>
+                                        </li>
+                                        @php
+                                            $servicio = 80000;
+                                        @endphp
+                                    @endif
                                     <li><strong>TOTAL PRICE:
-                                            <span>${{ $product[0]->precio_venta_public + 20.0 }}</span></strong></li>
-                                    <li class="modal-continue-button">
-                                        <strong>Medio de pago: </strong><a data-bs-dismiss="modal"
-                                            href="">WEBPAY</a>
+                                            <span>${{ number_format($product[0]->precio_venta_public + 10000 + $servicio, 2, ',', '.') }}</span></strong>
                                     </li>
                                 </ul>
                             </div>
