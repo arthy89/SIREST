@@ -69,7 +69,7 @@ Route::put('backend/negocio/{negocio}/editar', [NegocioController::class, 'updat
 
 
 //->middleware('guest')
-Route::view('backend/login', 'Backend/Auth/login')->name('login-admin')->middleware('guest');
+Route::view('backend/login', 'Backend/Auth/login')->name('login-admin')->middleware('guest:web');
 Route::post('backend/login', [App\Http\Controllers\Backend\LoginController::class, 'login']);
 Route::post('backend/logout', [App\Http\Controllers\Backend\LoginController::class, 'logout'])->name('logout-admin');
 
@@ -172,9 +172,10 @@ Route::get('/errors', function () {
 Route::get('/backend/dispositivos-listar', Listar::class)->name('dispositivos');
 Route::post('backend/dispotivos/crear', [ReparacionesController::class, 'create_device'])->name('create_device');
 
-return
+// ?FRONTEND
+Route::get('ecommerce/home', [EcommerceController::class, 'home'])->name('home-client');
 
-    Route::view('ecommerce/login', 'Frontend/Auth/login')->name('login_cliente');
+Route::view('ecommerce/login', 'Frontend/Auth/login')->name('login_cliente');
 //Route::view('ecommerce/regitrar', 'Frontend/Auth/registrar')->name('login-crear');
 //Route::post('ecommerce/login', [LoginEController::class, 'login_cliente']);
 Route::post('ecommerce/login', [LoginEController::class, 'login'])->name('login_cliente');
