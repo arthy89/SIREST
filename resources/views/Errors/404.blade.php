@@ -43,7 +43,7 @@
           </div>
         </div>
         <div id="buttonerror">
-  <a href="{{ route('dashboard') }} ">Homepage</a></div>
+  <a href="{{ route('home-client') }} ">Homepage</a></div>
       </div>
     </b:if>
   </body>

@@ -79,7 +79,13 @@
                             </nav>
                         </div>
                         <!-- End Header Main Menu Start -->
-
+                        @auth('client')
+                                <li>
+                                    <a href="{{ route('list_pedidos_servicio') }}">
+                                        <i class="icon-grid"></i>
+                                    </a>
+                                </li>
+                        @endauth
                         <!-- Start Header Action Link -->
                         <ul class="header-action-link action-color--white action-hover-color--pink">
                             <li>
