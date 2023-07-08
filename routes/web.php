@@ -53,7 +53,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    redirect()->route('home-client');
 });
 
 Route::get('/home', function () {
