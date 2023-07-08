@@ -57,10 +57,21 @@ class ServiciotecnicoController extends Controller
         $commerceCode = env('WEBPAY_COMMERCE_CODE');
         $apiKeySecret = env('WEBPAY_API_KEY');
 
+        //* coste servicio
+        if ($product[0]->precio_venta_public <= 100000) {
+            $servicio = 20000;
+        } else if ($product[0]->precio_venta_public > 100000 && $product[0]->precio_venta_public <= 200000) {
+            $servicio = 40000;
+        } else if ($product[0]->precio_venta_public > 200000 && $product[0]->precio_venta_public <= 300000) {
+            $servicio = 60000;
+        } else if ($product[0]->precio_venta_public > 300000 && $product[0]->precio_venta_public <= 400000) {
+            $servicio = 80000;
+        }
+
         // Configurar la transacción
         $buy_order = "ztel" . rand();
         $session_id = uniqid();
-        $amount = $product[0]->precio_venta_public + 20;
+        $amount = $product[0]->precio_venta_public + 10000 + $servicio;
         $return_url = route('wp_confirm', $product[0]->nombre_p) . '?action=getResult';
 
         // Crear instancia de la transacción
@@ -91,12 +102,23 @@ class ServiciotecnicoController extends Controller
             die('No es un flujo de pago normal.');
         }
 
+        //* coste servicio
+        if ($product[0]->precio_venta_public <= 100000) {
+            $servicio_p = 20000;
+        } else if ($product[0]->precio_venta_public > 100000 && $product[0]->precio_venta_public <= 200000) {
+            $servicio_p = 40000;
+        } else if ($product[0]->precio_venta_public > 200000 && $product[0]->precio_venta_public <= 300000) {
+            $servicio_p = 60000;
+        } else if ($product[0]->precio_venta_public > 300000 && $product[0]->precio_venta_public <= 400000) {
+            $servicio_p = 80000;
+        }
+
         $response = (new Transaction)->commit($token); // ó cualquiera de los métodos detallados en el ejemplo anterior del método create.
         $respuesta = json_encode($response);
 
-        $servicio = array("id" => 1, "tipo" => "servicio", "nombre" => "Cambio de pantalla", "cantidad" => null, "precio" => 0);
+        $servicio = array("id" => 1, "tipo" => "servicio", "nombre" => "Cambio de pantalla", "cantidad" => null, "precio" => $servicio_p);
 
-        $producto_l = array("id" => 2, "id_p" => $product[0]->idproducto, "tipo" => "producto", "nombre" => $product[0]->nombre_p, "cantidad" => 1, "precio" => $response->amount - 20);
+        $producto_l = array("id" => 2, "id_p" => $product[0]->idproducto, "tipo" => "producto", "nombre" => $product[0]->nombre_p, "cantidad" => 1, "precio" => $response->amount - 10000 - $servicio_p);
 
         $lista = array(0 => $servicio, 1 => $producto_l);
 
@@ -106,16 +128,11 @@ class ServiciotecnicoController extends Controller
         $user = auth()->guard('client')->user();
 
         if ($response->isApproved()) {
-            // Transacción Aprobada
-            // return $product[0];
-            // return $user;
-            // return $lista_pedido;
-            // return $respuesta;
             $pedido = Pedido::create([
                 'personaid' => $user->idpersona,
                 'fecha' => now(),
-                'monto' => $response->amount - 20,
-                'costo_envio' => 20,
+                'monto' => $response->amount - 10000,
+                'costo_envio' => 10000,
                 'id_device' => $product[0]->id_device,
                 'lista_pedido' => $lista_pedido,
                 'status' => 1,
@@ -146,6 +163,7 @@ class ServiciotecnicoController extends Controller
             ->join('dispositivo', 'pedido.id_device', '=', 'dispositivo.id_device')
             ->select('pedido.*', 'pedido.status as estado_p', 'persona.*', 'persona.apellidos as persona_apellidos', 'dispositivo.*')
             ->where('pedido.personaid', $user->idpersona)
+            ->orderBy('pedido.idpedido', 'desc')
             ->get();
         // return $pedidos;
         return view('Frontend.Ordenes.orderlist', compact('pedidos'));
