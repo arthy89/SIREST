@@ -53,11 +53,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    redirect()->route('home-client');
+    return redirect()->route('home-client');
 });
 
 Route::get('/home', function () {
-    redirect()->route('login-admin');
+    return redirect()->route('login-admin');
 });
 
 // !BACKEND
@@ -172,10 +172,9 @@ Route::get('/errors', function () {
 Route::get('/backend/dispositivos-listar', Listar::class)->name('dispositivos');
 Route::post('backend/dispotivos/crear', [ReparacionesController::class, 'create_device'])->name('create_device');
 
-// ?FRONTEND
-Route::get('ecommerce/home', [EcommerceController::class, 'home'])->name('home-client');
+return
 
-Route::view('ecommerce/login', 'Frontend/Auth/login')->name('login_cliente');
+    Route::view('ecommerce/login', 'Frontend/Auth/login')->name('login_cliente');
 //Route::view('ecommerce/regitrar', 'Frontend/Auth/registrar')->name('login-crear');
 //Route::post('ecommerce/login', [LoginEController::class, 'login_cliente']);
 Route::post('ecommerce/login', [LoginEController::class, 'login'])->name('login_cliente');
