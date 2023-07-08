@@ -19,8 +19,12 @@ class OrderController extends Controller
         if ($pedido->personaid == $user->idpersona) {
             $dispositivo = Dispositivo::find($pedido->id_device);
             $lista_pedido_array = json_decode($pedido->lista_pedido, true);
-            $id_producto = $lista_pedido_array[1]['id_p'];
-            $producto = Productos::find($id_producto);
+            if ($lista_pedido_array) {
+                $id_producto = $lista_pedido_array[1]['id_p'];
+                $producto = Productos::find($id_producto);
+            } else {
+                $producto = null;
+            }
             return view('Frontend.Ordenes.ordermpshow', compact('pedido', 'dispositivo', 'producto', 'lista_pedido_array'));
         }
     }
@@ -35,9 +39,20 @@ class OrderController extends Controller
 
         $status = $response->status;
 
-        $servicio = array("id" => 1, "tipo" => "servicio", "nombre" => "Cambio de pantalla", "cantidad" => null, "precio" => 0);
+        //* coste servicio
+        if ($producto->precio_venta_public <= 100000) {
+            $servicio_p = 20000;
+        } else if ($producto->precio_venta_public > 100000 && $producto->precio_venta_public <= 200000) {
+            $servicio_p = 40000;
+        } else if ($producto->precio_venta_public > 200000 && $producto->precio_venta_public <= 300000) {
+            $servicio_p = 60000;
+        } else if ($producto->precio_venta_public > 300000 && $producto->precio_venta_public <= 400000) {
+            $servicio_p = 80000;
+        }
 
-        $producto_l = array("id" => 2, "id_p" => $producto->idproducto, "tipo" => "producto", "nombre" => $producto->nombre_p, "cantidad" => 1, "precio" => $response->transaction_amount - 20);
+        $servicio = array("id" => 1, "tipo" => "servicio", "nombre" => "Cambio de pantalla", "cantidad" => null, "precio" => $servicio_p);
+
+        $producto_l = array("id" => 2, "id_p" => $producto->idproducto, "tipo" => "producto", "nombre" => $producto->nombre_p, "cantidad" => 1, "precio" => $response->transaction_amount - 10000 - $servicio_p);
 
         $lista = array(0 => $servicio, 1 => $producto_l);
 
@@ -49,8 +64,8 @@ class OrderController extends Controller
             $pedido = Pedido::create([
                 'personaid' => $user->idpersona,
                 'fecha' => now(),
-                'monto' => $response->transaction_amount - 20,
-                'costo_envio' => 20,
+                'monto' => $response->transaction_amount - 10000,
+                'costo_envio' => 10000,
                 'id_device' => $producto->id_device,
                 'lista_pedido' => $lista_pedido,
                 'status' => 1,

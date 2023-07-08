@@ -40,17 +40,30 @@
                                 </thead> <!-- End Cart Table Head -->
                                 <tbody>
                                     <tr>
-                                        <td class="product_thumb"><img src="{{ asset($producto->imagen) }}" alt="">
-                                        </td>
+                                        @if ($producto)
+                                            <td class="product_thumb"><img src="{{ asset($producto->imagen) }}"
+                                                    alt="">
+                                            </td>
+                                        @else
+                                            <td class="product_thumb"><img src="{{ asset('imgs/noimage.jpg') }}"
+                                                    alt="">
+                                            </td>
+                                        @endif
+
                                         <td class="product_remove">
                                             <p>{{ $dispositivo->device_name }} -
                                                 {{ $dispositivo->device_mark }}</p>
                                         </td>
                                         <td class="product_name">
-                                            @foreach ($lista_pedido_array as $items)
-                                                <li><strong>{{ $items['tipo'] }}</strong> - {{ $items['nombre'] }} -
-                                                    ${{ $items['precio'] }}</li>
-                                            @endforeach
+                                            @if ($lista_pedido_array)
+                                                @foreach ($lista_pedido_array as $items)
+                                                    <li><strong>{{ $items['tipo'] }}</strong> - {{ $items['nombre'] }} -
+                                                        ${{ $items['precio'] }}</li>
+                                                @endforeach
+                                            @else
+                                                <li>No hay lista de agregados</li>
+                                            @endif
+
                                             <li><strong>Envío:</strong> ${{ $pedido->costo_envio }}</li>
                                         </td>
                                         <td class="product-price">${{ $pedido->monto + $pedido->costo_envio }}</td>
