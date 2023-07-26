@@ -19,31 +19,6 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navigation">
                         <ul class="navbar-nav mx-auto">
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center me-2 active" aria-current="page"
-                                    href="../pages/dashboard.html">
-                                    <i class="fa fa-chart-pie opacity-6 text-dark me-1"></i>
-                                    Dashboard
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-2" href="../pages/profile.html">
-                                    <i class="fa fa-user opacity-6 text-dark me-1"></i>
-                                    Perfil
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-2" href="../pages/sign-up.html">
-                                    <i class="fas fa-user-circle opacity-6 text-dark me-1"></i>
-                                    Registrarse
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link me-2" href="../pages/sign-in.html">
-                                    <i class="fas fa-key opacity-6 text-dark me-1"></i>
-                                    Iniciar Sesión
-                                </a>
-                            </li>
                         </ul>
                         <ul class="navbar-nav d-lg-flex d-none">
 
