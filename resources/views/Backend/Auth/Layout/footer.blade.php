@@ -7,15 +7,13 @@
                     <script>
                         document.write(new Date().getFullYear())
                     </script>,
-                    made with <i class="fa fa-heart" aria-hidden="true"></i> by
-                    <a href="https://www.creative-tim.com" class="font-weight-bold text-white" target="_blank">Creative
-                        Tim</a>
-                    for a better web.
+                    made with <i class="fa fa-heart" aria-hidden="true"></i> ZTEL
+                    @</a>
                 </div>
             </div>
             <div class="col-12 col-md-6">
                 <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a href="https://www.creative-tim.com" class="nav-link text-white" target="_blank">Creative
                             Tim</a>
                     </li>
@@ -29,7 +27,7 @@
                     <li class="nav-item">
                         <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-white"
                             target="_blank">License</a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>
