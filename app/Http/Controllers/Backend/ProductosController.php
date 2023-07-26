@@ -111,7 +111,7 @@ class ProductosController extends Controller
         $dispositivos = Dispositivo::all();
         //return $categorias;
 
-        return view('Backend.Productos.productoscrear', compact('categorias','proveedores','dispositivos'));
+        return view('Backend.Productos.productoscrear', compact('categorias', 'proveedores', 'dispositivos'));
     }
 
     /**
@@ -165,8 +165,8 @@ class ProductosController extends Controller
         $categorias = Categorias::all();
         $dispositivos = Dispositivo::all();
         $proveedores = Proveedores::all();
-        //return $producto;
-        return view('Backend.Productos.productosedit', compact('categorias', 'producto','proveedores','dispositivos'));
+        // return $producto;
+        return view('Backend.Productos.productosedit', compact('categorias', 'producto', 'proveedores', 'dispositivos'));
     }
 
 
