@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Requests\Frontend\ClientesEcom\ClientesEcomReq;
+use App\Http\Requests\Frontend\ClientesEcom\ClienteupReq;
+
 use App\Http\Controllers\Controller;
 use App\Models\Persona;
 use Illuminate\Support\Facades\Auth;
@@ -62,14 +64,39 @@ class ClientesEcomController extends Controller
     public function edit(string $id)
     {
         //
+        return view('Frontend.Auth.editar');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ClienteupReq $request, Persona $persona)
     {
         //
+        $persona->update([
+            'nombres' => $request->nombres,
+            'apellidos' => $request->apellidos,
+            'identificacion' => $request->identificacion,
+            'telefono' => $request->telefono,
+            'email' => $request->email,
+            'direccionfiscal' => $request->direccionfiscal
+        ]);
+        $muestra = Auth::guard('client')->user()->idpersona;
+        //return $muestra;
+        return redirect()->route('editar_perfil_cliente', Auth::guard('client')->user()->idpersona)->with('status', '¡Datos Cliente Actualizados Correctamente!');
+
+        //return $request;
+
+    }
+    public function updatepass(Request $request, Persona $persona)
+    {
+        $persona->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+
+        //return $request;
+        return redirect()->route('editar_perfil_cliente', Auth::guard('client')->user()->idpersona)->with('contrastatus', '¡Contraseña Actualizada Correctamente!');
     }
 
     /**
