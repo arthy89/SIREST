@@ -257,10 +257,10 @@
                 <a href="{{ route('serviciotecnico') }}"><span>Pedir Tecnico</span></a>
 
             </li>
-            <li>
+            {{-- <li>
                 <a href="{{ route('editar_perfil_cliente', Auth::guard('client')->user()->idpersona) }}"><span>Mi Cuenta</span></a>
 
-            </li>
+            </li> --}}
 
                 </ul>
             </div>
