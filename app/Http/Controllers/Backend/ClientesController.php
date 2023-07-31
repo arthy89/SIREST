@@ -102,6 +102,7 @@ class ClientesController extends Controller
     {
         //return $producto;
         //$categorias = Categorias::all();
+        // return $cliente;
 
         return view('Backend.Clientes.clienteseditar', compact('cliente'));
     }

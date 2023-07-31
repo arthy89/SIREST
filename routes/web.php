@@ -185,7 +185,7 @@ Route::post('ecommerce/logout', [LoginEController::class, 'logout'])->name('logo
 Route::get('ecommerce/regitrar', [ClientesEcomController::class, 'create'])->name('login-crear');
 Route::post('ecommerce/regitrar', [ClientesEcomController::class, 'store'])->name('crear_ecom_clientes');
 Route::get('ecommerce/clientes/{cliente}/editar', [ClientesEcomController::class, 'edit'])->name('editar_perfil_cliente');
-Route::put('ecommerce/clientes/{cliente}/editar', [ClientesEcomController::class, 'update'])->name('editar_clientes');
+Route::put('ecommerce/clientes/{cliente}/editar', [ClientesEcomController::class, 'update'])->name('editar_perfil_cliente');
 //Route::get('ecommerce/{cliente}/perfil', [PerfilclienteController::class, 'edit'])->name('editar_perfil_cliente');
 
 //Route::view('ecommerce/logincli', 'Backend/Auth/login')->name('login_cliente');
