@@ -116,7 +116,7 @@
                                         @php
                                             $numero = $rep_actual[0]->idpedido;
                                             $digitos = strlen((string) $numero);
-                                            
+
                                             if ($digitos <= 7) {
                                                 $numeroFormateado = str_pad($numero, 7, '0', STR_PAD_LEFT);
                                                 $resultado = 'REP-' . $numeroFormateado;
@@ -164,7 +164,7 @@
 
                             {{-- datos de raparacion --}}
                             <div class="row">
-                                <h6 class="text-white bg-gray-800 py-1 px-3 text-center mb-0">DETALLES DE REPARACIÓN
+                                <h6 class="text-white bg-gray-800 py-1 px-3 text-center mb-0" style="font-weight: normal;">DETALLES DE REPARACIÓN
                                 </h6>
                                 <div class="border-bottom border-start border-end mb-2">
                                     <p class="text-lg text-dark mb-0 text-uppercase"><strong>Dispositivo:</strong>
@@ -275,7 +275,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <h6 class="text-white bg-gray-800 py-1 px-3 text-center mb-0">GARANTÍA</h6>
+                                    <h6 class="text-white bg-gray-800 py-1 px-3 text-center mb-0" style="font-weight: normal;">GARANTÍA</h6>
                                     <div class="border-bottom border-start border-end mb-2">
                                         <p class="text-lg text-dark mb-0">
                                             {{ $negocio[0]->neg_garantia }}

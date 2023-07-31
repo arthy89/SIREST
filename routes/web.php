@@ -176,6 +176,9 @@ Route::post('backend/dispotivos/crear', [ReparacionesController::class, 'create_
 Route::get('ecommerce/home', [EcommerceController::class, 'home'])->name('home-client');
 
 Route::view('ecommerce/login', 'Frontend/Auth/login')->name('login_cliente');
+// crear cleinte
+
+
 //Route::view('ecommerce/regitrar', 'Frontend/Auth/registrar')->name('login-crear');
 //Route::post('ecommerce/login', [LoginEController::class, 'login_cliente']);
 Route::post('ecommerce/login', [LoginEController::class, 'login'])->name('login_cliente');
@@ -186,6 +189,8 @@ Route::get('ecommerce/regitrar', [ClientesEcomController::class, 'create'])->nam
 Route::post('ecommerce/regitrar', [ClientesEcomController::class, 'store'])->name('crear_ecom_clientes');
 Route::get('ecommerce/clientes/{cliente}/editar', [ClientesEcomController::class, 'edit'])->name('editar_perfil_cliente');
 Route::put('ecommerce/clientes/{cliente}/editar', [ClientesEcomController::class, 'update'])->name('editar_perfil_cliente');
+Route::put('ecommerce/clientes/{cliente}/editar', [ClientesEcomController::class, 'updatepass'])->name('editar_perfil_cliente_pass');
+
 //Route::get('ecommerce/{cliente}/perfil', [PerfilclienteController::class, 'edit'])->name('editar_perfil_cliente');
 
 //Route::view('ecommerce/logincli', 'Backend/Auth/login')->name('login_cliente');

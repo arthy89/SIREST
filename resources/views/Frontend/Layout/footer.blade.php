@@ -9,12 +9,12 @@
                         <!-- Start Footer Single Item -->
                         <div class="footer-widget-single-item footer-widget-color--pink" data-aos="fade-up"
                             data-aos-delay="0">
-                            <h5 class="title">INFORMATION</h5>
+                            <h5 class="title">INFORMACION</h5>
                             <ul class="footer-nav">
-                                <li><a href="#">Delivery Information</a></li>
+                                <li><a href="#">SIREST V 1.1.0</a></li>
                                 <li><a href="#">Terms & Conditions</a></li>
-                                <li><a href="contact-us.html">Contact</a></li>
-                                <li><a href="#">Returns</a></li>
+                                <li><a href="#">desarrolladores</a></li>
+                                <li><a href="#">PROYECTO</a></li>
                             </ul>
                         </div>
                         <!-- End Footer Single Item -->
@@ -23,13 +23,13 @@
                         <!-- Start Footer Single Item -->
                         <div class="footer-widget-single-item footer-widget-color--pink" data-aos="fade-up"
                             data-aos-delay="200">
-                            <h5 class="title">MY ACCOUNT</h5>
+                            <h5 class="title">MI CUENTA</h5>
                             <ul class="footer-nav">
-                                <li><a href="my-account.html">My account</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                                <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                <li><a href="faq.html">Frequently Questions</a></li>
-                                <li><a href="#">Order History</a></li>
+                                <li><a href="#">mi cuenta</a></li>
+                                <li><a href="#">Lista de deseos</a></li>
+                                <li><a href="#">política de privacidad</a></li>
+                                <li><a href="#">Preguntas Frecuentes</a></li>
+                                <li><a href="#">Historial de pedidos</a></li>
                             </ul>
                         </div>
                         <!-- End Footer Single Item -->
@@ -38,13 +38,13 @@
                         <!-- Start Footer Single Item -->
                         <div class="footer-widget-single-item footer-widget-color--pink" data-aos="fade-up"
                             data-aos-delay="400">
-                            <h5 class="title">CATEGORIES</h5>
+                            <h5 class="title">CATEGORIAS</h5>
                             <ul class="footer-nav">
-                                <li><a href="#">Decorative</a></li>
-                                <li><a href="#">Kitchen utensils</a></li>
-                                <li><a href="#">Chair & Bar stools</a></li>
-                                <li><a href="#">Sofas and Armchairs</a></li>
-                                <li><a href="#">Interior lighting</a></li>
+                                <li><a href="#">Cargadores</a></li>
+                                <li><a href="#">Pantallas</a></li>
+                                <li><a href="#">Flex de Carga</a></li>
+                                <li><a href="#">Baterias</a></li>
+                                <li><a href="#">Pin de Carga</a></li>
                             </ul>
                         </div>
                         <!-- End Footer Single Item -->
@@ -53,16 +53,15 @@
                         <!-- Start Footer Single Item -->
                         <div class="footer-widget-single-item footer-widget-color--pink" data-aos="fade-up"
                             data-aos-delay="600">
-                            <h5 class="title">ABOUT US</h5>
+                            <h5 class="title">SOBRE NOSOTROS</h5>
                             <div class="footer-about">
                                 <p>
-                                    We are a team of designers and developers that create high
-                                    quality Magento, Prestashop, Opencart.
+                                    Somos un equipo de diseñadores y desarrolladores que crean Magento, Prestashop, Opencart de alta calidad.
                                 </p>
 
                                 <address>
-                                    <span>Address: Your address goes here.</span>
-                                    <span>Email: demo@example.com</span>
+                                    <span>Direccion: Coimbra local 204.</span>
+                                    <span>Email: ztel@gmail.com</span>
                                 </address>
                             </div>
                         </div>
@@ -79,7 +78,7 @@
                 <div class="row mb-n6">
                     <div class="col-xl-3 col-lg-4 col-md-6 mb-6">
                         <div class="footer-social" data-aos="fade-up" data-aos-delay="0">
-                            <h4 class="title">FOLLOW US</h4>
+                            <h4 class="title">ME GUSTA</h4>
                             <ul class="footer-social-link">
                                 <li>
                                     <a href="#"><i class="fa fa-facebook"></i></a>
@@ -98,11 +97,11 @@
                     </div>
                     <div class="col-xl-7 col-lg-6 col-md-6 mb-6">
                         <div class="footer-newsletter" data-aos="fade-up" data-aos-delay="200">
-                            <h4 class="title">DON'T MISS OUT ON THE LATEST</h4>
+                            <h4 class="title">SUBSCRIBIRME</h4>
                             <div class="form-newsletter">
                                 <form action="#" method="post">
                                     <div class="form-fild-newsletter-single-item input-color--pink">
-                                        <input type="email" placeholder="Your email address..." required />
+                                        <input type="email" placeholder="Su direccion de correo..." required />
                                         <button type="submit">SUBSCRIBE!</button>
                                     </div>
                                 </form>
@@ -122,9 +121,9 @@
                     <div class="col-auto mb-6">
                         <div class="footer-copyright">
                             <p class="copyright-text">
-                                &copy; 2021 <a href="index.html">therankme</a>. Made with
-                                <i class="fa fa-heart text-danger"></i> by
-                                <a href="https://therankme.com/" target="_blank">therankme</a>
+                                &copy; 2023 <a href="https://api.whatsapp.com/send?phone=51985107359">civil & arty</a>. desarrolladores
+                                <i class="fa fa-heart text-danger"></i> de
+                                <a href="https://www.facebook.com/joel.gomezalanoca.7" target="_blank">Peru</a>
                             </p>
                         </div>
                     </div>
