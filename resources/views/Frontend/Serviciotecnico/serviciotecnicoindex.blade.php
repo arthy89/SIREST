@@ -579,11 +579,17 @@
                                         </div>
                                         <div class="col-md-8">
                                             <div class="modal-add-cart-info">
-                                                <i class="fa fa-check-square"></i>vAS A PDIR EL SIGUEINTE PRODUCTOP!
+                                                <i class="fa fa-check-square"></i>VAS A PDIR EL SIGUEINTE PRODUCTOP!
                                             </div>
                                             <div class="modal-add-cart-product-cart-buttons">
-                                                <a href="">CONTINUAR PEDIDO</a>
-                                                <a href="">SERVICIO TECNICO</a>
+                                                @guest('client')
+                                                    <a href="{{ route('login_cliente') }}">Iniciar Sesión</a>
+                                                @else
+                                                    {{-- <a href="{{ route('payment.create', $product[0]) }}">Realizar
+                                                        Pedido</a> --}}
+
+                                                @endguest
+
                                             </div>
                                         </div>
                                     </div>
