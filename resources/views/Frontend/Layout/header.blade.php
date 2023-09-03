@@ -9,7 +9,7 @@
                         <!-- Start Header Logo -->
                         <div class="header-logo">
                             <div class="logo">
-                                <a href="#"><img src="{{ asset('imgs/ztel1.jpg') }}" alt="" /></a>
+                                <a href="#"><img src="{{ asset('imgs/Recurso2.png') }}" alt="" /></a>
                             </div>
                         </div>
                         <!-- End Header Logo -->
@@ -189,7 +189,7 @@
                         <li>
                             <a href="{{ route('home-client') }}">
                                 <div class="logo">
-                                    <img src="{{ asset('imgs/ztel1.jpg') }}" alt="" />
+                                    <img src="{{ asset('imgs/Recurso2.png') }}" alt="" />
                                 </div>
                             </a>
                         </li>
@@ -267,7 +267,7 @@
         <!-- Start Mobile contact Info -->
         <div class="mobile-contact-info">
             <div class="logo">
-                <a href="{{ route('home-client') }}"><img src="{{ asset('imgs/ztel1.jpg') }}" alt="" /></a>
+                <a href="{{ route('home-client') }}"><img src="{{ asset('imgs/Recurso2.png') }}" alt="" /></a>
             </div>
 
             <address class="address">
@@ -322,7 +322,7 @@
     <!-- Start Mobile contact Info -->
     <div class="mobile-contact-info">
         <div class="logo">
-            <a href="{{ route('home-client') }}"><img src="{{ asset('assetsc/images/logo/logo_white.png') }}" alt="" /></a>
+            <a href="{{ route('home-client') }}"><img src="{{ asset('imgs/Recurso2.png') }}" alt="" /></a>
         </div>
 
         <address class="address">
