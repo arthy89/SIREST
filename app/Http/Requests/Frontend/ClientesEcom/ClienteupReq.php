@@ -1,23 +1,18 @@
 <?php
 
-namespace App\Http\Requests\frontend\ClientesEcom;
+namespace App\Http\Requests\Frontend\ClientesEcom;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ClientesEcomReq extends FormRequest
+class ClienteupReq extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     */
-     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
         return true;
     }
-
-
 
     /**
      * Get the validation rules that apply to the request.
@@ -31,6 +26,7 @@ class ClientesEcomReq extends FormRequest
             'apellidos' => 'required',
             'identificacion' => ['required', 'unique:persona,identificacion'],
             'telefono' => 'required',
+            'password' => 'required',
             'direccionfiscal' => 'required',
             'email' => ['required', 'email', 'string', 'unique:persona,email'],
         ];
